@@ -1,0 +1,39 @@
+<?php
+
+namespace $NAMESPACE_REQUEST$;
+
+use $NAMESPACE_REQUEST$\Request;
+use $NAMESPACE_MODEL$\$MODEL_NAME$;
+
+class Update$MODEL_NAME$Request extends Request {
+
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+
+    public function attributes() {
+        return [
+
+         "" => "",
+         "" => "",
+    
+        ];
+    }
+
+    /**
+     * Reglas de validación importadas desde el modelo $MODEL_NAME$.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return $MODEL_NAME$::$rules;
+    }
+}
