@@ -2,10 +2,11 @@
 
 namespace $NAMESPACE_REQUEST$;
 
-use $NAMESPACE_REQUEST$\Request;
+use $NAMESPACE_REQUEST_BASE$\Request;
 use $NAMESPACE_MODEL$\$MODEL_NAME$;
 
-class Update$MODEL_NAME$Request extends Request {
+class Update$MODEL_NAME$Request extends Request
+{
 
     /**
      * Determine if the user is authorized to make this request.
@@ -17,18 +18,8 @@ class Update$MODEL_NAME$Request extends Request {
         return true;
     }
 
-
-    public function attributes() {
-        return [
-
-         "" => "",
-         "" => "",
-    
-        ];
-    }
-
     /**
-     * Reglas de validación importadas desde el modelo $MODEL_NAME$.
+     * Get the validation rules that apply to the request.
      *
      * @return array
      */

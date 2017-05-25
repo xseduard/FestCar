@@ -162,11 +162,11 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
-        \InfyOm\Generator\InfyOmGeneratorServiceProvider::class,
-        \InfyOm\CoreTemplates\CoreTemplatesServiceProvider::class,
+        \InfyOm\Generator\InfyOmGeneratorServiceProvider::class,        
         \Jlapp\Swaggervel\SwaggervelServiceProvider::class,
         \InfyOm\GeneratorBuilder\GeneratorBuilderServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
+        InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class,
     ],
 
     /*

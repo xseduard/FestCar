@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8cad805bf7a39d09829a8991fd334c44",
+    "content-hash": "b4124ef94fed8c0ebe78ab8c66b396ea",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -2754,17 +2754,17 @@
             "time": "2015-05-11T14:41:42+00:00"
         },
         {
-            "name": "infyomlabs/core-templates",
-            "version": "dev-master",
+            "name": "infyomlabs/adminlte-templates",
+            "version": "5.2.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/InfyOmLabs/core-templates.git",
-                "reference": "9958be60c793bf4e888c820dc1235715d17bf2a4"
+                "url": "https://github.com/InfyOmLabs/adminlte-templates.git",
+                "reference": "709c53351e077d775ac563c4767e5ac4751fb684"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/InfyOmLabs/core-templates/zipball/9958be60c793bf4e888c820dc1235715d17bf2a4",
-                "reference": "9958be60c793bf4e888c820dc1235715d17bf2a4",
+                "url": "https://api.github.com/repos/InfyOmLabs/adminlte-templates/zipball/709c53351e077d775ac563c4767e5ac4751fb684",
+                "reference": "709c53351e077d775ac563c4767e5ac4751fb684",
                 "shasum": ""
             },
             "require": {
@@ -2774,7 +2774,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "InfyOm\\CoreTemplates\\": "src/"
+                    "InfyOm\\AdminLTETemplates\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2787,14 +2787,16 @@
                     "email": "me@mitul.me"
                 }
             ],
-            "description": "Core Bootstrap templates for InfyOm Laravel Generator",
+            "description": "AdminLTE templates for InfyOm Laravel Generator",
             "keywords": [
+                "AdminLTE",
                 "bootstrap",
                 "generator",
+                "infyom",
                 "laravel",
                 "templates"
             ],
-            "time": "2016-08-20T17:12:41+00:00"
+            "time": "2017-05-20T10:43:42+00:00"
         },
         {
             "name": "infyomlabs/generator-builder",
@@ -2845,16 +2847,16 @@
         },
         {
             "name": "infyomlabs/laravel-generator",
-            "version": "dev-master",
+            "version": "5.2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/InfyOmLabs/laravel-generator.git",
-                "reference": "a2038b2ae6c72987e79e830896cc6d12c06e4ee7"
+                "reference": "15830722b8be219b83c43961790590c3dae635d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/InfyOmLabs/laravel-generator/zipball/a2038b2ae6c72987e79e830896cc6d12c06e4ee7",
-                "reference": "a2038b2ae6c72987e79e830896cc6d12c06e4ee7",
+                "url": "https://api.github.com/repos/InfyOmLabs/laravel-generator/zipball/15830722b8be219b83c43961790590c3dae635d8",
+                "reference": "15830722b8be219b83c43961790590c3dae635d8",
                 "shasum": ""
             },
             "require": {
@@ -2862,6 +2864,10 @@
                 "laracasts/flash": "~2.0",
                 "php": ">=5.5.9",
                 "prettus/l5-repository": "~2.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~5.0"
             },
             "type": "library",
             "autoload": {
@@ -2896,7 +2902,7 @@
                 "test",
                 "view"
             ],
-            "time": "2016-08-18T14:19:50+00:00"
+            "time": "2017-05-20T11:14:59+00:00"
         },
         {
             "name": "infyomlabs/swagger-generator",
@@ -3028,12 +3034,12 @@
             "version": "0.9.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/mockery.git",
+                "url": "https://github.com/mockery/mockery.git",
                 "reference": "6fdb61243844dc924071d3404bb23994ea0b6856"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/6fdb61243844dc924071d3404bb23994ea0b6856",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/6fdb61243844dc924071d3404bb23994ea0b6856",
                 "reference": "6fdb61243844dc924071d3404bb23994ea0b6856",
                 "shasum": ""
             },
@@ -4373,10 +4379,10 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "infyomlabs/laravel-generator": 20,
-        "infyomlabs/core-templates": 20,
         "infyomlabs/swagger-generator": 20,
         "infyomlabs/generator-builder": 20,
-        "jlapp/swaggervel": 20
+        "jlapp/swaggervel": 20,
+        "infyomlabs/adminlte-templates": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
