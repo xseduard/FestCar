@@ -23,6 +23,7 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/css/skins/_all-skins.min.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -39,9 +40,10 @@ background: linear-gradient(45deg,  #0095d8 0%,#00b0a3 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0095d8', endColorstr='#00b0a3',GradientType=1 );
 
  ">
+ <section class="wow fadeIn" data-wow-duration="2s">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"  style="color: white;"><b>FestCar</b>Transeba</a>
+        <a href="{{ url('/home') }}"  style="color: white;"><b>Fest</b>Transeba</a>
     </div>
 
     <!-- /.login-logo -->
@@ -93,6 +95,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0095d8', end
     </div>
     <!-- /.login-box-body -->
 </div>
+</section>
 <!-- /.login-box -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -100,5 +103,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0095d8', end
 
 <!-- AdminLTE App -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/js/app.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script type="text/javascript">
+$( document ).ready(function() {
+    console.log( "Transeba ready!" );
+    new WOW().init();
+});
+   
+</script>
 </body>
 </html>

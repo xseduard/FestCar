@@ -26,6 +26,7 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/css/skins/_all-skins.min.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -41,9 +42,10 @@ background: linear-gradient(45deg,  #0095d8 0%,#00b0a3 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0095d8', endColorstr='#00b0a3',GradientType=1 );
 
  ">
+ <section class="wow fadeIn" data-wow-duration="2s">
 <div class="register-box">
     <div class="register-logo">
-        <a href="{{ url('/home') }}" style="color: white;"><b>FEST </b>car</a>
+        <a href="{{ url('/home') }}" style="color: white;"><b>Fest</b>Transeba</a>
     </div>
 
     <div class="register-box-body">
@@ -96,7 +98,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0095d8', end
             </div>
 
             <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
-                <input type="password" class="form-control" name="password" placeholder="Password">
+                <input type="password" class="form-control" name="password" placeholder="Contraseña">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 
                 @if ($errors->has('password'))
@@ -107,7 +109,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0095d8', end
             </div>
 
             <div class="form-group has-feedback{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm password">
+                <input type="password" name="password_confirmation" class="form-control" placeholder="Confirme Contraseña">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 
                 @if ($errors->has('password_confirmation'))
@@ -121,22 +123,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0095d8', end
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
                         <label>
-                            <input type="checkbox"> I agree to the <a href="#">terms</a>
+                            <input type="checkbox"> Acepto los  <a href="#">terminos y condiciones</a>
                         </label>
                     </div>
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Registrarte</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
 
-        <a href="{{ url('/login') }}" class="text-center">I already have a membership</a>
+        ¿Tienes una cuenta? <a href="{{ url('/login') }}" class="text-center">Entrar</a>
     </div>
     <!-- /.form-box -->
 </div>
+</section>
 <!-- /.register-box -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -145,7 +148,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0095d8', end
 
 <!-- AdminLTE App -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/js/app.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script type="text/javascript">
+$( document ).ready(function() {
+    console.log( "Transeba ready!" );
+    new WOW().init();
+});
+   
+</script>
 <script>
     $(function () {
         $('input').iCheck({

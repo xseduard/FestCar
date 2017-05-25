@@ -14,7 +14,11 @@
 Route::get('/', function () {
     return redirect('/home');
 });
-
+/*
+Route::get('/', function () {
+    return view('auth.login');
+});
+*/
 
 /*
 |--------------------------------------------------------------------------
@@ -32,19 +36,26 @@ Route::group(['middleware' => 'web'], function() {
 	//Route::auth();
 
 	Route::get('/home', 'HomeController@index');
+    // RUTAS DE CONTROL DE USUARIOS
+	    Route::get('login', 'Auth\AuthController@showLoginForm');
+        Route::post('login', 'Auth\AuthController@login');
+        Route::get('logout', 'Auth\AuthController@logout');
 
-	Route::get('login', 'Auth\AuthController@getLogin');
-    Route::post('login', 'Auth\AuthController@postLogin');
-    Route::get('logout', 'Auth\AuthController@getLogout');
+        // Registration Routes...
+            Route::get('register', 'Auth\AuthController@showRegistrationForm');
+            Route::post('register', 'Auth\AuthController@register');
 
-    // Registration Routes...
-    Route::get('register', 'Auth\AuthController@getRegister');
-    Route::post('register', 'Auth\AuthController@postRegister');
+        // Password Reset Routes...
+            Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+            Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+            Route::post('password/reset', 'Auth\PasswordController@reset');
 
+    //Rutas del generador web
+        Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder');
 
-    Route::get('password/reset', 'Auth\PasswordController@getEmail');
-	Route::post('password/email', 'Auth\PasswordController@postEmail');
-	Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
-	Route::post('password/reset', 'Auth\PasswordController@postReset');
+        Route::get('field_template', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@fieldTemplate');
 
+        Route::post('generator_builder/generate', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generate');
 });
+
+Route::resource('pruebas', 'pruebaController');

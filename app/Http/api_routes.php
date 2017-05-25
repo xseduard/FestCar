@@ -18,3 +18,6 @@
 
 
 
+
+
+Route::resource('pruebas', 'pruebaAPIController');
