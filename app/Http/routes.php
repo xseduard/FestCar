@@ -58,4 +58,5 @@ Route::group(['middleware' => 'web'], function() {
         Route::post('generator_builder/generate', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generate');
 });
 
-Route::resource('pruebas', 'pruebaController');
+
+
