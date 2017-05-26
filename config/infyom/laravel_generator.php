@@ -15,6 +15,8 @@ return [
 
         'model'             => app_path('Models/'),
 
+        'datatables'        => app_path('DataTables/'),
+
         'repository'        => app_path('Repositories/'),
 
         'routes'            => app_path('Http/routes.php'),
@@ -40,6 +42,8 @@ return [
         'schema_files'      => base_path('resources/model_schemas/'),
 
         'templates_dir'     => base_path('resources/infyom/infyom-generator-templates/'),
+
+        'modelJs'           => base_path('resources/assets/js/models/'),
     ],
 
     /*
@@ -52,6 +56,8 @@ return [
     'namespace' => [
 
         'model'             => 'App\Models',
+
+        'datatables'        => 'App\DataTables',
 
         'repository'        => 'App\Repositories',
 
@@ -104,7 +110,25 @@ return [
 
         'softDelete' => true,
 
-        'tables_searchable_default' => false,
+        'tables_searchable_default' => true,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Prefixes
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    'prefixes' => [
+
+        'route' => '',  // using admin will create route('admin.?.index') type routes
+
+        'path' => '',
+
+        'view' => '',  // using backend will create return view('backend.?.index') type the backend views directory
+
+        'public' => '',
     ],
 
     /*
@@ -116,11 +140,18 @@ return [
 
     'add_on' => [
 
-        'swagger'   => true,
+        'swagger'       => false,
 
-        'tests'     => true,
+        'tests'         => false,
 
-        'datatables' => false,
+        'datatables'    => true,
+
+        'menu'          => [
+
+            'enabled'       => true,
+
+            'menu_file'     => 'layouts/menu.blade.php',
+        ],
     ],
 
     /*
@@ -137,6 +168,16 @@ return [
         'created_at'    => 'created_at',
 
         'updated_at'    => 'updated_at',
+
+        'deleted_at'    => 'deleted_at',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Save model files to `App/Models` when use `--prefix`. see #208
+    |--------------------------------------------------------------------------
+    |
+    */
+    'ignore_model_prefix' => false,
 
 ];

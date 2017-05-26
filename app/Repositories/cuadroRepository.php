@@ -2,17 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Models\Mario;
+use App\Models\cuadro;
 use InfyOm\Generator\Common\BaseRepository;
 
-class MarioRepository extends BaseRepository
+class cuadroRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        "texto",
-        "numero"
+        'nombre_cuadro',
+        'numero',
+        'correo'
     ];
 
     /**
@@ -20,6 +21,6 @@ class MarioRepository extends BaseRepository
      **/
     public function model()
     {
-        return Mario::class;
+        return cuadro::class;
     }
 }

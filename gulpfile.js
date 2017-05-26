@@ -1,4 +1,5 @@
 var elixir = require('laravel-elixir');
+elixir.config.sourcemaps = false;
 
 /*
  |--------------------------------------------------------------------------
@@ -12,5 +13,13 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.sass('app.scss');
+    mix.styles([
+        'vue-styles.css'
+    ], 'public/app/css/vue-styles.css');
+
+    mix.browserify('crud.js', 'public/app/js/crud.js');
+    // Add all model-config.js and generate 
+    // then using gulp, but, generate one for each model.
+	mix.scripts(['models/model-config.js'], 'public/app/js/models/model-config.js')
+       
 });

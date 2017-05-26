@@ -144,7 +144,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{!! url('/') !!}">
-                    InfyOm Generator
+                    Invitado: {!! Auth::guest() !!}
                 </a>
             </div>
 
