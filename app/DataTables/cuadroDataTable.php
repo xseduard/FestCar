@@ -46,20 +46,37 @@ class cuadroDataTable extends DataTable
             ->parameters([
                 'dom' => 'Bfrtip',
                 'scrollX' => false,
+                'language' => ['url' => '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json'],
                 'buttons' => [
-                    'print',
-                    'reset',
-                    'reload',
+                    [
+                        'extend' => 'print',
+                            'text'=> '<i class="fa fa-print"></i> Imprimir',
+                            'titleAttr'=> 'Imprimir Tabla',
+                            'className'=> '',
+                    ],
+                    [
+                    'extend' => 'reset',                          
+                        'text' => '<i class="fa fa-repeat  fa-flip-horizontal"></i> Reiniciar',
+                    ],
+                    [
+                    'extend' => 'reload',                          
+                        'text' => '<i class="fa fa-refresh"></i> Recargar',
+                    ],
+                    
                     [
                          'extend'  => 'collection',
-                         'text'    => '<i class="fa fa-download"></i> Export',
+                         'text'    => '<i class="fa fa-download"></i> Exportar',
                          'buttons' => [
                              'csv',
                              'excel',
                              'pdf',
                          ],
                     ],
-                    'colvis'
+                    [
+                    'extend' => 'colvis',                          
+                        'text' => 'Columnas visibles',
+                    ],
+                    
                 ]
             ]);
     }
