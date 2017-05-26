@@ -21,7 +21,9 @@
         "infyomlabs/generator-builder": "dev-master",
         "jlapp/swaggervel": "dev-master",
         "doctrine/dbal": "~2.3",
-        "infyomlabs/adminlte-templates": "5.2.x-dev"
+        "infyomlabs/adminlte-templates": "5.2.x-dev",
+        "barryvdh/laravel-dompdf": "0.6.*"
+
     },
     "autoload": {
         "classmap": [

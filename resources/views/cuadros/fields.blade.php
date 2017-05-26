@@ -18,6 +18,9 @@
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
-    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('cuadros.index') !!}" class="btn btn-default">Cancel</a>
+    {!! Form::button('<i class="glyphicon glyphicon-floppy-disk"></i> Guardar', [
+        'type' => 'submit',
+        'class' => 'btn btn-primary'        
+    ]) !!}
+    <a href="{!! route('cuadros.index') !!}" class="btn btn-default">Cancelar</a>
 </div>

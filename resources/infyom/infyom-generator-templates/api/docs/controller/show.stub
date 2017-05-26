@@ -1,5 +1,5 @@
 /**
-     * Display the specified $MODEL_NAME$.
+     * Muestra de forma detallada el modelo $MODEL_NAME$.
      * GET|HEAD /$MODEL_NAME_PLURAL_CAMEL$/{id}
      *
      * @param  int $id

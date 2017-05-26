@@ -17,7 +17,8 @@ class cuadroController extends AppBaseController
     private $cuadroRepository;
 
     public function __construct(cuadroRepository $cuadroRepo)
-    {
+    {   
+        $this->middleware('auth');
         $this->cuadroRepository = $cuadroRepo;
     }
 

@@ -1,10 +1,12 @@
 <li class="{{ Request::is('home*') ? 'active' : '' }}">
     <a href="{!! url('/home') !!}"><i class="fa fa-home"></i><span>Inicio</span></a>
 </li>
+<li class="{{ Request::is('generator_builder*') ? 'active' : '' }}">
+    <a href="{!! url('/generator_builder') !!}"><i class="fa fa-tasks"></i><span>GUI Generador</span></a>
+</li>
 <!-- route('rosas.index') -->
-<li ruta="generator_builder"><a href="{{ url('/generator_builder') }}"><span>Generador</span></a></li>
 <li class="treeview">
-<a href="#"><span>Ajustes Generales</span> <i class="fa fa-angle-left pull-right"></i></a>
+<a href="#"><i class="fa fa-sliders"></i><span>Ajustes Generales</span> <i class="fa fa-angle-left pull-right"></i></a>
 <ul class="treeview-menu">
 	<li><a href="#"><span>Generador</span></a></li>
 </ul>

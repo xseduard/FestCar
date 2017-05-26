@@ -13,7 +13,8 @@
 
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
+    <!-- Animsitun -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.min.css">
     <!-- FavICONS ================================================== -->
 
         <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
@@ -64,7 +65,8 @@
 
             <!-- Logo -->
             <a href="#" class="logo">
-                <b>T</b>ranseba
+                <span class="logo-mini"><b>T</b>RS</span>
+                <span class="logo-lg"><b>T</b>ranseba</span>
             </a>
 
             <!-- Header Navbar -->
@@ -118,7 +120,10 @@
         @include('layouts.sidebar')
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+        <div class="animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
             @yield('content')
+        </div>
+            
         </div>
 
         <!-- Main Footer -->
@@ -183,7 +188,38 @@
 
     <!-- AdminLTE App -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/js/app.min.js"></script>
-
+    <!-- Vue.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.0/vue.js" ></script>
+    <!-- Animsition -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.min.js"></script>
+     <!-- Animsition ini -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $(".animsition").animsition({
+            inClass: 'fade-in',
+            outClass: 'fade-out',
+            inDuration: 1500,
+            outDuration: 800,
+            linkElement: '.animsition-link',
+            // e.g. linkElement: 'a:not([target="_blank"]):not([href^="#"])'
+            loading: true,
+            loadingParentElement: 'body', //animsition wrapper element
+            loadingClass: 'animsition-loading',
+            loadingInner: '', // e.g '<img src="loading.svg" />'
+            timeout: false,
+            timeoutCountdown: 5000,
+            onLoadEvent: true,
+            browser: [ 'animation-duration', '-webkit-animation-duration'],
+            // "browser" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser.
+            // The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
+            overlay : false,
+            overlayClass : 'animsition-overlay-slide',
+            overlayParentElement : 'body',
+            transition: function(url){ window.location.href = url; }
+          });
+        });
+    </script>
+     <!-- Animsition end ini -->
     @yield('scripts')
 </body>
 </html>
