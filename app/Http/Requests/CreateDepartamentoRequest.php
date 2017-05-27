@@ -1,12 +1,13 @@
 <?php
 
-namespace $NAMESPACE_API_REQUEST$;
+namespace App\Http\Requests;
 
-use $NAMESPACE_MODEL$\$MODEL_NAME$;
-use InfyOm\Generator\Request\APIRequest;
+use App\Http\Requests\Request;
+use App\Models\Departamento;
 
-class Create$MODEL_NAME$APIRequest extends APIRequest
+class CreateDepartamentoRequest extends Request
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,7 +29,6 @@ class Create$MODEL_NAME$APIRequest extends APIRequest
         ];
     }
 
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -36,6 +36,6 @@ class Create$MODEL_NAME$APIRequest extends APIRequest
      */
     public function rules()
     {
-        return $MODEL_NAME$::$rules;
+        return Departamento::$rules;
     }
 }

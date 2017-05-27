@@ -16,6 +16,18 @@ class Update$MODEL_NAME$APIRequest extends APIRequest
     {
         return true;
     }
+    /**
+     * NOMBRES DE VARAIBLES EN CASO DE ERROR
+     */
+    public function attributes() {
+        return [
+
+         "" => "",
+         "" => "",
+    
+        ];
+    }
+
 
     /**
      * Get the validation rules that apply to the request.

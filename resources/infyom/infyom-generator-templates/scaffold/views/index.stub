@@ -15,7 +15,12 @@
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
+                @if($$MODEL_NAME_PLURAL_CAMEL$->isEmpty())
+                    <div class="well text-center">No se encontraron registros de $MODEL_NAME_PLURAL$ en esta consulta.</div>
+                @else
                     @include('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.table')
+                @endif
+                @include('common.paginate', ['records' => $$MODEL_NAME_PLURAL_CAMEL$])
             </div>
         </div>
     </div>

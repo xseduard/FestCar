@@ -20,3 +20,7 @@
     <a href="{!! route('cuadros.index') !!}"><i class="fa fa-edit"></i><span>cuadros</span></a>
 </li>
 
+<li class="{{ Request::is('departamentos*') ? 'active' : '' }}">
+    <a href="{!! route('departamentos.index') !!}"><i class="fa fa-edit"></i><span>Departamentos</span></a>
+</li>
+

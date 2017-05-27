@@ -28,3 +28,5 @@
 Route::resource('triangulos', 'trianguloAPIController');
 
 Route::resource('cuadros', 'cuadroAPIController');
+
+Route::resource('departamentos', 'DepartamentoAPIController');

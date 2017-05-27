@@ -15,24 +15,24 @@ $PRIMARY$
     public $fillable = [
         $FIELDS$
     ];
-
     /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
+     * Estos atributos son casteados en su tipo nativo.
      */
     protected $casts = [
         $CAST$
     ];
-
     /**
-     * Validation rules
-     *
-     * @var array
+     * Reglas de Validacón
      */
     public static $rules = [
         $RULES$
     ];
-
+    /**
+     * Relaciones entre Modelos
+     */
     $RELATIONS$
+
+    /**
+     * Funciones Especiales
+     */
 }

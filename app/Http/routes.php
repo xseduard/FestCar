@@ -51,16 +51,8 @@ Route::group(['middleware' => 'web'], function() {
             Route::post('password/reset', 'Auth\PasswordController@reset');
     Route::resource('triangulos', 'trianguloController');
     Route::resource('cuadros', 'cuadroController');
+    Route::resource('departamentos', 'DepartamentoController');
 });
-
-Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder');
-
-Route::get('field_template', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@fieldTemplate');
-
-Route::post('generator_builder/generate', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generate');
-
-
-
 
 
 
