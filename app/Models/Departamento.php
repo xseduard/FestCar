@@ -42,5 +42,11 @@ class Departamento extends Model
         'nombre' => 'required'
     ];
 
-    
+    public static function selDepartamento(){
+        $modelo = Departamento::all()->toArray();
+            foreach ($modelo as $key => $value) {
+                $array[$value['id']]=$value['nombre'];
+            }
+        return ($array);
+    }
 }

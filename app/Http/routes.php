@@ -52,7 +52,5 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('triangulos', 'trianguloController');
     Route::resource('cuadros', 'cuadroController');
     Route::resource('departamentos', 'DepartamentoController');
+    Route::resource('municipios', 'MunicipioController');
 });
-
-
-
