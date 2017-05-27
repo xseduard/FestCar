@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
-use App\Models\Departamento;
 
 class MunicipioController extends AppBaseController
 {
@@ -50,8 +49,15 @@ class MunicipioController extends AppBaseController
      */
     public function create()
     {
+        $array = [
+        's1' => 'uno',
+        's2' => 'dos'
+        ];
+        $array=array_add($array, 'price', 'value');
+        //dd($array);
+
         $selectores = [
-                    'departamentos' => Departamento::selDepartamento()
+                    'departamentos' => $this->municipioRepository->selDepartamento_re()
         ];
         return view('municipios.create')->with(['selectores' => $selectores]);
     }

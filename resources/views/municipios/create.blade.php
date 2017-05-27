@@ -27,7 +27,10 @@
  <script>
      $(".select2").select2({
       tags: "true",
-      placeholder: "Seleccionar...",
+      placeholder: {
+        id: '-1', // the value of the option
+        text: 'Seleccionar...'
+      },      
       allowClear: true
     });
  </script>
