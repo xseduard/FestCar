@@ -49,6 +49,11 @@ Route::group(['middleware' => 'web'], function() {
             Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
             Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
             Route::post('password/reset', 'Auth\PasswordController@reset');
+            
+            Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder');
+            Route::get('field_template', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@fieldTemplate');
+
+            Route::post('generator_builder/generate', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generate');
 
      // Central rutas       
     Route::get('central/departamentos', [
@@ -61,6 +66,5 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('departamentos', 'DepartamentoController');
     Route::resource('municipios', 'MunicipioController');
     Route::resource('naturals', 'NaturalController');
+    Route::resource('juridicos', 'JuridicoController');
 });
-
-

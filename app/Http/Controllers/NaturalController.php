@@ -144,7 +144,11 @@ class NaturalController extends AppBaseController
 
             return redirect(route('naturals.index'));
         }
-        $natural = $this->naturalRepository->update($request->all(), $id);
+
+        $input = $request->all();
+        $input['user_id'] = Auth::id();
+
+        $natural = $this->naturalRepository->update($input, $id);
 
         Flash::success('Tercero Natural actualizado correctamente.');
 

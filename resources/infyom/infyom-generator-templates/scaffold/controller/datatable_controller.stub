@@ -43,7 +43,7 @@ class $MODEL_NAME$Controller extends AppBaseController
     public function selectoresComunes()
     {
         $selectores = [];
-        // $selectores['id_atributo'] = $this->centralRepository->id_atributo();
+        // $selectores['atributo_id'] = $this->centralRepository->atributo_id();
         return $selectores;
     }
     /**

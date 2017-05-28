@@ -29,4 +29,7 @@
 </li>
 <li class="{{ Request::is('naturals*') ? 'active' : '' }}">
     <a href="{!! route('naturals.index') !!}"><i class="fa fa-users" aria-hidden="true"></i></i><span>Tercero Natural</span></a>
+</li><li class="{{ Request::is('juridicos*') ? 'active' : '' }}">
+    <a href="{!! route('juridicos.index') !!}"><i class="fa fa-building-o" aria-hidden="true"></i><span>Tercero Jurídico</span></a>
 </li>
+

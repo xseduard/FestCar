@@ -34,3 +34,5 @@ Route::resource('departamentos', 'DepartamentoAPIController');
 Route::resource('municipios', 'MunicipioAPIController');
 
 Route::resource('naturals', 'NaturalAPIController');
+
+Route::resource('juridicos', 'JuridicoAPIController');
