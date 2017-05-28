@@ -27,4 +27,15 @@ class CreateNaturalRequest extends Request
     {
         return Natural::$rules;
     }
+     /**
+     * Atributos (Nombres que se muestran en las alertas)
+     */
+    public function attributes() {
+        return [
+         "cedula" => "Documento de Identidad",
+         "municipio_id" => "Lugar de Expedición",
+         "" => "",
+    
+    ];
+    }
 }

@@ -21,6 +21,10 @@ class CentralRepository extends BaseRepository
         // Departamento::all()->pluck('nombre', 'id')->toArray();                
            return Departamento::lists('nombre', 'id');
     }
+    public function municipio_id(){
+        // Departamento::all()->pluck('nombre', 'id')->toArray();                
+           return Municipio::lists('nombre', 'id');
+    }
     /**
      * Selectores urls ajax
      */

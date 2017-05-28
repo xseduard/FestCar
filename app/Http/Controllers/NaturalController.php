@@ -51,6 +51,7 @@ class NaturalController extends AppBaseController
     {
         $selectores = [];
         // $selectores['id_atributo'] = $this->centralRepository->id_atributo();
+        $selectores['municipio_id'] = $this->centralRepository->municipio_id();
         return $selectores;
     }
     /**

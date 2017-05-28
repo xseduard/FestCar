@@ -30,4 +30,15 @@ class UpdateNaturalRequest extends Request
          return $array;
         
     }
+     /**
+     * Atributos (Nombres que se muestran en las alertas)
+     */
+    public function attributes() {
+        return [
+         "cedula" => "Documento de Identidad",
+         "municipio_id" => "Lugar de Expedición",
+         "" => "",
+    
+    ];
+    }
 }

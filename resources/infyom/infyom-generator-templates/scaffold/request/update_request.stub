@@ -9,7 +9,7 @@ class Update$MODEL_NAME$Request extends Request
 {
 
     /**
-     * Determine if the user is authorized to make this request.
+     * Determine si el usuario está autorizado para realizar esta solicitud.
      *
      * @return bool
      */
@@ -19,7 +19,7 @@ class Update$MODEL_NAME$Request extends Request
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     *  Obtienes las reglas que se aplican a la solicitud (Request).
      *
      * @return array
      */
@@ -27,4 +27,17 @@ class Update$MODEL_NAME$Request extends Request
     {
         return $MODEL_NAME$::$rules;
     }
+
+    /**
+     * Atributos (Nombres que se muestran en las alertas)
+     */
+    public function attributes() {
+        return [
+        "" => "",
+        "" => "",    
+        ];
+    }
+    /*
+    $FIELDS$
+    */
 }

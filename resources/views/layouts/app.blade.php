@@ -124,9 +124,9 @@
         @include('layouts.sidebar')
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-        <div class="animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
+        
             @yield('content')
-        </div>
+        
             
         </div>
 

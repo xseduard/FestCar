@@ -1,6 +1,6 @@
 <table class="table table-responsive" id="naturals-table">
     <thead>
-        <th>Cedula</th>
+        <th>Cédula</th>
         <th>Nombres</th>
         <th>Apellidos</th>
         <th>Correo</th>
@@ -26,7 +26,7 @@
                         <a href="{!! route('naturals.show', [$natural->id]) !!}" class='btn btn-default btn-xs' title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
                     -->
                     <a href="{!! route('naturals.edit', [$natural->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
+                    {!! Form::button('<i class="fa fa-user-times" aria-hidden="true"></i>', [
                         'type' => 'submit',
                         'class' => 'btn btn-danger btn-xs',
                         'onclick' => "return confirm('¿Confirma que desea eliminar?')",

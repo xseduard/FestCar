@@ -22,35 +22,41 @@ class Natural extends Model
 
     public $fillable = [
         'cedula',
+        'municipio_id',
         'nombres',
         'apellidos',
         'genero',
         'correo',
         'telefono',
-        'user_id'
+        'user_id',
+        'observaciones'
     ];
     /**
      * Estos atributos son casteados en su tipo nativo.
      */
     protected $casts = [
         'cedula' => 'string',
+        'municipio_id' => 'integer',
         'nombres' => 'string',
         'apellidos' => 'string',
         'genero' => 'string',
         'correo' => 'string',
         'telefono' => 'string',
-        'user_id' => 'integer'
+        'user_id' => 'integer',
+        'observaciones' => 'string'
     ];
     /**
      * Reglas de Validacón
      */
     public static $rules = [
         'cedula' => 'required|numeric|unique:naturals|digits_between:8,12',
+        'municipio_id' => 'required',
         'nombres' => 'required|string',
         'apellidos' => 'required|string',
         'genero' => 'required',
         'correo' => 'email',
-        'telefono' => 'numeric|digits_between:8,15'
+        'telefono' => 'numeric|digits_between:8,15',
+        'observaciones' => ''
     ];
     /**
      * Relaciones entre Modelos
@@ -62,6 +68,9 @@ class Natural extends Model
     */
     public function user(){
         return $this->belongsTo('App\User');
+    }
+    public function municipio(){
+        return $this->belongsTo('App\Models\Municipio');
     }
     
 
