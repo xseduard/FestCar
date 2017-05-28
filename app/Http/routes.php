@@ -60,4 +60,7 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('cuadros', 'cuadroController');
     Route::resource('departamentos', 'DepartamentoController');
     Route::resource('municipios', 'MunicipioController');
+    Route::resource('naturals', 'NaturalController');
 });
+
+

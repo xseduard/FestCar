@@ -32,3 +32,5 @@ Route::resource('cuadros', 'cuadroAPIController');
 Route::resource('departamentos', 'DepartamentoAPIController');
 
 Route::resource('municipios', 'MunicipioAPIController');
+
+Route::resource('naturals', 'NaturalAPIController');

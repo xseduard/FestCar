@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            $MODEL_NAME_HUMAN$ <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Editar
+            Terceros Naturales <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Editar
         </h1>
    </section>
    <div class="content">
@@ -11,9 +11,9 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($$MODEL_NAME_CAMEL$, ['route' => ['$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.update', $$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$], 'method' => 'patch']) !!}
+                   {!! Form::model($natural, ['route' => ['naturals.update', $natural->id], 'method' => 'patch']) !!}
 
-                        @include('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.fields')
+                        @include('naturals.fields')
 
                    {!! Form::close() !!}
                </div>
@@ -34,6 +34,7 @@
           },      
           allowClear: true
         });
+        $("#cedula").prop('disabled', true);
     });
  </script>
 @endsection

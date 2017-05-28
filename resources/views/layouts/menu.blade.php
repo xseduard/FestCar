@@ -27,6 +27,6 @@
 <li class="{{ Request::is('cuadros*') ? 'active' : '' }}">
     <a href="{!! route('cuadros.index') !!}"><i class="fa fa-indent"></i><span>cuadros</span></a>
 </li>
-
-
-
+<li class="{{ Request::is('naturals*') ? 'active' : '' }}">
+    <a href="{!! route('naturals.index') !!}"><i class="fa fa-users" aria-hidden="true"></i></i><span>Tercero Natural</span></a>
+</li>
