@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateMunicipioRequest;
 use App\Http\Requests\UpdateMunicipioRequest;
 use App\Repositories\MunicipioRepository;
+use App\Repositories\CentralRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -16,11 +17,13 @@ class MunicipioController extends AppBaseController
     /** @var  MunicipioRepository */
     /** vendor laravel-generator templates xs*/
     private $municipioRepository;
+    private $centralRepository;
 
-    public function __construct(MunicipioRepository $municipioRepo)
+    public function __construct(MunicipioRepository $municipioRepo, CentralRepository $centralRepo)
     {
         $this->middleware('auth');
         $this->municipioRepository = $municipioRepo;
+        $this->centralRepository = $centralRepo;
     }
 
     /**
@@ -41,7 +44,15 @@ class MunicipioController extends AppBaseController
         return view('municipios.index')
             ->with('municipios', $municipios);
     }
-
+    /**
+     * selectores comunes
+     */
+    public function selectoresComunes()
+    {
+        $selectores = [];
+        $selectores['id_departamento'] = $this->centralRepository->id_departamento();
+        return $selectores;
+    }
     /**
      * Show the form for creating a new Municipio.
      *
@@ -49,16 +60,9 @@ class MunicipioController extends AppBaseController
      */
     public function create()
     {
-        $array = [
-        's1' => 'uno',
-        's2' => 'dos'
-        ];
-        $array=array_add($array, 'price', 'value');
-        //dd($array);
-
-        $selectores = [
-                    'departamentos' => $this->municipioRepository->selDepartamento_re()
-        ];
+        
+        $selectores = $this->selectoresComunes();
+       
         return view('municipios.create')->with(['selectores' => $selectores]);
     }
 
@@ -117,7 +121,9 @@ class MunicipioController extends AppBaseController
             return redirect(route('municipios.index'));
         }
 
-        return view('municipios.edit')->with('municipio', $municipio);
+        $selectores = $this->selectoresComunes();
+
+        return view('municipios.edit')->with(['municipio' => $municipio, 'selectores' => $selectores]);
     }
 
     /**

@@ -49,6 +49,13 @@ Route::group(['middleware' => 'web'], function() {
             Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
             Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
             Route::post('password/reset', 'Auth\PasswordController@reset');
+
+     // Central rutas       
+    Route::get('central/departamentos', [
+            'as' => 'central.sdepa',
+            'uses' => 'CentralController@sdepa',
+        ]);
+
     Route::resource('triangulos', 'trianguloController');
     Route::resource('cuadros', 'cuadroController');
     Route::resource('departamentos', 'DepartamentoController');

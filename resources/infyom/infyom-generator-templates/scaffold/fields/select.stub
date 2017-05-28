@@ -1,5 +1,5 @@
-<!-- $FIELD_NAME_TITLE$ Field -->
+<!-- $FIELD_NAME_TITLE$ Selector -->
 <div class="form-group col-sm-6">
     {!! Form::label('$FIELD_NAME$', '$FIELD_NAME_TITLE$') !!}
-    {!! Form::select('$FIELD_NAME$', $INPUT_ARR$, null, ['class' => 'form-control select2', 'style' => 'width: 100%']) !!}
+    {!! Form::select('$FIELD_NAME$', $selectores['$FIELD_NAME$'], null, ['class' => 'form-control select2', 'style' => 'width: 100%']) !!}
 </div>

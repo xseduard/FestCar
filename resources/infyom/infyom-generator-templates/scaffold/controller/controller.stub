@@ -5,6 +5,7 @@ namespace $NAMESPACE_CONTROLLER$;
 use $NAMESPACE_REQUEST$\Create$MODEL_NAME$Request;
 use $NAMESPACE_REQUEST$\Update$MODEL_NAME$Request;
 use $NAMESPACE_REPOSITORY$\$MODEL_NAME$Repository;
+use $NAMESPACE_REPOSITORY$\CentralRepository;
 use $NAMESPACE_APP$\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -14,13 +15,14 @@ use Response;
 class $MODEL_NAME$Controller extends AppBaseController
 {
     /** @var  $MODEL_NAME$Repository */
-    /** vendor laravel-generator templates xs*/
     private $$MODEL_NAME_CAMEL$Repository;
+    private $centralRepository;
 
-    public function __construct($MODEL_NAME$Repository $$MODEL_NAME_CAMEL$Repo)
+    public function __construct($MODEL_NAME$Repository $$MODEL_NAME_CAMEL$Repo, CentralRepository $centralRepo)
     {
         $this->middleware('auth');
         $this->$MODEL_NAME_CAMEL$Repository = $$MODEL_NAME_CAMEL$Repo;
+        $this->centralRepository = $centralRepo;
     }
 
     /**
@@ -41,7 +43,15 @@ class $MODEL_NAME$Controller extends AppBaseController
         return view('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.index')
             ->with('$MODEL_NAME_PLURAL_CAMEL$', $$MODEL_NAME_PLURAL_CAMEL$);
     }
-
+    /**
+     * Selectores comunes
+     */
+    public function selectoresComunes()
+    {
+        $selectores = [];
+        // $selectores['id_atributo'] = $this->centralRepository->id_atributo();
+        return $selectores;
+    }
     /**
      * Show the form for creating a new $MODEL_NAME$.
      *
@@ -49,7 +59,9 @@ class $MODEL_NAME$Controller extends AppBaseController
      */
     public function create()
     {
-        return view('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.create');
+        $selectores = $this->selectoresComunes();
+
+        return view('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.create')->with(['selectores' => $selectores]);
     }
 
     /**
@@ -106,8 +118,10 @@ class $MODEL_NAME$Controller extends AppBaseController
 
             return redirect(route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index'));
         }
+        
+        $selectores = $this->selectoresComunes();
 
-        return view('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.edit')->with('$MODEL_NAME_CAMEL$', $$MODEL_NAME_CAMEL$);
+        return view('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.edit')->with(['$MODEL_NAME_CAMEL$' => $$MODEL_NAME_CAMEL$, 'selectores' => $selectores]);
     }
 
     /**

@@ -196,6 +196,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.0/vue.js" ></script>
     <!-- select2 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <!-- select2 español -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/i18n/es.js"></script>
     <!-- Animsition -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.min.js"></script>
      <!-- Animsition ini -->

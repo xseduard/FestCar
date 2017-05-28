@@ -30,6 +30,11 @@ $PRIMARY$
     /**
      * Relaciones entre Modelos
      */
+    /*
+    public function modelo(){
+        return $this->belongsTo('App\Models\Modelo');
+    }
+    */
     $RELATIONS$
 
     /**

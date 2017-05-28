@@ -42,7 +42,7 @@ class Municipio extends Model
      * Relaciones entre Modelos
      */
     public function departamento(){
-        return $this->belongsTo(Departamento::class, 'id_departamento');
+        return $this->belongsTo('App\Models\Departamento', 'id_departamento');
     }
 
     /**

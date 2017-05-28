@@ -25,13 +25,47 @@
 
 @section('scripts')
  <script>
-     $(".select2").select2({
-      tags: "true",
+  $(document).ready(function () {  
+    $(".select2").select2({
+      tags: false,
+      language: {noResults: function() {return "No se encontraron coincidencias";}, searching: function() {return "Buscando..";}
+            },
       placeholder: {
-        id: '-1', // the value of the option
-        text: 'Seleccionar...'
+        id: '0', // the value of the option
+        text: 'Seleccionar... '
       },      
       allowClear: true
     });
+
+    $('.seltest').select2({
+            // Activamos la opcion "Tags" del plugin
+            tags: false,
+            language: {noResults: function() {return "No se encontraron coincidencias";}, searching: function() {return "Buscando..";}
+            },
+            placeholder: 'Seleccione...',
+            //minimumInputLength: 3,
+            tokenSeparators: [','],
+            ajax: {
+                dataType: 'json',
+                url: '{{ route("central.sdepa") }}',
+                delay: 250,
+                data: function(params) {
+                    console.log('params: '+params.term);
+                    return {
+                        term: params.term
+                    }
+                },
+                processResults: function (data, page) {
+                    console.log('darta: '+data);
+                  return {
+                    results: data
+                  };
+                },
+            }
+        }); 
+
+
+     // terminado ready
+});
  </script>
 @endsection
