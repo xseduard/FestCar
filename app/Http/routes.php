@@ -70,5 +70,14 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('vehiculos', 'VehiculoController');
     Route::resource('tarjetaPropiedads', 'Tarjeta_PropiedadController');
     Route::resource('soats', 'SoatController');
+    Route::resource('tecnicomecanicas', 'TecnicomecanicaController');
     
 });
+
+
+
+Route::resource('tarjetaOperacions', 'TarjetaOperacionController');
+
+Route::resource('polizaResponsabilidads', 'PolizaResponsabilidadController');
+
+Route::resource('revisionPreventivas', 'RevisionPreventivaController');

@@ -97,7 +97,7 @@ class Tarjeta_PropiedadController extends AppBaseController
         $tarjetaPropiedad = $this->tarjetaPropiedadRepository->findWithoutFail($id);
 
         if (empty($tarjetaPropiedad)) {
-            Flash::error('Tarjeta  Propiedad No se encuentra en encuentra registrado.');
+            Flash::error('Tarjeta  Propiedad No se encuentra registrado.');
 
             return redirect(route('tarjetaPropiedads.index'));
         }
@@ -117,7 +117,7 @@ class Tarjeta_PropiedadController extends AppBaseController
         $tarjetaPropiedad = $this->tarjetaPropiedadRepository->findWithoutFail($id);
 
         if (empty($tarjetaPropiedad)) {
-            Flash::error('Tarjeta  Propiedad No se encuentra en encuentra registrado.');
+            Flash::error('Tarjeta  Propiedad No se encuentra registrado.');
 
             return redirect(route('tarjetaPropiedads.index'));
         }
@@ -140,7 +140,7 @@ class Tarjeta_PropiedadController extends AppBaseController
         $tarjetaPropiedad = $this->tarjetaPropiedadRepository->findWithoutFail($id);
 
         if (empty($tarjetaPropiedad)) {
-            Flash::error('Tarjeta  Propiedad No se encuentra en encuentra registrado.');
+            Flash::error('Tarjeta  Propiedad No se encuentra registrado.');
 
             return redirect(route('tarjetaPropiedads.index'));
         }
@@ -166,7 +166,7 @@ class Tarjeta_PropiedadController extends AppBaseController
         $tarjetaPropiedad = $this->tarjetaPropiedadRepository->findWithoutFail($id);
 
         if (empty($tarjetaPropiedad)) {
-            Flash::error('Tarjeta  Propiedad No se encuentra en encuentra registrado.');
+            Flash::error('Tarjeta  Propiedad No se encuentra registrado.');
 
             return redirect(route('tarjetaPropiedads.index'));
         }

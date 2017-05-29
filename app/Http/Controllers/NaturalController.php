@@ -97,7 +97,7 @@ class NaturalController extends AppBaseController
         $natural = $this->naturalRepository->findWithoutFail($id);
 
         if (empty($natural)) {
-            Flash::error('Tercero Natural No se encuentra en encuentra registrado.');
+            Flash::error('Tercero Natural No se encuentra registrado.');
 
             return redirect(route('naturals.index'));
         }
@@ -117,7 +117,7 @@ class NaturalController extends AppBaseController
         $natural = $this->naturalRepository->findWithoutFail($id);
 
         if (empty($natural)) {
-            Flash::error('Tercero Natural No se encuentra en encuentra registrado.');
+            Flash::error('Tercero Natural No se encuentra registrado.');
 
             return redirect(route('naturals.index'));
         }
@@ -140,7 +140,7 @@ class NaturalController extends AppBaseController
         $natural = $this->naturalRepository->findWithoutFail($id);
 
         if (empty($natural)) {
-            Flash::error('Tercero Natural No se encuentra en encuentra registrado.');
+            Flash::error('Tercero Natural No se encuentra registrado.');
 
             return redirect(route('naturals.index'));
         }
@@ -167,7 +167,7 @@ class NaturalController extends AppBaseController
         $natural = $this->naturalRepository->findWithoutFail($id);
 
         if (empty($natural)) {
-            Flash::error('Tercero Natural No se encuentra en encuentra registrado.');
+            Flash::error('Tercero Natural No se encuentra registrado.');
 
             return redirect(route('naturals.index'));
         }

@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Soat <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Registrar
+            Revision Preventiva <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Registrar
         </h1>
     </section>
     <div class="content">
@@ -15,9 +15,9 @@
 
                 <div class="box-body">
                     <div class="row">
-                        {!! Form::open(['route' => 'soats.store']) !!}
+                        {!! Form::open(['route' => 'revisionPreventivas.store']) !!}
 
-                            @include('soats.fields')
+                            @include('revision_preventivas.fields')
 
                         {!! Form::close() !!}
                     </div>
@@ -42,17 +42,5 @@
             language: 'es',
         });
     });
-/*
-    $('#fecha_vigencia_inicio').on('focus',function(){
-        
-        var cadena = $('#fecha_vigencia_inicio').val();
-        console.log("cadena: "+cadena);
-        var ms = Date.parse(cadena);
-        console.log("fecha ini: "+ms);
-        var fecha = new Date(cadena);
-        // fecha.setHours(fecha.getHours()+1);
-                console.log("fecha es: "+fecha);
-    });
-    */
  </script>
 @endsection

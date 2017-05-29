@@ -97,7 +97,7 @@ class JuridicoController extends AppBaseController
         $juridico = $this->juridicoRepository->findWithoutFail($id);
 
         if (empty($juridico)) {
-            Flash::error('Tercero Jurídico No se encuentra en encuentra registrado.');
+            Flash::error('Tercero Jurídico No se encuentra registrado.');
 
             return redirect(route('juridicos.index'));
         }
@@ -117,7 +117,7 @@ class JuridicoController extends AppBaseController
         $juridico = $this->juridicoRepository->findWithoutFail($id);
 
         if (empty($juridico)) {
-            Flash::error('Tercero Jurídico No se encuentra en encuentra registrado.');
+            Flash::error('Tercero Jurídico No se encuentra registrado.');
 
             return redirect(route('juridicos.index'));
         }
@@ -140,7 +140,7 @@ class JuridicoController extends AppBaseController
         $juridico = $this->juridicoRepository->findWithoutFail($id);
 
         if (empty($juridico)) {
-            Flash::error('Tercero Jurídico No se encuentra en encuentra registrado.');
+            Flash::error('Tercero Jurídico No se encuentra registrado.');
 
             return redirect(route('juridicos.index'));
         }
@@ -166,7 +166,7 @@ class JuridicoController extends AppBaseController
         $juridico = $this->juridicoRepository->findWithoutFail($id);
 
         if (empty($juridico)) {
-            Flash::error('Tercero Jurídico No se encuentra en encuentra registrado.');
+            Flash::error('Tercero Jurídico No se encuentra registrado.');
 
             return redirect(route('juridicos.index'));
         }

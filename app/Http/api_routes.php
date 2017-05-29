@@ -44,3 +44,11 @@ Route::resource('vehiculos', 'VehiculoAPIController');
 Route::resource('tarjeta__propiedads', 'Tarjeta_PropiedadAPIController');
 
 Route::resource('soats', 'SoatAPIController');
+
+Route::resource('tecnicomecanicas', 'TecnicomecanicaAPIController');
+
+Route::resource('tarjeta_operacions', 'TarjetaOperacionAPIController');
+
+Route::resource('poliza_responsabilidads', 'PolizaResponsabilidadAPIController');
+
+Route::resource('revision_preventivas', 'RevisionPreventivaAPIController');

@@ -90,7 +90,7 @@ class VehiculoController extends AppBaseController
         $vehiculo = $this->vehiculoRepository->findWithoutFail($id);
 
         if (empty($vehiculo)) {
-            Flash::error('Vehículo  No se encuentra en encuentra registrado.');
+            Flash::error('Vehículo  No se encuentra registrado.');
 
             return redirect(route('vehiculos.index'));
         }
@@ -110,7 +110,7 @@ class VehiculoController extends AppBaseController
         $vehiculo = $this->vehiculoRepository->findWithoutFail($id);
 
         if (empty($vehiculo)) {
-            Flash::error('Vehículo  No se encuentra en encuentra registrado.');
+            Flash::error('Vehículo  No se encuentra registrado.');
 
             return redirect(route('vehiculos.index'));
         }
@@ -132,7 +132,7 @@ class VehiculoController extends AppBaseController
         $vehiculo = $this->vehiculoRepository->findWithoutFail($id);
 
         if (empty($vehiculo)) {
-            Flash::error('Vehículo  No se encuentra en encuentra registrado.');
+            Flash::error('Vehículo  No se encuentra registrado.');
 
             return redirect(route('vehiculos.index'));
         }
@@ -159,7 +159,7 @@ class VehiculoController extends AppBaseController
         $vehiculo = $this->vehiculoRepository->findWithoutFail($id);
 
         if (empty($vehiculo)) {
-            Flash::error('Vehículo  No se encuentra en encuentra registrado.');
+            Flash::error('Vehículo  No se encuentra registrado.');
 
             return redirect(route('vehiculos.index'));
         }

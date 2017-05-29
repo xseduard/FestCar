@@ -45,3 +45,19 @@
     <a href="{!! route('soats.index') !!}"><i class="fa fa-id-card-o" aria-hidden="true"></i><span>Soats</span></a>
 </li>
 
+<li class="{{ Request::is('tecnicomecanicas*') ? 'active' : '' }}">
+    <a href="{!! route('tecnicomecanicas.index') !!}"><i class="fa fa-edit"></i><span>Tecnicomecanicas</span></a>
+</li>
+
+<li class="{{ Request::is('tarjetaOperacions*') ? 'active' : '' }}">
+    <a href="{!! route('tarjetaOperacions.index') !!}"><i class="fa fa-edit"></i><span>TarjetaOperacions</span></a>
+</li>
+
+<li class="{{ Request::is('polizaResponsabilidads*') ? 'active' : '' }}">
+    <a href="{!! route('polizaResponsabilidads.index') !!}"><i class="fa fa-edit"></i><span>PolizaResponsabilidads</span></a>
+</li>
+
+<li class="{{ Request::is('revisionPreventivas*') ? 'active' : '' }}">
+    <a href="{!! route('revisionPreventivas.index') !!}"><i class="fa fa-edit"></i><span>RevisionPreventivas</span></a>
+</li>
+

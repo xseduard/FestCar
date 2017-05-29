@@ -99,7 +99,7 @@ class SoatController extends AppBaseController
         $soat = $this->soatRepository->findWithoutFail($id);
 
         if (empty($soat)) {
-            Flash::error('Soat No se encuentra en encuentra registrado.');
+            Flash::error('Soat No se encuentra registrado.');
 
             return redirect(route('soats.index'));
         }
@@ -119,7 +119,7 @@ class SoatController extends AppBaseController
         $soat = $this->soatRepository->findWithoutFail($id);
 
         if (empty($soat)) {
-            Flash::error('Soat No se encuentra en encuentra registrado.');
+            Flash::error('Soat No se encuentra registrado.');
 
             return redirect(route('soats.index'));
         }
@@ -142,7 +142,7 @@ class SoatController extends AppBaseController
         $soat = $this->soatRepository->findWithoutFail($id);
 
         if (empty($soat)) {
-            Flash::error('Soat No se encuentra en encuentra registrado.');
+            Flash::error('Soat No se encuentra registrado.');
 
             return redirect(route('soats.index'));
         }
@@ -168,7 +168,7 @@ class SoatController extends AppBaseController
         $soat = $this->soatRepository->findWithoutFail($id);
 
         if (empty($soat)) {
-            Flash::error('Soat No se encuentra en encuentra registrado.');
+            Flash::error('Soat No se encuentra registrado.');
 
             return redirect(route('soats.index'));
         }
