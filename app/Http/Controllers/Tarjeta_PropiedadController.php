@@ -145,7 +145,6 @@ class Tarjeta_PropiedadController extends AppBaseController
             return redirect(route('tarjetaPropiedads.index'));
         }
         $input = $request->all();
-        //dd($input);
         $input['user_id'] = Auth::id();
 
         $tarjetaPropiedad = $this->tarjetaPropiedadRepository->update($input, $id);

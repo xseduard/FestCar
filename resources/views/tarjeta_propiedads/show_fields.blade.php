@@ -1,5 +1,6 @@
 <!-- Id Field -->
-<div class="form-group">
+<div class="col-sm-4">
+    <div class="form-group">
     {!! Form::label('id', 'Id:') !!}
     <p>{!! $tarjetaPropiedad->id !!}</p>
 </div>
@@ -52,6 +53,9 @@
     <p>{!! $tarjetaPropiedad->clase_vehiculo !!}</p>
 </div>
 
+</div>
+<div class="col-sm-4">
+    
 <!-- Tipo Carroceria Field -->
 <div class="form-group">
     {!! Form::label('tipo_carroceria', 'Tipo Carroceria:') !!}
@@ -94,6 +98,9 @@
     <p>{!! $tarjetaPropiedad->blindaje !!}</p>
 </div>
 
+</div>
+<div class="col-sm-4">
+    
 <!-- Potencia Hp Field -->
 <div class="form-group">
     {!! Form::label('potencia_hp', 'Potencia Hp:') !!}
@@ -147,4 +154,10 @@
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{!! $tarjetaPropiedad->updated_at !!}</p>
 </div>
+<div class="form-group">
+    {!! Form::label('updated_at', 'usuario') !!}
+    <p>{!! $tarjetaPropiedad->user_id !!}</p>
+</div>
 
+
+</div>

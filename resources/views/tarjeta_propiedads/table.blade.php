@@ -16,9 +16,9 @@
             <td>
                 {!! Form::open(['route' => ['tarjetaPropiedads.destroy', $tarjetaPropiedad->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>
-                    <!-- 
+                    
                         <a href="{!! route('tarjetaPropiedads.show', [$tarjetaPropiedad->id]) !!}" class='btn btn-default btn-xs' title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
-                    -->
+                    
                     <a href="{!! route('tarjetaPropiedads.edit', [$tarjetaPropiedad->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                         'type' => 'submit',

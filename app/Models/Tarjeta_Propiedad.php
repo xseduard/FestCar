@@ -42,7 +42,8 @@ class Tarjeta_Propiedad extends Model
         'puertas',
         'fecha_matricula',
         'fecha_expedicion',
-        'organismo_transito'
+        'organismo_transito',
+        'user_id'
     ];
     /**
      * Estos atributos son casteados en su tipo nativo.
@@ -69,7 +70,8 @@ class Tarjeta_Propiedad extends Model
         'puertas' => 'string',
         'fecha_matricula' => 'string',
         'fecha_expedicion' => 'string',
-        'organismo_transito' => 'string'
+        'organismo_transito' => 'string',
+        'user_id' => 'integer'
     ];
     /**
      * Reglas de Validacón
