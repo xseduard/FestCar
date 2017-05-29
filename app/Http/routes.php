@@ -69,10 +69,6 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('juridicos', 'JuridicoController');
     Route::resource('vehiculos', 'VehiculoController');
     Route::resource('tarjetaPropiedads', 'Tarjeta_PropiedadController');
+    Route::resource('soats', 'SoatController');
     
 });
-
-
-
-
-

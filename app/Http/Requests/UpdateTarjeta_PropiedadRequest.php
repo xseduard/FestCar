@@ -33,7 +33,7 @@ class UpdateTarjeta_PropiedadRequest extends Request
      */
     public function attributes() {
         return [
-        "" => "",
+        "vehiculo_id" => "Vehículo",
         "" => "",    
         ];
     }

@@ -42,3 +42,5 @@ Route::resource('juridicos', 'JuridicoAPIController');
 Route::resource('vehiculos', 'VehiculoAPIController');
 
 Route::resource('tarjeta__propiedads', 'Tarjeta_PropiedadAPIController');
+
+Route::resource('soats', 'SoatAPIController');

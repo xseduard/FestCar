@@ -41,3 +41,7 @@
     <a href="{!! route('tarjetaPropiedads.index') !!}"><i class="fa fa-id-card-o" aria-hidden="true"></i><span>Tarjetas de Propiedad</span></a>
 </li>
 
+<li class="{{ Request::is('soats*') ? 'active' : '' }}">
+    <a href="{!! route('soats.index') !!}"><i class="fa fa-id-card-o" aria-hidden="true"></i><span>Soats</span></a>
+</li>
+

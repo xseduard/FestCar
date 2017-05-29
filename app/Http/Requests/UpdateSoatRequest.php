@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use App\Models\Tarjeta_Propiedad;
+use App\Models\Soat;
 
-class CreateTarjeta_PropiedadRequest extends Request
+class UpdateSoatRequest extends Request
 {
 
     /**
@@ -19,13 +19,13 @@ class CreateTarjeta_PropiedadRequest extends Request
     }
 
     /**
-     * Obtienes las reglas que se aplican a la solicitud (Request).
+     *  Obtienes las reglas que se aplican a la solicitud (Request).
      *
      * @return array
      */
     public function rules()
     {
-        return Tarjeta_Propiedad::$rules;
+        return Soat::$rules;
     }
 
     /**
@@ -33,8 +33,11 @@ class CreateTarjeta_PropiedadRequest extends Request
      */
     public function attributes() {
         return [
-        "vehiculo_id" => "vehículo",
-        "licencia_transito" => "licencia de transito",    
+       "vehiculo_id" => "Vehículo",
+       'fecha_expedicion' => 'fecha de expedición',
+        'fecha_vigencia_inicio' => 'fecha inicio de vigencia',
+        'fecha_vigencia_final' => 'fecha final de vigencia',
+        "" => "",    
         ];
     }
     /*

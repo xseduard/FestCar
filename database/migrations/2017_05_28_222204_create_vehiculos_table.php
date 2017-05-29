@@ -15,7 +15,7 @@ class CreateVehiculosTable extends Migration
     {
         Schema::create('vehiculos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('placa', 6);            
+            $table->string('placa', 6)->unique();            
             $table->string('propietario_nombre')->comment('Dueño segun la tarjeta de propiedad');
             $table->string('propietario_cedula', 12);
             $table->string('poseedor_nombre');

@@ -6,7 +6,7 @@
 
 <!-- Licencia Transito Campo de texto -->
 <div class="form-group col-sm-4">
-    {!! Form::label('licencia_transito', 'Licencia Transito') !!}
+    {!! Form::label('licencia_transito', 'Licencia de Transito') !!}
     {!! Form::text('licencia_transito', null, ['class' => 'form-control', 'placeholder'=>'Número...']) !!}
 </div>
 

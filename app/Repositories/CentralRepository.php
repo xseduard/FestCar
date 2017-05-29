@@ -46,6 +46,7 @@ class CentralRepository extends BaseRepository
             }
         return ($array);
     }
+    // falta where para evitar que aparezcan los que ya tienen este documento
     public function vehiculo_id_tarjeta_propiedad (){
         $modelo = Vehiculo::all()->toArray();
             foreach ($modelo as $key => $value) {

@@ -19,7 +19,7 @@ class CreateTarjetaPropiedadsTable extends Migration
             $table->integer('vehiculo_id')->unsigned();
             $table->foreign('vehiculo_id')->references('id')->on('vehiculos');
 
-            $table->string('licencia_transito', 12);
+            $table->string('licencia_transito', 12)->unique();
             $table->string('marca', 100);
             $table->string('linea', 100);
             $table->string('cilindrada', 5);
