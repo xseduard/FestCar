@@ -89,7 +89,7 @@ class $MODEL_NAME$Controller extends AppBaseController
         $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->findWithoutFail($id);
 
         if (empty($$MODEL_NAME_CAMEL$)) {
-            Flash::error('$MODEL_NAME_HUMAN$  No se encuentra en encuentra registrado.');
+            Flash::error('$MODEL_NAME_HUMAN$  No se encuentra registrado.');
 
             return redirect(route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index'));
         }
@@ -109,7 +109,7 @@ class $MODEL_NAME$Controller extends AppBaseController
         $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->findWithoutFail($id);
 
         if (empty($$MODEL_NAME_CAMEL$)) {
-            Flash::error('$MODEL_NAME_HUMAN$  No se encuentra en encuentra registrado.');
+            Flash::error('$MODEL_NAME_HUMAN$  No se encuentra registrado.');
 
             return redirect(route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index'));
         }
@@ -131,7 +131,7 @@ class $MODEL_NAME$Controller extends AppBaseController
         $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->findWithoutFail($id);
 
         if (empty($$MODEL_NAME_CAMEL$)) {
-            Flash::error('$MODEL_NAME_HUMAN$  No se encuentra en encuentra registrado.');
+            Flash::error('$MODEL_NAME_HUMAN$  No se encuentra registrado.');
 
             return redirect(route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index'));
         }
@@ -157,7 +157,7 @@ class $MODEL_NAME$Controller extends AppBaseController
         $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->findWithoutFail($id);
 
         if (empty($$MODEL_NAME_CAMEL$)) {
-            Flash::error('$MODEL_NAME_HUMAN$  No se encuentra en encuentra registrado.');
+            Flash::error('$MODEL_NAME_HUMAN$  No se encuentra registrado.');
 
             return redirect(route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index'));
         }
