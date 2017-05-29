@@ -68,6 +68,7 @@ class $MODEL_NAME$Controller extends AppBaseController
     public function store(Create$MODEL_NAME$Request $request)
     {
         $input = $request->all();
+        $input['user_id'] = Auth::id();
 
         $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->create($input);
 
@@ -134,8 +135,10 @@ class $MODEL_NAME$Controller extends AppBaseController
 
             return redirect(route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index'));
         }
-
-        $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->update($request->all(), $id);
+        $input = $request->all();
+        $input['user_id'] = Auth::id();
+        
+        $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->update($input, $id);
 
         Flash::success('$MODEL_NAME_HUMAN$ actualizado correctamente.');
 

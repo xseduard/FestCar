@@ -67,4 +67,12 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('municipios', 'MunicipioController');
     Route::resource('naturals', 'NaturalController');
     Route::resource('juridicos', 'JuridicoController');
+    Route::resource('vehiculos', 'VehiculoController');
+    Route::resource('tarjetaPropiedads', 'Tarjeta_PropiedadController');
+    
 });
+
+
+
+
+

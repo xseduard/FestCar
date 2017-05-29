@@ -14,7 +14,7 @@
 <!-- Natural Id Selector -->
 <div class="form-group col-sm-6">
     {!! Form::label('natural_id', '*Representante Legal') !!}
-    {!! Form::select('natural_id', $selectores['natural_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%']) !!}
+    {!! Form::select('natural_id', $selectores['natural_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
 
 <!-- Actividad Campo de texto -->

@@ -36,3 +36,9 @@ Route::resource('municipios', 'MunicipioAPIController');
 Route::resource('naturals', 'NaturalAPIController');
 
 Route::resource('juridicos', 'JuridicoAPIController');
+
+
+
+Route::resource('vehiculos', 'VehiculoAPIController');
+
+Route::resource('tarjeta__propiedads', 'Tarjeta_PropiedadAPIController');

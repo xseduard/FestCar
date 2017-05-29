@@ -1,9 +1,8 @@
 @extends('layouts.app')
-
 @section('content')
     <section class="content-header">
         <h1>
-            Terceros Naturales <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Registrar
+            Tarjeta  Propiedad <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Registrar
         </h1>
     </section>
     <div class="content">
@@ -15,9 +14,9 @@
 
                 <div class="box-body">
                     <div class="row">
-                        {!! Form::open(['route' => 'naturals.store']) !!}
+                        {!! Form::open(['route' => 'tarjetaPropiedads.store']) !!}
 
-                            @include('naturals.fields')
+                            @include('tarjeta_propiedads.fields')
 
                         {!! Form::close() !!}
                     </div>
@@ -30,12 +29,17 @@
 @section('scripts')
  <script>
     $(document).ready(function () {  
+        
         $(".select2").select2({
           tags: false, // permite insertar texto
           language: {noResults: function() {return "No se encontraron coincidencias";}, searching: function() {return "Buscando..";}
                 },
-          placeholder: 'Seleccionar...',      
+          placeholder: 'Seleccionar...',     
           allowClear: true
+        });
+        $('.datepicker').datepicker({             
+            format: 'yyyy-mm-dd',        
+            language: 'es',
         });
     });
  </script>

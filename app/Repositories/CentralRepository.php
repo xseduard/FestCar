@@ -7,6 +7,7 @@ use App\Models\Departamento;
 use App\Models\Municipio;
 use App\Models\Natural;
 use App\Models\Juridico;
+use App\Models\Vehiculo;
 use InfyOm\Generator\Common\BaseRepository;
 
 class CentralRepository extends BaseRepository
@@ -32,10 +33,23 @@ class CentralRepository extends BaseRepository
            return Natural::lists('nombres', 'id');
     }
     public function natural_id(){
-        $array['']= "seleccione...";
         $modelo = Natural::all()->toArray();
             foreach ($modelo as $key => $value) {
                 $array[$value['id']]=$value['cedula']." - ".$value['nombres']." ".$value['apellidos'];
+            }
+        return ($array);
+    }
+    public function vehiculo_id (){
+        $modelo = Vehiculo::all()->toArray();
+            foreach ($modelo as $key => $value) {
+                $array[$value['id']]=$value['placa']." - ".$value['propietario_cedula']." ".$value['propietario_nombre'];
+            }
+        return ($array);
+    }
+    public function vehiculo_id_tarjeta_propiedad (){
+        $modelo = Vehiculo::all()->toArray();
+            foreach ($modelo as $key => $value) {
+                $array[$value['id']]=$value['placa']." - ".$value['propietario_cedula']." ".$value['propietario_nombre'];
             }
         return ($array);
     }

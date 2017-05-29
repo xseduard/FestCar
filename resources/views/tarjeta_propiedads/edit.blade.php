@@ -1,9 +1,8 @@
 @extends('layouts.app')
-
 @section('content')
     <section class="content-header">
         <h1>
-            $MODEL_NAME_HUMAN$ <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Editar
+            Tarjeta  Propiedad <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Editar
         </h1>
    </section>
    <div class="content">
@@ -14,9 +13,9 @@
          <div class="box box-primary">
              <div class="box-body">
                  <div class="row">
-                     {!! Form::model($$MODEL_NAME_CAMEL$, ['route' => ['$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.update', $$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$], 'method' => 'patch']) !!}
+                     {!! Form::model($tarjetaPropiedad, ['route' => ['tarjetaPropiedads.update', $tarjetaPropiedad->id], 'method' => 'patch']) !!}
 
-                          @include('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.fields')
+                          @include('tarjeta_propiedads.fields')
 
                      {!! Form::close() !!}
                  </div>
@@ -26,13 +25,14 @@
    </div>
 @endsection
 @section('scripts')
+
  <script>
-    $(document).ready(function () {  
+    $(document).ready(function () {          
         $(".select2").select2({
           tags: false, // permite insertar texto
           language: {noResults: function() {return "No se encontraron coincidencias";}, searching: function() {return "Buscando..";}
                 },
-          placeholder: 'Seleccionar...',       
+          placeholder: 'Seleccionar...',      
           allowClear: true
         });
         $('.datepicker').datepicker({             

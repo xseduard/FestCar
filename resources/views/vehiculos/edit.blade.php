@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Terceros Naturales <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Editar
+            Vehiculo <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Editar
         </h1>
    </section>
    <div class="content">
@@ -14,28 +14,21 @@
          <div class="box box-primary">
              <div class="box-body">
                  <div class="row">
-                     {!! Form::model($natural, ['route' => ['naturals.update', $natural->id], 'method' => 'patch']) !!}
+                     {!! Form::model($vehiculo, ['route' => ['vehiculos.update', $vehiculo->id], 'method' => 'patch']) !!}
 
-                          @include('naturals.fields')
+                          @include('vehiculos.fields')
 
                      {!! Form::close() !!}
                  </div>
              </div>
          </div>
-       </div>
+        </div>
    </div>
 @endsection
 @section('scripts')
  <script>
     $(document).ready(function () {  
-        $(".select2").select2({
-          tags: false, // permite insertar texto
-          language: {noResults: function() {return "No se encontraron coincidencias";}, searching: function() {return "Buscando..";}
-                },
-          placeholder: 'Seleccionar...',      
-          allowClear: true
-        });
-        $("#cedula").prop('disabled', true);
+        $("#placa").prop('disabled', true);
     });
  </script>
 @endsection

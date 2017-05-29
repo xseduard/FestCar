@@ -1,5 +1,8 @@
 <!-- $FIELD_NAME_TITLE$ campo de fecha -->
 <div class="form-group col-sm-6">
     {!! Form::label('$FIELD_NAME$', '$FIELD_NAME_TITLE$') !!}
-    {!! Form::date('$FIELD_NAME$', null, ['class' => 'form-control']) !!}
+    <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+    	{!! Form::text('$FIELD_NAME$', null, ['class' => 'form-control datepicker', 'placeholder' => 'yyyy-mm-dd']) !!}
+    </div>
 </div>

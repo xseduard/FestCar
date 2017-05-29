@@ -6,7 +6,7 @@
 <!-- Nombre Campo de texto -->
 <div class="form-group col-sm-6">
     {!! Form::label('municipio_id', '*Lugar de Expedición') !!}
-     {!! Form::select('municipio_id', $selectores['municipio_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%']) !!}
+     {!! Form::select('municipio_id', $selectores['municipio_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
 <!-- Nombres Campo de texto -->
 <div class="form-group col-sm-6">

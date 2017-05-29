@@ -34,10 +34,7 @@
           tags: false, // permite insertar texto
           language: {noResults: function() {return "No se encontraron coincidencias";}, searching: function() {return "Buscando..";}
                 },
-          placeholder: {
-            id: '-1', // posicion de la opción
-            text: 'Seleccionar... '
-          },      
+          placeholder: 'Seleccionar...',    
           allowClear: true
         });
     });

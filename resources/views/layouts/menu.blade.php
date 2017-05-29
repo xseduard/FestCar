@@ -33,3 +33,11 @@
     <a href="{!! route('juridicos.index') !!}"><i class="fa fa-building-o" aria-hidden="true"></i><span>Tercero Jurídico</span></a>
 </li>
 
+<li class="{{ Request::is('vehiculos*') ? 'active' : '' }}">
+    <a href="{!! route('vehiculos.index') !!}"><i class="fa fa-bus" aria-hidden="true"></i><span>Vehículos</span></a>
+</li>
+
+<li class="{{ Request::is('tarjetaPropiedads*') ? 'active' : '' }}">
+    <a href="{!! route('tarjetaPropiedads.index') !!}"><i class="fa fa-id-card-o" aria-hidden="true"></i><span>Tarjetas de Propiedad</span></a>
+</li>
+
