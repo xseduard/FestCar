@@ -1,8 +1,9 @@
 @extends('layouts.app')
+
 @section('content')
     <section class="content-header">
         <h1>
-            Tarjetas de Propiedad<small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Editar
+            Contrato Vinculacion <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Editar
         </h1>
    </section>
    <div class="content">
@@ -13,9 +14,9 @@
          <div class="box box-primary">
              <div class="box-body">
                  <div class="row">
-                     {!! Form::model($tarjetaPropiedad, ['route' => ['tarjetaPropiedads.update', $tarjetaPropiedad->id], 'method' => 'patch']) !!}
+                     {!! Form::model($contratoVinculacion, ['route' => ['contratoVinculacions.update', $contratoVinculacion->id], 'method' => 'patch']) !!}
 
-                          @include('tarjeta_propiedads.fields')
+                          @include('contrato_vinculacions.fields')
 
                      {!! Form::close() !!}
                  </div>
@@ -25,14 +26,13 @@
    </div>
 @endsection
 @section('scripts')
-
  <script>
-    $(document).ready(function () {          
+    $(document).ready(function () {  
         $(".select2").select2({
           tags: false, // permite insertar texto
           language: {noResults: function() {return "No se encontraron coincidencias";}, searching: function() {return "Buscando..";}
                 },
-          placeholder: 'Seleccionar...',      
+          placeholder: 'Seleccionar...',       
           allowClear: true
         });
         $('.datepicker').datepicker({             

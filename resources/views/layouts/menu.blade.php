@@ -55,7 +55,7 @@
         </li>
 
         <li class="{{ Request::is('soats*') ? 'active' : '' }}">
-            <a href="{!! route('soats.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Soats</span></a>
+            <a href="{!! route('soats.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Soat</span></a>
         </li>
 
         <li class="{{ Request::is('tecnicomecanicas*') ? 'active' : '' }}">
@@ -77,3 +77,7 @@
    
     </ul>
 </li>
+<li class="{{ Request::is('contratoVinculacions*') ? 'active' : '' }}">
+    <a href="{!! route('contratoVinculacions.index') !!}"><i class="fa fa-edit"></i><span>ContratoVinculacions</span></a>
+</li>
+

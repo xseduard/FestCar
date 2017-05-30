@@ -1,8 +1,9 @@
 @extends('layouts.app')
+
 @section('content')
     <section class="content-header">
         <h1>
-            Tarjetas de Propiedad <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Registrar
+            Contrato Vinculacion <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Registrar
         </h1>
     </section>
     <div class="content">
@@ -14,9 +15,9 @@
 
                 <div class="box-body">
                     <div class="row">
-                        {!! Form::open(['route' => 'tarjetaPropiedads.store']) !!}
+                        {!! Form::open(['route' => 'contratoVinculacions.store']) !!}
 
-                            @include('tarjeta_propiedads.fields')
+                            @include('contrato_vinculacions.fields')
 
                         {!! Form::close() !!}
                     </div>
@@ -29,12 +30,11 @@
 @section('scripts')
  <script>
     $(document).ready(function () {  
-        
         $(".select2").select2({
           tags: false, // permite insertar texto
           language: {noResults: function() {return "No se encontraron coincidencias";}, searching: function() {return "Buscando..";}
                 },
-          placeholder: 'Seleccionar...',     
+          placeholder: 'Seleccionar...',      
           allowClear: true
         });
         $('.datepicker').datepicker({             

@@ -2,9 +2,9 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Tarjetas de Propiedad</h1>
+        <h1 class="pull-left">Contrato Vinculacions</h1>
         <h1 class="pull-right">
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('tarjetaPropiedads.create') !!}"><i class="fa fa-plus"></i> &nbsp; Aregar</a>
+           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('contratoVinculacions.create') !!}"><i class="fa fa-plus"></i> &nbsp; Aregar</a>
         </h1>
     </section>
     <div class="content">
@@ -18,16 +18,16 @@
         <div class="animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
             <div class="box box-primary">
                 <div class="box-body">
-                    @if($tarjetaPropiedads->isEmpty())
+                    @if($contratoVinculacions->isEmpty())
                         <div class="alert alert-info alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                             <h4><i class="icon fa fa-info"></i>Sistema de Información</h4>
-                           No se encontraron registros de Tarjetas de Propiedad en esta consulta.
+                           No se encontraron registros de ContratoVinculacions en esta consulta.
                       </div>                    
                     @else
-                        @include('tarjeta_propiedads.table')
+                        @include('contrato_vinculacions.table')
                     @endif
-                    @include('common.paginate', ['records' => $tarjetaPropiedads])
+                    @include('common.paginate', ['records' => $contratoVinculacions])
                 </div>
             </div>
         </div>

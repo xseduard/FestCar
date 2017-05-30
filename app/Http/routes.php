@@ -74,8 +74,11 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('tarjetaOperacions', 'TarjetaOperacionController');
     Route::resource('polizaResponsabilidads', 'PolizaResponsabilidadController');
     Route::resource('revisionPreventivas', 'RevisionPreventivaController');
+    Route::resource('contratoVinculacions', 'ContratoVinculacionController');
     
 });
+
+
 
 
 

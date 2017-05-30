@@ -52,3 +52,5 @@ Route::resource('tarjeta_operacions', 'TarjetaOperacionAPIController');
 Route::resource('poliza_responsabilidads', 'PolizaResponsabilidadAPIController');
 
 Route::resource('revision_preventivas', 'RevisionPreventivaAPIController');
+
+Route::resource('contrato_vinculacions', 'ContratoVinculacionAPIController');
