@@ -35,8 +35,8 @@ class RevisionPreventiva extends Model
         'vehiculo_id' => 'integer',
         'entidad_nombre' => 'string',
         'entidad_nit' => 'string',
-        'fecha_vigencia_inicio' => 'date',
-        'fecha_vigencia_final' => 'date',
+        'fecha_vigencia_inicio' => 'string',
+        'fecha_vigencia_final' => 'string',
         'user_id' => 'integer'
     ];
     /**

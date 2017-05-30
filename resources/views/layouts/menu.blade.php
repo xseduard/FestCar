@@ -12,10 +12,10 @@
 <a href="#"><i class="fa fa-sliders"></i><span>Ajustes Generales</span> <i class="fa fa-angle-left pull-right"></i></a>
 	<ul class="treeview-menu">
 		<li class="{{ Request::is('departamentos*') ? 'active' : '' }}">
-		    <a href="{!! route('departamentos.index') !!}"><i class="fa fa-angle-right"></i><span>Departamentos</span></a>
+		    <a href="{!! route('departamentos.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Departamentos</span></a>
 		</li>
 		<li class="{{ Request::is('municipios*') ? 'active' : '' }}">
-		    <a href="{!! route('municipios.index') !!}"><i class="fa fa-angle-right"></i><span>Municipios</span></a>
+		    <a href="{!! route('municipios.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Municipios</span></a>
 		</li>	
 	</ul>
 </li>
@@ -36,28 +36,44 @@
 <li class="{{ Request::is('vehiculos*') ? 'active' : '' }}">
     <a href="{!! route('vehiculos.index') !!}"><i class="fa fa-bus" aria-hidden="true"></i><span>Vehículos</span></a>
 </li>
+<!-- documentos vehiculos -->
+<li class="treeview 
+@if (Request::is('tarjetaPropiedads*') 
+    or Request::is('soats*')
+    or Request::is('tecnicomecanicas*')
+    or Request::is('tarjetaOperacions*')
+    or Request::is('polizaResponsabilidads*')
+    or Request::is('revisionPreventivas*')
+    )
+    active
+@endif">
+<a href="#"><i class="fa fa-id-card-o" aria-hidden="true"></i><span>Documentos vehículos</span><i class="fa fa-angle-left pull-right"></i></a>
+    <ul class="treeview-menu">
 
-<li class="{{ Request::is('tarjetaPropiedads*') ? 'active' : '' }}">
-    <a href="{!! route('tarjetaPropiedads.index') !!}"><i class="fa fa-id-card-o" aria-hidden="true"></i><span>Tarjetas de Propiedad</span></a>
+        <li class="{{ Request::is('tarjetaPropiedads*') ? 'active' : '' }}">
+            <a href="{!! route('tarjetaPropiedads.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Tarjetas de Propiedad</span></a>
+        </li>
+
+        <li class="{{ Request::is('soats*') ? 'active' : '' }}">
+            <a href="{!! route('soats.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Soats</span></a>
+        </li>
+
+        <li class="{{ Request::is('tecnicomecanicas*') ? 'active' : '' }}">
+            <a href="{!! route('tecnicomecanicas.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Técnico Mecánicas</span></a>
+        </li>
+
+        <li class="{{ Request::is('tarjetaOperacions*') ? 'active' : '' }}">
+            <a href="{!! route('tarjetaOperacions.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Tarjetas de Operación</span></a>
+        </li>
+
+        <li class="{{ Request::is('polizaResponsabilidads*') ? 'active' : '' }}">
+            <a href="{!! route('polizaResponsabilidads.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Polizas de Responsabilidad</span></a>
+        </li>
+
+        <li class="{{ Request::is('revisionPreventivas*') ? 'active' : '' }}">
+            <a href="{!! route('revisionPreventivas.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Revisiones de Preventivas</span></a>
+        </li>
+
+   
+    </ul>
 </li>
-
-<li class="{{ Request::is('soats*') ? 'active' : '' }}">
-    <a href="{!! route('soats.index') !!}"><i class="fa fa-id-card-o" aria-hidden="true"></i><span>Soats</span></a>
-</li>
-
-<li class="{{ Request::is('tecnicomecanicas*') ? 'active' : '' }}">
-    <a href="{!! route('tecnicomecanicas.index') !!}"><i class="fa fa-edit"></i><span>Tecnicomecanicas</span></a>
-</li>
-
-<li class="{{ Request::is('tarjetaOperacions*') ? 'active' : '' }}">
-    <a href="{!! route('tarjetaOperacions.index') !!}"><i class="fa fa-edit"></i><span>TarjetaOperacions</span></a>
-</li>
-
-<li class="{{ Request::is('polizaResponsabilidads*') ? 'active' : '' }}">
-    <a href="{!! route('polizaResponsabilidads.index') !!}"><i class="fa fa-edit"></i><span>PolizaResponsabilidads</span></a>
-</li>
-
-<li class="{{ Request::is('revisionPreventivas*') ? 'active' : '' }}">
-    <a href="{!! route('revisionPreventivas.index') !!}"><i class="fa fa-edit"></i><span>RevisionPreventivas</span></a>
-</li>
-

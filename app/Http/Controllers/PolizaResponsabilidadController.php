@@ -81,7 +81,7 @@ class PolizaResponsabilidadController extends AppBaseController
 
         $polizaResponsabilidad = $this->polizaResponsabilidadRepository->create($input);
 
-        Flash::success('Poliza Responsabilidad registrado correctamente.');
+        Flash::success('Poliza de Responsabilidad registrada correctamente.');
 
         return redirect(route('polizaResponsabilidads.index'));
     }
@@ -98,7 +98,7 @@ class PolizaResponsabilidadController extends AppBaseController
         $polizaResponsabilidad = $this->polizaResponsabilidadRepository->findWithoutFail($id);
 
         if (empty($polizaResponsabilidad)) {
-            Flash::error('Poliza Responsabilidad No se encuentra registrado.');
+            Flash::error('Poliza de Responsabilidad No se encuentra registrada.');
 
             return redirect(route('polizaResponsabilidads.index'));
         }
@@ -118,7 +118,7 @@ class PolizaResponsabilidadController extends AppBaseController
         $polizaResponsabilidad = $this->polizaResponsabilidadRepository->findWithoutFail($id);
 
         if (empty($polizaResponsabilidad)) {
-            Flash::error('Poliza Responsabilidad No se encuentra registrado.');
+            Flash::error('Poliza de Responsabilidad No se encuentra registrada.');
 
             return redirect(route('polizaResponsabilidads.index'));
         }
@@ -141,7 +141,7 @@ class PolizaResponsabilidadController extends AppBaseController
         $polizaResponsabilidad = $this->polizaResponsabilidadRepository->findWithoutFail($id);
 
         if (empty($polizaResponsabilidad)) {
-            Flash::error('Poliza Responsabilidad No se encuentra registrado.');
+            Flash::error('Poliza de Responsabilidad No se encuentra registrada.');
 
             return redirect(route('polizaResponsabilidads.index'));
         }
@@ -150,7 +150,7 @@ class PolizaResponsabilidadController extends AppBaseController
 
         $polizaResponsabilidad = $this->polizaResponsabilidadRepository->update($input, $id);
 
-        Flash::success('Poliza Responsabilidad actualizado correctamente.');
+        Flash::success('Poliza de Responsabilidad actualizada correctamente.');
 
         return redirect(route('polizaResponsabilidads.index'));
     }
@@ -167,14 +167,14 @@ class PolizaResponsabilidadController extends AppBaseController
         $polizaResponsabilidad = $this->polizaResponsabilidadRepository->findWithoutFail($id);
 
         if (empty($polizaResponsabilidad)) {
-            Flash::error('Poliza Responsabilidad No se encuentra registrado.');
+            Flash::error('Poliza de Responsabilidad No se encuentra registrada.');
 
             return redirect(route('polizaResponsabilidads.index'));
         }
 
         $this->polizaResponsabilidadRepository->delete($id);
 
-        Flash::success('Poliza Responsabilidad eliminado correctamente.');
+        Flash::success('Poliza de Responsabilidad eliminada correctamente.');
 
         return redirect(route('polizaResponsabilidads.index'));
     }

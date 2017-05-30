@@ -33,8 +33,8 @@ class PolizaResponsabilidad extends Model
     protected $casts = [
         'vehiculo_id' => 'integer',
         'codigo' => 'string',
-        'fecha_vigencia_inicio' => 'date',
-        'fecha_vigencia_final' => 'date',
+        'fecha_vigencia_inicio' => 'string',
+        'fecha_vigencia_final' => 'string',
         'user_id' => 'integer'
     ];
     /**

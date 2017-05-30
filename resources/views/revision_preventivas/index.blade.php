@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Revision Preventivas</h1>
+        <h1 class="pull-left">Revisiónes Preventivas</h1>
         <h1 class="pull-right">
            <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('revisionPreventivas.create') !!}"><i class="fa fa-plus"></i> &nbsp; Aregar</a>
         </h1>
@@ -22,7 +22,7 @@
                         <div class="alert alert-info alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                             <h4><i class="icon fa fa-info"></i>Sistema de Información</h4>
-                           No se encontraron registros de RevisionPreventivas en esta consulta.
+                           No se encontraron registros de Revisiones Preventivas en esta consulta.
                       </div>                    
                     @else
                         @include('revision_preventivas.table')

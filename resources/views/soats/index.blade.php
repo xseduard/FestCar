@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Soats</h1>
+        <h1 class="pull-left">Soat</h1>
         <h1 class="pull-right">
            <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('soats.create') !!}"><i class="fa fa-plus"></i> &nbsp; Aregar</a>
         </h1>

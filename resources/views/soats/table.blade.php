@@ -1,10 +1,10 @@
 <table class="table table-responsive" id="soats-table">
     <thead>
-        <th>Vehiculo</th>
+        <th>Vehículo</th>
         <th>Poliza</th>
-        <th>Fecha Expedicion</th>
-        <th>Fecha Vigencia Inicio</th>
-        <th>Fecha Vigencia Final</th>
+        <th>Fecha de Expedicion</th>
+        <th>Fecha de Inicio Vigencia</th>
+        <th>Fecha de Final Vigencia</th>
         <th>Estado</th>        
         <th colspan="3">Acciones</th>
     </thead>

@@ -98,7 +98,7 @@ class RevisionPreventivaController extends AppBaseController
         $revisionPreventiva = $this->revisionPreventivaRepository->findWithoutFail($id);
 
         if (empty($revisionPreventiva)) {
-            Flash::error('Revision Preventiva No se encuentra registrado.');
+            Flash::error('Revision Preventiva No se encuentra registrada.');
 
             return redirect(route('revisionPreventivas.index'));
         }
@@ -118,7 +118,7 @@ class RevisionPreventivaController extends AppBaseController
         $revisionPreventiva = $this->revisionPreventivaRepository->findWithoutFail($id);
 
         if (empty($revisionPreventiva)) {
-            Flash::error('Revision Preventiva No se encuentra registrado.');
+            Flash::error('Revision Preventiva No se encuentra registrada.');
 
             return redirect(route('revisionPreventivas.index'));
         }
@@ -141,7 +141,7 @@ class RevisionPreventivaController extends AppBaseController
         $revisionPreventiva = $this->revisionPreventivaRepository->findWithoutFail($id);
 
         if (empty($revisionPreventiva)) {
-            Flash::error('Revision Preventiva No se encuentra registrado.');
+            Flash::error('Revision Preventiva No se encuentra registrada.');
 
             return redirect(route('revisionPreventivas.index'));
         }
@@ -150,7 +150,7 @@ class RevisionPreventivaController extends AppBaseController
 
         $revisionPreventiva = $this->revisionPreventivaRepository->update($input, $id);
 
-        Flash::success('Revision Preventiva actualizado correctamente.');
+        Flash::success('Revision Preventiva actualizada correctamente.');
 
         return redirect(route('revisionPreventivas.index'));
     }
@@ -167,14 +167,14 @@ class RevisionPreventivaController extends AppBaseController
         $revisionPreventiva = $this->revisionPreventivaRepository->findWithoutFail($id);
 
         if (empty($revisionPreventiva)) {
-            Flash::error('Revision Preventiva No se encuentra registrado.');
+            Flash::error('Revision Preventiva No se encuentra registrada.');
 
             return redirect(route('revisionPreventivas.index'));
         }
 
         $this->revisionPreventivaRepository->delete($id);
 
-        Flash::success('Revision Preventiva eliminado correctamente.');
+        Flash::success('Revision Preventiva eliminada correctamente.');
 
         return redirect(route('revisionPreventivas.index'));
     }

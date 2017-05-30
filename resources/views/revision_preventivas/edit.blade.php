@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Revision Preventiva <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Editar
+            Revisiónes Preventivas <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Editar
         </h1>
    </section>
    <div class="content">

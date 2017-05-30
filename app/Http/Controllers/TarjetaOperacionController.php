@@ -81,7 +81,7 @@ class TarjetaOperacionController extends AppBaseController
 
         $tarjetaOperacion = $this->tarjetaOperacionRepository->create($input);
 
-        Flash::success('Tarjeta Operacion registrado correctamente.');
+        Flash::success('Tarjeta de Operación registrada correctamente.');
 
         return redirect(route('tarjetaOperacions.index'));
     }
@@ -98,7 +98,7 @@ class TarjetaOperacionController extends AppBaseController
         $tarjetaOperacion = $this->tarjetaOperacionRepository->findWithoutFail($id);
 
         if (empty($tarjetaOperacion)) {
-            Flash::error('Tarjeta Operacion No se encuentra registrado.');
+            Flash::error('Tarjeta de Operación No se encuentra registrada.');
 
             return redirect(route('tarjetaOperacions.index'));
         }
@@ -118,7 +118,7 @@ class TarjetaOperacionController extends AppBaseController
         $tarjetaOperacion = $this->tarjetaOperacionRepository->findWithoutFail($id);
 
         if (empty($tarjetaOperacion)) {
-            Flash::error('Tarjeta Operacion No se encuentra registrado.');
+            Flash::error('Tarjeta de Operación No se encuentra registrada.');
 
             return redirect(route('tarjetaOperacions.index'));
         }
@@ -141,7 +141,7 @@ class TarjetaOperacionController extends AppBaseController
         $tarjetaOperacion = $this->tarjetaOperacionRepository->findWithoutFail($id);
 
         if (empty($tarjetaOperacion)) {
-            Flash::error('Tarjeta Operacion No se encuentra registrado.');
+            Flash::error('Tarjeta de Operación No se encuentra registrada.');
 
             return redirect(route('tarjetaOperacions.index'));
         }
@@ -150,7 +150,7 @@ class TarjetaOperacionController extends AppBaseController
 
         $tarjetaOperacion = $this->tarjetaOperacionRepository->update($input, $id);
 
-        Flash::success('Tarjeta Operacion actualizado correctamente.');
+        Flash::success('Tarjeta de Operación actualizada correctamente.');
 
         return redirect(route('tarjetaOperacions.index'));
     }
@@ -167,14 +167,14 @@ class TarjetaOperacionController extends AppBaseController
         $tarjetaOperacion = $this->tarjetaOperacionRepository->findWithoutFail($id);
 
         if (empty($tarjetaOperacion)) {
-            Flash::error('Tarjeta Operacion No se encuentra registrado.');
+            Flash::error('Tarjeta de Operación No se encuentra registrada.');
 
             return redirect(route('tarjetaOperacions.index'));
         }
 
         $this->tarjetaOperacionRepository->delete($id);
 
-        Flash::success('Tarjeta Operacion eliminado correctamente.');
+        Flash::success('Tarjeta de Operación eliminada correctamente.');
 
         return redirect(route('tarjetaOperacions.index'));
     }

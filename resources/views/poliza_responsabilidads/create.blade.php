@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Poliza Responsabilidad <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Registrar
+            Polizas de Responsabilidad (RCC RCE)<small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Registrar
         </h1>
     </section>
     <div class="content">

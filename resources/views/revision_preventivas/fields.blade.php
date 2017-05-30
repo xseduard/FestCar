@@ -1,21 +1,23 @@
 <!-- Vehiculo Id Selector -->
 <div class="form-group col-sm-6">
-    {!! Form::label('vehiculo_id', 'Vehiculo Id') !!}
+    {!! Form::label('vehiculo_id', 'Vehículo') !!}
     {!! Form::select('vehiculo_id', $selectores['vehiculo_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
 
+<div class="clearfix"></div>
+
 <!-- Fecha Vigencia Inicio campo de fecha -->
 <div class="form-group col-sm-6">
-    {!! Form::label('fecha_vigencia_inicio', 'Fecha Vigencia Inicio') !!}
+    {!! Form::label('fecha_vigencia_inicio', 'Fecha de Inicio Vigencia') !!}
     <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
     	{!! Form::text('fecha_vigencia_inicio', null, ['class' => 'form-control datepicker', 'placeholder' => 'yyyy-mm-dd']) !!}
     </div>
 </div>
 
-<!-- Fecha Vigencia Final campo de fecha -->
+<!-- Fecha de Final Vigencia campo de fecha -->
 <div class="form-group col-sm-6">
-    {!! Form::label('fecha_vigencia_final', 'Fecha Vigencia Final') !!}
+    {!! Form::label('fecha_vigencia_final', 'Fecha de Final Vigencia') !!}
     <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
     	{!! Form::text('fecha_vigencia_final', null, ['class' => 'form-control datepicker', 'placeholder' => 'yyyy-mm-dd']) !!}

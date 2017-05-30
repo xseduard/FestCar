@@ -44,9 +44,9 @@ class TarjetaOperacion extends Model
         'razon_social_empresa' => 'string',
         'nit' => 'string',
         'direccion' => 'string',
-        'fecha_expedicion' => 'date',
-        'fecha_vigencia_inicio' => 'date',
-        'fecha_vigencia_final' => 'date',
+        'fecha_expedicion' => 'string',
+        'fecha_vigencia_inicio' => 'string',
+        'fecha_vigencia_final' => 'string',
         'user_id' => 'integer'
     ];
     /**

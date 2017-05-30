@@ -1,22 +1,24 @@
 <table class="table table-responsive" id="revisionPreventivas-table">
     <thead>
-        <th>Vehiculo Id</th>
-        <th>Fecha Vigencia Inicio</th>
-        <th>Fecha Vigencia Final</th>
-        <th>User Id</th>
-        <th>Created At</th>
-        <th>Updated At</th>
+        <th>Vehiculo</th>
+        <th>Fecha de Inicio Vigencia</th>
+        <th>Fecha de Final Vigencia</th>
+        <th>Estado</th>
         <th colspan="3">Acciones</th>
     </thead>
     <tbody>
     @foreach($revisionPreventivas as $revisionPreventiva)
         <tr>
-            <td>{!! $revisionPreventiva->vehiculo_id !!}</td>
+            <td><span class="label label-default">{!! $revisionPreventiva->vehiculo->placa !!}</span></td>
             <td>{!! $revisionPreventiva->fecha_vigencia_inicio !!}</td>
             <td>{!! $revisionPreventiva->fecha_vigencia_final !!}</td>
-            <td>{!! $revisionPreventiva->user_id !!}</td>
-            <td>{!! $revisionPreventiva->created_at !!}</td>
-            <td>{!! $revisionPreventiva->updated_at !!}</td>
+            <td>
+                @if (($fecha_actual >= $revisionPreventiva->fecha_vigencia_inicio) and ($fecha_actual <= $revisionPreventiva->fecha_vigencia_final))
+                    <span class="label label-success">Vigente</span>
+                @else
+                    <span class="label label-warning">No Vigente</span>
+                @endif
+            </td>
             <td>
                 {!! Form::open(['route' => ['revisionPreventivas.destroy', $revisionPreventiva->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>
