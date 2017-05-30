@@ -19,7 +19,7 @@ class CreateJuridicosTable extends Migration
             $table->string('nombre')->comment('Nombre o Razon Social');
 
             $table->integer('natural_id')->unsigned()->comment('Representate Legal');
-            $table->foreign('natural_id')->references('id')->on('naturals');
+            $table->foreign('natural_id')->references('id')->on('naturales');
 
             $table->string('actividad');
             $table->string('telefono', 100);

@@ -33,7 +33,7 @@
     {!! Form::label('fecha_expedicion', 'Fecha de Expedicion') !!}
     <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-    	{!! Form::text('fecha_expedicion', null, ['class' => 'form-control datepicker', 'placeholder' => 'yyyy-mm-dd']) !!}
+    	{!! Form::text('fecha_expedicion', null, ['class' => 'form-control datepicker', 'placeholder' => 'AAAA-MM-DD']) !!}
     </div>
 </div>
 
@@ -42,7 +42,7 @@
     {!! Form::label('fecha_vencimiento', 'Fecha de Vencimiento') !!}
     <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-    	{!! Form::text('fecha_vencimiento', null, ['class' => 'form-control datepicker', 'placeholder' => 'yyyy-mm-dd']) !!}
+    	{!! Form::text('fecha_vencimiento', null, ['class' => 'form-control datepicker', 'placeholder' => 'AAAA-MM-DD']) !!}
     </div>
 </div>
 

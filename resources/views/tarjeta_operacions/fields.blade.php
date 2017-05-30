@@ -44,7 +44,7 @@
     {!! Form::label('fecha_expedicion', 'Fecha de Expedición') !!}
     <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-    	{!! Form::text('fecha_expedicion', null, ['class' => 'form-control datepicker', 'placeholder' => 'yyyy-mm-dd']) !!}
+    	{!! Form::text('fecha_expedicion', null, ['class' => 'form-control datepicker', 'placeholder' => 'AAAA-MM-DD']) !!}
     </div>
 </div>
 
@@ -53,7 +53,7 @@
     {!! Form::label('fecha_vigencia_inicio', 'Fecha Inicio de vigencia') !!}
     <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-    	{!! Form::text('fecha_vigencia_inicio', null, ['class' => 'form-control datepicker', 'placeholder' => 'yyyy-mm-dd']) !!}
+    	{!! Form::text('fecha_vigencia_inicio', null, ['class' => 'form-control datepicker', 'placeholder' => 'AAAA-MM-DD']) !!}
     </div>
 </div>
 
@@ -62,7 +62,7 @@
     {!! Form::label('fecha_vigencia_final', 'Fecha Final de vigencia') !!}
     <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-    	{!! Form::text('fecha_vigencia_final', null, ['class' => 'form-control datepicker', 'placeholder' => 'yyyy-mm-dd']) !!}
+    	{!! Form::text('fecha_vigencia_final', null, ['class' => 'form-control datepicker', 'placeholder' => 'AAAA-MM-DD']) !!}
     </div>
 </div>
 

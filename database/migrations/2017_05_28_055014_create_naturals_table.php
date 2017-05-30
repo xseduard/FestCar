@@ -13,7 +13,7 @@ class CreateNaturalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('naturals', function (Blueprint $table) {
+        Schema::create('naturales', function (Blueprint $table) {
             $table->increments('id');
             $table->string('cedula', 12)->unique();
 
@@ -39,6 +39,6 @@ class CreateNaturalsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('naturals');
+        Schema::drop('naturales');
     }
 }

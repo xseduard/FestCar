@@ -14,7 +14,7 @@ class Natural extends Model
 {
     use SoftDeletes;
 
-    public $table = 'naturals';
+    public $table = 'naturales';
     
 
     protected $dates = ['deleted_at'];
@@ -49,7 +49,7 @@ class Natural extends Model
      * Reglas de Validacón
      */
     public static $rules = [
-        'cedula' => 'required|numeric|unique:naturals|digits_between:8,12',
+        'cedula' => 'required|numeric|unique:naturales|digits_between:8,12',
         'municipio_id' => 'required',
         'nombres' => 'required|string',
         'apellidos' => 'required|string',

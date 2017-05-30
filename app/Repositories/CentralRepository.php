@@ -39,6 +39,13 @@ class CentralRepository extends BaseRepository
             }
         return ($array);
     }
+    public function juridico_id(){
+        $modelo = Juridico::all()->toArray();
+            foreach ($modelo as $key => $value) {
+                $array[$value['id']]=$value['nit']." - ".$value['nombre'];
+            }
+        return ($array);
+    }
     public function vehiculo_id (){
         $modelo = Vehiculo::all()->toArray();
             foreach ($modelo as $key => $value) {

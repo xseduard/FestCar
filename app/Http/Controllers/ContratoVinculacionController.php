@@ -51,6 +51,9 @@ class ContratoVinculacionController extends AppBaseController
     {
         $selectores = [];
         // $selectores['atributo_id'] = $this->centralRepository->atributo_id();
+        $selectores['vehiculo_id'] = $this->centralRepository->vehiculo_id();
+        $selectores['natural_id'] = $this->centralRepository->natural_id();
+        $selectores['juridico_id'] = $this->centralRepository->juridico_id();
         return $selectores;
     }
     /**
@@ -79,7 +82,7 @@ class ContratoVinculacionController extends AppBaseController
 
         $contratoVinculacion = $this->contratoVinculacionRepository->create($input);
 
-        Flash::success('Contrato Vinculacion registrado correctamente.');
+        Flash::success('Contrato de Vinculación registrado correctamente.');
 
         return redirect(route('contratoVinculacions.index'));
     }
@@ -96,7 +99,7 @@ class ContratoVinculacionController extends AppBaseController
         $contratoVinculacion = $this->contratoVinculacionRepository->findWithoutFail($id);
 
         if (empty($contratoVinculacion)) {
-            Flash::error('Contrato Vinculacion No se encuentra registrado.');
+            Flash::error('Contrato de Vinculación No se encuentra registrado.');
 
             return redirect(route('contratoVinculacions.index'));
         }
@@ -116,7 +119,7 @@ class ContratoVinculacionController extends AppBaseController
         $contratoVinculacion = $this->contratoVinculacionRepository->findWithoutFail($id);
 
         if (empty($contratoVinculacion)) {
-            Flash::error('Contrato Vinculacion No se encuentra registrado.');
+            Flash::error('Contrato de Vinculación No se encuentra registrado.');
 
             return redirect(route('contratoVinculacions.index'));
         }
@@ -139,7 +142,7 @@ class ContratoVinculacionController extends AppBaseController
         $contratoVinculacion = $this->contratoVinculacionRepository->findWithoutFail($id);
 
         if (empty($contratoVinculacion)) {
-            Flash::error('Contrato Vinculacion No se encuentra registrado.');
+            Flash::error('Contrato de Vinculación No se encuentra registrado.');
 
             return redirect(route('contratoVinculacions.index'));
         }
@@ -148,7 +151,7 @@ class ContratoVinculacionController extends AppBaseController
 
         $contratoVinculacion = $this->contratoVinculacionRepository->update($input, $id);
 
-        Flash::success('Contrato Vinculacion actualizado correctamente.');
+        Flash::success('Contrato de Vinculación actualizado correctamente.');
 
         return redirect(route('contratoVinculacions.index'));
     }
@@ -165,14 +168,14 @@ class ContratoVinculacionController extends AppBaseController
         $contratoVinculacion = $this->contratoVinculacionRepository->findWithoutFail($id);
 
         if (empty($contratoVinculacion)) {
-            Flash::error('Contrato Vinculacion No se encuentra registrado.');
+            Flash::error('Contrato de Vinculación No se encuentra registrado.');
 
             return redirect(route('contratoVinculacions.index'));
         }
 
         $this->contratoVinculacionRepository->delete($id);
 
-        Flash::success('Contrato Vinculacion eliminado correctamente.');
+        Flash::success('Contrato de Vinculación eliminado correctamente.');
 
         return redirect(route('contratoVinculacions.index'));
     }
