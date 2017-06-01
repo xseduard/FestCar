@@ -58,3 +58,5 @@ Route::resource('contrato_vinculacions', 'ContratoVinculacionAPIController');
 Route::resource('contrato_prestacion_servicios', 'ContratoPrestacionServicioAPIController');
 
 Route::resource('licencia_conduccions', 'LicenciaConduccionAPIController');
+
+Route::resource('extractos', 'ExtractoAPIController');

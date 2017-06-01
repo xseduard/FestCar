@@ -8,6 +8,8 @@ use App\Models\Municipio;
 use App\Models\Natural;
 use App\Models\Juridico;
 use App\Models\Vehiculo;
+use App\Models\ContratoPrestacionServicio;
+use App\Models\LicenciaConduccion;
 use InfyOm\Generator\Common\BaseRepository;
 
 class CentralRepository extends BaseRepository
@@ -38,7 +40,35 @@ class CentralRepository extends BaseRepository
             }
         return ($array);
     }
+    public function conductor_id(){
+        // se mantienen formas de colleciones dentro de arrays
+        //dd(Municipio::with('departamento')->get()->all()[1]->departamento);
+        //dd(Municipio::with('departamento')->get()->all()[1]['departamento']);
+            foreach (LicenciaConduccion::with('natural')->get()->toArray() as $key => $value) {
+                //dd($value); //cuando lo recorre se convierte absolutamente todo en arrray
+                $array[$value['id']]=$value['natural']['cedula']." - ".$value['natural']['nombres']." ".$value['natural']['apellidos']; 
+                //hasta aqui
+            }
+        return ($array);
+    }
+     public function ContratoPrestacionServicio_id(){
+        
+        $modelo = ContratoPrestacionServicio::with('natural')->with('juridico')->get()->toArray();
+    
+            foreach ($modelo as $key => $value) {
+
+                if ($value['tipo_cliente'] == 'Natural') {
+                   $array[$value['id']]="CPS".str_pad($value['id'], 4, "0", STR_PAD_LEFT)." - ".$value['natural']['cedula']." ".$value['natural']['nombres']." ".$value['natural']['apellidos'];
+                } elseif ($value['tipo_cliente'] == 'Juridico') {
+                    $array[$value['id']]="CPS".str_pad($value['id'], 4, "0", STR_PAD_LEFT)." - ".$value['juridico']['nit']." ".$value['juridico']['nombre'];
+                }
+                
+            }
+        return ($array);               
+          
+    }
     public function natural_id_nombre(){                      
+           
            return Natural::lists('nombres', 'id');
     }
     public function natural_id(){

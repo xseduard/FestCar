@@ -32,7 +32,7 @@
 <!-- Numero Interno Campo de texto -->
 <div class="form-group col-sm-4">
     {!! Form::label('numero_interno', 'Numero Interno') !!}
-    {!! Form::text('numero_interno', null, ['class' => 'form-control', 'placeholder'=>'En caso de ser propiedad empresarial']) !!}
+    {!! Form::text('numero_interno', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
 </div>
 
 <!-- campo numerico -->

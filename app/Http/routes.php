@@ -77,6 +77,9 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('contratoVinculacions', 'ContratoVinculacionController');
     Route::resource('contratoPrestacionServicios', 'ContratoPrestacionServicioController');
     Route::resource('licenciaConduccions', 'LicenciaConduccionController');
+    Route::resource('extractos', 'ExtractoController');
     
 });
+
+
 
