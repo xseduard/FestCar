@@ -80,6 +80,7 @@ class ContratoVinculacionController extends AppBaseController
         $input = $request->all();
         $input['user_id'] = Auth::id();
 
+
         $contratoVinculacion = $this->contratoVinculacionRepository->create($input);
 
         Flash::success('Contrato de Vinculación registrado correctamente.');
@@ -148,7 +149,7 @@ class ContratoVinculacionController extends AppBaseController
         }
         $input = $request->all();
         $input['user_id'] = Auth::id();
-
+      
         $contratoVinculacion = $this->contratoVinculacionRepository->update($input, $id);
 
         Flash::success('Contrato de Vinculación actualizado correctamente.');

@@ -11,7 +11,7 @@
     @foreach($juridicos as $juridico)
         <tr>
             <td>{!! $juridico->nit !!}</td>
-            <td>{!! $juridico->nombre !!}</td>
+            <td><a href="{!! route('juridicos.show', [$juridico->id]) !!}" class='' title="Ver">{!! $juridico->nombre !!}</a></td>
             <td>{!! $juridico->natural->nombres," ",$juridico->natural->apellidos !!}</td>
             <td>
                 @if ($juridico->estado)
@@ -24,9 +24,9 @@
             <td>
                 {!! Form::open(['route' => ['juridicos.destroy', $juridico->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>
-                    
+                    <!--
                         <a href="{!! route('juridicos.show', [$juridico->id]) !!}" class='btn btn-default btn-xs' title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
-                    
+                    -->
                     <a href="{!! route('juridicos.edit', [$juridico->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                         'type' => 'submit',

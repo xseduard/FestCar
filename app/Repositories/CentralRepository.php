@@ -19,17 +19,26 @@ class CentralRepository extends BaseRepository
     /**
      * Generador de selects
      */
+    // Departamento::all()->pluck('nombre', 'id')->toArray();
 
     public function id_departamento(){
-        // Departamento::all()->pluck('nombre', 'id')->toArray();                
+                        
            return Departamento::lists('nombre', 'id');
     }
-    public function municipio_id(){
-        // Departamento::all()->pluck('nombre', 'id')->toArray();                
+    public function municipio_id_only(){               
            return Municipio::lists('nombre', 'id');
     }
-    public function natural_id_nombre(){
-        // Departamento::all()->pluck('nombre', 'id')->toArray();                
+    public function municipio_id(){
+        // se mantienen formas de colleciones dentro de arrays
+        //dd(Municipio::with('departamento')->get()->all()[1]->departamento);
+        //dd(Municipio::with('departamento')->get()->all()[1]['departamento']);
+            foreach (Municipio::with('departamento')->get()->toArray() as $key => $value) {
+                //dd($value); //cuando lo recorre se convierte absolutamente todo en arrray
+                $array[$value['id']]=$value['nombre'].", ".$value['departamento']['nombre'];                
+            }
+        return ($array);
+    }
+    public function natural_id_nombre(){                      
            return Natural::lists('nombres', 'id');
     }
     public function natural_id(){

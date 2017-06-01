@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use App\Models\ContratoVinculacion;
+use App\Models\ContratoPrestacionServicio;
 
-class UpdateContratoVinculacionRequest extends Request
+class UpdateContratoPrestacionServicioRequest extends Request
 {
 
     /**
@@ -25,7 +25,7 @@ class UpdateContratoVinculacionRequest extends Request
      */
     public function rules()
     {
-        return ContratoVinculacion::$rules;
+        return ContratoPrestacionServicio::$rules;
     }
 
     /**
@@ -33,14 +33,8 @@ class UpdateContratoVinculacionRequest extends Request
      */
     public function attributes() {
         return [
-        'tipo_contrato' => 'tipo contrato',
-        'tipo_proveedor' => 'tipo proveedor',
-        'natural_id' => 'tercero natural',
-        'juridico_id' => 'tercero jurídico',
-        'vehiculo_id' => 'vehículo',
-        'servicio' => 'servicio',
-        'fecha_inicio' => 'fecha inicio',
-        'fecha_final' => 'fecha final'    
+        "" => "",
+        "" => "",    
         ];
     }
     /*

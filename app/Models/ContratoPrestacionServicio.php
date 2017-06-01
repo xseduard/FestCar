@@ -6,61 +6,67 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class ContratoVinculacion
+ * Class ContratoPrestacionServicio
  * @package App\Models
- * @version May 30, 2017, 5:15 am UTC
+ * @version May 30, 2017, 8:05 am UTC
  */
-class ContratoVinculacion extends Model
+class ContratoPrestacionServicio extends Model
 {
     use SoftDeletes;
 
-    public $table = 'contrato_vinculaciones';
+    public $table = 'contrato_prestacion_servicios';
     
 
     protected $dates = ['deleted_at'];
 
 
     public $fillable = [
-        'tipo_contrato',
-        'tipo_proveedor',
+        'tipo_cliente',
         'natural_id',
         'juridico_id',
-        'vehiculo_id',
+        'origen_id',
+        'destino_id',
         'servicio',
-        'fecha_inicio',
-        'fecha_final',
-        'user_id',
+        'tipo_cuenta_bancaria',
+        'numero_cuenta_bancaria',
+        'entidad_bancaria',
         'aprobado',
         'fecha_aprobacion',
-        'usuario_aprobacion'
+        'usuario_aprobacion',
+        'fecha_inicio',
+        'fecha_final'
     ];
     /**
      * Estos atributos son casteados en su tipo nativo.
      */
     protected $casts = [
-        'tipo_contrato' => 'string',
-        'tipo_proveedor' => 'string',
+        'tipo_cliente' => 'string',
         'natural_id' => 'integer',
         'juridico_id' => 'integer',
-        'vehiculo_id' => 'integer',
+        'origen_id' => 'integer',
+        'destino_id' => 'integer',
         'servicio' => 'string',
-        'fecha_inicio' => 'string',
-        'fecha_final' => 'string',
-        'user_id' => 'integer',
+        'tipo_cuenta_bancaria' => 'string',
+        'numero_cuenta_bancaria' => 'string',
+        'entidad_bancaria' => 'string',
         'aprobado' => 'boolean',
         'fecha_aprobacion' => 'datetime',
-        'usuario_aprobacion' => 'integer'
+        'usuario_aprobacion' => 'integer',
+        'fecha_inicio' => 'string',
+        'fecha_final' => 'string'
     ];
     /**
      * Reglas de Validacón
      */
     public static $rules = [
-        'tipo_contrato' => 'required',
-        'tipo_proveedor' => 'required',
-        'vehiculo_id' => 'required',
-        'natural_id' => 'required_if:tipo_proveedor,Natural',
-        'juridico_id' => 'required_if:tipo_proveedor,Juridico',
+        'tipo_cliente' => 'required',
+        'origen_id' => 'required',
+        'destino_id' => 'required',
         'servicio' => 'required',
+        'tipo_cuenta_bancaria' => 'required',
+        'numero_cuenta_bancaria' => 'required',
+        'entidad_bancaria' => 'required',
+        'usuario_aprobacion' => '',
         'fecha_inicio' => 'required|date',
         'fecha_final' => 'required|date'
     ];
@@ -68,21 +74,16 @@ class ContratoVinculacion extends Model
      * Relaciones entre Modelos
      */
     /*
-    // REGLA SEGURA?: 'tipo_proveedor' => 'required_unless:tipo_contrato,CC',    
     public function modelo(){
         return $this->belongsTo('App\Models\Modelo');
     }
     */
-
-    public function natural(){
+     public function natural(){
         return $this->belongsTo('App\Models\Natural');
     }
     public function juridico(){
         return $this->belongsTo('App\Models\Juridico');
-    }
-    public function vehiculo(){
-        return $this->belongsTo('App\Models\Vehiculo');
-    }
+    }   
     public function usuario(){
         return $this->belongsTo('App\User');
     }

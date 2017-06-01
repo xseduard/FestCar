@@ -34,7 +34,7 @@
 </li>
 
 <li class="{{ Request::is('vehiculos*') ? 'active' : '' }}">
-    <a href="{!! route('vehiculos.index') !!}"><i class="fa fa-bus" aria-hidden="true"></i><span>Vehículos</span></a>
+    <a href="{!! route('vehiculos.index') !!}"><i class="flaticon-transport-2"></i> <span>Vehículos</span></a>
 </li>
 <!-- documentos vehiculos -->
 <li class="treeview 
@@ -77,7 +77,39 @@
    
     </ul>
 </li>
-<li class="{{ Request::is('contratoVinculacions*') ? 'active' : '' }}">
-    <a href="{!! route('contratoVinculacions.index') !!}"><i class="fa fa-edit"></i><span>ContratoVinculacions</span></a>
+<!-- documentos conductores -->
+<li class="treeview 
+@if (Request::is('licenciaConduccions*') 
+    or Request::is('hojavidas*')    
+    )
+    active
+@endif">
+<a href="#"><i class="fa fa-bars" aria-hidden="true"></i></i><span>Documentos Conductores</span><i class="fa fa-angle-left pull-right"></i></a>
+    <ul class="treeview-menu">
+
+        <li class="{{ Request::is('licenciaConduccions*') ? 'active' : '' }}">
+            <a href="{!! route('licenciaConduccions.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Licencias de Conducción</span></a>
+        </li>   
+
+    </ul>
 </li>
+
+<li class="treeview 
+@if (Request::is('contratoVinculacions*') or Request::is('contratoPrestacionServicios*'))
+    active
+@endif">
+<a href="#"><i class="fa fa-contao" aria-hidden="true"></i><span>Contratación</span> <i class="fa fa-angle-left pull-right"></i></a>
+    <ul class="treeview-menu">
+        <li class="{{ Request::is('contratoVinculacions*') ? 'active' : '' }}">
+            <a href="{!! route('contratoVinculacions.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Vinculación</span></a>
+        </li>
+
+        <li class="{{ Request::is('contratoPrestacionServicios*') ? 'active' : '' }}">
+            <a href="{!! route('contratoPrestacionServicios.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Prestación de Servicios</span></a>
+        </li>  
+    </ul>
+</li>
+
+
+
 
