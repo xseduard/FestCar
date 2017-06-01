@@ -8,7 +8,7 @@
         <th>Fecha Inicio</th>
         <th>Fecha Final</th>
                 
-        <th colspan="3">Acciones</th>
+        <th  width="90px">Acciones</th>
     </thead>
     <tbody>
     @foreach($contratoVinculacions as $contratoVinculacion)
@@ -48,6 +48,7 @@
                     <!-- 
                         <a href="{!! route('contratoVinculacions.show', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
                     -->
+                    <a href="{!! route('contratoVinculacions.print', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' title="Imprimir"><i class="fa fa-print" aria-hidden="true"></i></a>
                     <a href="{!! route('contratoVinculacions.edit', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                         'type' => 'submit',

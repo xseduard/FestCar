@@ -168,6 +168,7 @@ return [
         Yajra\Datatables\DatatablesServiceProvider::class,
         InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        
     ],
 
     /*
@@ -218,6 +219,7 @@ return [
         'Flash'     => Laracasts\Flash\Flash::class,
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
         'PDF'       => Barryvdh\DomPDF\Facade::class,
+        
         
     ],
 

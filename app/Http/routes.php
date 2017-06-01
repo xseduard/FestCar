@@ -61,6 +61,11 @@ Route::group(['middleware' => 'web'], function() {
             'uses' => 'CentralController@sdepa',
         ]);
 
+    Route::get('contratoVinculacions/print/{id}', [
+            'as' => 'contratoVinculacions.print',
+            'uses' => 'ContratoVinculacionController@print',
+        ]);
+
     Route::resource('triangulos', 'trianguloController');
     Route::resource('cuadros', 'cuadroController');
     Route::resource('departamentos', 'DepartamentoController');
