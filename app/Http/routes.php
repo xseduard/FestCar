@@ -65,7 +65,12 @@ Route::group(['middleware' => 'web'], function() {
             'as' => 'contratoVinculacions.print',
             'uses' => 'ContratoVinculacionController@print',
         ]);
-
+/*
+    Route::get('contratoVinculacions/print/{id}', [
+            'as' => 'contratoVinculacions.print',
+            'uses' => 'PdfController@vinculacion_print',
+        ]);
+*/
     Route::resource('triangulos', 'trianguloController');
     Route::resource('cuadros', 'cuadroController');
     Route::resource('departamentos', 'DepartamentoController');
