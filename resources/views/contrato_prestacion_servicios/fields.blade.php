@@ -58,6 +58,33 @@
         {!! Form::text('fecha_final', null, ['class' => 'form-control datepicker', 'placeholder' => 'AAAA-MM-DD']) !!}
     </div>
 </div>
+<div class="clearfix"></div>
+<br>
+<div class="col-sm-12">
+    <strong class="text-muted" style="padding-bottom: 0px;"><i class="fa fa-shield" aria-hidden="true"></i> Responsable </strong>
+    <hr  style="margin-top: 0px;">
+</div>
+<!-- Servicio Campo de texto -->
+<div class="form-group col-sm-2">
+    {!! Form::label('res_cedula', 'Cédula') !!}
+    {!! Form::text('res_cedula', null, ['class' => 'form-control', 'placeholder'=>'Opcional...']) !!}
+</div>
+<div class="form-group col-sm-4">
+    {!! Form::label('res_id_ref', 'Lugar de Expedición') !!}
+    {!! Form::text('res_id_ref', null, ['class' => 'form-control', 'placeholder'=>'Opcional...']) !!}
+</div>
+<div class="form-group col-sm-6">
+    {!! Form::label('res_nombres', 'Nombre y Apellidos') !!}
+    {!! Form::text('res_nombres', null, ['class' => 'form-control', 'placeholder'=>'Opcional...']) !!}
+</div>
+<div class="form-group col-sm-4">
+    {!! Form::label('res_telefono', 'Teléfono') !!}
+    {!! Form::text('res_telefono', null, ['class' => 'form-control', 'placeholder'=>'Opcional...']) !!}
+</div>
+<div class="form-group col-sm-6">
+    {!! Form::label('res_direccion', 'Dirección') !!}
+    {!! Form::text('res_direccion', null, ['class' => 'form-control', 'placeholder'=>'Opcional...']) !!}
+</div>
 
 
 <div class="clearfix"></div>

@@ -34,7 +34,12 @@ class ContratoPrestacionServicio extends Model
         'fecha_aprobacion',
         'usuario_aprobacion',
         'fecha_inicio',
-        'fecha_final'
+        'fecha_final',
+        'res_cedula',
+        'res_id_ref',
+        'res_nombres',
+        'res_telefono',
+        'res_direccion'
     ];
     /**
      * Estos atributos son casteados en su tipo nativo.
@@ -53,7 +58,12 @@ class ContratoPrestacionServicio extends Model
         'fecha_aprobacion' => 'datetime',
         'usuario_aprobacion' => 'integer',
         'fecha_inicio' => 'string',
-        'fecha_final' => 'string'
+        'fecha_final' => 'string',
+        'res_cedula' => 'string',
+        'res_id_ref' => 'string',
+        'res_nombres' => 'string',
+        'res_telefono' => 'string',
+        'res_direccion' => 'string'
     ];
     /**
      * Reglas de Validacón
@@ -68,7 +78,8 @@ class ContratoPrestacionServicio extends Model
         'entidad_bancaria' => 'required',
         'usuario_aprobacion' => '',
         'fecha_inicio' => 'required|date',
-        'fecha_final' => 'required|date'
+        'fecha_final' => 'required|date',
+        'res_cedula' => 'numeric'
     ];
     /**
      * Relaciones entre Modelos

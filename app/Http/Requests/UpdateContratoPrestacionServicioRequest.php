@@ -33,8 +33,22 @@ class UpdateContratoPrestacionServicioRequest extends Request
      */
     public function attributes() {
         return [
-        "" => "",
-        "" => "",    
+        'tipo_cliente' => 'tipo de cliente',
+        'natural_id' => 'tercero natural',
+        'juridico_id' => 'tercero jurídico',
+        'origen_id' => 'origen',
+        'destino_id' => 'destino',
+        'servicio' => 'servicio',
+        'tipo_cuenta_bancaria' => 'tipo de cuenta',
+        'numero_cuenta_bancaria' => 'numero de cuenta',
+        'entidad_bancaria' => 'entidad bancaria',        
+        'fecha_inicio' => 'fecha de inicio',
+        'fecha_final' => 'fecha final',
+        'res_cedula' => 'cédula',
+        'res_id_ref' => 'lugar de expedición',
+        'res_nombres' => 'nombres y apellidos',
+        'res_telefono' => 'teléfono',
+        'res_direccion' => 'dirección'   
         ];
     }
     /*

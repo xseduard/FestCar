@@ -60,7 +60,12 @@ class Extracto extends Model
     }
 
     */
-
+    public function usuario(){
+        return $this->belongsTo('App\User', 'user_id');
+    }
+    public function conductoruno(){
+        return $this->belongsTo('App\Models\Natural', 'conductor_uno');
+    }
      public function cps(){
         return $this->belongsTo('App\Models\ContratoPrestacionServicio');
     }

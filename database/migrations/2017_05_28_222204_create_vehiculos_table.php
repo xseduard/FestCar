@@ -23,6 +23,9 @@ class CreateVehiculosTable extends Migration
             $table->string('numero_interno', 3)->comment('Numero indicado por la empresa');
             $table->string('capacidad', 2)->comment('capacidad ocupantes/pasajeros');
             $table->string('modelo', 4)->comment('modelo año');
+            $table->string('marca', 20);
+            $table->string('clase', 20);
+            $table->boolean('propiedad')->comment('Veridicar si es de la empresa');
             $table->text('observaciones');
             $table->integer('user_id')->unsigned();
             $table->timestamps();

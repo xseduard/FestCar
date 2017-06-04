@@ -70,7 +70,6 @@ class VehiculoController extends AppBaseController
         $input = $request->all();
         $input['user_id'] = Auth::id();
         $input['placa'] = strtoupper($request->placa);
-
         $vehiculo = $this->vehiculoRepository->create($input);
 
         Flash::success('Vehículo registrado correctamente.');

@@ -29,6 +29,9 @@ class Vehiculo extends Model
         'numero_interno',
         'capacidad',
         'modelo',
+        'marca',
+        'clase',
+        'propiedad',
         'observaciones',
         'user_id'
     ];
@@ -44,6 +47,9 @@ class Vehiculo extends Model
         'numero_interno' => 'string',
         'capacidad' => 'string',
         'modelo' => 'string',
+        'marca' => 'string',
+        'clase' => 'string',
+        'propiedad' => 'boolean',
         'observaciones' => 'string',
         'user_id' => 'integer'
     ];
@@ -55,9 +61,12 @@ class Vehiculo extends Model
         'propietario_nombre' => 'required',
         'propietario_cedula' => 'required|numeric',
         'poseedor_cedula' => 'numeric',
-        'numero_interno' => 'numeric',
+        'numero_interno' => 'required|numeric',
         'capacidad' => 'numeric',
         'modelo' => 'numeric',
+        'marca' => 'required',
+        'clase' => 'required',
+        'propiedad' => 'required',
         'observaciones' => ''
     ];
     /**

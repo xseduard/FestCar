@@ -3,11 +3,10 @@
         <th>Codigo</th>
         <th>CPS</th>
         <th>Recorrido</th>
-        <th>Conductor Uno</th>
-        <th>Conductor Dos</th>
-        <th>Conductor Tres</th>
+        <th>Conductor Ppal</th>
+        <th>Usuario Creador</th>
         
-        <th colspan="3">Acciones</th>
+        <th width="80px">Acciones</th>
     </thead>
     <tbody>
     @foreach($extractos as $extracto)
@@ -15,9 +14,8 @@
             <td>{!! $extracto->codigo !!}</td>
             <td>{!! "CPS",str_pad($extracto->ContratoPrestacionServicio_id, 4, "0", STR_PAD_LEFT) !!}</td>
             <td>{!! $extracto->recorrido !!}</td>
-            <td>{!! $extracto->conductor_uno !!}</td>
-            <td>{!! $extracto->conductor_dos !!}</td>
-            <td>{!! $extracto->conductor_tres !!}</td>            
+            <td>{!! $extracto->conductoruno->nombres," ", $extracto->conductoruno->apellidos !!}</td>   
+            <td>{!! $extracto->usuario->nombres," ",$extracto->usuario->apellidos !!}</td>        
             <td>
                 {!! Form::open(['route' => ['extractos.destroy', $extracto->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>

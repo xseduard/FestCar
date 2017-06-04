@@ -36,13 +36,22 @@ class CreateContratoPrestacionServiciosTable extends Migration
             $table->dateTime('fecha_aprobacion');
             $table->integer('usuario_aprobacion')->unsigned()->comment('Usuario que Verifica la firma');
 
+            $table->string('res_cedula', 12)->comment('Responsable');
+            $table->string('res_id_ref', 30)->comment('Responsable');
+            $table->string('res_nombres', 50)->comment('Responsable');
+            $table->string('res_telefono', 20)->comment('Responsable');
+            $table->string('res_direccion', 50)->comment('Responsable');
+
             $table->timestamps();
             $table->softDeletes();
             
             $table->string('rl_id', 14)->default('50.914.925')->comment('Repre. legal');
-            $table->string('rl_id_ref', 15)->default('Arboletes')->comment('Repre. legal');
+            $table->string('rl_id_ref', 30)->default('Monteria Córdoba')->comment('Repre. legal');
             $table->string('rl_name', 5)->default('Tana')->comment('Repre. legal');
-            $table->string('rl_lastname', 18)->default('Coronado Calderin')->comment('Repre. legal');  
+            $table->string('rl_lastname', 18)->default('Coronado Calderin')->comment('Repre. legal');
+
+            
+
         });
     }
 

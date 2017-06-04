@@ -45,7 +45,22 @@
     {!! Form::label('modelo', 'Modelo') !!}
     {!! Form::number('modelo', null, ['class' => 'form-control', 'placeholder'=>'1990']) !!}
 </div>
-
+<!-- campo numerico -->
+<div class="form-group col-sm-4">
+    {!! Form::label('marca', 'Marca') !!}
+    {!! Form::text('marca', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
+</div>
+<!-- campo numerico -->
+<div class="form-group col-sm-4">
+    {!! Form::label('clase', 'Clase') !!}
+    {!! Form::text('clase', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
+</div>
+<!-- $FIELD_NAME_TITLE$ Field -->
+<!-- $FIELD_NAME_TITLE$ Selector -->
+<div class="form-group col-sm-4">
+    {!! Form::label('propiedad', '¿Propiedad de Empresarial?') !!}
+    {!! Form::select('propiedad',[false=>'No', true=>'Si'], false, ['class' => 'form-control']) !!}
+</div>
 <!-- Observaciones Field -->
 <div class="form-group col-sm-12 col-lg-12">
     {!! Form::label('observaciones', 'Observaciones:') !!}
