@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\DatesTranslator;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -12,7 +13,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class ContratoVinculacion extends Model
 {
-    use SoftDeletes;
+    use DatesTranslator, SoftDeletes;
+
 
     public $table = 'contrato_vinculaciones';
     

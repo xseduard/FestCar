@@ -53,7 +53,7 @@ class ContratoVinculacionController extends AppBaseController
     {
         $selectores = [];
         // $selectores['atributo_id'] = $this->centralRepository->atributo_id();
-        $selectores['vehiculo_id'] = $this->centralRepository->vehiculo_id();
+        $selectores['vehiculo_id'] = $this->centralRepository->vehiculo_con_tarjeta_propiedad();
         $selectores['natural_id'] = $this->centralRepository->natural_id();
         $selectores['juridico_id'] = $this->centralRepository->juridico_id();
         return $selectores;

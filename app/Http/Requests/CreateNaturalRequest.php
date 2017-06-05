@@ -34,7 +34,8 @@ class CreateNaturalRequest extends Request
         return [
          "cedula" => "Documento de Identidad",
          "municipio_id" => "Lugar de Expedición",
-         "" => "",
+         'direccion' => 'dirección',
+         'direccion_municipio' => 'ciudad/departamento',
     
     ];
     }

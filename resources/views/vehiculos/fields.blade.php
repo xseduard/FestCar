@@ -5,30 +5,13 @@
 </div>
 
 <div class="clearfix"></div>
-<!-- Propietario Nombre Campo de texto -->
+
 <div class="form-group col-sm-6">
-    {!! Form::label('propietario_nombre', 'Nombre Propietario') !!}
-    {!! Form::text('propietario_nombre', null, ['class' => 'form-control']) !!}
+    {!! Form::label('natural_id', 'Propietario') !!}
+    {!! Form::select('natural_id', $selectores['natural_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
 
-<!-- Propietario Cedula Campo de texto -->
-<div class="form-group col-sm-6">
-    {!! Form::label('propietario_cedula', 'Cédula Propietario') !!}
-    {!! Form::text('propietario_cedula', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Poseedor Nombre Campo de texto -->
-<div class="form-group col-sm-6">
-    {!! Form::label('poseedor_nombre', 'Nombre Poseedor') !!}
-    {!! Form::text('poseedor_nombre', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Poseedor Cedula Campo de texto -->
-<div class="form-group col-sm-6">
-    {!! Form::label('poseedor_cedula', 'Cédula Poseedor') !!}
-    {!! Form::text('poseedor_cedula', null, ['class' => 'form-control']) !!}
-</div>
-
+<div class="clearfix"></div>
 <!-- Numero Interno Campo de texto -->
 <div class="form-group col-sm-4">
     {!! Form::label('numero_interno', 'Numero Interno') !!}

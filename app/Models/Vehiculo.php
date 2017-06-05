@@ -22,10 +22,7 @@ class Vehiculo extends Model
 
     public $fillable = [
         'placa',
-        'propietario_nombre',
-        'propietario_cedula',
-        'poseedor_nombre',
-        'poseedor_cedula',
+        'natural_id',        
         'numero_interno',
         'capacidad',
         'modelo',
@@ -40,10 +37,7 @@ class Vehiculo extends Model
      */
     protected $casts = [
         'placa' => 'string',
-        'propietario_nombre' => 'string',
-        'propietario_cedula' => 'string',
-        'poseedor_nombre' => 'string',
-        'poseedor_cedula' => 'string',
+        'natural_id' => 'integer',        
         'numero_interno' => 'string',
         'capacidad' => 'string',
         'modelo' => 'string',
@@ -58,9 +52,7 @@ class Vehiculo extends Model
      */
     public static $rules = [
         'placa' => 'required|alpha_num|unique:vehiculos|size:6',
-        'propietario_nombre' => 'required',
-        'propietario_cedula' => 'required|numeric',
-        'poseedor_cedula' => 'numeric',
+        'natural_id' => 'required',        
         'numero_interno' => 'required|numeric',
         'capacidad' => 'numeric',
         'modelo' => 'numeric',
@@ -72,11 +64,11 @@ class Vehiculo extends Model
     /**
      * Relaciones entre Modelos
      */
-    /*
-    public function modelo(){
-        return $this->belongsTo('App\Models\Modelo');
+    
+    public function natural(){
+        return $this->belongsTo('App\Models\Natural');
     }
-    */
+    
     
 
     /**

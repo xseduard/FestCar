@@ -36,7 +36,7 @@ class scriptFPDF extends baseFpdf
          $this->SetFont('Arial','B',11.5);
          $this->SetTextColor(255);
         // Page number
-         $this->Cell(56,9,' ',0,0,'L');
+         $this->Cell(80,9,' ',0,0,'L');
          $this->Cell(5,9,$this->PageNo(),0,0,'L');
          $this->Cell(4,9,'',0,0,'L');
          $this->Cell(0,9,'{nb}',0,0,'L');

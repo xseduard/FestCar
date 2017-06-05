@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Bogota',
 
     /*
     |--------------------------------------------------------------------------
@@ -169,6 +169,7 @@ return [
         InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Anouar\Fpdf\FpdfServiceProvider::class,
+        Jenssegers\Date\DateServiceProvider::class,
         
     ],
 
@@ -221,6 +222,7 @@ return [
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
         'PDF'       => Barryvdh\DomPDF\Facade::class,
         'Fpdf'      => Anouar\Fpdf\Facades\Fpdf::class,
+        'Date'      => Jenssegers\Date\Date::class,
         
         
     ],

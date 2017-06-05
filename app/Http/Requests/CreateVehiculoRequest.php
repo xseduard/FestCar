@@ -33,7 +33,7 @@ class CreateVehiculoRequest extends Request
      */
     public function attributes() {
         return [
-        "" => "",
+        "natural_id" => "Propietario",
         "" => "",    
         ];
     }

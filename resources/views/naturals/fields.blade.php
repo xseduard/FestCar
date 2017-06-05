@@ -19,6 +19,19 @@
     {!! Form::label('apellidos', '*Apellidos') !!}
     {!! Form::text('apellidos', null, ['class' => 'form-control']) !!}
 </div>
+
+<!-- Direccion Campo de texto -->
+<div class="form-group col-sm-7">
+    {!! Form::label('direccion', 'Dirección') !!}
+    {!! Form::text('direccion', null, ['class' => 'form-control']) !!}
+</div>
+<div class="form-group col-sm-5">
+    {!! Form::label('direccion_municipio', 'Ciudad/Departamento') !!}
+     {!! Form::select('direccion_municipio', $selectores['municipio_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+</div>
+
+
+
 <!-- genero Campo de texto -->
 <div class="form-group col-sm-6">
     {!! Form::label('genero', '*Genero') !!}

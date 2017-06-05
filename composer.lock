@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "56fd47f476c12406e66a460638ad72e5",
+    "content-hash": "5c1a6615a41b1aae0835ec0570737a34",
     "packages": [
         {
             "name": "anouar/fpdf",
@@ -283,6 +283,63 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "jenssegers/date",
+            "version": "v3.2.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jenssegers/date.git",
+                "reference": "ddc073e6cbba95bf298bf2bf43f2ebb2ec47b050"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jenssegers/date/zipball/ddc073e6cbba95bf298bf2bf43f2ebb2ec47b050",
+                "reference": "ddc073e6cbba95bf298bf2bf43f2ebb2ec47b050",
+                "shasum": ""
+            },
+            "require": {
+                "nesbot/carbon": "^1.0",
+                "php": ">=5.4",
+                "symfony/translation": "^2.7|^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0|^5.0|^6.0",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jenssegers\\Date\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jens Segers",
+                    "homepage": "https://jenssegers.com"
+                }
+            ],
+            "description": "A date library to help you work with dates in different languages",
+            "homepage": "https://github.com/jenssegers/date",
+            "keywords": [
+                "carbon",
+                "date",
+                "datetime",
+                "i18n",
+                "laravel",
+                "time",
+                "translation"
+            ],
+            "time": "2017-04-20T14:50:49+00:00"
         },
         {
             "name": "jeremeamia/SuperClosure",
@@ -2243,6 +2300,49 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "arielcr/numero-a-letras",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arielcr/numero-a-letras.git",
+                "reference": "df3e5504b477059e290faecad3004ee79f4406a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arielcr/numero-a-letras/zipball/df3e5504b477059e290faecad3004ee79f4406a4",
+                "reference": "df3e5504b477059e290faecad3004ee79f4406a4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "NumeroALetras": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ariel Orozco",
+                    "email": "bassplayer85@gmail.com",
+                    "homepage": "http://arielorozco.com"
+                }
+            ],
+            "description": "Convierte un número a su valor correspondiente en letras.",
+            "homepage": "https://github.com/arielcr/numero-a-letras",
+            "keywords": [
+                "convertir",
+                "letras",
+                "numero"
+            ],
+            "time": "2017-03-14T01:51:35+00:00"
+        },
         {
             "name": "barryvdh/laravel-dompdf",
             "version": "v0.6.1",
@@ -4545,7 +4645,8 @@
         "infyomlabs/swagger-generator": 20,
         "infyomlabs/generator-builder": 20,
         "jlapp/swaggervel": 20,
-        "infyomlabs/adminlte-templates": 20
+        "infyomlabs/adminlte-templates": 20,
+        "arielcr/numero-a-letras": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

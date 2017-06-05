@@ -23,6 +23,8 @@ class CreateNaturalsTable extends Migration
             $table->string('nombres', 150);
             $table->string('apellidos', 150);
             $table->enum('genero', ['masculino', 'femenino']);
+            $table->string('direccion',150);
+            $table->integer('direccion_municipio')->unsigned();
             $table->string('correo', 100);
             $table->string('telefono', 15);
             $table->text('observaciones');

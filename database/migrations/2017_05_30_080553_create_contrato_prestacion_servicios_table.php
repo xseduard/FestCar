@@ -45,7 +45,7 @@ class CreateContratoPrestacionServiciosTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             
-            $table->string('rl_id', 14)->default('50.914.925')->comment('Repre. legal');
+            $table->string('rl_id', 14)->default('50914925')->comment('Repre. legal');
             $table->string('rl_id_ref', 30)->default('Monteria Córdoba')->comment('Repre. legal');
             $table->string('rl_name', 5)->default('Tana')->comment('Repre. legal');
             $table->string('rl_lastname', 18)->default('Coronado Calderin')->comment('Repre. legal');

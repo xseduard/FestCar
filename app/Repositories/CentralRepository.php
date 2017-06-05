@@ -10,6 +10,7 @@ use App\Models\Juridico;
 use App\Models\Vehiculo;
 use App\Models\ContratoPrestacionServicio;
 use App\Models\LicenciaConduccion;
+use App\Models\Tarjeta_Propiedad;
 use InfyOm\Generator\Common\BaseRepository;
 
 class CentralRepository extends BaseRepository
@@ -86,17 +87,27 @@ class CentralRepository extends BaseRepository
         return ($array);
     }
     public function vehiculo_id (){
-        $modelo = Vehiculo::all()->toArray();
-            foreach ($modelo as $key => $value) {
-                $array[$value['id']]=$value['placa']." - ".$value['propietario_cedula']." ".$value['propietario_nombre'];
+         $modelo = Vehiculo::with('natural')->get()->toArray();
+            foreach ($modelo as $key => $value) {               
+                $array[$value['id']]=$value['placa']." - ".$value['natural']['cedula']." ".$value['natural']['nombres']." ".$value['natural']['apellidos'] ;
+                
+            }
+        return ($array);
+    }
+    public function vehiculo_con_tarjeta_propiedad (){
+         $modelo = Tarjeta_Propiedad::with('vehiculo')->with('vehiculo.natural')->get()->toArray(); //demo doble relacion
+            foreach ($modelo as $key => $value) {               
+                $array[$value['vehiculo_id']]=$value['vehiculo']['placa']." - ".$value['vehiculo']['natural']['cedula']." ".$value['vehiculo']['natural']['nombres']." ".$value['vehiculo']['natural']['apellidos'] ;
+                
             }
         return ($array);
     }
     // falta where para evitar que aparezcan los que ya tienen este documento
     public function vehiculo_id_tarjeta_propiedad (){
-        $modelo = Vehiculo::all()->toArray();
-            foreach ($modelo as $key => $value) {
-                $array[$value['id']]=$value['placa']." - ".$value['propietario_cedula']." ".$value['propietario_nombre'];
+        $modelo = Vehiculo::with('natural')->get()->toArray();
+            foreach ($modelo as $key => $value) {               
+                $array[$value['id']]=$value['placa']." - ".$value['natural']['cedula']." ".$value['natural']['nombres']." ".$value['natural']['apellidos'] ;
+                
             }
         return ($array);
     }

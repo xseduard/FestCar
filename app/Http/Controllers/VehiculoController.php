@@ -43,7 +43,7 @@ class VehiculoController extends AppBaseController
     public function selectoresComunes()
     {
         $selectores = [];
-        // $selectores['atributo_id'] = $this->centralRepository->atributo_id();
+        $selectores['natural_id'] = $this->centralRepository->natural_id();
         return $selectores;
     }
     /**

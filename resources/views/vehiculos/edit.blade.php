@@ -29,6 +29,13 @@
  <script>
     $(document).ready(function () {  
         $("#placa").prop('disabled', true);
+        $(".select2").select2({
+          tags: false, // permite insertar texto
+          language: {noResults: function() {return "No se encontraron coincidencias";}, searching: function() {return "Buscando..";}
+                },
+          placeholder: 'Seleccionar...',      
+          allowClear: true
+        });
     });
  </script>
 @endsection
