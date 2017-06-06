@@ -8,7 +8,7 @@
         <th>Fecha final</th>
        
      
-        <th width="100px">Acciones</th>
+        <th width="120px">Acciones</th>
     </thead>
     <tbody>
     @foreach($contratoPrestacionServicios as $contratoPrestacionServicio)
@@ -28,7 +28,7 @@
             <td>
                 {!! Form::open(['route' => ['contratoPrestacionServicios.destroy', $contratoPrestacionServicio->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>
-                    
+                        <a href="{!! route('contratoPrestacionServicios.print', [$contratoPrestacionServicio->id]) !!}" class='btn btn-default btn-xs' title="Imprimir" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
                         <a href="{!! route('contratoPrestacionServicios.show', [$contratoPrestacionServicio->id]) !!}" class='btn btn-default btn-xs' title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
                     
                     <a href="{!! route('contratoPrestacionServicios.edit', [$contratoPrestacionServicio->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>

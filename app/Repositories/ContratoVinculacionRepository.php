@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\ContratoVinculacion;
 use InfyOm\Generator\Common\BaseRepository;
-use Anouar\Fpdf\Fpdf as baseFpdf;
 
 //Models
 use App\Models\Departamento;
@@ -19,8 +18,8 @@ use Carbon\Carbon;
 use File;
 use Jenssegers\Date\Date;
 
-
-use App\Repositories\scriptFPDF;
+//script para texto fpdf
+use App\Repositories\FPDF_VIN;
 
 
 class ContratoVinculacionRepository extends BaseRepository
@@ -57,7 +56,7 @@ class ContratoVinculacionRepository extends BaseRepository
             return $result;
     }
     function tarjeta_propiedad_por_vehiculo($id){
-           return Tarjeta_Propiedad::where('id', $id)->first();
+           return Tarjeta_Propiedad::where('vehiculo_id', $id)->first();
     }
     function buscar_juridico($id){
            return Juridico::where('id', $id)->first();
@@ -102,17 +101,17 @@ class ContratoVinculacionRepository extends BaseRepository
 
         //dd($contrato->created_at->diffForHumans());
 
-$NOMBRE_PROP_VEHICULO = '';
-$LUGAR_EXP_PROP_VEHICULO = '';
-$CEDULA_PROP_VEHICULO = '';
-$ID_PROPIETARIO_VEHICULO = '';
-$TIPO_POSEEDOR_O_TENEDOR = '';
-$DIR_MUNINCIPIO_PROP_VEHICULO = '';
-$JURIDICO_NOMBRE = '';
-$JURIDICO_NIT = '';
-$NOMBRE_RTE_LEGAL_CONTRATISTA = '';
-$CEDULA_RTE_LEGAL = '';
-$LUGAR_EXP_RTE_LEGAL = '';
+            $NOMBRE_PROP_VEHICULO = '';
+            $LUGAR_EXP_PROP_VEHICULO = '';
+            $CEDULA_PROP_VEHICULO = '';
+            $ID_PROPIETARIO_VEHICULO = '';
+            $TIPO_POSEEDOR_O_TENEDOR = '';
+            $DIR_MUNINCIPIO_PROP_VEHICULO = '';
+            $JURIDICO_NOMBRE = '';
+            $JURIDICO_NIT = '';
+            $NOMBRE_RTE_LEGAL_CONTRATISTA = '';
+            $CEDULA_RTE_LEGAL = '';
+            $LUGAR_EXP_RTE_LEGAL = '';
         
 
         if ($contrato->tipo_proveedor == 'Natural') {
@@ -168,10 +167,10 @@ $LUGAR_EXP_RTE_LEGAL = '';
                 $tipo_contrato_nombre = 'Administración Flota';
                 break;
             case 'CP':
-                $tipo_contrato_nombre = 'Proveedor';
+                $tipo_contrato_nombre = 'DE SUMINISTRO DE VEHÍCULO';
                 break;
             case 'CV':
-                $tipo_contrato_nombre = 'Vinculación';
+                $tipo_contrato_nombre = 'DE VINCULACIÓN Y ADMINISTRACIÓN DELEGADA';
                 break;
             case 'CC':
                 $tipo_contrato_nombre = 'CONVENIO DE COLABORACIÓN EMPRESARIAL';
@@ -215,7 +214,7 @@ $LUGAR_EXP_RTE_LEGAL = '';
         'CEDULA_RTE_LEGAL'                  =>  $CEDULA_RTE_LEGAL,
         'LUGAR_EXP_RTE_LEGAL'               =>  $LUGAR_EXP_RTE_LEGAL,
         ];
-        $pdf = new scriptFPDF('P','mm','A4');
+        $pdf = new FPDF_VIN('P','mm','A4');
 
         $pdf->header();
         //$pdf->Cell(Ancho,Alto,"Texto",borde,Ln 0=derecha 1=siguiente linea 2=debajo,'L/C/R',relleno true/false);
@@ -224,16 +223,18 @@ $LUGAR_EXP_RTE_LEGAL = '';
         $pdf->SetSubject('Copia Contrato '.$data['NOMBRE_EMPRESA']);
         $pdf->SetCreator('FestCar Project');
         $pdf->SetAuthor('@xsED');
-        $pdf->SetFont('Arial','B',15);
+        $pdf->SetFont('helvetica','B',15);
         $pdf->Cell(160,8,utf8_decode("CONTRATO ".mb_strtoupper($tipo_contrato_nombre,'utf-8')),0,1,"C");
         if ($contrato->tipo_contrato == 'CC') {
-            $pdf->Cell(160,8,utf8_decode("Artículo 15 del decreto 348 de 2015. (hoy decreto 1079 de 2015)"),0,1,"C");
+            $pdf->SetFont('helvetica','',10); 
+            $pdf->Cell(160,5,utf8_decode("Artículo 15 del decreto 348 de 2015. (hoy decreto 1079 de 2015)"),0,1,"C");
+            $pdf->SetFont('helvetica','B',15);
         }
         $pdf->Cell(160,8,utf8_decode($codigo),0,1,"C");
-        $pdf->SetFont('Arial','',10);    
+        $pdf->SetFont('helvetica','',10);    
         // Estilos para etiquetas
-        $pdf->SetStyle("p","Arial","N",12,"50,50,50",0);
-        $pdf->SetStyle("b","Arial","B",0,"102,153,153");
+        $pdf->SetStyle("p","helvetica","N",12,"50,50,50",0);
+        $pdf->SetStyle("b","helvetica","B",0,"102,153,153");
 
         //$pdf->SetLineWidth(0.5);  
 
@@ -250,6 +251,23 @@ $LUGAR_EXP_RTE_LEGAL = '';
                 $pdf->WriteTag(0,6,utf8_decode($this->CV_P1($data)),0,"J",0,0);
                 break;
             case 'CC':
+                $pdf->Cell(75,10,utf8_decode('EMPRESA CONTRATANTE'),1,0,"C");
+                $pdf->Multicell(0,10,utf8_decode($data['NOMBRE_EMPRESA_CORTO']),1,'C');
+                $pdf->Cell(75,10,utf8_decode('NIT'),1,0,"C");
+                $pdf->Multicell(0,10,utf8_decode($data['NIT_MI_EMPRESA']),1,'C');
+                $pdf->Cell(75,10,utf8_decode('REPRESENTANTE LEGAL'),1,0,"C");
+                $pdf->Multicell(0,10,utf8_decode($data['CEDULA_RTE_LEGAL_MI_EMPRESA']),1,'C');
+                $pdf->Cell(75,10,utf8_decode('EMPRESA DE CONVENIO EMPRESARIAL'),1,0,"C");
+                $pdf->Multicell(0,10,utf8_decode($data['JURIDICO_NOMBRE']),1,'C');
+                $pdf->Cell(75,10,utf8_decode('NIT'),1,0,"C");
+                $pdf->Multicell(0,10,utf8_decode($data['JURIDICO_NIT']),1,'C');
+                $pdf->Cell(75,10,utf8_decode('REPRESENTANTE LEGAL'),1,0,"C");
+                $pdf->Multicell(0,10,utf8_decode($data['NOMBRE_PROP_VEHICULO']),1,'C');
+                $pdf->Cell(75,10,utf8_decode('CONVENIO A DESARROLLLAR'),1,0,"C");
+                $pdf->Multicell(0,10,utf8_decode($contrato->servicio),1,'C');
+                $pdf->Ln();
+                $pdf->Ln();
+
                 $pdf->WriteTag(0,6,utf8_decode($this->CC_P1($data)),0,"J",0,0);
                 break;
             default:
@@ -257,6 +275,7 @@ $LUGAR_EXP_RTE_LEGAL = '';
                 break;
         }
         $pdf->Ln(8);  // 8 debido a que el anterior no tenia altura
+        $pdf->SetFont('helvetica','',10); 
 
         //Tabla vehiculo
         $pdf->Cell(30,8,utf8_decode('PLACA'),0,0,"R");
@@ -271,7 +290,7 @@ $LUGAR_EXP_RTE_LEGAL = '';
         $pdf->Cell(50,8,utf8_decode($contrato->vehiculo->marca),1,0,"R");
         $pdf->Cell(30,8,utf8_decode('CLASE'),0,0,"R");
         $pdf->Cell(50,8,utf8_decode($contrato->vehiculo->clase),1,1,"R");
-        $pdf->Cell(30,8,utf8_decode('SERVICIO'),0,0,"R");
+        $pdf->Cell(30,8,utf8_decode('SERVICIO'),0,0,"R");        
         $pdf->Cell(50,8,utf8_decode($this->tarjeta_propiedad_por_vehiculo($contrato->vehiculo_id)->servicio),1,0,"R");
         $pdf->Cell(30,8,utf8_decode('MOTOR'),0,0,"R");
         $pdf->Cell(50,8,utf8_decode($this->tarjeta_propiedad_por_vehiculo($contrato->vehiculo_id)->numero_motor),1,1,"R");
@@ -299,19 +318,23 @@ $LUGAR_EXP_RTE_LEGAL = '';
                 $tipo_contrato_nombre = 'NO DEFINIDO';
                 break;
         }
+        $pdf->SetFont('helvetica','',10); 
         $pdf->Ln(30);
         $pdf->Cell(65,5,'________________________',0,0,"L");
         $pdf->Cell(30,5,'',0,0,"L");
         $pdf->Cell(65,5,'________________________',0,1,"L");
-        $pdf->Cell(65,5,utf8_decode($data['NOMBRE_PROP_VEHICULO']),0,0,"L");
+        $pdf->Cell(65,5,utf8_decode($data['NOMBRE_RTE_LEGAL_MI_EMPRESA']),0,0,"L");
+        //$pdf->Cell(65,5,utf8_decode($data['NOMBRE_PROP_VEHICULO']),0,0,"L");
         $pdf->Cell(30,5,'',0,0,"L");
-        $pdf->Cell(65,5,utf8_decode($data['NOMBRE_RTE_LEGAL_MI_EMPRESA']),0,1,"L");
-        $pdf->Cell(65,5,utf8_decode("CC ".$data['CEDULA_PROP_VEHICULO']),0,0,"L");
+        $pdf->Multicell(65,5,utf8_decode($data['NOMBRE_PROP_VEHICULO']),0,'L',0);
+        $pdf->Cell(65,5,utf8_decode("CC ".$data['CEDULA_RTE_LEGAL_MI_EMPRESA']),0,0,"L");        
         $pdf->Cell(30,5,'',0,0,"L");
-        $pdf->Cell(65,5,utf8_decode("CC ".$data['CEDULA_RTE_LEGAL_MI_EMPRESA']),0,1,"L");       
-        $pdf->Cell(65,5,utf8_decode(''),0,0,"L");
+        $pdf->Cell(65,5,utf8_decode("CC ".$data['CEDULA_PROP_VEHICULO']),0,1,"L"); 
+        $pdf->Cell(65,5,utf8_decode($data['NOMBRE_EMPRESA_CORTO']),0,0,"L");        
         $pdf->Cell(30,5,'',0,0,"L");
-        $pdf->Cell(65,5,utf8_decode($data['NOMBRE_EMPRESA_CORTO']),0,1,"L");
+        $pdf->Multicell(65,5,utf8_decode(mb_strtoupper($data['JURIDICO_NOMBRE'],'utf-8')),0,'L',0);
+
+
         $pdf->AliasNbPages();
         $pdf->Output();
     exit;
@@ -415,7 +438,7 @@ $LUGAR_EXP_RTE_LEGAL = '';
         $view = "
 <p>Entre los suscritos a saber, <b>".$data['NOMBRE_RTE_LEGAL_MI_EMPRESA']."</b>, identificado(a) con Cédula de Ciudadanía Nro. <b>".$data['CEDULA_RTE_LEGAL_MI_EMPRESA']."</b>, en calidad de Gerente y Representante Legal de <b>".$data['NOMBRE_EMPRESA'].".</b> Con Nit ".$data['NIT_MI_EMPRESA'].", y quien para efectos del presente contrato se denominará <b>EL CONTRATANTE</b>; y el señor (a) <b>".$data['NOMBRE_PROP_VEHICULO'].",</b> con Cédula de Ciudadanía. Nro. <b>".$data['CEDULA_PROP_VEHICULO']."</b> y domicilio  en ".$data['DIRECCION_PROP_VEHICULO'].", quien actua como ".$data['TIPO_POSEEDOR_O_TENEDOR']." DEL VEHICULO  de servicio público inscrito en el organismo de transito correspondiente.</p>
 
-<p><b>PARAGRAFO 1: PROPIETARIO Y/O POSEEDOR DEL VEHICULO</b> acredita  la tenencia de la  propiedad del vehiculo y además que, el automotor se encuentra libre de pleitos pendientes, embargos judiciales, condiciones resolutorias, acciones reales y en general, que se encuentra ajustada a derecho y es consecuencia de una cadena lógica de dominio.  Así mismo que su patrimonio liquido proviene de actividades lícitas; y quien para los efectos del presente documento se denominará el <b>PROPIETARIO</b>, acuerdan celebrar el presente <b>CONTRATO DE SUMINISTRO DE VEHÍCULO</b>, contrato que se rige por las siguientes estipulaciones:</p>
+<p><b>PARAGRAFO 1: ".$data['TIPO_POSEEDOR_O_TENEDOR']."</b> acredita  la tenencia de la  propiedad del vehiculo y además que, el automotor se encuentra libre de pleitos pendientes, embargos judiciales, condiciones resolutorias, acciones reales y en general, que se encuentra ajustada a derecho y es consecuencia de una cadena lógica de dominio.  Así mismo que su patrimonio liquido proviene de actividades lícitas; y quien para los efectos del presente documento se denominará el <b>PROPIETARIO</b>, acuerdan celebrar el presente <b>CONTRATO DE SUMINISTRO DE VEHÍCULO</b>, contrato que se rige por las siguientes estipulaciones:</p>
 
 <p><b>PRIMERA</b>: MOTIVO DE LA CONTRATACIÓN Que la empresa <b>".$data['NOMBRE_EMPRESA']."</b>, tiene contratos suscritos con clientes que demandan cada vez mas servicios en la modalidad de Contrato para transporte empresarial. especialmente de empleados de Fincas, y aunque la empresa presta servicios de transporte público especial, debidamente autorizada y habilitada por el Ministerio de Transporte,  en la actualidad no cuenta con la cantidad  de vehículos que exige la empresa y sus filiales a la cual le prestamos servicios,  para tal objeto contractual.</p>
 
@@ -434,21 +457,21 @@ $LUGAR_EXP_RTE_LEGAL = '';
 
 <p><b>TERCERA. TÉRMINO</b>El presente contrato tendrá una Duracion de <b>".$data['DURACION_CONTRATO']."</b>, contados a partir del <b>".$data['FECHA_INICIO']."</b> Hasta <b>".$data['FECHA_FINAL']."</b>.En ningun caso se produciran renovaciones automaticas del contrato. </p>
 
-<p><b>CUARTA. VALOR. CUARTA: VALOR  DEL CONTRATO Y FORMA DE PAGO</b>: LA EMPRESA CONTRATANTE  pagará al <b>PROPIETARIO Y/O POSEEDOR DEL VEHICULO</b> la suma que estará determinado de  acuerdo a las cláusulas establecidas en documento posterior, por  el suministro de cada vehículo por viaje realizado conforme lo dispone la cláusula siguiente.</p>
+<p><b>CUARTA. VALOR. CUARTA: VALOR  DEL CONTRATO Y FORMA DE PAGO</b>: LA EMPRESA CONTRATANTE  pagará al <b>".$data['TIPO_POSEEDOR_O_TENEDOR']."</b> la suma que estará determinado de  acuerdo a las cláusulas establecidas en documento posterior, por  el suministro de cada vehículo por viaje realizado conforme lo dispone la cláusula siguiente.</p>
 
-<p><b>QUINTA. FORMA DE PAGO</b>. LA EMPRESA CONTRATANTE  pagará al <b>PROPIETARIO Y/O POSEEDOR DEL VEHICULO</b>,   la suma indicada de la siguiente manera: los clientes que demandan los servicios,  pagarán directamente el costo del contrato de manera global a LA EMPRESA CONTRATANTE, previa consignación en la cuenta suministrada por LA EMPRESA CONTRATANTE, y está a su vez le reconocerá al <b>PROPIETARIO Y/O POSEEDOR DEL VEHICULO</b> por sus SERVICIOS el valor de los servicios pactados, por el suministro de cada viaje realizado.</p>
+<p><b>QUINTA. FORMA DE PAGO</b>. LA EMPRESA CONTRATANTE  pagará al <b>".$data['TIPO_POSEEDOR_O_TENEDOR']."</b>,   la suma indicada de la siguiente manera: los clientes que demandan los servicios,  pagarán directamente el costo del contrato de manera global a LA EMPRESA CONTRATANTE, previa consignación en la cuenta suministrada por LA EMPRESA CONTRATANTE, y está a su vez le reconocerá al <b>".$data['TIPO_POSEEDOR_O_TENEDOR']."</b> por sus SERVICIOS el valor de los servicios pactados, por el suministro de cada viaje realizado.</p>
 
-<p><b>SEXTA. OBLIGACIONES ESPECÍFICAS DEL PROPIETARIO Y/O POSEEDOR DEL VEHICULO.</b> EPROPIETARIO Y/O POSEEDOR DEL VEHICULO se obliga para con LA EMPRESA CONTRATANTE: A) a cumplir con el suministro del vehículo con las características descritas y exigidas por el el cliente, en el tiempo pactado y con las descripciones exactas con el fin de atender las necesidades presentadas en el CONTRATO con el cliente respectivo; B) Demás actividades que asigne CONTRATANTE,  relacionado con el objeto contractual; C) PROPIETARIO Y/O POSEEDOR DEL VEHICULO  debe cumplir con todas las condiciones de seguridad y de revisión técnico mecánica y de emisiones contaminantes de que trata el artículo 51 de la Ley 769 de 2002, modificado por el artículo 11 de la Ley 1383 de 2010, modificado por el artículo 201 del Decreto número 019 de 2012, además del adecuado mantenimiento del vehículo de manera pre-ventiva y correctiva; D) el servicio debe hacerse de manera inmediata al usuario; E) El procedimiento debe ser continuo, permanente y ágil, y de la mejor calidad; F) Debe tenerse prevista la eventualidad de daños, a fin que el proceso sea permanente, repuestos, reparaciones, y vehículo de reemplazo.  G) El servicio deberá ser resuelta por lo menos en un día hábil.  H) Abstenerse de utilizar la información entregada por LA EMPRESA CONTRATANTE para fines distintos a los establecidos en el presente contrato, o para beneficio personal o de personas ajenas. I) Es obligación del <b>PROPIETARIO Y/O POSEEDOR DEL VEHICULO</b> y su vehículo que entre desde el lugar de origen hasta el lugar de destino, que la prestación del servicio se haga a través de CONDUCTOR ASALARIADO, pagado directamente por el PROPIETARIO Y/O POSEEDOR DEL VEHICULO de conformidad con el Art. 36 de la Ley 336 de 1996 y será solidariamente responsable con la EMPRESA VINCULADORA del automotor de todas las obligaciones o sanciones que surgieran por este aspecto, además que deben estar afiliados al régimen de seguridad social (Salud, pensión y Riesgos Laborales si hubiere lugar).</p>
+<p><b>SEXTA. OBLIGACIONES ESPECÍFICAS DEL ".$data['TIPO_POSEEDOR_O_TENEDOR'].".</b> EL ".$data['TIPO_POSEEDOR_O_TENEDOR']." se obliga para con LA EMPRESA CONTRATANTE: A) a cumplir con el suministro del vehículo con las características descritas y exigidas por el el cliente, en el tiempo pactado y con las descripciones exactas con el fin de atender las necesidades presentadas en el CONTRATO con el cliente respectivo; B) Demás actividades que asigne CONTRATANTE,  relacionado con el objeto contractual; C) ".$data['TIPO_POSEEDOR_O_TENEDOR']."  debe cumplir con todas las condiciones de seguridad y de revisión técnico mecánica y de emisiones contaminantes de que trata el artículo 51 de la Ley 769 de 2002, modificado por el artículo 11 de la Ley 1383 de 2010, modificado por el artículo 201 del Decreto número 019 de 2012, además del adecuado mantenimiento del vehículo de manera pre-ventiva y correctiva; D) el servicio debe hacerse de manera inmediata al usuario; E) El procedimiento debe ser continuo, permanente y ágil, y de la mejor calidad; F) Debe tenerse prevista la eventualidad de daños, a fin que el proceso sea permanente, repuestos, reparaciones, y vehículo de reemplazo.  G) El servicio deberá ser resuelta por lo menos en un día hábil.  H) Abstenerse de utilizar la información entregada por LA EMPRESA CONTRATANTE para fines distintos a los establecidos en el presente contrato, o para beneficio personal o de personas ajenas. I) Es obligación del <b>".$data['TIPO_POSEEDOR_O_TENEDOR']."</b> y su vehículo que entre desde el lugar de origen hasta el lugar de destino, que la prestación del servicio se haga a través de CONDUCTOR ASALARIADO, pagado directamente por el ".$data['TIPO_POSEEDOR_O_TENEDOR']." de conformidad con el Art. 36 de la Ley 336 de 1996 y será solidariamente responsable con la EMPRESA VINCULADORA del automotor de todas las obligaciones o sanciones que surgieran por este aspecto, además que deben estar afiliados al régimen de seguridad social (Salud, pensión y Riesgos Laborales si hubiere lugar).</p>
 
-<p><b>SÉPTIMA. OBLIGACIONES DE LA EMPRESA CONTRATANTE .</b> LA EMPRESA CONTRATANTE se obliga: 1º) Facilitarle al PROPIETARIO Y/O POSEEDOR DEL VEHICULO  para el cumplimiento de sus obligaciones, todos los documentos e información que requiera para este fin. 2°) Pagarle oportunamente la contraprestación. 3º). Facilitarle los recursos de que dispone LA EMPRESA CONTRATANTE que le sean necesarios para el buen desempeño de las labores a realizar. PARÁGRAFO: Esto tiene que ver con información y logística, más no así suministro de materiales, combustibles lubricantes, peajes, viáticos, gastos de viajes, etc.</p>
+<p><b>SÉPTIMA. OBLIGACIONES DE LA EMPRESA CONTRATANTE .</b> LA EMPRESA CONTRATANTE se obliga: 1º) Facilitarle al ".$data['TIPO_POSEEDOR_O_TENEDOR']."  para el cumplimiento de sus obligaciones, todos los documentos e información que requiera para este fin. 2°) Pagarle oportunamente la contraprestación. 3º). Facilitarle los recursos de que dispone LA EMPRESA CONTRATANTE que le sean necesarios para el buen desempeño de las labores a realizar. PARÁGRAFO: Esto tiene que ver con información y logística, más no así suministro de materiales, combustibles lubricantes, peajes, viáticos, gastos de viajes, etc.</p>
 
 <p><b>OCTAVA: SUPERVISIÓN</b>: Será ejercida por el Jefe Operativo de LA EMPRESA CONTRATANTE  o quien haga sus veces, quien para cumplir con esta función deberá realizar el seguimiento, control y vigilancia de la ejecución del presente contrato y de sus actuaciones, de lo cual dejará constancia escrita.</p>
 
-<p><b>NOVENA: CUMPLIMIENTO AL SISTEMA GENERAL DE SEGURIDAD SOCIAL.</b> Es obligación del <b>PROPIETARIO Y/O POSEEDOR DEL VEHICULO</b>,   la suma indicada de la siguiente manera: los clientes que demandan los servicios,  pagarán directamente el costo del contrato de manera global a LA EMPRESA CONTRATANTE, previa consignación en la cuenta suministrada por LA EMPRESA CONTRATANTE, y está a su vez le reconocerá al <b>PROPIETARIO Y/O POSEEDOR DEL VEHICULO</b> por sus SERVICIOS el valor de los servicios pactados, por el suministro de cada viaje realizado.</p>
+<p><b>NOVENA: CUMPLIMIENTO AL SISTEMA GENERAL DE SEGURIDAD SOCIAL.</b> Es obligación del <b>".$data['TIPO_POSEEDOR_O_TENEDOR']."</b>,   la suma indicada de la siguiente manera: los clientes que demandan los servicios,  pagarán directamente el costo del contrato de manera global a LA EMPRESA CONTRATANTE, previa consignación en la cuenta suministrada por LA EMPRESA CONTRATANTE, y está a su vez le reconocerá al <b>".$data['TIPO_POSEEDOR_O_TENEDOR']."</b> por sus SERVICIOS el valor de los servicios pactados, por el suministro de cada viaje realizado.</p>
 
-<p><b>SEXTA. OBLIGACIONES ESPECÍFICAS DEL PROPIETARIO Y/O POSEEDOR DEL VEHICULO.</b> PROPIETARIO Y/O POSEEDOR DEL VEHICULO garantizar y demostrar el cumplimiento de sus obligaciones frente al SISTEMA DE SEGURIDAD SOCIAL de su CONDUCTOR, lo que deberá acreditar antes de cada pago de sus honorarios, mediante la entrega de los respectivos soportes de pago, los cuales adjuntará a las cuentas de cobro  y que formarán parte del presente contrato.</p>
+<p><b>SEXTA. OBLIGACIONES ESPECÍFICAS DEL ".$data['TIPO_POSEEDOR_O_TENEDOR'].".</b> ".$data['TIPO_POSEEDOR_O_TENEDOR']." garantizar y demostrar el cumplimiento de sus obligaciones frente al SISTEMA DE SEGURIDAD SOCIAL de su CONDUCTOR, lo que deberá acreditar antes de cada pago de sus honorarios, mediante la entrega de los respectivos soportes de pago, los cuales adjuntará a las cuentas de cobro  y que formarán parte del presente contrato.</p>
 
-<p><b>DECIMA: INDEPENDENCIA DEL PROPITARIO:</b> PROPIETARIO Y/O POSEEDOR DEL VEHICULO actuará por su propia cuenta con absoluta autonomía y no estará sometido a subordinación laboral con LA EMPRESA CONTRATANTE u horario laboral alguno y sus derechos se limitarán de acuerdo  con la naturaleza del contrato, las obligaciones inherentes al mismo.</p> 
+<p><b>DECIMA: INDEPENDENCIA DEL PROPITARIO:</b> ".$data['TIPO_POSEEDOR_O_TENEDOR']." actuará por su propia cuenta con absoluta autonomía y no estará sometido a subordinación laboral con LA EMPRESA CONTRATANTE u horario laboral alguno y sus derechos se limitarán de acuerdo  con la naturaleza del contrato, las obligaciones inherentes al mismo.</p> 
 
 <p><b>UNDÉCIMA. CESION</b> Este contrato no podrá ser cedido total ni parcialmente, salvo autorización expresa de LA EMPRESA CONTRATANTE.</p>
 
@@ -456,13 +479,13 @@ $LUGAR_EXP_RTE_LEGAL = '';
 
 <p><b>DÉCIMA TERCERA. CAUSALES DE TERMINACIÓN.</b>  El presente contrato termina por las siguientes causales: 1)  En forma regular cuando se configure: a) La ejecución total  del objeto del contrato.  b)  El cumplimiento del plazo estipulado y 2)  En forma anticipada cuando se configure: a) El incumplimiento parcial o total  de una de las obligaciones pactadas en el presente contrato, y b)  por mutuo acuerdo entre las partes.</p>
 
-<p><b>DÉCIMA CUARTA. CLÁUSULA PENAL.</b> En caso de incumplimiento por alguna de las partes de cualquiera de las obligaciones previstas en este contrato dará derecho a LA EMPRESA CONTRATANTE  a cobrar al PROPIETARIO Y/O POSEEDOR DEL VEHICULO una suma igual a la afectacion sufrida por incumplimiento.</p>
+<p><b>DÉCIMA CUARTA. CLÁUSULA PENAL.</b> En caso de incumplimiento por alguna de las partes de cualquiera de las obligaciones previstas en este contrato dará derecho a LA EMPRESA CONTRATANTE  a cobrar al ".$data['TIPO_POSEEDOR_O_TENEDOR']." una suma igual a la afectacion sufrida por incumplimiento.</p>
 
-<p><b>DÉCIMA QUINTA: DOCUMENTOS:</b> Hacen parte integral del presente contrato los siguientes, documentos del automotor, certificado de existencia y representación legal de LA EMPRESA CONTRATANTE, copias de la cédulas del Representante Legal y del PROPIETARIO Y/O POSEEDOR DEL VEHICULO  que es contratado, certificado de antecedentes judiciales, Registro Único Tributario (RUT), antecedentes, constancia de pago de aportes al Sistema General de Seguridad Social, y demás documentos relacionados con la ejecución del contrato.</p>
+<p><b>DÉCIMA QUINTA: DOCUMENTOS:</b> Hacen parte integral del presente contrato los siguientes, documentos del automotor, certificado de existencia y representación legal de LA EMPRESA CONTRATANTE, copias de la cédulas del Representante Legal y del ".$data['TIPO_POSEEDOR_O_TENEDOR']."  que es contratado, certificado de antecedentes judiciales, Registro Único Tributario (RUT), antecedentes, constancia de pago de aportes al Sistema General de Seguridad Social, y demás documentos relacionados con la ejecución del contrato.</p>
 
 <p><b>DÉCIMA SEXTA:</b> Impuestos y Contabilización. En relación con el manejo contable y tributario del presente contrato, las partes expresamente declaran: 1) Contabilización del ingreso: Cada una de las partes registra en su respectiva contabilidad, como ingreso, el valor correspondiente a la participación pactada para cada una. 2) Contabilización de impuestos; Cada una de las partes deberá causar, declarar y pagar los impuestos que correspondan por la actividad, en proporción del ingreso que cada una percibe.</p>
 
-<p><b>DÉCIMA SÉPTIMA:</b> Independencia: LA EMPRESA CONTRATANTE  y PROPIETARIO Y/O POSEEDOR DEL VEHICULO y/o  EL CONDUCTOR del vehículo conservan su Independencia y responden cada una de por sus obligaciones laborales y contractuales. PARÁGRAFO: Se deja expresa constancia que por la celebración del presente contrato no se entenderá de ninguna manera la constitución de Agencia Comercial de una parte hacia la otra, ni la celebración de Contrato de Cuentas en Participación, o constitución de Sociedad de Hecho ni ninguna otra forma asociativa, como tampoco la prestación de un servicio. Los derechos y obligaciones de las partes quedan recogidos bajo los términos y condiciones del presente Contrato, según lo convenido en el Objeto del mismo y expresamente aceptado por las partes, previa deliberación y conocimiento de su alcance, que queda circunscrito estrictamente a lo allí señalado.</p>
+<p><b>DÉCIMA SÉPTIMA:</b> Independencia: LA EMPRESA CONTRATANTE  y ".$data['TIPO_POSEEDOR_O_TENEDOR']." y/o  EL CONDUCTOR del vehículo conservan su Independencia y responden cada una de por sus obligaciones laborales y contractuales. PARÁGRAFO: Se deja expresa constancia que por la celebración del presente contrato no se entenderá de ninguna manera la constitución de Agencia Comercial de una parte hacia la otra, ni la celebración de Contrato de Cuentas en Participación, o constitución de Sociedad de Hecho ni ninguna otra forma asociativa, como tampoco la prestación de un servicio. Los derechos y obligaciones de las partes quedan recogidos bajo los términos y condiciones del presente Contrato, según lo convenido en el Objeto del mismo y expresamente aceptado por las partes, previa deliberación y conocimiento de su alcance, que queda circunscrito estrictamente a lo allí señalado.</p>
 
 <p><b>DECIMA NOVENA:</b> Solución de conflictos Cláusula Compromisoria: Con excepción de las obligaciones económicas que se encuentren establecidas en forma cierta e indiscutible, y que serán exigibles por la vía judicial, todas las diferencias que se susciten entre las partes con motivo de la validez, existencia, celebración, interpretación, alcance o ejecución, forma, términos y condiciones de exigir los derechos y cumplir las obligaciones derivadas del contrato o sobre su terminación, consecuencias y liquidación se someterán a las disposiciones de la ley colombiana en materia de conciliación y arbitraje, tanto técnico como jurídico, para lo cual deberá agotarse el siguiente trámite: Toda discrepancia o controversia procurará resolverse por los respectivos representantes de las partes. En caso de no puedan ser resueltas directamente por los Representantes legales de las partes, el conflicto se someterá a la Justicia Ordinaria.</p>
  

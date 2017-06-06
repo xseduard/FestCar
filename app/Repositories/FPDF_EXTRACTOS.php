@@ -6,14 +6,14 @@ use Anouar\Fpdf\Fpdf as baseFpdf;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class scriptFPDF extends baseFpdf
+class FPDF_EXTRACTOS extends baseFpdf
 {
     
 // fin tags bold
     function Header()
 {
     // Logo
-    $this->Image('pdf-templates/membrete.jpg',0,0,210);
+    //$this->Image('pdf-templates/membrete.jpg',0,0,210);
     // Arial bold 15
     $this->SetMargins(25,4);
 
@@ -21,9 +21,11 @@ class scriptFPDF extends baseFpdf
     
     // Move to the right
     $this->Cell(130,8,"",0,0,'');
+
+    $this->Cell(80,9,' ',1,1,'L');
     // Title
     $this->SetTextColor(255);
-    $this->Cell(45,8,$GLOBALS['codigo'],0,1,'R');
+    //$this->Cell(45,8,$GLOBALS['codigo_cont'],0,1,'R');
     $this->SetTextColor(50);
     // Line break
     $this->Ln(15);    
@@ -41,7 +43,7 @@ class scriptFPDF extends baseFpdf
          $this->Cell(4,9,'',0,0,'L');
          $this->Cell(0,9,'{nb}',0,0,'L');
     }
-        var $wLine; // Maximum width of the line
+    var $wLine; // Maximum width of the line
     var $hLine; // Height of the line
     var $Text; // Text to display
     var $border;

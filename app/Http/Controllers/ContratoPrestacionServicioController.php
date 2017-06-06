@@ -179,4 +179,17 @@ class ContratoPrestacionServicioController extends AppBaseController
 
         return redirect(route('contratoPrestacionServicios.index'));
     }
+     public function print($id)
+    {
+        $contratoPrestacionServicio = $this->contratoPrestacionServicioRepository->findWithoutFail($id);
+
+        if (empty($contratoPrestacionServicio)) {
+            Flash::error('Contrato prestación de servicios No se encuentra registrado.');
+
+            return redirect(route('contratoPrestacionServicios.index'));
+        }
+       
+       $this->contratoPrestacionServicioRepository->print_contratos($id);
+        
+    }
 }

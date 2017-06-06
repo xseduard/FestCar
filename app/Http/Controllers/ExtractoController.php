@@ -178,4 +178,16 @@ class ExtractoController extends AppBaseController
 
         return redirect(route('extractos.index'));
     }
+    public function print($id)
+    {
+        $extracto = $this->extractoRepository->findWithoutFail($id);
+
+        if (empty($extracto)) {
+            Flash::error('Extracto No se encuentra registrado.');
+
+            return redirect(route('extractos.index'));
+        }
+       $this->extractoRepository->print_extractos($id);
+        
+    }
 }

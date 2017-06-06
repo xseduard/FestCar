@@ -65,6 +65,14 @@ Route::group(['middleware' => 'web'], function() {
             'as' => 'contratoVinculacions.print',
             'uses' => 'ContratoVinculacionController@print',
         ]);
+    Route::get('contratoPrestacionServicios/print/{id}', [
+            'as' => 'contratoPrestacionServicios.print',
+            'uses' => 'ContratoPrestacionServicioController@print',
+        ]);
+    Route::get('extractos/print/{id}', [
+            'as' => 'extractos.print',
+            'uses' => 'ExtractoController@print',
+        ]);
 /*
     Route::get('contratoVinculacions/print/{id}', [
             'as' => 'contratoVinculacions.print',

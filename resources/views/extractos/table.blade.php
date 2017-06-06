@@ -6,7 +6,7 @@
         <th>Conductor Ppal</th>
         <th>Usuario Creador</th>
         
-        <th width="80px">Acciones</th>
+        <th width="100px">Acciones</th>
     </thead>
     <tbody>
     @foreach($extractos as $extracto)
@@ -22,6 +22,7 @@
                     <!-- 
                         <a href="{!! route('extractos.show', [$extracto->id]) !!}" class='btn btn-default btn-xs' title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
                     -->
+                    <a href="{!! route('extractos.print', [$extracto->id]) !!}" class='btn btn-default btn-xs' title="Imprimir" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
                     <a href="{!! route('extractos.edit', [$extracto->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                         'type' => 'submit',
