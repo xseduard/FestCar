@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Traits\DatesTranslator;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\DatesTranslator;
 
 /**
  * Class ContratoVinculacion

@@ -13,9 +13,9 @@
         <tr>
             <td><span class="label label-default">{!! $tarjetaOperacion->vehiculo->placa !!}</span></td>
             <td>{!! $tarjetaOperacion->codigo !!}</td>            
-            <td>{!! $tarjetaOperacion->fecha_expedicion !!}</td>
-            <td>{!! $tarjetaOperacion->fecha_vigencia_inicio !!}</td>
-            <td>{!! $tarjetaOperacion->fecha_vigencia_final !!}</td>
+            <td>{!! $tarjetaOperacion->fecha_expedicion->format('d/F/Y') !!}</td>
+            <td>{!! $tarjetaOperacion->fecha_vigencia_inicio->format('d/F/Y') !!}</td>
+            <td>{!! $tarjetaOperacion->fecha_vigencia_final->format('d/F/Y') !!}</td>
             <td>
                 @if (($fecha_actual >= $tarjetaOperacion->fecha_vigencia_inicio) and ($fecha_actual <= $tarjetaOperacion->fecha_vigencia_final))
                     <span class="label label-success">Vigente</span>

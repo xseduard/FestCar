@@ -38,6 +38,12 @@
     {!! Form::label('direccion', 'Dirección') !!}
     {!! Form::text('direccion', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
 </div>
+
+<div class="form-group col-sm-6">
+    {!! Form::label('entidad_expide', 'Entidad que expide') !!}
+    {!! Form::text('entidad_expide', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
+</div>
+
 <clear class="clearfix"></clear>
 <!-- Fecha Expedicion campo de fecha -->
 <div class="form-group col-sm-4">

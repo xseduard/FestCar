@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\DatesTranslatorDocumentosVehiculo;
 
 /**
  * Class TarjetaOperacion
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class TarjetaOperacion extends Model
 {
-    use SoftDeletes;
+    use DatesTranslatorDocumentosVehiculo, SoftDeletes;
 
     public $table = 'tarjeta_operacions';
     
@@ -28,6 +29,7 @@ class TarjetaOperacion extends Model
         'razon_social_empresa',
         'nit',
         'direccion',
+        'entidad_expide',
         'fecha_expedicion',
         'fecha_vigencia_inicio',
         'fecha_vigencia_final',
@@ -44,6 +46,7 @@ class TarjetaOperacion extends Model
         'razon_social_empresa' => 'string',
         'nit' => 'string',
         'direccion' => 'string',
+        'entidad_expide' => 'string',
         'fecha_expedicion' => 'string',
         'fecha_vigencia_inicio' => 'string',
         'fecha_vigencia_final' => 'string',

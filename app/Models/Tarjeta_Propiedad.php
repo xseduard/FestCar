@@ -82,7 +82,9 @@ class Tarjeta_Propiedad extends Model
         'marca' => 'required',
         'potencia_hp' => '',
         'puertas' => 'numeric',
-        'organismo_transito' => ''
+        'organismo_transito' => '',
+        "fecha_matricula" => "required",
+        "fecha_expedicion" => "required",
     ];
     /**
      * Relaciones entre Modelos

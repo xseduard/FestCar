@@ -34,7 +34,9 @@ class CreateTarjeta_PropiedadRequest extends Request
     public function attributes() {
         return [
         "vehiculo_id" => "vehículo",
-        "licencia_transito" => "licencia de transito",    
+        "licencia_transito" => "licencia de transito", 
+        "fecha_matricula" => "fecha de matricula",
+        "fecha_expedicion" => "fecha de expedicion",
         ];
     }
     /*

@@ -1,9 +1,9 @@
 <table class="table table-responsive" id="contratoPrestacionServicios-table">
     <thead>
+        <th>No.</th>
         <th>Tipo Cliente</th>
         <th>Nit/CC</th>
-        <th>Nombres/Razón Social</th>      
-        
+        <th>Nombres/Razón Social</th>  
         <th>Fecha Inicio</th>
         <th>Fecha final</th>
        
@@ -13,6 +13,8 @@
     <tbody>
     @foreach($contratoPrestacionServicios as $contratoPrestacionServicio)
         <tr>
+        <td>
+            {!! "CPS",str_pad($contratoPrestacionServicio->id, 4, "0", STR_PAD_LEFT) !!}</td>
             <td>{!! $contratoPrestacionServicio->tipo_cliente !!}</td>
              @if ($contratoPrestacionServicio->tipo_cliente=='Natural')
                 <td>{!! $contratoPrestacionServicio->natural->cedula !!}</td>

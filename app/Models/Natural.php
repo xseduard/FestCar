@@ -65,6 +65,15 @@ class Natural extends Model
         'observaciones' => ''
     ];
     /**
+     * Ascensores
+     */
+
+    public function getFullNameAttribute()
+    {
+       return $this->nombres . ' ' . $this->apellidos;
+    }
+    
+    /**
      * Relaciones entre Modelos
      */
     /*

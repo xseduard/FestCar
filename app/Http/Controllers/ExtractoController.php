@@ -12,6 +12,9 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Auth;
 use Response;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Input;
+
 
 class ExtractoController extends AppBaseController
 {
@@ -53,6 +56,7 @@ class ExtractoController extends AppBaseController
         // $selectores['atributo_id'] = $this->centralRepository->atributo_id();
         $selectores['ContratoPrestacionServicio_id'] = $this->centralRepository->ContratoPrestacionServicio_id();
         $selectores['conductor_id'] = $this->centralRepository->conductor_id();
+        $selectores['vehiculo_id'] = $this->centralRepository->vehiculo_id();
         return $selectores;
     }
     /**
@@ -78,6 +82,7 @@ class ExtractoController extends AppBaseController
     {
         $input = $request->all();
         $input['user_id'] = Auth::id();
+
 
         $extracto = $this->extractoRepository->create($input);
 
@@ -147,6 +152,25 @@ class ExtractoController extends AppBaseController
         }
         $input = $request->all();
         $input['user_id'] = Auth::id();
+
+        // VALIDACIONES DE CONDUCTORES
+        if (!empty($input['conductor_dos']) and $input['conductor_uno'] == $input['conductor_dos']) {
+           Flash::error('Conductor UNO y DOS NO pueden ser iguales.');
+           return Redirect::back()->withInput(Input::all());
+        }
+        if (!empty($input['conductor_tres']) and $input['conductor_uno'] == $input['conductor_tres']) {
+           Flash::error('Conductor UNO y TRES NO pueden ser iguales.');
+           return Redirect::back()->withInput(Input::all());
+        }
+        if (!empty($input['conductor_dos']) 
+            and !empty($input['conductor_tres']) 
+                and $input['conductor_dos'] == $input['conductor_tres']) {
+           Flash::error('Conductor UNO y DOS NO pueden ser iguales.');
+           return Redirect::back()->withInput(Input::all());
+        }
+        // FIN VALIDACIONES
+
+        //dd($input);
 
         $extracto = $this->extractoRepository->update($input, $id);
 

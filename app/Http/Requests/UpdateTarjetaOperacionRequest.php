@@ -33,8 +33,17 @@ class UpdateTarjetaOperacionRequest extends Request
      */
     public function attributes() {
         return [
-        "" => "",
-        "" => "",    
+       'vehiculo_id' => 'vehículo',
+        'codigo' => 'codigo',
+        'modalidad_servicio' => 'modalidad de servicio',
+        'radio_accion' => 'radio de acción',
+        'razon_social_empresa' => 'razón social',
+        'nit' => 'nit',
+        'direccion' => 'dirección',
+        'entidad_expide' => 'entida que expide',
+        'fecha_expedicion' => 'fecha de expedición',
+        'fecha_vigencia_inicio' => 'fecha vigencia incial',
+        'fecha_vigencia_final' => 'fecha vigencia final',     
         ];
     }
     /*

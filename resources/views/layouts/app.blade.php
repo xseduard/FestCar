@@ -105,7 +105,7 @@
                                     <img  src="{{ asset('/multimedia/profiles/Estefania.jpg') }}"
                                          class="img-circle" alt="Imagen de usuario"/>
                                     <p>
-                                        {!! Auth::user()->nombres," ", Auth::user()->apellidos  !!}
+                                        {!! Auth::user()->fullname !!}
 
                                         <small>Miembro desde {!! Auth::user()->created_at->format('M. Y') !!}</small>
                                         <small>({!! ucwords(Auth::user()->role) !!})</small>
@@ -139,7 +139,7 @@
 
         <!-- Main Footer -->
         <footer class="main-footer" style="max-height: 100px;text-align: center">
-            <strong>Copyright © 2016 <a href="#">Company</a>.</strong> All rights reserved.
+            <strong>Copyright © 2017 <a href="">FestCar</a>.</strong> Todos los derechos reservados.
         </footer>
 
     </div>

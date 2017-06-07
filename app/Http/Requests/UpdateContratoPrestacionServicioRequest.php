@@ -44,11 +44,7 @@ class UpdateContratoPrestacionServicioRequest extends Request
         'entidad_bancaria' => 'entidad bancaria',        
         'fecha_inicio' => 'fecha de inicio',
         'fecha_final' => 'fecha final',
-        'res_cedula' => 'cédula',
-        'res_id_ref' => 'lugar de expedición',
-        'res_nombres' => 'nombres y apellidos',
-        'res_telefono' => 'teléfono',
-        'res_direccion' => 'dirección'   
+        'responsable_id' => 'responsable',   
         ];
     }
     /*

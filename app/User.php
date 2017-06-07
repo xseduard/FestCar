@@ -23,6 +23,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    /**
+     * Ascensores
+     */
+
+    public function getFullNameAttribute()
+    {
+       return $this->nombres . ' ' . $this->apellidos;
+    }
 
     /**
      * seleccionadores

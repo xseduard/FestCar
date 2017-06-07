@@ -20,6 +20,9 @@ class CreateExtractosTable extends Migration
             $table->integer('ContratoPrestacionServicio_id')->unsigned();
             $table->foreign('ContratoPrestacionServicio_id')->references('id')->on('contrato_prestacion_servicios');
 
+            $table->integer('vehiculo_id')->unsigned();
+            $table->foreign('vehiculo_id')->references('id')->on('vehiculos');
+
             $table->string('recorrido', 150);
             
             $table->integer('conductor_uno')->unsigned();

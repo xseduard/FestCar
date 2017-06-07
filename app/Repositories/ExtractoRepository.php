@@ -4,7 +4,10 @@ namespace App\Repositories;
 
 use App\Models\Extracto;
 use InfyOm\Generator\Common\BaseRepository;
+use Carbon\Carbon;
+use Jenssegers\Date\Date;
 use App\Repositories\FPDF_EXTRACTOS;
+
 use Anouar\Fpdf\Fpdf as baseFpdf;
 
 class ExtractoRepository extends BaseRepository
@@ -29,48 +32,294 @@ class ExtractoRepository extends BaseRepository
     {
         return Extracto::class;
     }
-
+    function traducir_fecha($date){
+            return new Date($date);
+        }
+    
     function print_extractos($id){
 
-        $extracto = $this->findWithoutFail($id);
+        $extracto =  Extracto::with('cps.natural')
+        ->with('cps.juridico.natural')
+        ->with('vehiculo.tarjetaoperacion')
+        ->with('cps.origen.departamento')
+        ->with('cps.destino.departamento')
+        ->with('conductoruno')
+        ->with('conductordos')
+        ->with('conductortres')
+        ->where('id',$id)
+        ->first();
+
+        //dd($extracto->vehiculo->tarjetaoperacion);
+        //dd($extracto->vehiculo);
+        $tar_operacion_vigente = $extracto->vehiculo->tarjetaoperacion;
+
+        $fecha_test = Carbon::createFromFormat('Y-m-d', '2017-06-06');
+        //dd($fecha_test);
+        //dd($extracto->created_at->format('l j F Y H:i:s'));
+        //dd($tar_operacion_vigente->where('fecha_vigencia_final', '<', $fecha_test));
+        //dd($tar_operacion_vigente[0]->fecha_vigencia_final->format('l j F Y H:i:s'));
+
+
         $codigo_cont = 'CPS'.str_pad($extracto->id, 4, "0", STR_PAD_LEFT);
         $codigo = 'CPS'.str_pad($extracto->id, 4, "0", STR_PAD_LEFT);
         global $codigo_cont; 
-            
+        
+        
+
         $data = [
         'nombre_mi_empresa' => 'TRANSPORTES ESPECIALES BUSES Y MIXTOS TRANSEBA S.A.S',
         'nombre_mi_empresa_corto' => 'TRANSEBA S.A.S',
-        'nit_mi_empresa' => '90000000-4',
+        'nit_mi_empresa' => '900.414.811-9',
         ];
 
-       
+       if ($extracto->cps->tipo_cliente == 'Natural') {
+           $data['contratante_nombre'] = mb_strtoupper($extracto->cps->natural->nombres." ".$extracto->cps->natural->apellidos,'utf-8');
+           $data['documento_contratante'] = $extracto->cps->natural->cedula; 
+        } elseif ($extracto->cps->tipo_cliente == 'Juridico') {
+            $data['contratante_nombre'] = mb_strtoupper($extracto->cps->juridico->nombre,'utf-8');
+            $data['documento_contratante'] = $extracto->cps->juridico->nit; 
+        }
+            $c2_nombre      = "";
+            $c2_apellidos   = "";
+            $c2_cedula      = "";
+            $c2_licencia    = "";
+            $c2_vigencia    = "";
+            $c3_nombre      = "";
+            $c3_apellidos   = "";
+            $c3_cedula      = "";
+            $c3_licencia    = "";
+            $c3_vigencia    = "";
+
+            $r_nombre      = "";
+            $r_apellidos    = "";
+            $r_cedula       = "";
+            $r_telefono     = "";
+            $r_direccion    = "";
+
+        if (!is_null($extracto->conductordos)) {
+            $c2_nombre      = mb_strtoupper($extracto->conductordos->nombres,'utf-8');
+            $c2_apellidos   = mb_strtoupper($extracto->conductordos->apellidos,'utf-8');
+            $c2_cedula      = number_format($extracto->conductordos->cedula, 0, '.', '.' );
+            $c2_licencia    = "";
+            $c2_vigencia    = "";
+        }
+        if (!is_null($extracto->conductortres)) {
+            $c3_nombre      = mb_strtoupper($extracto->conductortres->nombres,'utf-8');
+            $c3_apellidos   = mb_strtoupper($extracto->conductortres->apellidos,'utf-8');
+            $c3_cedula      = number_format($extracto->conductortres->cedula, 0, '.', '.' );
+            $c3_licencia    = "";
+            $c3_vigencia    = "";
+        }
+        if (!is_null($extracto->cps->responsable)) {
+            $r_nombre      = mb_strtoupper($extracto->cps->responsable->nombres,'utf-8');
+            $r_apellidos    = mb_strtoupper($extracto->cps->responsable->apellidos,'utf-8');
+            $r_cedula       = number_format($extracto->cps->responsable->cedula, 0, '.', '.' );
+            $r_telefono     = $extracto->cps->responsable->telefono;
+            $r_direccion    = substr($extracto->cps->responsable->direccion, 0, 73);
+        }
         
 
         $pdf = new PDF('P','mm',array(216,279));
 
         //$pdf->Cell(Ancho,Alto,"Texto",borde,Ln 0=derecha 1=siguiente linea 2=debajo,'L/C/R',relleno true/false);
         $pdf->AddPage();
-        $pdf->SetTitle(" | CONTRATO ".$data['nombre_mi_empresa_corto'],true);
+        $pdf->SetTitle("$codigo | EXTRACTO ".$data['nombre_mi_empresa_corto'],true);
         $pdf->SetSubject('Copia Contrato '.$data['nombre_mi_empresa_corto']);
         $pdf->SetCreator('FestCar Project');
         $pdf->SetAuthor('@xsED');
-        $pdf->ln(30);
-        $pdf->SetFont('helvetica','',15);
 
         //$pdf->SetMargins(25,35,5);
         $pdf->SetLeftMargin(15);
         $pdf->SetTopMargin(35);
-        $pdf->SetRightMargin(5);
-        
+        $pdf->SetRightMargin(5);        
         $pdf->SetTextColor(50);
-        $pdf->Cell(0,8,utf8_decode("Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo Contenido aquí, contenido aquí. Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de Lorem Ipsum va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo)."),1,1,"L");
 
-        $pdf->SetFont('helvetica','',10); 
-        $pdf->Cell(160,5,utf8_decode("2017"),0,1,"C");
-        $pdf->SetFont('helvetica','B',15);
-        $pdf->Cell(160,8,utf8_decode($codigo),0,1,"C");
+        $HC=8; // "6" PARA VISTA NORMAL "8" PARA VISTA MEMBRETEADA EXPECIAL
+
+        /**
+         * INICIO CUERPO
+         */
+        $pdf->SetFont('helvetica','',12);
+        $pdf->Cell(0,6,utf8_decode("FORMATO ÚNICO DE EXTRACTO DEL CONTRATO DEL SERVICIO PÚBLICO DE"),0,1,"C");
+        $pdf->Cell(0,6,utf8_decode("TRANSPORTE TERRESTRE AUTOMOTOR ESPECIAL"),0,1,"C");
+        $pdf->SetFont('helvetica','B',12);
+        $pdf->Cell(0,6,utf8_decode("No. 305-075-12-".$extracto->created_at->year."-".str_pad($extracto->cps->id, 4, "0", STR_PAD_LEFT)."-".str_pad($extracto->codigo, 4, "0", STR_PAD_LEFT)),0,1,"C");
+        $pdf->ln();
+        $pdf->SetFont('helvetica','',10);
+        $pdf->Cell(146,5,utf8_decode("RAZÓN SOCIAL DE LA EMPRESA DE TRANSPORTE EPECIAL"),"LT",0,"L");
+        $pdf->Cell(50,5,utf8_decode("NIT"),"TR",1,"L");
+        $pdf->Cell(146,$HC,utf8_decode("".$data['nombre_mi_empresa']),"LB",0,"L");
+        $pdf->Cell(50,$HC,utf8_decode("".$data['nit_mi_empresa']),"BR",1,"L");
+        $pdf->Cell(0,$HC,utf8_decode("CONTRATO No: CPS".str_pad($extracto->cps->id, 4, "0", STR_PAD_LEFT)),1,1,"L");        
+        $pdf->Cell(146,5,utf8_decode("CONTRATANTE"),"LT",0,"L");
+        $pdf->Cell(50,5,utf8_decode("NIT/CC"),"TR",1,"L");
+        $pdf->Cell(146,$HC,utf8_decode("".substr($data['contratante_nombre'], 0, 73)),"LB",0,"L");
+
+        $pdf->Cell(50,$HC,utf8_decode("".$data['documento_contratante']),"BR",1,"L");
+        $pdf->Cell(0,$HC,utf8_decode('OBJETO CONTRATO: '.mb_strtoupper($extracto->cps->servicio,'utf-8')),"LBR",1,"L");
+        $pdf->Cell(0,$HC,utf8_decode("ORIGEN-DESTINO, DESCRIBIENDO EL RECORRIDO:"),"LTR",1,"L");
+        $pdf->Cell(0,$HC,utf8_decode(mb_strtoupper($extracto->recorrido,'utf-8')),"LBR",1,"L");
+
+        $pdf->Cell(28,$HC,utf8_decode('CONVENIO'),"LB",0,"L");
+        $pdf->Cell(30,$HC,utf8_decode('CONSORCIO'),"B",0,"L");
+        $pdf->Cell(38,$HC,utf8_decode('UNION TEMPORAL'),"B",0,"L");
+        $pdf->Cell(100,$HC,utf8_decode('CON:'),"RB",1,"L");
+
+        /**
+         * VIGENCIA CONTRATO
+         */
+        $pdf->ln(6);
+        $pdf->SetFont('helvetica','B',10);
+        $pdf->Cell(0,6,utf8_decode("VIGENCIA DEL CONTRATO"),0,1,"C");        
+     
+        $pdf->SetFont('helvetica','',6);
+        $pdf->Cell(106,4,"","LTR",0,"C");
+        $pdf->Cell(25,4,utf8_decode("DÍA"),"TR",0,"C");
+        $pdf->Cell(40,4,utf8_decode("MES"),"LTR",0,"C");
+        $pdf->Cell(25,4,utf8_decode("AÑO"),"LTR",1,"C");
 
         $pdf->SetFont('helvetica','',10);
+        $pdf->Cell(106,5,utf8_decode('FECHA INICIAL'),"LR",0,"L");
+        $pdf->Cell(25,5,utf8_decode($this->traducir_fecha($extracto->cps->fecha_incial)->day),"R",0,"C");
+        $pdf->Cell(40,5,utf8_decode(mb_strtoupper($this->traducir_fecha($extracto->cps->fecha_incial)->format('F'),'utf-8')),"LR",0,"C");
+        $pdf->Cell(25,5,utf8_decode($this->traducir_fecha($extracto->cps->fecha_incial)->year),"LR",1,"C");
+
+         $pdf->SetFont('helvetica','',6);
+        $pdf->Cell(106,4,utf8_decode(''),"LTR",0,"C");
+        $pdf->Cell(25,4,utf8_decode("DÍA"),"TR",0,"C");
+        $pdf->Cell(40,4,utf8_decode("MES"),"LTR",0,"C");
+        $pdf->Cell(25,4,utf8_decode("AÑO"),"LTR",1,"C");
+
+        $pdf->SetFont('helvetica','',10);
+        $pdf->Cell(106,5,utf8_decode('FECHA FINAL'),"LBR",0,"L");
+        $pdf->Cell(25,5,utf8_decode("".$this->traducir_fecha($extracto->cps->fecha_final)->day),"BR",0,"C");
+        $pdf->Cell(40,5,utf8_decode("".mb_strtoupper($this->traducir_fecha($extracto->cps->fecha_final)->format('F'),'utf-8')),"LBR",0,"C");
+        $pdf->Cell(25,5,utf8_decode("".$this->traducir_fecha($extracto->cps->fecha_final)->year),"LBR",1,"C");
+
+        /**
+         * DESCRIPCCIÓN VEHÍCULO
+         */
+
+        $pdf->ln(6);
+        $pdf->SetFont('helvetica','B',10);
+        $pdf->Cell(0,6,utf8_decode("CARACTERISITCAS DEL VEHÍCULO"),0,1,"C"); 
+
+        $pdf->SetFont('helvetica','',6);
+        $pdf->Cell(50,3,utf8_decode("PLACA"),"LTR",0,"C");
+        $pdf->Cell(56,3,utf8_decode("MODELO"),"LTR",0,"C");
+        $pdf->Cell(25,3,utf8_decode("MARCA"),"TR",0,"C");
+        $pdf->Cell(65,3,utf8_decode("CLASE"),"LTR",1,"C");
+
+        $pdf->SetFont('helvetica','',10);
+        $pdf->Cell(50,6,utf8_decode("".mb_strtoupper($extracto->vehiculo->placa,'utf-8')),"LBR",0,"C");
+        $pdf->Cell(56,6,utf8_decode("".mb_strtoupper($extracto->vehiculo->modelo,'utf-8')),"LBR",0,"C");
+        $pdf->Cell(25,6,utf8_decode("".mb_strtoupper($extracto->vehiculo->marca,'utf-8')),"BR",0,"C");
+        $pdf->Cell(65,6,utf8_decode("".mb_strtoupper($extracto->vehiculo->clase,'utf-8')),"LBR",1,"C");
+
+
+        $pdf->ln(6);
+        $pdf->SetFont('helvetica','B',10);
+        $pdf->Cell(106,6,utf8_decode("NÚMERO INTERNO"),0,0,"C");
+        $pdf->Cell(90,6,utf8_decode("NÚMERO TARJETA OPERACIÓN"),0,1,"C"); 
+
+        $pdf->SetFont('helvetica','',10);
+        $pdf->Cell(106,8,utf8_decode("".$extracto->vehiculo->numero_interno),1,0,"C");
+        $pdf->Cell(90,8,"",1,1,"C"); 
+
+        /**
+         * CONDUCTOR UNO (1)
+         */
+        $pdf->SetFont('helvetica','',6);
+        $pdf->Cell(50,4,utf8_decode(""),"LTR",0,"C");
+        $pdf->Cell(56,4,utf8_decode("NOMBRES Y APELLIDOS"),"LTR",0,"C");
+        $pdf->Cell(25,4,utf8_decode("NÚMERO CÉDULA"),"TR",0,"C");
+        $pdf->Cell(40,4,utf8_decode("NÚMERO LICENCIA CONDUCCIÓN"),"LTR",0,"C");
+        $pdf->Cell(25,4,utf8_decode("VIGENCIA"),"LTR",1,"C");
+        $pdf->SetFont('helvetica','',10);
+        
+        $pdf->Cell(50,4,utf8_decode("DATOS DEL CONDUCTOR 1"),"LR",0,"C");
+        $pdf->Cell(56,4,utf8_decode("".mb_strtoupper($extracto->conductoruno->nombres,'utf-8')),"R",0,"C");
+        $pdf->Cell(25,4,utf8_decode("".number_format($extracto->conductoruno->cedula, 0, '.', '.' )),"R",0,"C");
+        $pdf->Cell(40,4,utf8_decode(""),"R",0,"C");
+        $pdf->Cell(25,4,utf8_decode(""),"R",1,"C");
+
+        $pdf->Cell(50,5,utf8_decode(""),"LBR",0,"C");
+        $pdf->Cell(56,5,utf8_decode("".mb_strtoupper($extracto->conductoruno->apellidos,'utf-8')),"BR",0,"C");
+        $pdf->Cell(25,5,utf8_decode(""),"BR",0,"C");
+        $pdf->Cell(40,5,utf8_decode(""),"BR",0,"C");
+        $pdf->Cell(25,5,utf8_decode(""),"BR",1,"C");
+
+        /**
+         * CONDUCTOR DOS (2)
+         */
+        $pdf->SetFont('helvetica','',6);
+        $pdf->Cell(50,4,utf8_decode(""),"LTR",0,"C");
+        $pdf->Cell(56,4,utf8_decode("NOMBRES Y APELLIDOS"),"LTR",0,"C");
+        $pdf->Cell(25,4,utf8_decode("NÚMERO CÉDULA"),"TR",0,"C");
+        $pdf->Cell(40,4,utf8_decode("NÚMERO LICENCIA CONDUCCIÓN"),"LTR",0,"C");
+        $pdf->Cell(25,4,utf8_decode("VIGENCIA"),"LTR",1,"C");
+        $pdf->SetFont('helvetica','',10);
+
+        $pdf->Cell(50,4,utf8_decode("DATOS DEL CONDUCTOR 2"),"LR",0,"C");
+        $pdf->Cell(56,4,utf8_decode("".$c2_nombre),"R",0,"C");
+        $pdf->Cell(25,4,utf8_decode("".$c2_cedula),"R",0,"C");
+        $pdf->Cell(40,4,utf8_decode("".$c2_licencia),"R",0,"C");
+        $pdf->Cell(25,4,utf8_decode("".$c2_vigencia),"R",1,"C");
+
+        $pdf->Cell(50,4,utf8_decode(""),"LBR",0,"C");
+        $pdf->Cell(56,4,utf8_decode("".$c2_apellidos),"BR",0,"C");
+        $pdf->Cell(25,4,utf8_decode(""),"BR",0,"C");
+        $pdf->Cell(40,4,utf8_decode(""),"BR",0,"C");
+        $pdf->Cell(25,4,utf8_decode(""),"BR",1,"C");
+
+        /**
+         * CONDUCTOR TRES (3)
+         */
+        $pdf->SetFont('helvetica','',6);
+        $pdf->Cell(50,4,utf8_decode(""),"LTR",0,"C");
+        $pdf->Cell(56,4,utf8_decode("NOMBRES Y APELLIDOS"),"LTR",0,"C");
+        $pdf->Cell(25,4,utf8_decode("NÚMERO CÉDULA"),"TR",0,"C");
+        $pdf->Cell(40,4,utf8_decode("NÚMERO LICENCIA CONDUCCIÓN"),"LTR",0,"C");
+        $pdf->Cell(25,4,utf8_decode("VIGENCIA"),"LTR",1,"C");
+        $pdf->SetFont('helvetica','',10);
+
+        $pdf->Cell(50,4,utf8_decode("DATOS DEL CONDUCTOR 3"),"LR",0,"C");
+        $pdf->Cell(56,4,utf8_decode("".$c3_nombre),"R",0,"C");
+        $pdf->Cell(25,4,utf8_decode("".$c3_cedula),"R",0,"C");
+        $pdf->Cell(40,4,utf8_decode("".$c3_licencia),"R",0,"C");
+        $pdf->Cell(25,4,utf8_decode("".$c3_vigencia),"R",1,"C");
+
+        $pdf->Cell(50,4,utf8_decode(""),"LBR",0,"C");
+        $pdf->Cell(56,4,utf8_decode("".$c3_apellidos),"BR",0,"C");
+        $pdf->Cell(25,4,utf8_decode(""),"BR",0,"C");
+        $pdf->Cell(40,4,utf8_decode(""),"BR",0,"C");
+        $pdf->Cell(25,4,utf8_decode(""),"BR",1,"C");
+
+        /**
+         * RESPONSABLE (3)
+         */
+        $pdf->SetFont('helvetica','',6);
+        $pdf->Cell(50,4,utf8_decode(""),"LTR",0,"C");
+        $pdf->Cell(56,4,utf8_decode("NOMBRES Y APELLIDOS"),"LTR",0,"C");
+        $pdf->Cell(25,4,utf8_decode("NÚMERO CÉDULA"),"TR",0,"C");
+        $pdf->Cell(40,4,utf8_decode("DIRECCIÓN"),"LTR",0,"C");
+        $pdf->Cell(25,4,utf8_decode("TELÉFONO"),"LTR",1,"C");
+        $pdf->SetFont('helvetica','',10);
+
+        $pdf->Cell(50,4,utf8_decode("RESPONSABLE DEL"),"LR",0,"C");
+        $pdf->Cell(56,4,utf8_decode("".$r_nombre),"R",0,"C");
+        $pdf->Cell(25,4,utf8_decode("".$r_cedula),"R",0,"C");
+        $pdf->Cell(40,4,utf8_decode("".$r_direccion),"R",0,"C");
+        $pdf->Cell(25,4,utf8_decode("".$r_telefono),"R",1,"C");
+
+        $pdf->Cell(50,4,utf8_decode("CONTRATANTE"),"LBR",0,"C");
+        $pdf->Cell(56,4,utf8_decode("".$r_apellidos),"BR",0,"C");
+        $pdf->Cell(25,4,utf8_decode(""),"BR",0,"C");
+        $pdf->Cell(40,4,utf8_decode(""),"BR",0,"C");
+        $pdf->Cell(25,4,utf8_decode(""),"BR",1,"C");
+
+        
+
         // Estilos para etiquetas
         
         $pdf->ln();
@@ -88,6 +337,7 @@ class PDF extends baseFpdf
     {
         // Logo
         $this->Image('pdf-templates/extractos-96pp.jpg',0,0,0);
+        $this->ln(30);
         // helvetica bold 15
 
         // Move to the right

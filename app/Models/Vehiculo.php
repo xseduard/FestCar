@@ -68,7 +68,29 @@ class Vehiculo extends Model
     public function natural(){
         return $this->belongsTo('App\Models\Natural');
     }
+    public function tarjetapropiedad(){
+        return $this->hasOne('App\Models\Tarjeta_Propiedad', 'vehiculo_id', 'id');
+    }
+    public function tarjetaoperacion(){
+        return $this->hasMany('App\Models\TarjetaOperacion', 'vehiculo_id', 'id');
+    }
+    public function soat(){
+        return $this->hasMany('App\Models\Soat', 'vehiculo_id', 'id');
+    }
+    public function tecnicomecanica(){
+        return $this->hasMany('App\Models\Tecnicomecanica', 'vehiculo_id', 'id');
+    }
+    public function polizaresponsabilidad(){
+        return $this->hasMany('App\Models\PolizaResponsabilidad', 'vehiculo_id', 'id');
+    }
+    public function revisionpreventiva(){
+        return $this->hasMany('App\Models\RevisionPreventiva', 'vehiculo_id', 'id');
+    }
     
+    /**
+     * Ascensores
+     */
+
     
 
     /**

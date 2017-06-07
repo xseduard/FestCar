@@ -41,7 +41,7 @@
 <!-- $FIELD_NAME_TITLE$ Field -->
 <!-- $FIELD_NAME_TITLE$ Selector -->
 <div class="form-group col-sm-4">
-    {!! Form::label('propiedad', '¿Propiedad de Empresarial?') !!}
+    {!! Form::label('propiedad', '¿Propiedad de Transeba?') !!}
     {!! Form::select('propiedad',[false=>'No', true=>'Si'], false, ['class' => 'form-control']) !!}
 </div>
 <!-- Observaciones Field -->

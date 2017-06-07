@@ -34,7 +34,9 @@ class UpdateTarjeta_PropiedadRequest extends Request
     public function attributes() {
         return [
         "vehiculo_id" => "Vehículo",
-        "" => "",    
+        "licencia_transito" => "licencia de transito",
+        "fecha_matricula" => "fecha de matricula",
+        "fecha_expedicion" => "fecha de expedicion",
         ];
     }
     /*

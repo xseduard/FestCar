@@ -3,7 +3,11 @@
     {!! Form::label('ContratoPrestacionServicio_id', 'Contrato') !!}
     {!! Form::select('ContratoPrestacionServicio_id', $selectores['ContratoPrestacionServicio_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
-
+<!-- Vehiculo Id Selector -->
+<div class="form-group col-sm-6">
+    {!! Form::label('vehiculo_id', 'Vehículo') !!}
+    {!! Form::select('vehiculo_id', $selectores['vehiculo_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+</div>
 <!-- Recorrido Campo de texto -->
 <div class="form-group col-sm-12">
     {!! Form::label('recorrido', 'Recorrido') !!}

@@ -35,11 +35,7 @@ class ContratoPrestacionServicio extends Model
         'usuario_aprobacion',
         'fecha_inicio',
         'fecha_final',
-        'res_cedula',
-        'res_id_ref',
-        'res_nombres',
-        'res_telefono',
-        'res_direccion'
+        'responsable_id'
     ];
     /**
      * Estos atributos son casteados en su tipo nativo.
@@ -59,11 +55,8 @@ class ContratoPrestacionServicio extends Model
         'usuario_aprobacion' => 'integer',
         'fecha_inicio' => 'string',
         'fecha_final' => 'string',
-        'res_cedula' => 'string',
-        'res_id_ref' => 'string',
-        'res_nombres' => 'string',
-        'res_telefono' => 'string',
-        'res_direccion' => 'string'
+        'responsable_id' => 'string'
+        
     ];
     /**
      * Reglas de Validacón
@@ -79,8 +72,21 @@ class ContratoPrestacionServicio extends Model
         'usuario_aprobacion' => '',
         'fecha_inicio' => 'required|date',
         'fecha_final' => 'required|date',
-        'res_cedula' => 'numeric'
+        'responsable_id' => ''
     ];
+    /**
+     * Ascensores
+     */
+
+    public function getContratistaIdAttribute()
+    {
+        if ($this->tipo_cliente == "Natural") {
+           return $this->natural_id;
+        } elseif ($this->tipo_cliente == "Juridico") {
+             return$this->juridico_id;
+        }
+       
+    }
     /**
      * Relaciones entre Modelos
      */
@@ -94,12 +100,21 @@ class ContratoPrestacionServicio extends Model
     }
     public function juridico(){
         return $this->belongsTo('App\Models\Juridico');
+    } 
+    public function origen(){
+        return $this->belongsTo('App\Models\Municipio');
+    } 
+    public function destino(){
+        return $this->belongsTo('App\Models\Municipio');
     }   
     public function usuario(){
         return $this->belongsTo('App\User');
     }
     public function usuario_aprueba(){
         return $this->belongsTo('App\User', 'usuario_aprobacion');
+    }
+    public function responsable(){
+        return $this->belongsTo('App\Models\Natural', 'responsable_id');
     }
     
 

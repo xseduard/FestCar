@@ -30,17 +30,14 @@ class CreateContratoPrestacionServiciosTable extends Migration
             $table->date('fecha_final');
             $table->string('tipo_cuenta_bancaria', 20);
             $table->string('numero_cuenta_bancaria', 20);
-            $table->string('entidad_bancaria', 50);            
+            $table->string('entidad_bancaria', 50);  
+
             $table->integer('user_id')->unsigned()->comment('usuario que crea/edita/elimina');
             $table->boolean('aprobado')->comment('Verificación de firma');
             $table->dateTime('fecha_aprobacion');
             $table->integer('usuario_aprobacion')->unsigned()->comment('Usuario que Verifica la firma');
 
-            $table->string('res_cedula', 12)->comment('Responsable');
-            $table->string('res_id_ref', 30)->comment('Responsable');
-            $table->string('res_nombres', 50)->comment('Responsable');
-            $table->string('res_telefono', 20)->comment('Responsable');
-            $table->string('res_direccion', 50)->comment('Responsable');
+            $table->integer('responsable_id')->unsigned()->comment('Responsable');
 
             $table->timestamps();
             $table->softDeletes();

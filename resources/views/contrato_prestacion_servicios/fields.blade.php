@@ -59,31 +59,14 @@
     </div>
 </div>
 <div class="clearfix"></div>
-<br>
-<div class="col-sm-12">
-    <strong class="text-muted" style="padding-bottom: 0px;"><i class="fa fa-shield" aria-hidden="true"></i> Responsable </strong>
-    <hr  style="margin-top: 0px;">
-</div>
+
 <!-- Servicio Campo de texto -->
-<div class="form-group col-sm-2">
-    {!! Form::label('res_cedula', 'Cédula') !!}
-    {!! Form::text('res_cedula', null, ['class' => 'form-control', 'placeholder'=>'Opcional...']) !!}
-</div>
-<div class="form-group col-sm-4">
-    {!! Form::label('res_id_ref', 'Lugar de Expedición') !!}
-    {!! Form::text('res_id_ref', null, ['class' => 'form-control', 'placeholder'=>'Opcional...']) !!}
-</div>
-<div class="form-group col-sm-6">
-    {!! Form::label('res_nombres', 'Nombre y Apellidos') !!}
-    {!! Form::text('res_nombres', null, ['class' => 'form-control', 'placeholder'=>'Opcional...']) !!}
-</div>
-<div class="form-group col-sm-4">
-    {!! Form::label('res_telefono', 'Teléfono') !!}
-    {!! Form::text('res_telefono', null, ['class' => 'form-control', 'placeholder'=>'Opcional...']) !!}
-</div>
-<div class="form-group col-sm-6">
-    {!! Form::label('res_direccion', 'Dirección') !!}
-    {!! Form::text('res_direccion', null, ['class' => 'form-control', 'placeholder'=>'Opcional...']) !!}
+<div class="form-group col-sm-9">
+    {!! Form::label('responsable_id', 'Responsable (Opcional)') !!}
+    <div class="input-group">
+        <div class="input-group-addon" title="En caso de ser selcccionado, este Aparecerá en los extractos del contrato"><i class="fa fa-shield" aria-hidden="true" ></i></div>
+        {!! Form::select('responsable_id', $selectores['natural_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+    </div>
 </div>
 
 

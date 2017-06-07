@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            CContrato Prestación de Servicio <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Editar
+            Contrato Prestación de Servicio <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Editar
         </h1>
    </section>
    <div class="content">
