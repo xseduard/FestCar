@@ -30,19 +30,19 @@
 
 <!-- Fecha Expedicion campo de fecha -->
 <div class="form-group col-sm-4">
-    {!! Form::label('fecha_expedicion', 'Fecha de Expedicion') !!}
+    {!! Form::label('fecha_vigencia_inicio', 'Fecha de Expedicion') !!}
     <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-    	{!! Form::text('fecha_expedicion', null, ['class' => 'form-control datepicker', 'placeholder' => 'AAAA-MM-DD']) !!}
+    	{!! Form::text('fecha_vigencia_inicio', null, ['class' => 'form-control datepicker', 'placeholder' => 'AAAA-MM-DD']) !!}
     </div>
 </div>
 
 <!-- Fecha Vencimiento campo de fecha -->
 <div class="form-group col-sm-4">
-    {!! Form::label('fecha_vencimiento', 'Fecha de Vencimiento') !!}
+    {!! Form::label('fecha_vigencia_final', 'Fecha de Vencimiento') !!}
     <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-    	{!! Form::text('fecha_vencimiento', null, ['class' => 'form-control datepicker', 'placeholder' => 'AAAA-MM-DD']) !!}
+    	{!! Form::text('fecha_vigencia_final', null, ['class' => 'form-control datepicker', 'placeholder' => 'AAAA-MM-DD']) !!}
     </div>
 </div>
 

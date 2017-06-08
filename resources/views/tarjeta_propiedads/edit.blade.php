@@ -39,6 +39,8 @@
             format: 'yyyy-mm-dd',        
             language: 'es',
         });
+
+        $("#vehiculo_id").prop('disabled', true);
     });
  </script>
 @endsection

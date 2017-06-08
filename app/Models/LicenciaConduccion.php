@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
+use Jenssegers\Date\Date;
 
 /**
  * Class LicenciaConduccion
@@ -54,16 +56,16 @@ class LicenciaConduccion extends Model
      * Reglas de Validacón
      */
     public static $rules = [
-        'natural_id' => 'required',
+        'natural_id' => 'required|unique:licencia_conduccions,natural_id',
         'fecha_expedicion' => 'required|date',
-        'a1' => 'date',
-        'a2' => 'date',
-        'b1' => 'date',
-        'b2' => 'date',
-        'b3' => 'date',
-        'c1' => 'date',
-        'c2' => 'date',
-        'c3' => 'date',        
+        'a1' => '',
+        'a2' => '',
+        'b1' => '',
+        'b2' => '',
+        'b3' => '',
+        'c1' => '',
+        'c2' => '',
+        'c3' => '',        
     ];
     /**
      * Relaciones entre Modelos
@@ -75,6 +77,39 @@ class LicenciaConduccion extends Model
     */
     public function natural(){
         return $this->belongsTo('App\Models\Natural');
+    }
+    /**
+     * Ascensor C2 y C3
+     */
+        public function getFechaExpedicionAttribute($fecha_expedicion)
+    {
+        return new Date($fecha_expedicion);
+    }
+        public function getVigenteAttribute()
+    {       
+
+        if ($this->c2 >=  Carbon::now() || $this->c3 >=  Carbon::now()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+        public function getFechaVigenciaAttribute()
+    {      
+
+         if ($this->c3 >= Carbon::now()) {
+            return new Date($this->c3);               
+            } elseif ($this->c2 >= Carbon::now()) {
+                return new Date($this->c2); 
+            } else {
+                if ($this->c3 > $this->c2) {
+                     return new Date($this->c3);
+                } else {
+                    return new Date($this->c2);
+                }
+            }
+        
     }
 
     /**

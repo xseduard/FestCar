@@ -5,6 +5,8 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Jenssegers\Date\Date;
+
 /**
  * Class Tarjeta_Propiedad
  * @package App\Models
@@ -77,15 +79,26 @@ class Tarjeta_Propiedad extends Model
      * Reglas de Validacón
      */
     public static $rules = [
-        'vehiculo_id' => 'required',
+        'vehiculo_id' => 'required|unique:tarjeta_propiedads,vehiculo_id',
         'licencia_transito' => 'required',
-        'marca' => 'required',
+        'marca' => '',
         'potencia_hp' => '',
         'puertas' => 'numeric',
         'organismo_transito' => '',
         "fecha_matricula" => "required",
         "fecha_expedicion" => "required",
     ];
+
+    public function getFechaExpedicionAttribute($fecha_expedicion)
+    {
+        $result = new Date($fecha_expedicion);        
+        return $result;        
+    }
+    public function getFechaMatriculaAttribute($fecha_matricula)    {              
+        return new Date($fecha_matricula); 
+    }
+
+
     /**
      * Relaciones entre Modelos
      */

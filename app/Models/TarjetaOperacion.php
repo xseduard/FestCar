@@ -5,6 +5,9 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\DatesTranslatorDocumentosVehiculo;
+use App\Traits\VigenteTrait;
+
+
 
 /**
  * Class TarjetaOperacion
@@ -13,7 +16,7 @@ use App\Traits\DatesTranslatorDocumentosVehiculo;
  */
 class TarjetaOperacion extends Model
 {
-    use DatesTranslatorDocumentosVehiculo, SoftDeletes;
+    use DatesTranslatorDocumentosVehiculo, VigenteTrait, SoftDeletes;
 
     public $table = 'tarjeta_operacions';
     
@@ -64,6 +67,11 @@ class TarjetaOperacion extends Model
         'fecha_vigencia_inicio' => 'required|date',
         'fecha_vigencia_final' => 'required|date'
     ];
+    /**
+     * Ascensores
+     */
+
+
     /**
      * Relaciones entre Modelos
      */

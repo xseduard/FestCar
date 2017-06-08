@@ -13,11 +13,11 @@
         <tr>
             <td><span class="label label-default">{!! $soat->vehiculo->placa !!}</span></td>
             <td>{!! $soat->poliza !!}</td>
-            <td>{!! $soat->fecha_expedicion !!}</td>
-            <td>{!! $soat->fecha_vigencia_inicio !!}</td>
-            <td>{!! $soat->fecha_vigencia_final !!}</td>
+            <td>{!! $soat->fecha_expedicion->format('d-M-Y') !!}</td>
+            <td>{!! $soat->fecha_vigencia_inicio->format('d-M-Y') !!}</td>
+            <td>{!! $soat->fecha_vigencia_final->format('d-M-Y') !!}</td>
             <td>
-                @if (($fecha_actual >= $soat->fecha_vigencia_inicio) and ($fecha_actual <= $soat->fecha_vigencia_final))
+                @if ($soat->vigente)
                     <span class="label label-success">Vigente</span>
                 @else
                     <span class="label label-warning">No Vigente</span>

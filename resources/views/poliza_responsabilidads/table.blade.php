@@ -12,10 +12,10 @@
         <tr>
             <td><span class="label label-default">{!! $polizaResponsabilidad->vehiculo->placa !!}</span></td>
             <td>{!! $polizaResponsabilidad->codigo !!}</td>
-            <td>{!! $polizaResponsabilidad->fecha_vigencia_inicio !!}</td>
-            <td>{!! $polizaResponsabilidad->fecha_vigencia_final !!}</td>
+            <td>{!! $polizaResponsabilidad->fecha_vigencia_inicio->format('d-M-Y') !!}</td>
+            <td>{!! $polizaResponsabilidad->fecha_vigencia_final->format('d-M-Y') !!}</td>
            <td>
-                @if (($fecha_actual >= $polizaResponsabilidad->fecha_vigencia_inicio) and ($fecha_actual <= $polizaResponsabilidad->fecha_vigencia_final))
+                @if ($polizaResponsabilidad->vigente)
                     <span class="label label-success">Vigente</span>
                 @else
                     <span class="label label-warning">No Vigente</span>

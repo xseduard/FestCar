@@ -4,8 +4,10 @@
         <th>Nombres</th>
         <th>Apellidos</th>
         <th>Fecha Expedicion</th>
+        <th>Fecha Vigencia</th>
+        <th>Estado</th>
         
-        <th colspan="3">Acciones</th>
+        <th width="70px">Acciones</th>
     </thead>
     <tbody>
     @foreach($licenciaConduccions as $licenciaConduccion)
@@ -13,7 +15,16 @@
             <td>{!! $licenciaConduccion->natural->cedula !!}</td>
             <td>{!! $licenciaConduccion->natural->nombres !!}</td>
             <td>{!! $licenciaConduccion->natural->apellidos !!}</td>
-            <td>{!! $licenciaConduccion->fecha_expedicion !!}</td>
+            <td>{!! $licenciaConduccion->fecha_expedicion->format('d-M-Y') !!}</td>
+            <td>{!! $licenciaConduccion->fecha_vigencia->format('d-M-Y') !!}</td>
+            <td>
+                @if ($licenciaConduccion->vigente)
+                    <span class="label label-success">Vigente</span>
+                @else
+                    <span class="label label-warning">No Vigente</span>
+                @endif
+            </td>
+
            
             <td>
                 {!! Form::open(['route' => ['licenciaConduccions.destroy', $licenciaConduccion->id], 'method' => 'delete']) !!}

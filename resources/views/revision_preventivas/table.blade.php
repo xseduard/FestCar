@@ -4,16 +4,16 @@
         <th>Fecha de Inicio Vigencia</th>
         <th>Fecha de Final Vigencia</th>
         <th>Estado</th>
-        <th colspan="3">Acciones</th>
+        <th width="70px">Acciones</th>
     </thead>
     <tbody>
     @foreach($revisionPreventivas as $revisionPreventiva)
         <tr>
             <td><span class="label label-default">{!! $revisionPreventiva->vehiculo->placa !!}</span></td>
-            <td>{!! $revisionPreventiva->fecha_vigencia_inicio !!}</td>
-            <td>{!! $revisionPreventiva->fecha_vigencia_final !!}</td>
+            <td>{!! $revisionPreventiva->fecha_vigencia_inicio->format('d-M-Y') !!}</td>
+            <td>{!! $revisionPreventiva->fecha_vigencia_final->format('d-M-Y') !!}</td>
             <td>
-                @if (($fecha_actual >= $revisionPreventiva->fecha_vigencia_inicio) and ($fecha_actual <= $revisionPreventiva->fecha_vigencia_final))
+                @if ($revisionPreventiva->vigente)
                     <span class="label label-success">Vigente</span>
                 @else
                     <span class="label label-warning">No Vigente</span>

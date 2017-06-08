@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use App\Traits\DatesTranslatorDocumentosVehiculo;
+use App\Traits\VigenteTrait;
 /**
  * Class RevisionPreventiva
  * @package App\Models
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class RevisionPreventiva extends Model
 {
-    use SoftDeletes;
+    use DatesTranslatorDocumentosVehiculo, VigenteTrait, SoftDeletes;
 
     public $table = 'revision_preventivas';
     

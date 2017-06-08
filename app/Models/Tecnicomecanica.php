@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\DatesTranslatorDocumentosVehiculo;
+use App\Traits\VigenteTrait;
 
 /**
  * Class Tecnicomecanica
@@ -12,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Tecnicomecanica extends Model
 {
-    use SoftDeletes;
+    use DatesTranslatorDocumentosVehiculo, VigenteTrait, SoftDeletes;
 
     public $table = 'tecnicomecanicas';
     
@@ -26,8 +28,8 @@ class Tecnicomecanica extends Model
         'cda_nombre',
         'cda_nit',
         'consecutivo_runt',
-        'fecha_expedicion',
-        'fecha_vencimiento',
+        'fecha_vigencia_inicio',
+        'fecha_vigencia_final',
         'user_id'
     ];
     /**
@@ -39,8 +41,8 @@ class Tecnicomecanica extends Model
         'cda_nombre' => 'string',
         'cda_nit' => 'string',
         'consecutivo_runt' => 'string',
-        'fecha_expedicion' => 'string',
-        'fecha_vencimiento' => 'string',
+        'fecha_vigencia_inicio' => 'string',
+        'fecha_vigencia_final' => 'string',
         'user_id' => 'integer'
     ];
     /**
@@ -51,8 +53,8 @@ class Tecnicomecanica extends Model
         'codigo_control' => 'numeric',
         'cda_nombre' => '',
         'cda_nit' => '',
-        'fecha_expedicion' => 'required|date',
-        'fecha_vencimiento' => 'required|date'
+        'fecha_vigencia_inicio' => 'required|date',
+        'fecha_vigencia_final' => 'required|date'
     ];
     /**
      * Relaciones entre Modelos

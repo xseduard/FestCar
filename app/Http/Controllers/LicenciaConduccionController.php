@@ -80,7 +80,7 @@ class LicenciaConduccionController extends AppBaseController
 
         $licenciaConduccion = $this->licenciaConduccionRepository->create($input);
 
-        Flash::success('Licencia de Conducción registrado correctamente.');
+        Flash::success('Licencia de Conducción registrada correctamente.');
 
         return redirect(route('licenciaConduccions.index'));
     }
@@ -97,7 +97,7 @@ class LicenciaConduccionController extends AppBaseController
         $licenciaConduccion = $this->licenciaConduccionRepository->findWithoutFail($id);
 
         if (empty($licenciaConduccion)) {
-            Flash::error('Licencia de Conducción No se encuentra registrado.');
+            Flash::error('Licencia de Conducción No se encuentra registrada.');
 
             return redirect(route('licenciaConduccions.index'));
         }
@@ -117,7 +117,7 @@ class LicenciaConduccionController extends AppBaseController
         $licenciaConduccion = $this->licenciaConduccionRepository->findWithoutFail($id);
 
         if (empty($licenciaConduccion)) {
-            Flash::error('Licencia de Conducción No se encuentra registrado.');
+            Flash::error('Licencia de Conducción No se encuentra registrada.');
 
             return redirect(route('licenciaConduccions.index'));
         }
@@ -140,7 +140,7 @@ class LicenciaConduccionController extends AppBaseController
         $licenciaConduccion = $this->licenciaConduccionRepository->findWithoutFail($id);
 
         if (empty($licenciaConduccion)) {
-            Flash::error('Licencia de Conducción No se encuentra registrado.');
+            Flash::error('Licencia de Conducción No se encuentra registrada.');
 
             return redirect(route('licenciaConduccions.index'));
         }
@@ -149,7 +149,7 @@ class LicenciaConduccionController extends AppBaseController
 
         $licenciaConduccion = $this->licenciaConduccionRepository->update($input, $id);
 
-        Flash::success('Licencia de Conducción actualizado correctamente.');
+        Flash::success('Licencia de Conducción actualizada correctamente.');
 
         return redirect(route('licenciaConduccions.index'));
     }
@@ -166,14 +166,14 @@ class LicenciaConduccionController extends AppBaseController
         $licenciaConduccion = $this->licenciaConduccionRepository->findWithoutFail($id);
 
         if (empty($licenciaConduccion)) {
-            Flash::error('Licencia de Conducción No se encuentra registrado.');
+            Flash::error('Licencia de Conducción No se encuentra registrada.');
 
             return redirect(route('licenciaConduccions.index'));
         }
 
         $this->licenciaConduccionRepository->delete($id);
 
-        Flash::success('Licencia de Conducción eliminado correctamente.');
+        Flash::success('Licencia de Conducción eliminada correctamente.');
 
         return redirect(route('licenciaConduccions.index'));
     }

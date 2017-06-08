@@ -43,13 +43,22 @@ class ExtractoRepository extends BaseRepository
         ->with('vehiculo.tarjetaoperacion')
         ->with('cps.origen.departamento')
         ->with('cps.destino.departamento')
+        ->with('tarjetaoperacion')
         ->with('conductoruno')
         ->with('conductordos')
         ->with('conductortres')
         ->where('id',$id)
         ->first();
 
+        //dd($extracto->vehiculo->tarjetaoperacion[0]->vigente);
         //dd($extracto->vehiculo->tarjetaoperacion);
+        /*
+        foreach ($modelo as $key => $value) {
+            if ($value->vigente) {
+                return $value;
+            }                
+        }
+        */
         //dd($extracto->vehiculo);
         $tar_operacion_vigente = $extracto->vehiculo->tarjetaoperacion;
 
@@ -100,14 +109,14 @@ class ExtractoRepository extends BaseRepository
             $c2_nombre      = mb_strtoupper($extracto->conductordos->nombres,'utf-8');
             $c2_apellidos   = mb_strtoupper($extracto->conductordos->apellidos,'utf-8');
             $c2_cedula      = number_format($extracto->conductordos->cedula, 0, '.', '.' );
-            $c2_licencia    = "";
+            $c2_licencia    = $extracto->conductordos->cedula;
             $c2_vigencia    = "";
         }
         if (!is_null($extracto->conductortres)) {
             $c3_nombre      = mb_strtoupper($extracto->conductortres->nombres,'utf-8');
             $c3_apellidos   = mb_strtoupper($extracto->conductortres->apellidos,'utf-8');
             $c3_cedula      = number_format($extracto->conductortres->cedula, 0, '.', '.' );
-            $c3_licencia    = "";
+            $c3_licencia    = $extracto->conductortres->cedula;
             $c3_vigencia    = "";
         }
         if (!is_null($extracto->cps->responsable)) {
@@ -220,11 +229,11 @@ class ExtractoRepository extends BaseRepository
         $pdf->ln(6);
         $pdf->SetFont('helvetica','B',10);
         $pdf->Cell(106,6,utf8_decode("NÚMERO INTERNO"),0,0,"C");
-        $pdf->Cell(90,6,utf8_decode("NÚMERO TARJETA OPERACIÓN"),0,1,"C"); 
+        $pdf->Cell(90,6,utf8_decode("NÚMERO TARJETA DE OPERACIÓN"),0,1,"C"); 
 
         $pdf->SetFont('helvetica','',10);
         $pdf->Cell(106,8,utf8_decode("".$extracto->vehiculo->numero_interno),1,0,"C");
-        $pdf->Cell(90,8,"",1,1,"C"); 
+        $pdf->Cell(90,8,$extracto->tarjetaoperacion->codigo,1,1,"C"); 
 
         /**
          * CONDUCTOR UNO (1)
@@ -240,7 +249,7 @@ class ExtractoRepository extends BaseRepository
         $pdf->Cell(50,4,utf8_decode("DATOS DEL CONDUCTOR 1"),"LR",0,"C");
         $pdf->Cell(56,4,utf8_decode("".mb_strtoupper($extracto->conductoruno->nombres,'utf-8')),"R",0,"C");
         $pdf->Cell(25,4,utf8_decode("".number_format($extracto->conductoruno->cedula, 0, '.', '.' )),"R",0,"C");
-        $pdf->Cell(40,4,utf8_decode(""),"R",0,"C");
+        $pdf->Cell(40,4,$extracto->conductoruno->cedula,"R",0,"C");
         $pdf->Cell(25,4,utf8_decode(""),"R",1,"C");
 
         $pdf->Cell(50,5,utf8_decode(""),"LBR",0,"C");

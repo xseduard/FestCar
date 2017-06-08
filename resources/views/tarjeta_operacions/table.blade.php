@@ -6,18 +6,18 @@
         <th>Fecha de Inicio Vigencia</th>
         <th>Fecha de Final Vigencia</th>
          <th>Estado</th>
-        <th colspan="3">Acciones</th>
+        <th width="70px">Acciones</th>
     </thead>
     <tbody>
     @foreach($tarjetaOperacions as $tarjetaOperacion)
         <tr>
             <td><span class="label label-default">{!! $tarjetaOperacion->vehiculo->placa !!}</span></td>
             <td>{!! $tarjetaOperacion->codigo !!}</td>            
-            <td>{!! $tarjetaOperacion->fecha_expedicion->format('d/F/Y') !!}</td>
-            <td>{!! $tarjetaOperacion->fecha_vigencia_inicio->format('d/F/Y') !!}</td>
-            <td>{!! $tarjetaOperacion->fecha_vigencia_final->format('d/F/Y') !!}</td>
+            <td>{!! $tarjetaOperacion->fecha_expedicion->format('d-M-Y') !!}</td>
+            <td>{!! $tarjetaOperacion->fecha_vigencia_inicio->format('d-M-Y') !!}</td>
+            <td>{!! $tarjetaOperacion->fecha_vigencia_final->format('d-M-Y') !!}</td>
             <td>
-                @if (($fecha_actual >= $tarjetaOperacion->fecha_vigencia_inicio) and ($fecha_actual <= $tarjetaOperacion->fecha_vigencia_final))
+                @if ($tarjetaOperacion->vigente)
                     <span class="label label-success">Vigente</span>
                 @else
                     <span class="label label-warning">No Vigente</span>

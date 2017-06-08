@@ -4,17 +4,18 @@
         <th>Consecutivo Runt</th>
         <th>Fecha de Expedición</th>
         <th>Fecha de Vencimiento</th>
+        <th>Estado</th>
         
-        <th colspan="3">Acciones</th>
+        <th width="90px">Acciones</th>
     </thead>
     <tbody>
     @foreach($tecnicomecanicas as $tecnicomecanica)
         <tr>
-            <td><span class="label label-default">{!! $tecnicomecanica->vehiculo->placa !!}</span></td>            
-            <td>{!! $tecnicomecanica->fecha_expedicion !!}</td>
-            <td>{!! $tecnicomecanica->fecha_vencimiento !!}</td>
+            <td><span class="label label-default">{!! $tecnicomecanica->vehiculo->placa !!}</span></td> <td>{!! $tecnicomecanica->consecutivo_runt !!}</td>           
+            <td>{!! $tecnicomecanica->fecha_vigencia_inicio->format('d-M-Y') !!}</td>
+            <td>{!! $tecnicomecanica->fecha_vigencia_final->format('d-M-Y') !!}</td>
             <td>
-                @if (($fecha_actual >= $tecnicomecanica->fecha_expedicion) and ($fecha_actual <= $tecnicomecanica->fecha_vencimiento))
+                @if ($tecnicomecanica->vigente)
                     <span class="label label-success">Vigente</span>
                 @else
                     <span class="label label-warning">No Vigente</span>

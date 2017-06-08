@@ -3,16 +3,22 @@
         <th>Placa Vehículo</th>
         <th>Licencia Transito</th>
         <th>Marca</th>
-        <th>Linea</th>        
-        <th colspan="3">Acciones</th>
+        <th>Linea</th>
+        <th>Color</th>
+        <th>Fecha matricula</th>        
+        <th>Fecha expedición</th>
+        <th width="90px">Acciones</th>
     </thead>
     <tbody>
     @foreach($tarjetaPropiedads as $tarjetaPropiedad)
         <tr>
             <td>{!! $tarjetaPropiedad->vehiculo->placa !!}</td>
             <td>{!! $tarjetaPropiedad->licencia_transito !!}</td>
-            <td>{!! $tarjetaPropiedad->marca !!}</td>
-            <td>{!! $tarjetaPropiedad->linea !!}</td>
+            <td>{!! strtoupper($tarjetaPropiedad->vehiculo->marca) !!}</td>
+            <td>{!! strtoupper($tarjetaPropiedad->linea) !!}</td>
+            <td>{!! $tarjetaPropiedad->color !!}</td>
+            <td>{!! $tarjetaPropiedad->fecha_matricula->format('d-M-Y') !!}</td>
+            <td>{!! $tarjetaPropiedad->fecha_expedicion->format('d-M-Y') !!}</td>
             <td>
                 {!! Form::open(['route' => ['tarjetaPropiedads.destroy', $tarjetaPropiedad->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>

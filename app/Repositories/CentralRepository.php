@@ -12,6 +12,8 @@ use App\Models\ContratoPrestacionServicio;
 use App\Models\LicenciaConduccion;
 use App\Models\Tarjeta_Propiedad;
 use InfyOm\Generator\Common\BaseRepository;
+use Carbon\Carbon;
+use Flash;
 
 class CentralRepository extends BaseRepository
 {
@@ -19,6 +21,128 @@ class CentralRepository extends BaseRepository
     {
         return Departamento::class;
     }
+    /**
+     * Validador de vehículos
+     */
+    public function validar_conductores_duplicados($input) {
+        // VALIDACIONES DE CONDUCTORES
+
+        if (!empty($input['conductor_dos']) and $input['conductor_uno'] == $input['conductor_dos']) {
+           Flash::error('Conductor UNO y DOS <b>NO</b> pueden ser iguales.');
+           return true;
+        } 
+        if (!empty($input['conductor_tres']) and $input['conductor_uno'] == $input['conductor_tres']) {
+           Flash::error('Conductor UNO y TRES <b>NO</b> pueden ser iguales.');
+           return true;
+        }
+        if (!empty($input['conductor_dos']) 
+            and !empty($input['conductor_tres']) 
+                and $input['conductor_dos'] == $input['conductor_tres']) {
+           Flash::error('Conductor UNO y DOS <b>NO</b> pueden ser iguales.');
+           return true;
+        }
+        // FIN VALIDACIONES
+    }
+    public function validar_documentos_vehiculo($id){
+        $car =  Vehiculo::with('tarjetapropiedad')
+        ->with('tarjetaoperacion')
+        ->with('soat')
+        ->with('tecnicomecanica')
+        ->with('polizaresponsabilidad')       
+        ->where('id',$id)
+        ->first();
+
+        $resultado['vehiculo_id'] = Vehiculo::where('id',$id)->first();
+        $resultado['error'] = false;
+        $msg = "";
+
+        if (is_null($car->tarjetapropiedad)) {
+            $resultado['tarjetapropiedad'] = false;
+            $resultado['error'] =  true;
+            $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Tarjeta de propiedad:</b> No se encuentra registrada, <a href='/tarjetaPropiedads/create' target='_blank'>Registrar aquí</a></p>";
+        } else {
+            $resultado['tarjetapropiedad'] = $car->tarjetapropiedad;
+            if($car->tarjetapropiedad->fecha_matricula->diffInDays(Carbon::now()) <= 730) {
+                $resultado['tecnicomecanica'] = 'Vehiculo nuevo';
+                $resultado['error'] =  false; 
+            } else {
+                if ($car->tecnicomecanica->isEmpty()) {
+                    $resultado['tecnicomecanica'] = false;
+                        $resultado['error'] =  true;                        
+                        $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Técnicomecánica</b> No se encuentra registrada o esta vencida, <a href='/tecnicomecanicas/create' target='_blank'>Registrar aquí</a></p>";
+                    } else {
+                        foreach ($car->tecnicomecanica as $key => $value) {
+                            if ($value->vigente) {
+                                $resultado['tecnicomecanica'] = $value;
+                                break;
+                            } 
+                            $resultado['tecnicomecanica'] = false;
+                            $resultado['error'] =  true;
+                            $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Técnicomecánica</b> No se encuentra registrada o esta vencida, <a href='/tecnicomecanicas/create' target='_blank'>Registrar aquí</a></p>";                      
+                    }
+                }
+            }
+            
+        }
+        if ($car->tarjetaoperacion->isEmpty()) {
+            $resultado['tarjetaoperacion'] = false;
+            $resultado['error'] =  true; 
+            $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Tarjeta de Operación:</b> No se encuentra registrada o esta vencida, <a href='/tarjetaOperacions/create' target='_blank'>Registrar aquí</a></p>";  
+            } else {
+                foreach ($car->tarjetaoperacion as $key => $value) {
+                    if ($value->vigente) {
+                        $resultado['tarjetaoperacion'] = $value;
+                        break;
+                    }
+                    $resultado['tarjetaoperacion'] = false;
+                    $resultado['error'] =  true; 
+                    $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Tarjeta de Operación:</b> No se encuentra registrada o esta vencida, <a href='/tarjetaOperacions/create' target='_blank'>Registrar aquí</a></p>";        
+
+                }
+        }
+        if ($car->soat->isEmpty()) {
+            $resultado['soat'] = false;
+            $resultado['error'] =  true; 
+            $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Soat:</b> No se encuentra registrado o esta vencido, <a href='/soats/create' target='_blank'>Registrar aquí</a> </p>";
+         } else { 
+           foreach ($car->soat as $key => $value) {
+                if ($value->vigente) {
+                    $resultado['soat'] = $value;
+                    break;
+                } 
+                $resultado['soat'] = false;
+                $resultado['error'] =  true; 
+                $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Soat:</b> No se encuentra registrado o esta vencido, <a href='/soats/create' target='_blank'>Registrar aquí</a> </p>";
+                           
+            }
+        }
+        if ($car->polizaresponsabilidad->isEmpty()) {
+            $resultado['polizaresponsabilidad'] = false; 
+            $resultado['error'] =  true;
+            $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b> Poliza de responsabilidad (RCC RCE):</b> No se encuentra registrada o esta vencida, <a href='/polizaResponsabilidads/create' target='_blank'>Registrar aquí</a></p>";
+         } else {       
+            foreach ($car->polizaresponsabilidad as $key => $value) {
+                if ($value->vigente) {
+                    $resultado['polizaresponsabilidad'] = $value;
+                    break;
+                } 
+                $resultado['polizaresponsabilidad'] = false; 
+                $resultado['error'] =  true;
+                $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b> Poliza de responsabilidad (RCC RCE):</b> No se encuentra registrada o esta vencida, <a href='/polizaResponsabilidads/create' target='_blank'>Registrar aquí</a></p>";                            
+            }
+        } 
+        if ($resultado['error']) {
+            $resultado['mensaje'] = "<p>El vehículo de placas <span class='label label-default'>".$car->placa."</span> NO cumple con los siguientes requisitos</p>".$msg;                
+            }
+
+        return $resultado;
+
+    }
+            
+        
+
+        
+    
     /**
      * Generador de selects
      */
@@ -147,4 +271,8 @@ class CentralRepository extends BaseRepository
             }
         return \Response::json($formateado);
     }
+
+
+
+
 }

@@ -39,6 +39,7 @@
             format: 'yyyy-mm-dd',        
             language: 'es',
         });
+        $("#natural_id").prop('disabled', true);
     });
  </script>
 @endsection

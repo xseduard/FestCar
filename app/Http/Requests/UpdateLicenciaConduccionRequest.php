@@ -24,8 +24,10 @@ class UpdateLicenciaConduccionRequest extends Request
      * @return array
      */
     public function rules()
-    {
-        return LicenciaConduccion::$rules;
+    {    
+        $array = LicenciaConduccion::$rules;
+        $array['natural_id'] = "";
+         return $array;
     }
 
     /**

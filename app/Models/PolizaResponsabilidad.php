@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\DatesTranslatorDocumentosVehiculo;
+use App\Traits\VigenteTrait;
 
 /**
  * Class PolizaResponsabilidad
@@ -12,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class PolizaResponsabilidad extends Model
 {
-    use SoftDeletes;
+    use DatesTranslatorDocumentosVehiculo, VigenteTrait, SoftDeletes;
 
     public $table = 'poliza_responsabilidads';
     

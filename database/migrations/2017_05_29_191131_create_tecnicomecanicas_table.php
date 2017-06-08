@@ -23,8 +23,8 @@ class CreateTecnicomecanicasTable extends Migration
             $table->string('cda_nombre', 100);
             $table->string('cda_nit', 15);
             $table->string('consecutivo_runt', 15);
-            $table->date('fecha_expedicion');
-            $table->date('fecha_vencimiento');            
+            $table->date('fecha_vigencia_inicio');
+            $table->date('fecha_vigencia_final');            
             $table->integer('user_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();

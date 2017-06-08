@@ -83,6 +83,25 @@ class ExtractoController extends AppBaseController
         $input = $request->all();
         $input['user_id'] = Auth::id();
 
+        $validar_documentos_vehiculo = $this->centralRepository->validar_documentos_vehiculo($input['vehiculo_id']);
+
+        if ($validar_documentos_vehiculo['error']) {  
+            Flash::error($validar_documentos_vehiculo['mensaje']);           
+             return Redirect::back()->withInput(Input::all());
+        }
+
+        if($this->centralRepository->validar_conductores_duplicados($input)) {
+            return Redirect::back()->withInput(Input::all());
+        }
+        
+        $input['tarjetaoperacion_id']       = $validar_documentos_vehiculo['tarjetaoperacion']->id;
+        $input['soat_id']                   = $validar_documentos_vehiculo['soat']->id;
+        $input['polizaresponsabilidad_id']  = $validar_documentos_vehiculo['polizaresponsabilidad']->id;
+
+        if ($validar_documentos_vehiculo['tecnicomecanica'] != 'Vehiculo nuevo') {                 
+            $input['tecnicomecanica_id']    = $validar_documentos_vehiculo['tecnicomecanica']->id;
+        }
+        //$input['contratovinculacion_id']    = '';
 
         $extracto = $this->extractoRepository->create($input);
 
@@ -128,6 +147,8 @@ class ExtractoController extends AppBaseController
             return redirect(route('extractos.index'));
         }
 
+        //validar datos
+
         $selectores = $this->selectoresComunes();
 
         return view('extractos.edit')->with(['extracto' => $extracto, 'selectores' => $selectores]);
@@ -150,25 +171,29 @@ class ExtractoController extends AppBaseController
 
             return redirect(route('extractos.index'));
         }
+
+
         $input = $request->all();
         $input['user_id'] = Auth::id();
 
-        // VALIDACIONES DE CONDUCTORES
-        if (!empty($input['conductor_dos']) and $input['conductor_uno'] == $input['conductor_dos']) {
-           Flash::error('Conductor UNO y DOS NO pueden ser iguales.');
-           return Redirect::back()->withInput(Input::all());
+        $validar_documentos_vehiculo = $this->centralRepository->validar_documentos_vehiculo($input['vehiculo_id']);
+
+        if ($validar_documentos_vehiculo['error']) {  
+            Flash::error($validar_documentos_vehiculo['mensaje']);           
+             return Redirect::back()->withInput(Input::all());
         }
-        if (!empty($input['conductor_tres']) and $input['conductor_uno'] == $input['conductor_tres']) {
-           Flash::error('Conductor UNO y TRES NO pueden ser iguales.');
-           return Redirect::back()->withInput(Input::all());
+
+        if($this->centralRepository->validar_conductores_duplicados($input)) {
+            return Redirect::back()->withInput(Input::all());
         }
-        if (!empty($input['conductor_dos']) 
-            and !empty($input['conductor_tres']) 
-                and $input['conductor_dos'] == $input['conductor_tres']) {
-           Flash::error('Conductor UNO y DOS NO pueden ser iguales.');
-           return Redirect::back()->withInput(Input::all());
+        
+        $input['tarjetaoperacion_id']       = $validar_documentos_vehiculo['tarjetaoperacion']->id;
+        $input['soat_id']                   = $validar_documentos_vehiculo['soat']->id;
+        $input['polizaresponsabilidad_id']  = $validar_documentos_vehiculo['polizaresponsabilidad']->id;
+
+        if ($validar_documentos_vehiculo['tecnicomecanica'] != 'Vehiculo nuevo') {                 
+            $input['tecnicomecanica_id']    = $validar_documentos_vehiculo['tecnicomecanica']->id;
         }
-        // FIN VALIDACIONES
 
         //dd($input);
 

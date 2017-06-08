@@ -25,7 +25,10 @@ class UpdateTarjeta_PropiedadRequest extends Request
      */
     public function rules()
     {
-        return Tarjeta_Propiedad::$rules;
+        $array = Tarjeta_Propiedad::$rules;
+        $array['vehiculo_id'] = "";
+        return $array;
+
     }
 
     /**

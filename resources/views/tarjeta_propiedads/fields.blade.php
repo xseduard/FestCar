@@ -11,11 +11,12 @@
 </div>
 
 <!-- Marca Campo de texto -->
+<!--
 <div class="form-group col-sm-2">
     {!! Form::label('marca', 'Marca') !!}
     {!! Form::text('marca', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
 </div>
-
+->
 <!-- Linea Campo de texto -->
 <div class="form-group col-sm-4">
     {!! Form::label('linea', 'Linea') !!}
@@ -41,11 +42,12 @@
 </div>
 
 <!-- Clase Vehiculo Campo de texto -->
+<!--
 <div class="form-group col-sm-2">
     {!! Form::label('clase_vehiculo', 'Clase Vehiculo') !!}
     {!! Form::text('clase_vehiculo', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
 </div>
-
+-->
 <!-- Tipo Carroceria Campo de texto -->
 <div class="form-group col-sm-2">
     {!! Form::label('tipo_carroceria', 'Tipo Carroceria') !!}
@@ -53,7 +55,7 @@
 </div>
 
 <!-- Combustible Campo de texto -->
-<div class="form-group col-sm-2">
+<div class="form-group col-sm-4">
     {!! Form::label('combustible', 'Combustible') !!}
     {!! Form::text('combustible', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
 </div>

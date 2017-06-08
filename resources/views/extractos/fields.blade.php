@@ -32,6 +32,12 @@
     {!! Form::select('conductor_tres', $selectores['conductor_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
 
+<!-- Observaciones Field -->
+<div class="form-group col-sm-12 col-lg-12">
+    {!! Form::label('observaciones', 'Observaciones:') !!}
+    {!! Form::textarea('observaciones', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::button('<i class="glyphicon glyphicon-floppy-disk"></i> Guardar', [
