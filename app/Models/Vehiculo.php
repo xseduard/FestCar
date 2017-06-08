@@ -22,6 +22,8 @@ class Vehiculo extends Model
 
     public $fillable = [
         'placa',
+        'tipo_propietario',
+        'juridico_id',
         'natural_id',        
         'numero_interno',
         'capacidad',
@@ -37,6 +39,8 @@ class Vehiculo extends Model
      */
     protected $casts = [
         'placa' => 'string',
+        'tipo_propietario' => 'string',
+        'juridico_id' => 'integer',
         'natural_id' => 'integer',        
         'numero_interno' => 'string',
         'capacidad' => 'string',
@@ -52,7 +56,9 @@ class Vehiculo extends Model
      */
     public static $rules = [
         'placa' => 'required|alpha_num|unique:vehiculos|size:6',
-        'natural_id' => 'required',        
+        'tipo_propietario' => 'required',
+        'natural_id' => 'required_if:tipo_propietario,Natural',
+        'juridico_id' => 'required_if:tipo_propietario,Juridico',      
         'numero_interno' => 'required|numeric',
         'capacidad' => 'numeric',
         'modelo' => 'numeric',

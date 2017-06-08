@@ -17,8 +17,9 @@ class CreateVehiculosTable extends Migration
             $table->increments('id');
             $table->string('placa', 6)->unique();   
               
-            $table->integer('natural_id')->unsigned()->comment('Propietario');
-            $table->foreign('natural_id')->references('id')->on('naturales');       
+            $table->enum('tipo_propietario', ['Natural','Juridico']);
+            $table->integer('natural_id')->unsigned();
+            $table->integer('juridico_id')->unsigned();
            
             $table->string('numero_interno', 3)->comment('Numero indicado por la empresa');
             $table->string('capacidad', 2)->comment('capacidad ocupantes/pasajeros');

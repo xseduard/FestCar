@@ -50,7 +50,7 @@ class JuridicoController extends AppBaseController
     public function selectoresComunes()
     {
         $selectores = [];
-        // $selectores['id_atributo'] = $this->centralRepository->id_atributo();
+        $selectores['municipio_id'] = $this->centralRepository->municipio_id();
         $selectores['natural_id'] = $this->centralRepository->natural_id();
         return $selectores;
     }

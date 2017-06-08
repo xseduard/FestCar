@@ -34,6 +34,12 @@
     {!! Form::label('direccion_envio', 'Direccion Envio') !!}
     {!! Form::text('direccion_envio', null, ['class' => 'form-control']) !!}
 </div>
+
+<div class="form-group col-sm-4">
+    {!! Form::label('municipio_id', '*Ciudad/Departamento') !!}
+     {!! Form::select('municipio_id', $selectores['municipio_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+</div>
+
 <!-- Telefono Campo de texto -->
 <div class="form-group col-sm-4">
     {!! Form::label('telefono', 'Teléfono') !!}

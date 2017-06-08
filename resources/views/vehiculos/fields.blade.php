@@ -5,12 +5,32 @@
 </div>
 
 <div class="clearfix"></div>
+<!-- Tipo Propietario Selector -->
+<div class="form-group col-sm-3">
+    {!! Form::label('tipo_propietario', 'Tipo de Propietario') !!}
+    {!! Form::select('tipo_propietario', ['Natural' => 'Natural', 'Juridico' => 'Jurídico'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+</div>
 
-<div class="form-group col-sm-6">
-    {!! Form::label('natural_id', 'Propietario') !!}
+<div class="form-group col-sm-9" id="tercero_locked">
+        {!! Form::label('field_default', 'Tercero Natural/Jurídico') !!}
+        <div class="input-group">
+            {!! Form::text('field_default', null, ['class' => 'form-control', 'placeholder'=>'', 'disabled' => 'disabled']) !!}
+            <div class="input-group-addon" title=" Seleccione un tipo de Propietario para Desbloquear"><i class="fa fa-lock" aria-hidden="true"></i></div>
+        </div>
+    </div>
+
+<!-- Natural Id Selector -->
+<div class="form-group col-sm-9" id="form_natural">
+    {!! Form::label('natural_id', 'Tercero Natural') !!}
     {!! Form::select('natural_id', $selectores['natural_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
 
+<!-- Juridico Id Selector -->
+<div class="form-group col-sm-9" id="form_juridico">
+    {!! Form::label('juridico_id', 'Tercero Jurídico') !!}
+    {!! Form::select('juridico_id', $selectores['juridico_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+</div>
+<div class="clearfix"></div>
 <div class="clearfix"></div>
 <!-- Numero Interno Campo de texto -->
 <div class="form-group col-sm-4">

@@ -73,38 +73,26 @@ class ContratoVinculacionRepository extends BaseRepository
         
          //pdf
         $contrato = $this->findWithoutFail($id);
+
+        $contrato =  ContratoVinculacion::with('natural.municipio.departamento')
+        ->with('juridico.natural.municipio.departamento')
+        ->with('vehiculo.tarjetapropiedad')
+        ->where('id',$id)
+        ->first();
+
         global $codigo;
         $codigo = $contrato->tipo_contrato.str_pad($contrato->id, 4, "0", STR_PAD_LEFT);
         
         $fecha_actual = Carbon::now();
  
-        /*
-        $fin = '2018-06-06';    
-        
-        $fecha_fin = Carbon::createFromFormat('Y-m-d', $fin);
-        
-        if ($fecha_actual->diffInYears($fecha_fin)>0) {
-            $duracion_contrato=strtolower(\NumeroALetras::convertir($fecha_actual->diffInYears($fecha_fin))).'('.$fecha_actual->diffInYears($fecha_fin).') años';
-        } elseif ($fecha_actual->diffInMonths($fecha_fin)>0) {
-            $duracion_contrato=strtolower(\NumeroALetras::convertir($fecha_actual->diffInMonths($fecha_fin))).'('.$fecha_actual->diffInMonths($fecha_fin).') meses';
-        } else {
-            $duracion_contrato=strtolower(\NumeroALetras::convertir($fecha_actual->diffInDays($fecha_fin))).'('.$fecha_actual->diffInDays($fecha_fin).') días';
-        }
-*/
-        
-//dd($this->tarjeta_propiedad_por_vehiculo('1'));
+
         $fecha_creacion = $this->traducir_fecha($contrato->created_at);       
-         //dd($fecha_creacion->format('l d, F Y'));
 
-        
-        // dd($fecha_perfec);      
 
-        //dd($contrato->created_at->diffForHumans());
-
-            $NOMBRE_PROP_VEHICULO = '';
-            $LUGAR_EXP_PROP_VEHICULO = '';
-            $CEDULA_PROP_VEHICULO = '';
-            $ID_PROPIETARIO_VEHICULO = '';
+            $contratista_nombre = '';
+            $contratista_cedula_ref = '';
+            $contratista_cedula = '';
+            $id_propietario_vehiculo = '';
             $TIPO_POSEEDOR_O_TENEDOR = '';
             $DIR_MUNINCIPIO_PROP_VEHICULO = '';
             $JURIDICO_NOMBRE = '';
@@ -116,16 +104,21 @@ class ContratoVinculacionRepository extends BaseRepository
 
         if ($contrato->tipo_proveedor == 'Natural') {
 
-           $NOMBRE_PROP_VEHICULO     =  $contrato->natural->nombres.' '. $contrato->natural->apellidos;
-           $LUGAR_EXP_PROP_VEHICULO  =  $this->municipio_departamento($contrato->natural->municipio_id);
-           $CEDULA_PROP_VEHICULO     =  $contrato->natural->cedula;           
-           $ID_PROPIETARIO_VEHICULO  =  $contrato->natural->id;
+           $contratista_nombre     =  $contrato->natural->nombres.' '. $contrato->natural->apellidos;
+           $contratista_cedula_ref  =  $this->municipio_departamento($contrato->natural->municipio_id);
+           $contratista_cedula     =  $contrato->natural->cedula;           
+           $id_propietario_vehiculo  =  $contrato->natural->id;
            $DIRECCION_PROP_VEHICULO  =  $this->municipio_departamento($contrato->natural->direccion_municipio);
            
-            if ($contrato->natural_id == $contrato->vehiculo->natural_id) {
-               $TIPO_POSEEDOR_O_TENEDOR = 'PROPIETARIO';
-            } else {
-                $TIPO_POSEEDOR_O_TENEDOR = 'POSEEDOR';
+            if ($contrato->vehiculo->tipo_propietario == "Natural") {
+                if ($contrato->natural_id == $contrato->vehiculo->natural_id) {
+                   $TIPO_POSEEDOR_O_TENEDOR = 'PROPIETARIO';
+                } else {
+                    $TIPO_POSEEDOR_O_TENEDOR = 'POSEEDOR';
+                }
+            }
+            else {
+                 $TIPO_POSEEDOR_O_TENEDOR = 'POSEEDOR';
             }            
             if (empty($contrato->natural->direccion_municipio)) {
                 $DIR_MUNINCIPIO_PROP_VEHICULO = $this->municipio_departamento($contrato->natural->municipio_id);
@@ -137,23 +130,29 @@ class ContratoVinculacionRepository extends BaseRepository
 
             $JURIDICO_NOMBRE            = $contrato->juridico->nombre;
             $JURIDICO_NIT               = $contrato->juridico->nit;
-            $NOMBRE_PROP_VEHICULO       = $this->buscar_vehiculo($contrato->vehiculo_id)->natural->nombres." ".$this->buscar_vehiculo($contrato->vehiculo_id)->natural->apellidos;
-            $LUGAR_EXP_PROP_VEHICULO    = $this->municipio_departamento($this->buscar_vehiculo($contrato->vehiculo_id)->natural->municipio_id);
-            $CEDULA_PROP_VEHICULO       = $this->buscar_vehiculo($contrato->vehiculo_id)->natural->cedula;
-            $ID_PROPIETARIO_VEHICULO    = '';
+            $contratista_nombre       = $this->buscar_vehiculo($contrato->vehiculo_id)->natural->nombres." ".$this->buscar_vehiculo($contrato->vehiculo_id)->natural->apellidos;
+            $contratista_cedula_ref    = $this->municipio_departamento($this->buscar_vehiculo($contrato->vehiculo_id)->natural->municipio_id);
+            $contratista_cedula       = $this->buscar_vehiculo($contrato->vehiculo_id)->natural->cedula;
+            $id_propietario_vehiculo    = '';
             $NOMBRE_RTE_LEGAL_CONTRATISTA = $this->buscar_juridico($contrato->juridico_id)->natural->nombres." ".$this->buscar_juridico($contrato->juridico_id)->natural->apellidos;
             $CEDULA_RTE_LEGAL           = number_format($this->buscar_juridico($contrato->juridico_id)->natural->cedula, 0, '.', '.' );
             $LUGAR_EXP_RTE_LEGAL        = $this->municipio_departamento($this->buscar_juridico($contrato->juridico_id)->natural->municipio_id);
             $DIRECCION_PROP_VEHICULO  =  $this->municipio_departamento($this->buscar_vehiculo($contrato->vehiculo_id)->natural->direccion_municipio);
 
-             if ($contrato->juridico->natural_id == $contrato->vehiculo->natural_id) {
-               $TIPO_POSEEDOR_O_TENEDOR = 'PROPIETARIO';
-            } else {
-                $TIPO_POSEEDOR_O_TENEDOR = 'POSEEDOR';
+
+            if ($contrato->vehiculo->tipo_propietario == "Juridico") {
+                if ($contrato->juridico_id == $contrato->vehiculo->juridico_id) {
+                   $TIPO_POSEEDOR_O_TENEDOR = 'PROPIETARIO';
+                } else {
+                    $TIPO_POSEEDOR_O_TENEDOR = 'POSEEDOR';
+                }
+            }
+            else {
+                 $TIPO_POSEEDOR_O_TENEDOR = 'POSEEDOR';
             }  
             
         }
-        // Determianr cuota
+                // Determianr cuota
         if ($contrato->vehiculo->capacidad > 19) {
             $CUOTA_ADMIN = "150000";
         } else {
@@ -188,16 +187,16 @@ class ContratoVinculacionRepository extends BaseRepository
         'NOMBRE_RTE_LEGAL_MI_EMPRESA'       =>  mb_strtoupper($contrato->rl_name,'utf-8').' '.mb_strtoupper($contrato->rl_lastname,'utf-8'),
         'CEDULA_RTE_LEGAL_MI_EMPRESA'       =>  number_format($contrato->rl_id, 0, '.', '.' ),
         'LUGAR_EXP_CED_RTE_LEGAL_MI_EMPRESA' => $contrato->rl_id_ref,
-        'NOMBRE_PROP_VEHICULO'              =>  mb_strtoupper($NOMBRE_PROP_VEHICULO,'utf-8'),
+        'contratista_nombre'              =>  mb_strtoupper($contratista_nombre,'utf-8'),
         'DIRECCION_PROP_VEHICULO'           =>  $DIRECCION_PROP_VEHICULO,
-        'LUGAR_EXP_PROP_VEHICULO'           =>  $LUGAR_EXP_PROP_VEHICULO,
-        'CEDULA_PROP_VEHICULO'              =>  number_format($CEDULA_PROP_VEHICULO, 0, '.', '.' ),
+        'contratista_cedula_ref'           =>  $contratista_cedula_ref,
+        'contratista_cedula'              =>  number_format($contratista_cedula, 0, '.', '.' ),
         'DIR_MUNINCIPIO_PROP_VEHICULO'      =>  $DIR_MUNINCIPIO_PROP_VEHICULO,
         'MUNICIPIO_MI_EMPRESA'              =>  'APARTADÓ, ANTIOQUIA',
         'DATOS_VEHICULO'                    =>  'FALTA TABLA VEHICULO',
         'DURACION_CONTRATO'                 =>  $this->traducir_fecha($contrato->fecha_inicio)->timespan($contrato->fecha_final),
         'FECHA_INICIO'                      =>  $this->traducir_fecha($contrato->fecha_inicio)->format('l d, F Y'),
-        'FECHA_FINAL'                       =>  $this->traducir_fecha($contrato->fecha_final)->format('l d, F Y'), 
+        'FECHA_FINAL'                       =>  $this->traducir_fecha($contrato->fecha_final)->subDay()->format('l d, F Y'), 
         'FECHA_PERFEC_DIA'                  =>  $fecha_creacion->day,
         'FECHA_PERFEC_MES'                  =>  $fecha_creacion->format('F'),
         'FECHA_PERFEC_ANO'                  =>  $fecha_creacion->year,
@@ -262,7 +261,7 @@ class ContratoVinculacionRepository extends BaseRepository
                 $pdf->Cell(75,10,utf8_decode('NIT'),1,0,"C");
                 $pdf->Multicell(0,10,utf8_decode($data['JURIDICO_NIT']),1,'C');
                 $pdf->Cell(75,10,utf8_decode('REPRESENTANTE LEGAL'),1,0,"C");
-                $pdf->Multicell(0,10,utf8_decode($data['NOMBRE_PROP_VEHICULO']),1,'C');
+                $pdf->Multicell(0,10,utf8_decode($data['contratista_nombre']),1,'C');
                 $pdf->Cell(75,10,utf8_decode('CONVENIO A DESARROLLLAR'),1,0,"C");
                 $pdf->Multicell(0,10,utf8_decode($contrato->servicio),1,'C');
                 $pdf->Ln();
@@ -324,12 +323,12 @@ class ContratoVinculacionRepository extends BaseRepository
         $pdf->Cell(30,5,'',0,0,"L");
         $pdf->Cell(65,5,'________________________',0,1,"L");
         $pdf->Cell(65,5,utf8_decode($data['NOMBRE_RTE_LEGAL_MI_EMPRESA']),0,0,"L");
-        //$pdf->Cell(65,5,utf8_decode($data['NOMBRE_PROP_VEHICULO']),0,0,"L");
+        //$pdf->Cell(65,5,utf8_decode($data['contratista_nombre']),0,0,"L");
         $pdf->Cell(30,5,'',0,0,"L");
-        $pdf->Multicell(65,5,utf8_decode($data['NOMBRE_PROP_VEHICULO']),0,'L',0);
+        $pdf->Multicell(65,5,utf8_decode($data['contratista_nombre']),0,'L',0);
         $pdf->Cell(65,5,utf8_decode("CC ".$data['CEDULA_RTE_LEGAL_MI_EMPRESA']),0,0,"L");        
         $pdf->Cell(30,5,'',0,0,"L");
-        $pdf->Cell(65,5,utf8_decode("CC ".$data['CEDULA_PROP_VEHICULO']),0,1,"L"); 
+        $pdf->Cell(65,5,utf8_decode("CC ".$data['contratista_cedula']),0,1,"L"); 
         $pdf->Cell(65,5,utf8_decode($data['NOMBRE_EMPRESA_CORTO']),0,0,"L");        
         $pdf->Cell(30,5,'',0,0,"L");
         $pdf->Multicell(65,5,utf8_decode(mb_strtoupper($data['JURIDICO_NOMBRE'],'utf-8')),0,'L',0);
@@ -345,7 +344,7 @@ class ContratoVinculacionRepository extends BaseRepository
 
         if ($data['TIPO_PROVEEDOR'] == 'Natural') {
 
-            $view .= " <b>".$data['NOMBRE_PROP_VEHICULO']."</b>, portador de la cedula de ciudadanía N° <b>".$data['CEDULA_PROP_VEHICULO']."</b>, expedida en ".$data['LUGAR_EXP_PROP_VEHICULO'].", y quien para efectos legales del presente documento se denominara EL CONTRATISTA, se ha celebrado el presente contrato de VINCULACIÓN Y ADMINISTRACIÓN DELEGADA DE UN VEHÍCULO AUTOMOTOR en ejercicio de nuestra libertad contractual, el cual se regirá por las siguientes CLAUSULAS: </p>
+            $view .= " <b>".$data['contratista_nombre']."</b>, portador de la cedula de ciudadanía N° <b>".$data['contratista_cedula']."</b>, expedida en ".$data['contratista_cedula_ref'].", y quien para efectos legales del presente documento se denominara EL CONTRATISTA, se ha celebrado el presente contrato de VINCULACIÓN Y ADMINISTRACIÓN DELEGADA DE UN VEHÍCULO AUTOMOTOR en ejercicio de nuestra libertad contractual, el cual se regirá por las siguientes CLAUSULAS: </p>
         ";
         } else {
             $view .= "
@@ -436,7 +435,7 @@ class ContratoVinculacionRepository extends BaseRepository
     }
     function CP_P1($data){
         $view = "
-<p>Entre los suscritos a saber, <b>".$data['NOMBRE_RTE_LEGAL_MI_EMPRESA']."</b>, identificado(a) con Cédula de Ciudadanía Nro. <b>".$data['CEDULA_RTE_LEGAL_MI_EMPRESA']."</b>, en calidad de Gerente y Representante Legal de <b>".$data['NOMBRE_EMPRESA'].".</b> Con Nit ".$data['NIT_MI_EMPRESA'].", y quien para efectos del presente contrato se denominará <b>EL CONTRATANTE</b>; y el señor (a) <b>".$data['NOMBRE_PROP_VEHICULO'].",</b> con Cédula de Ciudadanía. Nro. <b>".$data['CEDULA_PROP_VEHICULO']."</b> y domicilio  en ".$data['DIRECCION_PROP_VEHICULO'].", quien actua como ".$data['TIPO_POSEEDOR_O_TENEDOR']." DEL VEHICULO  de servicio público inscrito en el organismo de transito correspondiente.</p>
+<p>Entre los suscritos a saber, <b>".$data['NOMBRE_RTE_LEGAL_MI_EMPRESA']."</b>, identificado(a) con Cédula de Ciudadanía Nro. <b>".$data['CEDULA_RTE_LEGAL_MI_EMPRESA']."</b>, en calidad de Gerente y Representante Legal de <b>".$data['NOMBRE_EMPRESA'].".</b> Con Nit ".$data['NIT_MI_EMPRESA'].", y quien para efectos del presente contrato se denominará <b>EL CONTRATANTE</b>; y el señor (a) <b>".$data['contratista_nombre'].",</b> con Cédula de Ciudadanía. Nro. <b>".$data['contratista_cedula']."</b> y domicilio  en ".$data['DIRECCION_PROP_VEHICULO'].", quien actua como ".$data['TIPO_POSEEDOR_O_TENEDOR']." DEL VEHICULO  de servicio público inscrito en el organismo de transito correspondiente.</p>
 
 <p><b>PARAGRAFO 1: ".$data['TIPO_POSEEDOR_O_TENEDOR']."</b> acredita  la tenencia de la  propiedad del vehiculo y además que, el automotor se encuentra libre de pleitos pendientes, embargos judiciales, condiciones resolutorias, acciones reales y en general, que se encuentra ajustada a derecho y es consecuencia de una cadena lógica de dominio.  Así mismo que su patrimonio liquido proviene de actividades lícitas; y quien para los efectos del presente documento se denominará el <b>PROPIETARIO</b>, acuerdan celebrar el presente <b>CONTRATO DE SUMINISTRO DE VEHÍCULO</b>, contrato que se rige por las siguientes estipulaciones:</p>
 

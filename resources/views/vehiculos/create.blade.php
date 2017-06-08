@@ -36,7 +36,47 @@
                 },
           placeholder: 'Seleccionar...',      
           allowClear: true
+        });hidear_campos_clear();
+
+        $('#tipo_propietario').on('change',function(){   
+            disabled_campos_tercero();
+            hidear_campos_clear()
         });
+         
     });
+    // fuera del ready
+   
+    function disabled_campos_tercero(){
+
+            var tipo_propietario = $("#tipo_propietario").val();
+            if (tipo_propietario == 'Natural') {
+                
+                $("#juridico_id").prop('disabled', true).select2("val", "");             
+                $("#natural_id").prop('disabled', false);
+               
+
+            } else if (tipo_propietario == 'Juridico') {
+                
+                $("#natural_id").prop('disabled', true).select2("val", "");
+                $("#juridico_id").prop('disabled', false);
+
+            }  
+        
+    }
+    function hidear_campos_clear(){
+        
+        var tipo_propietario = $("#tipo_propietario").val();
+
+        if(tipo_propietario == 'Natural'){
+             $('#tercero_locked, #form_juridico').hide();
+             $('#form_natural').show();
+        } else if(tipo_propietario == 'Juridico'){
+            $('#tercero_locked, #form_natural').hide();
+             $('#form_juridico').show();
+        } else {
+            $('#form_natural, #form_juridico').hide();
+             $('#tercero_locked').show();
+        }
+    }
  </script>
 @endsection

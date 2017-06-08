@@ -44,6 +44,7 @@ class VehiculoController extends AppBaseController
     {
         $selectores = [];
         $selectores['natural_id'] = $this->centralRepository->natural_id();
+        $selectores['juridico_id'] = $this->centralRepository->juridico_id();
         return $selectores;
     }
     /**

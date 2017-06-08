@@ -28,6 +28,7 @@ class Juridico extends Model
         'telefono',
         'direccion_fiscal',
         'direccion_envio',
+        'municipio_id',
         'email',
         'observaciones',
         'estado',
@@ -44,6 +45,7 @@ class Juridico extends Model
         'telefono' => 'string',
         'direccion_fiscal' => 'string',
         'direccion_envio' => 'string',
+        'municipio_id' => 'string',
         'email' => 'string',
         'observaciones' => 'string',
         'estado' => 'boolean',
@@ -57,7 +59,8 @@ class Juridico extends Model
         'nombre' => 'required',
         'natural_id' => 'required',
         'email' => 'email',
-        'estado' => 'required'
+        'estado' => 'required',        
+        'municipio_id' => 'required',
     ];
     /**
      * Relaciones entre Modelos
@@ -70,6 +73,9 @@ class Juridico extends Model
 
     public function natural(){
         return $this->belongsTo('App\Models\Natural');
+    }
+    public function municipio(){
+        return $this->belongsTo('App\Models\Municipio', 'municipio_id');
     }
     public function usuario(){
         return $this->belongsTo('App\User', 'user_id');
