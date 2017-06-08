@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('css')
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/all.css">
+@endsection
 @section('content')
     <section class="content-header">
         <h1>
@@ -29,6 +31,11 @@
 @section('scripts')
  <script>
     $(document).ready(function () {  
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_minimal-blue',
+          radioClass: 'iradio_minimal-blue',
+          increaseArea: '20%' // optional
+        });
         $(".select2").select2({
           tags: false, // permite insertar texto
           language: {noResults: function() {return "No se encontraron coincidencias";}, searching: function() {return "Buscando..";}
@@ -91,4 +98,5 @@
         }
     }
  </script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
 @endsection

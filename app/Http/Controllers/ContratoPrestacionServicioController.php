@@ -149,6 +149,7 @@ class ContratoPrestacionServicioController extends AppBaseController
         $input = $request->all();
         $input['user_id'] = Auth::id();
 
+
         $contratoPrestacionServicio = $this->contratoPrestacionServicioRepository->update($input, $id);
 
         Flash::success('Contrato Prestacion Servicio actualizado correctamente.');

@@ -272,6 +272,17 @@ class CentralRepository extends BaseRepository
         return \Response::json($formateado);
     }
 
+    /**
+     * funciones de busqueda
+     */
+    public function buscar_licencia($id) {
+        $model = LicenciaConduccion::where('id',$id)
+        ->first();
+                
+        return $model->fechavigencia;
+    }
+
+
 
 
 

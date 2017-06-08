@@ -80,6 +80,38 @@ class ExtractoRepository extends BaseRepository
         'nombre_mi_empresa_corto' => 'TRANSEBA S.A.S',
         'nit_mi_empresa' => '900.414.811-9',
         ];
+        $objeto_contrato_cps = "";
+        if ($extracto->cps->s1) {
+            if (!empty($objeto_contrato_cps)) {
+                $objeto_contrato_cps .= ", ";
+            }
+            $objeto_contrato_cps .= "Empresarial";
+        }
+        if ($extracto->cps->s2) {
+            if (!empty($objeto_contrato_cps)) {
+                $objeto_contrato_cps .= ", ";
+            }
+            $objeto_contrato_cps .= "Escolar";
+        }
+        if ($extracto->cps->s3) {
+            if (!empty($objeto_contrato_cps)) {
+                $objeto_contrato_cps .= ", ";
+            }
+            $objeto_contrato_cps .= "Grupo de usuarios";
+        }
+        if ($extracto->cps->s4) {
+            if (!empty($objeto_contrato_cps)) {
+                $objeto_contrato_cps .= ", ";
+            }
+            $objeto_contrato_cps .= "Salud";
+        }
+        if ($extracto->cps->s5) {
+            if (!empty($objeto_contrato_cps)) {
+                $objeto_contrato_cps .= ", ";
+            }
+            $objeto_contrato_cps .= "Turismo";
+        }
+
 
        if ($extracto->cps->tipo_cliente == 'Natural') {
            $data['contratante_nombre'] = mb_strtoupper($extracto->cps->natural->nombres." ".$extracto->cps->natural->apellidos,'utf-8');
@@ -110,14 +142,14 @@ class ExtractoRepository extends BaseRepository
             $c2_apellidos   = mb_strtoupper($extracto->conductordos->apellidos,'utf-8');
             $c2_cedula      = number_format($extracto->conductordos->cedula, 0, '.', '.' );
             $c2_licencia    = $extracto->conductordos->cedula;
-            $c2_vigencia    = "";
+            $c2_vigencia    = $extracto->f_licencia_dos;
         }
         if (!is_null($extracto->conductortres)) {
             $c3_nombre      = mb_strtoupper($extracto->conductortres->nombres,'utf-8');
             $c3_apellidos   = mb_strtoupper($extracto->conductortres->apellidos,'utf-8');
             $c3_cedula      = number_format($extracto->conductortres->cedula, 0, '.', '.' );
             $c3_licencia    = $extracto->conductortres->cedula;
-            $c3_vigencia    = "";
+            $c3_vigencia    = $extracto->f_licencia_tres;
         }
         if (!is_null($extracto->cps->responsable)) {
             $r_nombre      = mb_strtoupper($extracto->cps->responsable->nombres,'utf-8');
@@ -165,7 +197,7 @@ class ExtractoRepository extends BaseRepository
         $pdf->Cell(146,$HC,utf8_decode("".substr($data['contratante_nombre'], 0, 73)),"LB",0,"L");
 
         $pdf->Cell(50,$HC,utf8_decode("".$data['documento_contratante']),"BR",1,"L");
-        $pdf->Cell(0,$HC,utf8_decode('OBJETO CONTRATO: '.mb_strtoupper($extracto->cps->servicio,'utf-8')),"LBR",1,"L");
+        $pdf->Cell(0,$HC,utf8_decode('OBJETO CONTRATO: '.mb_strtoupper($objeto_contrato_cps,'utf-8')),"LBR",1,"L");
         $pdf->Cell(0,$HC,utf8_decode("ORIGEN-DESTINO, DESCRIBIENDO EL RECORRIDO:"),"LTR",1,"L");
         $pdf->Cell(0,$HC,utf8_decode(mb_strtoupper($extracto->recorrido,'utf-8')),"LBR",1,"L");
 
@@ -250,7 +282,7 @@ class ExtractoRepository extends BaseRepository
         $pdf->Cell(56,4,utf8_decode("".mb_strtoupper($extracto->conductoruno->nombres,'utf-8')),"R",0,"C");
         $pdf->Cell(25,4,utf8_decode("".number_format($extracto->conductoruno->cedula, 0, '.', '.' )),"R",0,"C");
         $pdf->Cell(40,4,$extracto->conductoruno->cedula,"R",0,"C");
-        $pdf->Cell(25,4,utf8_decode(""),"R",1,"C");
+        $pdf->Cell(25,4,$extracto->f_licencia_uno,"R",1,"C");
 
         $pdf->Cell(50,5,utf8_decode(""),"LBR",0,"C");
         $pdf->Cell(56,5,utf8_decode("".mb_strtoupper($extracto->conductoruno->apellidos,'utf-8')),"BR",0,"C");

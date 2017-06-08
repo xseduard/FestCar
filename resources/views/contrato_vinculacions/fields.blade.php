@@ -73,6 +73,64 @@
     </div>
 </div>
 
+<div class="clearfix"></div>
+<br>
+<div class="col-sm-12">
+    <strong class="text-muted" style="padding-bottom: 0px;"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Información de Pago</strong>
+    <hr  style="margin-top: 0px;">
+</div>
+
+
+<!-- Entidad Bancaria Campo de texto -->
+<div class="form-group col-sm-4">
+    {!! Form::label('entidad_bancaria', 'Entidad Bancaria') !!}
+    {!! Form::select('entidad_bancaria', [
+'BANCO DE LA REPÚBLICA'     => 'BANCO DE LA REPÚBLICA',
+'BANCO DE BOGOTÁ'           => 'BANCO DE BOGOTÁ',
+'BANCO POPULAR'             => 'BANCO POPULAR',
+'BANCO CORPBANCA COLOMBIA S.A.' => 'BANCO CORPBANCA COLOMBIA S.A.',
+'BANCOLOMBIA S.A.'          => 'BANCOLOMBIA S.A.',
+'CITIBANK COLOMBIA'         => 'CITIBANK COLOMBIA',
+'BANCO GNB COLOMBIA S.A.'   => 'BANCO GNB COLOMBIA S.A.',
+'BANCO GNB SUDAMERIS COLOMBIA' => 'BANCO GNB SUDAMERIS COLOMBIA',
+'BBVA COLOMBIA'             => 'BBVA COLOMBIA',
+'HELM BANK'                 => 'HELM BANK',
+'RED MULTIBANCA COLPATRIA S.A.' => 'RED MULTIBANCA COLPATRIA S.A.',
+'BANCO DE OCCIDENTE'        => 'BANCO DE OCCIDENTE',
+'BANCO DE COMERCIO EXTERIOR DE COLOMBIA S.A.' => 'BANCO DE COMERCIO EXTERIOR DE COLOMBIA S.A.',
+'BANCO CAJA SOCIAL - BCSC S.A.' => 'BANCO CAJA SOCIAL - BCSC S.A.',
+'BANCO AGRARIO DE COLOMBIA S.A.' => 'BANCO AGRARIO DE COLOMBIA S.A.',
+'BANCO DAVIVIENDA S.A.'     => 'BANCO DAVIVIENDA S.A.',
+'BANCO AV VILLAS'           => 'BANCO AV VILLAS',
+'BANCO WWB S.A.'            => 'BANCO WWB S.A.',
+'BANCO PROCREDIT'           => 'BANCO PROCREDIT',
+'BANCAMIA'                  => 'BANCAMIA',
+'BANCO PICHINCHA S.A.'      => 'BANCO PICHINCHA S.A.',
+'BANCOOMEVA'                => 'BANCOOMEVA',
+'BANCO FALABELLA S.A.'      => 'BANCO FALABELLA S.A.',
+'BANCO FINANDINA S.A.'      => 'BANCO FINANDINA S.A.',
+'BANCO SANTANDER DE NEGOCIOS COLOMBIA S.A.' => 'BANCO SANTANDER DE NEGOCIOS COLOMBIA S.A.',
+'BANCO COOPERATIVO COOPCENTRAL' => 'BANCO COOPERATIVO COOPCENTRAL',
+],
+    null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+</div>
+<!-- Tipo Cuenta Bancaria Campo de texto -->
+<div class="form-group col-sm-2">
+    {!! Form::label('tipo_cuenta_bancaria', 'Tipo de Cuenta') !!}
+    {!! Form::select('tipo_cuenta_bancaria', ['Ahorro' => 'Ahorro', 'Corriente' => 'Corriente'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+</div>
+
+<!-- Numero Cuenta Bancaria Campo de texto -->
+<div class="form-group col-sm-6">
+    {!! Form::label('numero_cuenta_bancaria', 'Número Cuenta Bancaria') !!}
+    <div class="input-group">
+        <div class="input-group-addon">#</div>
+    {!! Form::text('numero_cuenta_bancaria', null, ['class' => 'form-control', 'placeholder'=>'000-000-000-00']) !!}
+    </div>
+</div>
+<!-- Fecha Inicio campo de fecha -->
+<div class="clearfix"></div>
+<hr>
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::button('<i class="glyphicon glyphicon-floppy-disk"></i> Guardar', [

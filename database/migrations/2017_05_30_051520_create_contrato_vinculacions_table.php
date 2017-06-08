@@ -26,8 +26,14 @@ class CreateContratoVinculacionsTable extends Migration
             $table->foreign('vehiculo_id')->references('id')->on('vehiculos');
 
             $table->string('servicio', 150);
+
             $table->date('fecha_inicio');
             $table->date('fecha_final');
+            
+             $table->string('tipo_cuenta_bancaria', 20);
+            $table->string('numero_cuenta_bancaria', 20);
+            $table->string('entidad_bancaria', 50);  
+
             $table->integer('user_id')->unsigned()->comment('usuario que crea/edita/elimina');
             $table->boolean('aprobado')->comment('Verificación de firma');
             $table->dateTime('fecha_aprobacion');

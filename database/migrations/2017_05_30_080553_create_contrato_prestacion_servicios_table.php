@@ -28,9 +28,7 @@ class CreateContratoPrestacionServiciosTable extends Migration
             $table->string('servicio', 150);
             $table->date('fecha_inicio');
             $table->date('fecha_final');
-            $table->string('tipo_cuenta_bancaria', 20);
-            $table->string('numero_cuenta_bancaria', 20);
-            $table->string('entidad_bancaria', 50);  
+           
 
             $table->integer('user_id')->unsigned()->comment('usuario que crea/edita/elimina');
             $table->boolean('aprobado')->comment('Verificación de firma');
@@ -41,6 +39,12 @@ class CreateContratoPrestacionServiciosTable extends Migration
 
             $table->timestamps();
             $table->softDeletes();
+
+            $table->boolean('s1')->comment('Empresarial');
+            $table->boolean('s2')->comment('Escolar');
+            $table->boolean('s3')->comment('Grupo de usuarios');
+            $table->boolean('s4')->comment('Salud');
+            $table->boolean('s5')->comment('Turismo');
             
             $table->string('rl_id', 14)->default('50914925')->comment('Repre. legal');
             $table->string('rl_id_ref', 30)->default('Monteria Córdoba')->comment('Repre. legal');

@@ -101,6 +101,17 @@ class ExtractoController extends AppBaseController
         if ($validar_documentos_vehiculo['tecnicomecanica'] != 'Vehiculo nuevo') {                 
             $input['tecnicomecanica_id']    = $validar_documentos_vehiculo['tecnicomecanica']->id;
         }
+        if (!empty($input['conductor_uno'])) {
+            $input['f_licencia_uno'] = $this->centralRepository->buscar_licencia($input['conductor_uno'])->format('d-m-Y');
+        }
+        if (!empty($input['conductor_dos'])) {
+            $input['f_licencia_dos'] = $this->centralRepository->buscar_licencia($input['conductor_dos'])->format('d-m-Y');
+        }
+        if (!empty($input['conductor_tres'])) {
+            $input['f_licencia_tres'] = $this->centralRepository->buscar_licencia($input['conductor_tres'])->format('d-m-Y');
+        }
+        
+
         //$input['contratovinculacion_id']    = '';
 
         $extracto = $this->extractoRepository->create($input);
@@ -186,7 +197,7 @@ class ExtractoController extends AppBaseController
         if($this->centralRepository->validar_conductores_duplicados($input)) {
             return Redirect::back()->withInput(Input::all());
         }
-        
+
         $input['tarjetaoperacion_id']       = $validar_documentos_vehiculo['tarjetaoperacion']->id;
         $input['soat_id']                   = $validar_documentos_vehiculo['soat']->id;
         $input['polizaresponsabilidad_id']  = $validar_documentos_vehiculo['polizaresponsabilidad']->id;
