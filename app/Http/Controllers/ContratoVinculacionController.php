@@ -12,6 +12,8 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Auth;
 use Response;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Input;
 
  
 
@@ -82,6 +84,12 @@ class ContratoVinculacionController extends AppBaseController
         $input = $request->all();
         $input['user_id'] = Auth::id();
 
+$validar_documentos_vehiculo = $this->centralRepository->validar_documentos_vehiculo($input['vehiculo_id']);
+
+        if ($validar_documentos_vehiculo['error']) {  
+            Flash::error($validar_documentos_vehiculo['mensaje']);           
+             return Redirect::back()->withInput(Input::all());
+        }
 
         $contratoVinculacion = $this->contratoVinculacionRepository->create($input);
 
@@ -151,7 +159,13 @@ class ContratoVinculacionController extends AppBaseController
         }
         $input = $request->all();
         $input['user_id'] = Auth::id();
-      
+
+    $validar_documentos_vehiculo = $this->centralRepository->validar_documentos_vehiculo($input['vehiculo_id']);
+
+        if ($validar_documentos_vehiculo['error']) {  
+            Flash::error($validar_documentos_vehiculo['mensaje']);           
+             return Redirect::back()->withInput(Input::all());
+        }  
         $contratoVinculacion = $this->contratoVinculacionRepository->update($input, $id);
 
         Flash::success('Contrato de Vinculación actualizado correctamente.');

@@ -56,7 +56,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0095d8', end
             {!! csrf_field() !!}
 
             <div class="form-group has-feedback{{ $errors->has('cedula') ? ' has-error' : '' }}">
-                <input type="text" class="form-control" cedula="cedula" value="{{ old('cedula') }}" placeholder="Documento de identificación">
+                <input type="text" class="form-control" name="cedula" value="{{ old('cedula') }}" placeholder="Documento de identificación">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
 
                 @if ($errors->has('cedula'))

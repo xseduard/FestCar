@@ -85,31 +85,31 @@ class ExtractoRepository extends BaseRepository
             if (!empty($objeto_contrato_cps)) {
                 $objeto_contrato_cps .= ", ";
             }
-            $objeto_contrato_cps .= "Empresarial";
+            $objeto_contrato_cps .= "Transporte de funcionarios, empleados o contratistas, incluyendo traslados a lugares no previstos en los recorridos diarios";
         }
         if ($extracto->cps->s2) {
             if (!empty($objeto_contrato_cps)) {
                 $objeto_contrato_cps .= ", ";
             }
-            $objeto_contrato_cps .= "Escolar";
+            $objeto_contrato_cps .= "Transporte de estudiantes entre el lugar de residencia y el establecimiento educativo u otros destinos que se requieran en razón de las actividades programadas por el plantel educativo";
         }
         if ($extracto->cps->s3) {
             if (!empty($objeto_contrato_cps)) {
                 $objeto_contrato_cps .= ", ";
             }
-            $objeto_contrato_cps .= "Grupo de usuarios";
+            $objeto_contrato_cps .= "Transporte expreso para trasladar a todas las personas que hacen parte del grupo";
         }
         if ($extracto->cps->s4) {
             if (!empty($objeto_contrato_cps)) {
                 $objeto_contrato_cps .= ", ";
             }
-            $objeto_contrato_cps .= "Salud";
+            $objeto_contrato_cps .= "Transporte de usuarios, que por su condición o estado no requieran de una ambulancia de traslado asistencial básico o medicalizado";
         }
         if ($extracto->cps->s5) {
             if (!empty($objeto_contrato_cps)) {
                 $objeto_contrato_cps .= ", ";
             }
-            $objeto_contrato_cps .= "Turismo";
+            $objeto_contrato_cps .= "Transporte expreso con fines Turisticos";
         }
 
 
@@ -197,7 +197,8 @@ class ExtractoRepository extends BaseRepository
         $pdf->Cell(146,$HC,utf8_decode("".substr($data['contratante_nombre'], 0, 73)),"LB",0,"L");
 
         $pdf->Cell(50,$HC,utf8_decode("".$data['documento_contratante']),"BR",1,"L");
-        $pdf->Cell(0,$HC,utf8_decode('OBJETO CONTRATO: '.mb_strtoupper($objeto_contrato_cps,'utf-8')),"LBR",1,"L");
+        $pdf->Cell(0,4,utf8_decode('OBJETO CONTRATO: '),"LR",1,"L");
+        $pdf->Multicell(0,4,utf8_decode(mb_strtoupper($objeto_contrato_cps,'utf-8')),"LBR",'L');
         $pdf->Cell(0,$HC,utf8_decode("ORIGEN-DESTINO, DESCRIBIENDO EL RECORRIDO:"),"LTR",1,"L");
         $pdf->Cell(0,$HC,utf8_decode(mb_strtoupper($extracto->recorrido,'utf-8')),"LBR",1,"L");
 
@@ -209,7 +210,7 @@ class ExtractoRepository extends BaseRepository
         /**
          * VIGENCIA CONTRATO
          */
-        $pdf->ln(6);
+        $pdf->ln(3);
         $pdf->SetFont('helvetica','B',10);
         $pdf->Cell(0,6,utf8_decode("VIGENCIA DEL CONTRATO"),0,1,"C");        
      
@@ -241,7 +242,7 @@ class ExtractoRepository extends BaseRepository
          * DESCRIPCCIÓN VEHÍCULO
          */
 
-        $pdf->ln(6);
+        $pdf->ln(3);
         $pdf->SetFont('helvetica','B',10);
         $pdf->Cell(0,6,utf8_decode("CARACTERISITCAS DEL VEHÍCULO"),0,1,"C"); 
 
@@ -258,7 +259,7 @@ class ExtractoRepository extends BaseRepository
         $pdf->Cell(65,6,utf8_decode("".mb_strtoupper($extracto->vehiculo->clase,'utf-8')),"LBR",1,"C");
 
 
-        $pdf->ln(6);
+        $pdf->ln(3);
         $pdf->SetFont('helvetica','B',10);
         $pdf->Cell(106,6,utf8_decode("NÚMERO INTERNO"),0,0,"C");
         $pdf->Cell(90,6,utf8_decode("NÚMERO TARJETA DE OPERACIÓN"),0,1,"C"); 

@@ -117,6 +117,6 @@
 
 
 <li class="{{ Request::is('extractos*') ? 'active' : '' }}">
-    <a href="{!! route('extractos.index') !!}"><i class="fa fa-edit"></i><span>Extractos</span></a>
+    <a href="{!! route('extractos.index') !!}"><i class="ion ion-clipboard"></i><span>Extractos</span></a>
 </li>
 

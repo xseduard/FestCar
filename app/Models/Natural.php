@@ -85,6 +85,10 @@ class Natural extends Model
         return $this->belongsTo('App\User');
     }
     public function municipio(){
+        return $this->belongsTo('App\Models\Municipio');
+    }
+
+    public function residenciamunicipio(){
         return $this->belongsTo('App\Models\Municipio', 'direccion_municipio');
     }
 

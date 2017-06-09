@@ -22,6 +22,7 @@
 
      <!-- Animsitun -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.min.css">
+     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/all.css">
 
     {!! Html::style('/css/login.css') !!}
     {!! Html::style('/css/login_v2.css') !!}    
@@ -52,36 +53,27 @@
       <form method="post" action="{{ url('/login') }}">
             {!! csrf_field() !!}
 
-            <div class="form-group has-feedback {{ $errors->has('cedula') ? ' has-error' : '' }}">
-                <input type="text" class="form-control" name="cedula" value="{{ old('cedula') }}" placeholder="Usuario">
+            <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
+                <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Usuario">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                @if ($errors->has('cedula'))
+                @if ($errors->has('email'))
                     <span class="help-block">
-                    <strong>{{ $errors->first('cedula') }}</strong>
+                    <strong>{{ $errors->first('email') }}</strong>
                 </span>
                 @endif
             </div>
 
-            <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
+            <div class="form-group has-feedback {{ $errors->has('password') ? ' has-error' : '' }}">
                 <input type="password" class="form-control" placeholder="Contraseña" name="password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 @if ($errors->has('password'))
                     <span class="help-block">
-                    <strong>{{ $errors->first('password') }}</strong>
-                </span>
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
                 @endif
 
             </div>
-            <div class="row">
-                <div class="col-xs-12">                
-                   <div class="checkbox-inline checkbox-primary pull-xs-left">
-                     <input type="checkbox" name="remember">
-                     <label for="inputCheckbox">Recuerdame</label>
-                    </div>
-                    <a class="pull-right" href="{{ url('/password/reset') }}">¿Olvidó su contraseña? </a>
-                </div>
-                
-            </div>
+            
             <div class="row">
                 <!-- /.col -->
                 <div class="col-xs-12">
@@ -89,7 +81,16 @@
                 </div>
                 <!-- /.col -->
             </div>
-       
+       <div class="row">
+                <div class="col-xs-12">                
+                   <div class="checkbox icheck">
+                     <input type="checkbox" name="remember">
+                     <label for="inputCheckbox">Recuerdame</label>
+                    </div>
+                    <a class="" href="{{ url('/password/reset') }}">¿Olvidó su contraseña? </a>
+                </div>
+                
+            </div>
         </form>
         <p>No tienes cuenta? <a href="{{ url('/register') }}" class="text-center">Registrate</a> </p>
             
@@ -108,7 +109,10 @@
 </div>
 <!-- /.login-box -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <!-- AdminLTE App -->
@@ -148,11 +152,17 @@
             transition: function(url){ window.location.href = url; }
           });
 
+          $('input').iCheck({
+              checkboxClass: 'icheckbox_minimal-blue',
+              radioClass: 'iradio_minimal-blue',
+              increaseArea: '20%' // optional
+            });
+
         });
 
 
     </script>
-
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
 
 </body>
 </html>
