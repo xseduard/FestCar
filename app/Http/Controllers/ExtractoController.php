@@ -238,7 +238,7 @@ class ExtractoController extends AppBaseController
 
         return redirect(route('extractos.index'));
     }
-    public function print($id)
+    public function print_space($id)
     {
         $extracto = $this->extractoRepository->findWithoutFail($id);
 

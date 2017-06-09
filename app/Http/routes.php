@@ -64,15 +64,15 @@ Route::group(['middleware' => 'web'], function() {
 
     Route::get('contratoVinculacions/print/{id}', [
             'as' => 'contratoVinculacions.print',
-            'uses' => 'ContratoVinculacionController@print',
+            'uses' => 'ContratoVinculacionController@print_space',
         ]);
     Route::get('contratoPrestacionServicios/print/{id}', [
             'as' => 'contratoPrestacionServicios.print',
-            'uses' => 'ContratoPrestacionServicioController@print',
+            'uses' => 'ContratoPrestacionServicioController@print_space',
         ]);
     Route::get('extractos/print/{id}', [
             'as' => 'extractos.print',
-            'uses' => 'ExtractoController@print',
+            'uses' => 'ExtractoController@print_space',
         ]);
 /*
     Route::get('contratoVinculacions/print/{id}', [

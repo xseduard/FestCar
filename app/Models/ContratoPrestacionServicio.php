@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use App\Traits\DatesTranslator; 
+use App\Traits\DatesTranslatorContrato; 
 /**
  * Class ContratoPrestacionServicio
  * @package App\Models
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class ContratoPrestacionServicio extends Model
 {
-    use SoftDeletes;
+    use DatesTranslator, DatesTranslatorContrato, SoftDeletes;
 
     public $table = 'contrato_prestacion_servicios';
     
@@ -123,6 +124,11 @@ class ContratoPrestacionServicio extends Model
     
 
     /**
-     * Funciones Especiales
+     * Ascensor
      */
+
+    public function getRlFullNameAttribute()
+    {
+       return $this->rl_name . ' ' . $this->rl_lastname;
+    }
 }

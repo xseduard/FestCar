@@ -180,7 +180,7 @@ class ContratoPrestacionServicioController extends AppBaseController
 
         return redirect(route('contratoPrestacionServicios.index'));
     }
-     public function print($id)
+     public function print_space($id)
     {
         $contratoPrestacionServicio = $this->contratoPrestacionServicioRepository->findWithoutFail($id);
 

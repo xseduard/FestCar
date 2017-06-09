@@ -196,7 +196,7 @@ $validar_documentos_vehiculo = $this->centralRepository->validar_documentos_vehi
 
         return redirect(route('contratoVinculacions.index'));
     }
-     public function print($id)
+     public function print_space($id)
     {
         $contratoVinculacion = $this->contratoVinculacionRepository->findWithoutFail($id);
 
