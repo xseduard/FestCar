@@ -6,7 +6,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ asset('/multimedia/profiles/Estefania.jpg') }}" class="img-circle"
+                <img src="{{ asset('/multimedia/profiles/default.png') }}" class="img-circle"
                      alt="Imagen de usuario"/>
             </div>
             <div class="pull-left info">

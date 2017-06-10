@@ -94,7 +94,7 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img  src="{{ asset('/multimedia/profiles/Estefania.jpg') }}"
+                                <img  src="{{ asset('/multimedia/profiles/default.png') }}"
                                      class="user-image" alt="imagen de usuario"/>
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                 <span class="hidden-xs">{!! Auth::user()->nombres !!}</span>
@@ -102,7 +102,7 @@
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img  src="{{ asset('/multimedia/profiles/Estefania.jpg') }}"
+                                    <img  src="{{ asset('/multimedia/profiles/default.png') }}"
                                          class="img-circle" alt="Imagen de usuario"/>
                                     <p>
                                         {!! Auth::user()->fullname !!}

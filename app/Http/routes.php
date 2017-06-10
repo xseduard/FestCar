@@ -101,4 +101,8 @@ Route::group(['middleware' => 'web'], function() {
 });
 
 
+Route::get('error', function(){ 
+    abort(500);
+});
+
 
