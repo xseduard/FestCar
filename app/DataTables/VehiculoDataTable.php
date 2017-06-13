@@ -90,8 +90,9 @@ class VehiculoDataTable extends DataTable
     {
         return [
             'placa' => ['name' => 'placa', 'data' => 'placa'],
-            'propietario' => ['name' => 'natural_id', 'data' => 'natural_id'],            
-            'capacidad' => ['name' => 'capacidad', 'data' => 'capacidad'],
+            'numero_interno' => ['name' => 'numero_interno', 'data' => 'numero_interno'],            
+            'capacidad' => ['name' => 'capacidad', 'data' => 'capacidad'],            
+            'clase' => ['name' => 'clase', 'data' => 'clase'],
             'modelo' => ['name' => 'modelo', 'data' => 'modelo'],
             'marca' => ['name' => 'marca', 'data' => 'marca'],
             

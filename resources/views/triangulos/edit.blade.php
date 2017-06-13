@@ -11,7 +11,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($triangulo, ['route' => ['triangulos.update', $triangulo->id], 'method' => 'patch']) !!}
+                   {!! Form::model($triangulo, ['route' => ['triangulos.update', $triangulo->id], 'method' => 'patch']) !!} {{ csrf_field() }}
 
                         @include('triangulos.fields')
 

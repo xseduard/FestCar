@@ -14,7 +14,7 @@
 
                 <div class="box-body">
                     <div class="row">
-                        {!! Form::open(['route' => 'tarjetaPropiedads.store']) !!}
+                        {!! Form::open(['route' => 'tarjetaPropiedads.store']) !!} {{ csrf_field() }}
 
                             @include('tarjeta_propiedads.fields')
 

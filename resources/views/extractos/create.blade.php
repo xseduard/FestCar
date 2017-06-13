@@ -22,7 +22,7 @@
 
                 <div class="box-body">
                     <div class="row">
-                        {!! Form::open(['route' => 'extractos.store']) !!}
+                        {!! Form::open(['route' => 'extractos.store']) !!} {{ csrf_field() }}
 
                             @include('extractos.fields')
 

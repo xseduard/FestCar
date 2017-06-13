@@ -15,7 +15,7 @@
 
                 <div class="box-body">
                     <div class="row">
-                        {!! Form::open(['route' => 'naturals.store']) !!}
+                        {!! Form::open(['route' => 'naturals.store']) !!} {{ csrf_field() }}
 
                             @include('naturals.fields')
 

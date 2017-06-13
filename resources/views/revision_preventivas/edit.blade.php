@@ -14,7 +14,7 @@
          <div class="box box-primary">
              <div class="box-body">
                  <div class="row">
-                     {!! Form::model($revisionPreventiva, ['route' => ['revisionPreventivas.update', $revisionPreventiva->id], 'method' => 'patch']) !!}
+                     {!! Form::model($revisionPreventiva, ['route' => ['revisionPreventivas.update', $revisionPreventiva->id], 'method' => 'patch']) !!} {{ csrf_field() }}
 
                           @include('revision_preventivas.fields')
 

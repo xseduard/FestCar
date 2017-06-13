@@ -14,7 +14,7 @@
          <div class="box box-primary">
              <div class="box-body">
                  <div class="row">
-                     {!! Form::model($licenciaConduccion, ['route' => ['licenciaConduccions.update', $licenciaConduccion->id], 'method' => 'patch']) !!}
+                     {!! Form::model($licenciaConduccion, ['route' => ['licenciaConduccions.update', $licenciaConduccion->id], 'method' => 'patch']) !!} {{ csrf_field() }}
 
                           @include('licencia_conduccions.fields')
 

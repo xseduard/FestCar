@@ -14,7 +14,7 @@
          <div class="box box-primary">
              <div class="box-body">
                  <div class="row">
-                     {!! Form::model($soat, ['route' => ['soats.update', $soat->id], 'method' => 'patch']) !!}
+                     {!! Form::model($soat, ['route' => ['soats.update', $soat->id], 'method' => 'patch']) !!} {{ csrf_field() }}
 
                           @include('soats.fields')
 

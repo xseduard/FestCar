@@ -15,7 +15,7 @@
 
                 <div class="box-body">
                     <div class="row">
-                        {!! Form::open(['route' => 'contratoPrestacionServicios.store']) !!}
+                        {!! Form::open(['route' => 'contratoPrestacionServicios.store']) !!} {{ csrf_field() }}
 
                             @include('contrato_prestacion_servicios.fields')
 
