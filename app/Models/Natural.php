@@ -53,7 +53,7 @@ class Natural extends Model
      * Reglas de Validacón
      */
     public static $rules = [
-        'cedula' => 'required|numeric|unique:naturales|digits_between:8,12',
+        'cedula' => 'required|numeric|unique:naturales|digits_between:7,12',
         'municipio_id' => 'required',
         'nombres' => 'required|string',
         'apellidos' => 'required|string',
@@ -61,7 +61,7 @@ class Natural extends Model
         'direccion' => '',
         'direccion_municipio' => 'required',
         'correo' => 'email',
-        'telefono' => 'numeric|digits_between:8,15',
+        'telefono' => 'numeric|digits_between:7,15',
         'observaciones' => ''
     ];
     /**

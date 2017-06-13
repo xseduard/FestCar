@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Response;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
 
  
 
@@ -84,7 +85,11 @@ class ContratoVinculacionController extends AppBaseController
         $input = $request->all();
         $input['user_id'] = Auth::id();
 
-$validar_documentos_vehiculo = $this->centralRepository->validar_documentos_vehiculo($input['vehiculo_id']);
+        if ($this->centralRepository->validar_numero_interno($input['vehiculo_id'])) {                     
+             return Redirect::back()->withInput(Input::all());
+        }
+
+        $validar_documentos_vehiculo = $this->centralRepository->validar_documentos_vehiculo($input['vehiculo_id']);
 
         if ($validar_documentos_vehiculo['error']) {  
             Flash::error($validar_documentos_vehiculo['mensaje']);           
@@ -160,7 +165,11 @@ $validar_documentos_vehiculo = $this->centralRepository->validar_documentos_vehi
         $input = $request->all();
         $input['user_id'] = Auth::id();
 
-    $validar_documentos_vehiculo = $this->centralRepository->validar_documentos_vehiculo($input['vehiculo_id']);
+        if ($this->centralRepository->validar_numero_interno($input['vehiculo_id'])) {                     
+             return Redirect::back()->withInput(Input::all());
+        }
+
+        $validar_documentos_vehiculo = $this->centralRepository->validar_documentos_vehiculo($input['vehiculo_id']);
 
         if ($validar_documentos_vehiculo['error']) {  
             Flash::error($validar_documentos_vehiculo['mensaje']);           
@@ -208,5 +217,33 @@ $validar_documentos_vehiculo = $this->centralRepository->validar_documentos_vehi
        
        $this->contratoVinculacionRepository->print_contratos($id);
         
+    }
+    public function aprobar($id)
+    {
+        $contratoVinculacion = $this->contratoVinculacionRepository->findWithoutFail($id);
+
+        if (empty($contratoVinculacion)) {
+            Flash::error('Contrato de Vinculación No se encuentra registrado.');
+
+            return redirect(route('contratoVinculacions.index'));
+        }
+
+        if (Auth::user()->role == 'gerencia' || Auth::user()->role == 'administrador') {
+           
+            $input = [];
+            $input['aprobado'] = true;
+            $input['fecha_aprobacion'] = Carbon::now();
+            $input['usuario_aprobacion'] = Auth::id();
+           
+           $contratoVinculacion = $this->contratoVinculacionRepository->update($input, $id);
+           
+           Flash::success('Contrato de Vinculación Aprobado correctamente.');
+
+            return redirect(route('contratoVinculacions.index'));
+        } else {
+             Flash::error('Su cuenta de usuario no posee el nivel de autorización requerida para efectuar esta acción.');
+
+            return redirect(route('contratoVinculacions.index'));
+        }
     }
 }

@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1 class="pull-left">Cuadros</h1>
         <h1 class="pull-right">
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('cuadros.create') !!}"><i class="fa fa-plus"></i> &nbsp; Agregar</a>
+           <a class="btn btn-primary btn-flat pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('cuadros.create') !!}"><i class="fa fa-plus"></i> &nbsp; Agregar</a>
         </h1>
     </section>
     <div class="content">

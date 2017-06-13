@@ -51,12 +51,48 @@
 <!-- campo numerico -->
 <div class="form-group col-sm-4">
     {!! Form::label('marca', 'Marca') !!}
-    {!! Form::text('marca', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
+    {!! Form::select('marca', [
+        'CHEVROLET' =>  'CHEVROLET',
+        'NISSAN'    =>  'NISSAN',
+        'TOYOTA'    =>  'TOYOTA',
+        'ZUSUKI'    =>  'ZUSUKI',
+        'DAEWOO'    =>  'DAEWOO',
+        'HYUNDAI'   =>  'HYUNDAI',
+        'KIA'       =>  'KIA',
+        'UAZ'       =>  'UAZ',
+        'RENAULT'   =>  'RENAULT',
+        'DAIHATSU'  =>  'DAIHATSU',
+        'WILLYS'    =>  'WILLYS',
+        'FORD'      =>  'FORD',
+        'MITSUBISHI'    =>  'MITSUBISHI',
+        'JAC'       =>  'JAC',
+        'MAZDA'     =>  'MAZDA',
+        'VOLKSWAGEN'    =>  'VOLKSWAGEN',
+        'FOTON'     =>  'FOTON',
+        'CHERY'     =>  'CHERY',
+        'SSANGYONG' =>  'SSANGYONG',
+        'AGRALE'    =>  'AGRALE',
+        'MAHINDRA'  =>  'MAHINDRA',
+        'DODGE'     =>  'DODGE',
+        'INTERNATIONAL' =>  'INTERNATIONAL',
+        'MERCEDES BENZ' =>  'MERCEDES BENZ',
+        'OTRA'      =>  'OTRA'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'']) !!}
 </div>
 <!-- campo numerico -->
 <div class="form-group col-sm-4">
     {!! Form::label('clase', 'Clase') !!}
-    {!! Form::text('clase', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
+    {!! Form::select('clase', [
+        'AUTOMOVIL' =>  'AUTOMOVIL',
+        'MICROBUS'  =>   'MICROBUS',
+        'CAMIONETA' =>  'CAMIONETA',
+        'CAMPERO'   =>    'CAMPERO',
+        'TAXI'      =>   'TAXI',
+        'BUSETA'    => 'BUSETA',
+        'TRACTO CAMIÓN' =>  'TRACTO CAMIÓN',
+        'BUS'       =>    'BUS',
+        'CAMIÓN'    => 'CAMIÓN',
+        'DOBLE CABINA' =>   'DOBLE CABINA',
+        'NO APLICA'     =>  'NO APLICA'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'']) !!}
 </div>
 <!-- $FIELD_NAME_TITLE$ Field -->
 <!-- $FIELD_NAME_TITLE$ Selector -->
@@ -75,7 +111,7 @@
 <div class="form-group col-sm-12">
     {!! Form::button('<i class="glyphicon glyphicon-floppy-disk"></i> Guardar', [
         'type' => 'submit',
-        'class' => 'btn btn-primary'        
+        'class' => 'btn btn-primary btn-flat'        
     ]) !!}
-    <a href="{!! route('vehiculos.index') !!}" class="btn btn-default">Cancelar</a>
+    <a href="{!! route('vehiculos.index') !!}" class="btn btn-default btn-flat">Cancelar</a>
 </div>

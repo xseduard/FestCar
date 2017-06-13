@@ -137,7 +137,7 @@ El presente contrato se firma a los ".$data['fecha_creacion']."
 
         $pdf->SetFont('helvetica','',10);
         // Estilos para etiquetas
-        $pdf->SetStyle("p","helvetica","N",12,"50,50,50",0);
+        $pdf->SetStyle("p","helvetica","N",10,"50,50,50",0);
         $pdf->SetStyle("b","helvetica","B",0,"102,153,153");
         $pdf->ln();
         $pdf->WriteTag(0,6,utf8_decode($text),0,"J",0,0);

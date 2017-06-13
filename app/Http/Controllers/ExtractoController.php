@@ -83,6 +83,10 @@ class ExtractoController extends AppBaseController
         $input = $request->all();
         $input['user_id'] = Auth::id();
 
+        if ($this->centralRepository->validar_numero_interno($input['vehiculo_id'])) {                     
+             return Redirect::back()->withInput(Input::all());
+        }
+
         $validar_documentos_vehiculo = $this->centralRepository->validar_documentos_vehiculo($input['vehiculo_id']);
 
         if ($validar_documentos_vehiculo['error']) {  
@@ -186,6 +190,10 @@ class ExtractoController extends AppBaseController
 
         $input = $request->all();
         $input['user_id'] = Auth::id();
+
+        if ($this->centralRepository->validar_numero_interno($input['vehiculo_id'])) {                     
+             return Redirect::back()->withInput(Input::all());
+        }
 
         $validar_documentos_vehiculo = $this->centralRepository->validar_documentos_vehiculo($input['vehiculo_id']);
 

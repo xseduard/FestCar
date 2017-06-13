@@ -95,7 +95,7 @@
 <div class="form-group col-sm-12">
     {!! Form::button('<i class="glyphicon glyphicon-floppy-disk"></i> Guardar', [
         'type' => 'submit',
-        'class' => 'btn btn-primary'        
+        'class' => 'btn btn-primary btn-flat'        
     ]) !!}
-    <a href="{!! route('licenciaConduccions.index') !!}" class="btn btn-default">Cancelar</a>
+    <a href="{!! route('licenciaConduccions.index') !!}" class="btn btn-default btn-flat">Cancelar</a>
 </div>

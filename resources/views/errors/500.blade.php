@@ -35,7 +35,7 @@
             <div class="content">
                 <div class="title">Encontramos un error.</div>
                 <h4>Para resolverlo: envianos un mensaje a: <a href="mailto:xseduard@gmail.com">xseduard@gmail.com</a> </h4>
-                <h4>con la hora exsacta de este aviso incluyendo minutos/segundos</h4>
+                <h4>con la hora exacta de este aviso incluyendo minutos/segundos</h4>
 
                 <h3>para regresar haz click <a href="http://fury.transeba.com">Aquí</a></h3>
             </div>

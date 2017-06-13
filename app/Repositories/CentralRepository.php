@@ -43,6 +43,13 @@ class CentralRepository extends BaseRepository
         }
         // FIN VALIDACIONES
     }
+    public function validar_numero_interno($id){
+        $vehiculo = Vehiculo::where('id', $id)->first();
+        if (empty($vehiculo->numero_interno)) {
+           Flash::error("<i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i> El vehiculo de placas ".$vehiculo->placa." no tiene asignado numero interno, <a href='/vehiculos/".$vehiculo->id."/edit' target='_blank'>Resolver aquí</a>"); 
+           return true;
+        }
+    }
     public function validar_documentos_vehiculo($id){
         $car =  Vehiculo::with('tarjetapropiedad')
         ->with('tarjetaoperacion')

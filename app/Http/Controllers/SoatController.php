@@ -12,6 +12,7 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Auth;
 use Response;
+use Jenssegers\Date\Date;
 
 class SoatController extends AppBaseController
 {
@@ -118,6 +119,7 @@ class SoatController extends AppBaseController
     {
         $soat = $this->soatRepository->findWithoutFail($id);
 
+
         if (empty($soat)) {
             Flash::error('Soat No se encuentra registrado.');
 
@@ -148,6 +150,10 @@ class SoatController extends AppBaseController
         }
         $input = $request->all();
         $input['user_id'] = Auth::id();
+        // $input['fecha_vigencia_final'] = $input['fecha_vigencia_inicio'];
+        // dd($input);
+        //$input['fecha_vigencia_final'] = new Date ($input['fecha_vigencia_final']);
+        //dd($input['fecha_vigencia_final']->addYear()->subDay());
 
         $soat = $this->soatRepository->update($input, $id);
 

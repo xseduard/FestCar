@@ -27,8 +27,7 @@ class ContratoPrestacionServicio extends Model
         'juridico_id',
         'origen_id',
         'destino_id',
-        'servicio',
-        
+        'servicio',        
         'aprobado',
         'fecha_aprobacion',
         'usuario_aprobacion',
@@ -50,8 +49,7 @@ class ContratoPrestacionServicio extends Model
         'juridico_id' => 'integer',
         'origen_id' => 'integer',
         'destino_id' => 'integer',
-        'servicio' => 'string',
-        
+        'servicio' => 'string',        
         'aprobado' => 'boolean',
         'fecha_aprobacion' => 'datetime',
         'usuario_aprobacion' => 'integer',
@@ -72,8 +70,7 @@ class ContratoPrestacionServicio extends Model
         'tipo_cliente' => 'required',
         'origen_id' => 'required',
         'destino_id' => 'required',
-        'servicio' => '',
-        
+        'servicio' => '',        
         'usuario_aprobacion' => '',
         'fecha_inicio' => 'required|date',
         'fecha_final' => 'required|date',

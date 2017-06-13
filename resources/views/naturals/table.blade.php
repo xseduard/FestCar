@@ -3,22 +3,20 @@
         <th>Cédula</th>
         <th>Nombres</th>
         <th>Apellidos</th>
-        <th>Correo</th>
         <th>Telefono</th>
+        <th>Domicilio</th>
         <th>Fecha de creación</th>
-        <th>Usuario creador</th>
         <th colspan="3">Acciones</th>
     </thead>
     <tbody>
     @foreach($naturals as $natural)
         <tr>
-            <td>{!! $natural->cedula !!}</td>
+            <td>{!! number_format($natural->cedula, 0, '.', '.' ) !!}</td>
             <td>{!! $natural->nombres !!}</td>
             <td>{!! $natural->apellidos !!}</td>
-            <td>{!! $natural->correo !!}</td>
             <td>{!! $natural->telefono !!}</td>
-            <td>{!! $natural->created_at !!}</td>
-            <td>{!! $natural->user->nombres," ", $natural->user->apellidos !!}</td>
+            <td>{!! $natural->residenciamunicipio->nombre !!}</td>
+            <td>{!! $natural->created_at->diffForHumans() !!}</td>
             <td>
                 {!! Form::open(['route' => ['naturals.destroy', $natural->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>

@@ -20,7 +20,7 @@
                     <span class="label label-default">Desactivado</span>
                 @endif
             </td>
-            <td>{!! $juridico->updated_at !!}</td>
+            <td>{!! $juridico->updated_at->diffForHumans() !!}</td>
             <td>
                 {!! Form::open(['route' => ['juridicos.destroy', $juridico->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>

@@ -48,15 +48,37 @@
 </div>
 
 <!-- Entidad Campo de texto -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-6">
     {!! Form::label('entidad', 'Entidad Expide SOAT') !!}
-    {!! Form::text('entidad', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
+    {!! Form::select('entidad', 
+        ['Aseguradora Solidaria' => 'Aseguradora Solidaria',
+        'Seguros del Estado S.A' => 'Seguros del Estado S.A',
+        'Allianz Seguros' => 'Allianz Seguros',
+        'AIG Seguros' => 'AIG Seguros',
+        'SURA' => 'SURA',
+        'AXA Colpatria Seguros' => 'AXA Colpatria Seguros',
+        'Alico' => 'Alico',
+        'Mapfre' => 'Mapfre',
+        'RSA Seguros' => 'RSA Seguros',
+        'Equidad Seguros' => 'Equidad Seguros',
+        'Liberty Seguros' => 'Liberty Seguros',
+        'Generali Seguros' => 'Generali Seguros',
+        'Charis' => 'Charis',
+        'Chubb' => 'Chubb',
+        'Confianza' => 'Confianza',
+        'Mundial Seguros' => 'Mundial Seguros',
+        'QBE' => 'QBE',
+        'Generali' => 'Generali',
+        'Seguros Bolivar' => 'Seguros Bolivar',
+        'BNP Paribas Cardif' => 'BNP Paribas Cardif',
+        'Previsora' => 'Previsora',
+        'Otra' => 'Otra'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'']) !!}
 </div>
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::button('<i class="glyphicon glyphicon-floppy-disk"></i> Guardar', [
         'type' => 'submit',
-        'class' => 'btn btn-primary'        
+        'class' => 'btn btn-primary btn-flat'        
     ]) !!}
-    <a href="{!! route('soats.index') !!}" class="btn btn-default">Cancelar</a>
+    <a href="{!! route('soats.index') !!}" class="btn btn-default btn-flat">Cancelar</a>
 </div>

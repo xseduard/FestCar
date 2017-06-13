@@ -1,0 +1,159 @@
+php artisan tinker
+
+$variable = App\Models\Nombre_modelo
+
+all()
+get()
+find(#)
+first()
+
+ 			
+::::::::::::::::  DB Type :::::::::::::::
+
+string,25
+text
+integer
+string:unique
+
+::::::::::::::::  Validations :::::::::::::::
+
+required
+
+::::::::::::::::  Migrations type :::::::::::::::
+
+			$table->integer('area_id')->unsigned();
+            $table->foreign('area_id')->references('id')->on('areas');
+
+
+
+$table->boolean('confirmed');
+
+$table->enum('choices', ['foo', 'bar']);
+
+$table->timestamp('added_on');
+
+$table->string('field_name', 25)
+
+
+::::::::::::::::  modificadores :::::::::::::::
+
+->comment('my comment')
+
+->default($value)
+
+->nullable()
+
+->nullable()
+
+->unique();
+
+
+::::::::::::::::  Relaciones :::::::::::::::
+
+in mmodel municipio
+
+  public function departamento(){
+      return $this->belongsTo(Departamento::class, 'id_departamento');
+  }
+  public function departamento(){
+        return $this->belongsTo('App\Models\Departamento');
+  }
+
+  return $this->hasOne('App\Phone', 'foreign_key', 'local_key');
+  return $this->belongsTo('App\User', 'foreign_key');
+  return $this->hasMany('App\Comment', 'foreign_key');
+  return $this->hasMany('App\Comment', 'foreign_key', 'local_key');
+
+  return $this->hasMany('App\Models\Soat', 'vehiculo_id', 'vehiculo_id');
+
+
+::::::::::::::::  llamar selectores  :::::::::::::::
+
+	$selectores = [
+             'regionals'=> Regional::selRegional()
+        ];
+
+        return view('grupoJurados.create')->with(['selectores' => $selectores]);
+
+
+
+::::::::::::::::  control de usuarios  :::::::::::::::
+
+
+Auth::id();
+Auth::guest();
+Auth::check();
+Auth::user()->nombres;
+
+        use Illuminate\Support\Facades\Auth;
+
+        C:\xampp\htdocs\FestProyecto\vendor\laravel\framework\src\Illuminate\Contracts\Auth
+
+middlewards 
+app/http/kernel.php 
+
+
+rutas de auth
+From Illuminate/Routing/Router.php
+
+
+controlador de autenticacion 
+C:\xampp\htdocs\FestProyecto\vendor\laravel\framework\src\Illuminate\Foundation\Auth
+
+
+
+
+{!! Form::select('user_id', [null => 'Select a user...'] + $users->lists('name', 'id')) !!}
+
+ {!! Form::select('user_id', $users->lists('name', 'id'), null, ['optional' => 'Select a user...']) !!}
+
+ {!! Form::select('id_departamento', \App\Models\Departamento::all()->pluck('nombre', 'id')->toArray(), null, ['class' => 'form-control seltest', 'style' => 'width: 100%']) !!}
+  
+
+public function cityByLanguage($lang_id){
+    $cities = City::select('name','id')->where('lang_id',$lang_id)->get();
+
+    return $cities;
+}
+
+Guardar el id de usuarios
+
+$input = $request->all();
+        $input['user_id'] = Auth::id();
+
+
+ORDER BY
+ $municipios = $this->municipioRepository->orderBy('id', 'DESC')->paginate(15);
+
+
+
+
+
+          <!-- PAGINATION -->
+          <!--
+          <div class="row mt-0">
+            <nav class="blog-pag">
+              <ul class="pagination pag2 m-0">
+              <li><a href="#"><i class="fa fa-angle-left"></i><span class="sr-only">Previous</span></a></li>
+              <li class="active"><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#"><i class="fa fa-angle-right"></i><span class="sr-only">Next</span></a></li>
+              </ul>
+            </nav>
+          </div>
+          -->
+  ejemplo recorrer relaciones
+ public function municipio_id(){
+        // se mantienen formas de colleciones dentro de arrays
+        //dd(Municipio::with('departamento')->get()->all()[1]->departamento);
+        //dd(Municipio::with('departamento')->get()->all()[1]['departamento']);
+            foreach (Municipio::with('departamento')->get()->toArray() as $key => $value) {
+                //dd($value); //cuando lo recorre se convierte absolutamente todo en arrray
+                $array[$value['id']]=$value['nombre'].", ".$value['departamento']['nombre'];                
+            }
+        return ($array);
+    }
+
+<iframe style="width:900px; overflow:auto; height:750px;" src="https://www.runt.com.co/consultaCiudadana/#consultaPersona" frameborder="0" scrolling="auto" id="external-frame"></iframe>

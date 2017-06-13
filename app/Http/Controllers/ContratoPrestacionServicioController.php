@@ -12,6 +12,7 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Auth;
 use Response;
+use Carbon\Carbon;
 
 class ContratoPrestacionServicioController extends AppBaseController
 {
@@ -192,5 +193,34 @@ class ContratoPrestacionServicioController extends AppBaseController
        
        $this->contratoPrestacionServicioRepository->print_contratos($id);
         
+    }
+
+     public function aprobar($id)
+    {
+        $contratoPrestacionServicio = $this->contratoPrestacionServicioRepository->findWithoutFail($id);
+
+        if (empty($contratoPrestacionServicio)) {
+            Flash::error('Contrato de prestación de servicios No se encuentra registrado.');
+
+            return redirect(route('contratoPrestacionServicios.index'));
+        }
+
+        if (Auth::user()->role == 'gerencia' || Auth::user()->role == 'administrador') {
+           
+            $input = [];
+            $input['aprobado'] = true;
+            $input['fecha_aprobacion'] = Carbon::now();
+            $input['usuario_aprobacion'] = Auth::id();
+           
+           $contratoPrestacionServicio = $this->contratoPrestacionServicioRepository->update($input, $id);
+           
+           Flash::success('Contrato de Vinculación Aprobado correctamente.');
+
+            return redirect(route('contratoPrestacionServicios.index'));
+        } else {
+             Flash::error('Su cuenta de usuario no posee el nivel de autorización requerida para efectuar esta acción.');
+
+            return redirect(route('contratoPrestacionServicios.index'));
+        }
     }
 }

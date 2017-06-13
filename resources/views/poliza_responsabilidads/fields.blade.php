@@ -32,7 +32,7 @@
 <div class="form-group col-sm-12">
     {!! Form::button('<i class="glyphicon glyphicon-floppy-disk"></i> Guardar', [
         'type' => 'submit',
-        'class' => 'btn btn-primary'        
+        'class' => 'btn btn-primary btn-flat'        
     ]) !!}
-    <a href="{!! route('polizaResponsabilidads.index') !!}" class="btn btn-default">Cancelar</a>
+    <a href="{!! route('polizaResponsabilidads.index') !!}" class="btn btn-default btn-flat">Cancelar</a>
 </div>

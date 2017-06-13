@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Jenssegers\Date\Date;
+use Carbon\Carbon;
 
 trait DatesTranslatorContrato
 {
@@ -14,5 +15,14 @@ trait DatesTranslatorContrato
 	{
 		return new Date($fecha_final);
 	}
+
+	public function getVigenteAttribute()
+    {       
+        if ($this->fecha_inicio <=  Carbon::now() && $this->fecha_final >= Carbon::now()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 	
 }
