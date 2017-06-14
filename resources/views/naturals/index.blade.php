@@ -16,6 +16,20 @@
         <div class="animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
             <div class="box box-primary">
                 <div class="box-body">
+                <!-- TESTING CONSTRUCCIOÓN -->
+                    {!!  Form::open(['route' => 'naturals.index', 'method' => 'GET']) !!}
+                     <div class="col-lg-4 pull-right">  
+                        <div class="input-group">
+                          <input name="search" type="text" class="form-control" placeholder="Buscar...">
+                          <span class="input-group-btn">
+                            <button class="btn btn-primary btn-flat" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                          </span>
+                        </div><!-- /input-group -->
+                      </div><!-- /.col-lg-6 -->
+                    {!! Form::close() !!}
+                    <div class="clearfix"></div>
+                    <hr>
+                <!-- FINAL TESTING CONSTRUCCIOÓN -->
                     @if($naturals->isEmpty())
                         <div class="alert alert-info alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

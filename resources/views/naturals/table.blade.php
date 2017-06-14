@@ -6,7 +6,7 @@
         <th>Telefono</th>
         <th>Domicilio</th>
         <th>Fecha de creación</th>
-        <th colspan="3">Acciones</th>
+        <th width="70px">Acciones</th>
     </thead>
     <tbody>
     @foreach($naturals as $natural)

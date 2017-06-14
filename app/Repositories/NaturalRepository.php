@@ -11,11 +11,9 @@ class NaturalRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'cedula',
-        'nombres',
-        'apellidos',
-        'correo',
-        'telefono'
+        'cedula' => 'like',
+        'nombres' => 'like',
+        'apellidos' => 'like'
     ];
 
     /**
