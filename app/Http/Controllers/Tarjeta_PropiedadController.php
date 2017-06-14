@@ -35,7 +35,7 @@ class Tarjeta_PropiedadController extends AppBaseController
     public function index(Request $request)
     {
         $this->tarjetaPropiedadRepository->pushCriteria(new RequestCriteria($request));
-        $tarjetaPropiedads = $this->tarjetaPropiedadRepository->paginate(15);
+        $tarjetaPropiedads = $this->tarjetaPropiedadRepository->orderBy('updated_at', 'desc')->paginate(15);
 
         /**
          * $tarjetaPropiedads = $this->tarjetaPropiedadRepository->all();

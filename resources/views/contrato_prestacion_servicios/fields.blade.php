@@ -63,11 +63,18 @@
 <div class="clearfix"></div>
 
 <!-- Servicio Campo de texto -->
-<div class="form-group col-sm-9">
+<div class="form-group col-sm-8">
     {!! Form::label('responsable_id', 'Responsable (Opcional)') !!}
     <div class="input-group">
         <div class="input-group-addon" title="En caso de ser selcccionado, este Aparecerá en los extractos del contrato"><i class="fa fa-shield" aria-hidden="true" ></i></div>
         {!! Form::select('responsable_id', $selectores['natural_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+    </div>
+</div>
+<div class="form-group col-sm-4">
+    {!! Form::label('valor', 'Valor contrato') !!}
+    <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-usd"></i></div>
+        {!! Form::text('valor', null, ['class' => 'form-control', 'placeholder' => 'sin puntos, comas o espacios']) !!}
     </div>
 </div>
 

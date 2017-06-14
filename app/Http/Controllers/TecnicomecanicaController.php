@@ -35,7 +35,7 @@ class TecnicomecanicaController extends AppBaseController
     public function index(Request $request)
     {
         $this->tecnicomecanicaRepository->pushCriteria(new RequestCriteria($request));
-        $tecnicomecanicas = $this->tecnicomecanicaRepository->paginate(15);        
+        $tecnicomecanicas = $this->tecnicomecanicaRepository->orderBy('updated_at', 'desc')->paginate(15);        
         $fecha_actual = \Carbon\Carbon::now();
 
         /**

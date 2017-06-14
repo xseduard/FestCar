@@ -35,7 +35,7 @@ class RevisionPreventivaController extends AppBaseController
     public function index(Request $request)
     {
         $this->revisionPreventivaRepository->pushCriteria(new RequestCriteria($request));
-        $revisionPreventivas = $this->revisionPreventivaRepository->paginate(15);
+        $revisionPreventivas = $this->revisionPreventivaRepository->orderBy('updated_at', 'desc')->paginate(15);
         $fecha_actual = \Carbon\Carbon::now();
 
         /**

@@ -41,10 +41,10 @@ class CreateContratoVinculacionsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->string('rl_id', 14)->default('50.914.925')->comment('Repre. legal');
-            $table->string('rl_id_ref', 15)->default('Arboletes')->comment('Repre. legal');
-            $table->string('rl_name', 5)->default('Tana')->comment('Repre. legal');
-            $table->string('rl_lastname', 18)->default('Coronado Calderin')->comment('Repre. legal');  
+            $table->string('rl_id', 14)->default('0000000')->comment('Repre. legal');
+            $table->string('rl_id_ref', 15)->default('city')->comment('Repre. legal');
+            $table->string('rl_name', 5)->default('name')->comment('Repre. legal');
+            $table->string('rl_lastname', 18)->default('lastname')->comment('Repre. legal');  
         });
     }
 

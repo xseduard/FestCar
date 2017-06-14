@@ -35,7 +35,7 @@ class JuridicoController extends AppBaseController
     public function index(Request $request)
     {
         $this->juridicoRepository->pushCriteria(new RequestCriteria($request));
-        $juridicos = $this->juridicoRepository->paginate(15);
+        $juridicos = $this->juridicoRepository->orderBy('updated_at', 'desc')->paginate(15);
 
         /**
          * $juridicos = $this->juridicoRepository->all();

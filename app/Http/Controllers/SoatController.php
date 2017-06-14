@@ -36,7 +36,7 @@ class SoatController extends AppBaseController
     public function index(Request $request)
     {
         $this->soatRepository->pushCriteria(new RequestCriteria($request));
-        $soats = $this->soatRepository->paginate(15);
+        $soats = $this->soatRepository->orderBy('updated_at', 'desc')->paginate(15);
         $fecha_actual = \Carbon\Carbon::now();
 
 

@@ -35,7 +35,7 @@ class NaturalController extends AppBaseController
     public function index(Request $request)
     {
         $this->naturalRepository->pushCriteria(new RequestCriteria($request));
-        $naturals = $this->naturalRepository->paginate(15);
+        $naturals = $this->naturalRepository->orderBy('updated_at', 'desc')->paginate(15);
 
         /**
          * $naturals = $this->naturalRepository->all();

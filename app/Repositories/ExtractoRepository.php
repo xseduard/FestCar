@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Extracto;
+use App\Models\Empresa;
 use InfyOm\Generator\Common\BaseRepository;
 use Carbon\Carbon;
 use Jenssegers\Date\Date;
@@ -37,7 +38,7 @@ class ExtractoRepository extends BaseRepository
         }
     
     function print_extractos($id){
-
+        $empresa = Empresa::first();
         $extracto =  Extracto::with('cps.natural')
         ->with('cps.juridico.natural')
         ->with('vehiculo.tarjetaoperacion')
@@ -76,9 +77,9 @@ class ExtractoRepository extends BaseRepository
         
 
         $data = [
-        'nombre_mi_empresa' => 'TRANSPORTES ESPECIALES BUSES Y MIXTOS TRANSEBA S.A.S',
-        'nombre_mi_empresa_corto' => 'TRANSEBA S.A.S',
-        'nit_mi_empresa' => '900.414.811-9',
+        'mi_empresa_nombre' => $empresa->razon_social,
+        'mi_empresa_nombre_corto' => $empresa->nombre_corto,
+        'mi_empresa_nit' => $empresa->nit,
         ];
         $objeto_contrato_cps = "";
         if ($extracto->cps->s1) {
@@ -164,8 +165,8 @@ class ExtractoRepository extends BaseRepository
 
         //$pdf->Cell(Ancho,Alto,"Texto",borde,Ln 0=derecha 1=siguiente linea 2=debajo,'L/C/R',relleno true/false);
         $pdf->AddPage();
-        $pdf->SetTitle("$codigo | EXTRACTO ".$data['nombre_mi_empresa_corto'],true);
-        $pdf->SetSubject('Copia Contrato '.$data['nombre_mi_empresa_corto']);
+        $pdf->SetTitle("$codigo | EXTRACTO ".$data['mi_empresa_nombre_corto'],true);
+        $pdf->SetSubject('Copia Contrato '.$data['mi_empresa_nombre_corto']);
         $pdf->SetCreator('FestCar Project');
         $pdf->SetAuthor('@xsED');
 
@@ -189,8 +190,8 @@ class ExtractoRepository extends BaseRepository
         $pdf->SetFont('helvetica','',10);
         $pdf->Cell(146,5,utf8_decode("RAZÓN SOCIAL DE LA EMPRESA DE TRANSPORTE EPECIAL"),"LT",0,"L");
         $pdf->Cell(50,5,utf8_decode("NIT"),"TR",1,"L");
-        $pdf->Cell(146,$HC,utf8_decode("".$data['nombre_mi_empresa']),"LB",0,"L");
-        $pdf->Cell(50,$HC,utf8_decode("".$data['nit_mi_empresa']),"BR",1,"L");
+        $pdf->Cell(146,$HC,utf8_decode("".$data['mi_empresa_nombre']),"LB",0,"L");
+        $pdf->Cell(50,$HC,utf8_decode("".$data['mi_empresa_nit']),"BR",1,"L");
         $pdf->Cell(0,$HC,utf8_decode("CONTRATO No: CPS".str_pad($extracto->cps->id, 4, "0", STR_PAD_LEFT)),1,1,"L");        
         $pdf->Cell(146,5,utf8_decode("CONTRATANTE"),"LT",0,"L");
         $pdf->Cell(50,5,utf8_decode("NIT/CC"),"TR",1,"L");

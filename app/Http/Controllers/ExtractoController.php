@@ -38,7 +38,7 @@ class ExtractoController extends AppBaseController
     public function index(Request $request)
     {
         $this->extractoRepository->pushCriteria(new RequestCriteria($request));
-        $extractos = $this->extractoRepository->paginate(15);
+        $extractos = $this->extractoRepository->orderBy('updated_at', 'desc')->paginate(15);
 
         /**
          * $extractos = $this->extractoRepository->all();

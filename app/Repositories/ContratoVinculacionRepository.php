@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\ContratoVinculacion;
+use App\Models\Empresa;
 use InfyOm\Generator\Common\BaseRepository;
 
 //Models
@@ -73,7 +74,7 @@ class ContratoVinculacionRepository extends BaseRepository
         
          //pdf
         $contrato = $this->findWithoutFail($id);
-
+        $empresa = Empresa::first();
         $contrato =  ContratoVinculacion::with('natural.municipio.departamento')
         ->with('juridico.natural.municipio.departamento')
         ->with('natural.residenciamunicipio.departamento')
@@ -155,9 +156,9 @@ class ContratoVinculacionRepository extends BaseRepository
         }
                 // Determianr cuota
         if ($contrato->vehiculo->capacidad > 19) {
-            $CUOTA_ADMIN = "150000";
+            $CUOTA_ADMIN = $empresa->cuota_admin_valor;
         } else {
-            $CUOTA_ADMIN = "130000";
+            $CUOTA_ADMIN = $empresa->cuota_admin_valor_dos;
         }
 
         //Tipo de contrato
@@ -182,16 +183,16 @@ class ContratoVinculacionRepository extends BaseRepository
         
 
         $data = [        
-        'NIT_MI_EMPRESA'                    =>  '9004148119',
-        'NOMBRE_EMPRESA'                    =>  'TRANSPORTES ESPECIALES BUSES Y MIXTOS TRANSEBA S.A.S',
-        'NOMBRE_EMPRESA_CORTO'              =>  'TRANSEBA S.A.S',
-        'NOMBRE_RTE_LEGAL_MI_EMPRESA'       =>  mb_strtoupper($contrato->rl_name,'utf-8').' '.mb_strtoupper($contrato->rl_lastname,'utf-8'),
-        'CEDULA_RTE_LEGAL_MI_EMPRESA'       =>  number_format($contrato->rl_id, 0, '.', '.' ),
-        'LUGAR_EXP_CED_RTE_LEGAL_MI_EMPRESA' => $contrato->rl_id_ref,
-        'contratista_nombre'              =>  mb_strtoupper($contratista_nombre,'utf-8'),
-        'contratista_residencia_actual'           =>  $contratista_residencia_actual,
-        'contratista_cedula_ref'           =>  $contratista_cedula_ref,
-        'contratista_cedula'              =>  number_format($contratista_cedula, 0, '.', '.' ),
+        'mi_empresa_nit'                    =>  $empresa->nit,
+        'mi_empresa_nombre'                 =>  $empresa->razon_social,
+        'mi_empresa_nombre_corto'           =>  $empresa->nombre_corto,
+        'mi_empresa_rt_nombre'              =>  mb_strtoupper($contrato->rlfullname,'utf-8'),
+        'mi_empresa_rt_cedula'              =>  number_format($contrato->rl_id, 0, '.', '.' ),
+        'mi_empresa_rt_cedula_ref'          => $contrato->rl_id_ref,
+        'contratista_nombre'                =>  mb_strtoupper($contratista_nombre,'utf-8'),
+        'contratista_residencia_actual'     =>  $contratista_residencia_actual,
+        'contratista_cedula_ref'            =>  $contratista_cedula_ref,
+        'contratista_cedula'                =>  number_format($contratista_cedula, 0, '.', '.' ),
         'DIR_MUNINCIPIO_PROP_VEHICULO'      =>  $DIR_MUNINCIPIO_PROP_VEHICULO,
         'MUNICIPIO_MI_EMPRESA'              =>  'APARTADÓ, ANTIOQUIA',
         'DATOS_VEHICULO'                    =>  'FALTA TABLA VEHICULO',
@@ -204,8 +205,8 @@ class ContratoVinculacionRepository extends BaseRepository
         'FECHA_PERFEC_ANO_LETRAS'           =>  strtolower(\NumeroALetras::convertir($fecha_creacion->year)),
         'FECHA_PERFECCIONAMIENTO'           =>  $this->traducir_fecha($contrato->created_at)->format('l d, F Y'),
         'TIPO_POSEEDOR_O_TENEDOR'           =>  $TIPO_POSEEDOR_O_TENEDOR,
-        'CUOTA_ADMIN_PORCENTAJE'            =>  '5',
-        'CUOTA_ADMIN_PORCENTAJE_LETRAS'     =>  strtolower(\NumeroALetras::convertir('5')),
+        'CUOTA_ADMIN_PORCENTAJE'            =>  $empresa->cuota_admin,
+        'CUOTA_ADMIN_PORCENTAJE_LETRAS'     =>  strtolower(\NumeroALetras::convertir($empresa->cuota_admin)),
         'CUOTA_ADMIN'                       =>  number_format($CUOTA_ADMIN, 0, '.', '.' ),
         'TIPO_PROVEEDOR'                    =>  $contrato->tipo_proveedor,
         'JURIDICO_NOMBRE'                   =>  $JURIDICO_NOMBRE,
@@ -219,8 +220,8 @@ class ContratoVinculacionRepository extends BaseRepository
         $pdf->header();
         //$pdf->Cell(Ancho,Alto,"Texto",borde,Ln 0=derecha 1=siguiente linea 2=debajo,'L/C/R',relleno true/false);
         $pdf->AddPage();
-        $pdf->SetTitle($codigo." | CONTRATO ".$data['NOMBRE_EMPRESA'],true);
-        $pdf->SetSubject('Copia Contrato '.$data['NOMBRE_EMPRESA']);
+        $pdf->SetTitle($codigo." | CONTRATO ".$data['mi_empresa_nombre'],true);
+        $pdf->SetSubject('Copia Contrato '.$data['mi_empresa_nombre']);
         $pdf->SetCreator('FestCar Project');
         $pdf->SetAuthor('@xsED');
         $pdf->SetFont('helvetica','B',15);
@@ -252,11 +253,11 @@ class ContratoVinculacionRepository extends BaseRepository
                 break;
             case 'CC':
                 $pdf->Cell(75,10,utf8_decode('EMPRESA CONTRATANTE'),1,0,"C");
-                $pdf->Multicell(0,10,utf8_decode($data['NOMBRE_EMPRESA_CORTO']),1,'C');
+                $pdf->Multicell(0,10,utf8_decode($data['mi_empresa_nombre_corto']),1,'C');
                 $pdf->Cell(75,10,utf8_decode('NIT'),1,0,"C");
-                $pdf->Multicell(0,10,utf8_decode($data['NIT_MI_EMPRESA']),1,'C');
+                $pdf->Multicell(0,10,utf8_decode($data['mi_empresa_nit']),1,'C');
                 $pdf->Cell(75,10,utf8_decode('REPRESENTANTE LEGAL'),1,0,"C");
-                $pdf->Multicell(0,10,utf8_decode($data['CEDULA_RTE_LEGAL_MI_EMPRESA']),1,'C');
+                $pdf->Multicell(0,10,utf8_decode($data['mi_empresa_rt_cedula']),1,'C');
                 $pdf->Cell(75,10,utf8_decode('EMPRESA DE CONVENIO EMPRESARIAL'),1,0,"C");
                 $pdf->Multicell(0,10,utf8_decode($data['JURIDICO_NOMBRE']),1,'C');
                 $pdf->Cell(75,10,utf8_decode('NIT'),1,0,"C");
@@ -323,14 +324,14 @@ class ContratoVinculacionRepository extends BaseRepository
         $pdf->Cell(65,5,'________________________',0,0,"L");
         $pdf->Cell(30,5,'',0,0,"L");
         $pdf->Cell(65,5,'________________________',0,1,"L");
-        $pdf->Cell(65,5,utf8_decode($data['NOMBRE_RTE_LEGAL_MI_EMPRESA']),0,0,"L");
+        $pdf->Cell(65,5,utf8_decode($data['mi_empresa_rt_nombre']),0,0,"L");
         //$pdf->Cell(65,5,utf8_decode($data['contratista_nombre']),0,0,"L");
         $pdf->Cell(30,5,'',0,0,"L");
         $pdf->Multicell(65,5,utf8_decode($data['contratista_nombre']),0,'L',0);
-        $pdf->Cell(65,5,utf8_decode("CC ".$data['CEDULA_RTE_LEGAL_MI_EMPRESA']),0,0,"L");        
+        $pdf->Cell(65,5,utf8_decode("CC ".$data['mi_empresa_rt_cedula']),0,0,"L");        
         $pdf->Cell(30,5,'',0,0,"L");
         $pdf->Cell(65,5,utf8_decode("CC ".$data['contratista_cedula']),0,1,"L"); 
-        $pdf->Cell(65,5,utf8_decode($data['NOMBRE_EMPRESA_CORTO']),0,0,"L");        
+        $pdf->Cell(65,5,utf8_decode($data['mi_empresa_nombre_corto']),0,0,"L");        
         $pdf->Cell(30,5,'',0,0,"L");
         $pdf->Multicell(65,5,utf8_decode(mb_strtoupper($data['JURIDICO_NOMBRE'],'utf-8')),0,'L',0);
 
@@ -352,7 +353,7 @@ class ContratoVinculacionRepository extends BaseRepository
         */
 
     function CV_P1($data){
-        $view = "<p>Entre <b>".$data['NOMBRE_EMPRESA']."</b>, Sociedad Comercial con domicilio en Apartado Antioquia, representada legalmente por la señor(a) <b>".$data['NOMBRE_RTE_LEGAL_MI_EMPRESA']."</b>, mayor de edad, identificado(a) con la cedula de ciudadanía  N° <b>".$data['CEDULA_RTE_LEGAL_MI_EMPRESA']."</b>  expedida en  <b>".$data['LUGAR_EXP_CED_RTE_LEGAL_MI_EMPRESA']."</b>, y que en el  presente acto se denominara LA EMPRESA, y el señor(a)";
+        $view = "<p>Entre <b>".$data['mi_empresa_nombre']."</b>, Sociedad Comercial con domicilio en Apartado Antioquia, representada legalmente por la señor(a) <b>".$data['mi_empresa_rt_nombre']."</b>, mayor de edad, identificado(a) con la cedula de ciudadanía  N° <b>".$data['mi_empresa_rt_cedula']."</b>  expedida en  <b>".$data['mi_empresa_rt_cedula_ref']."</b>, y que en el  presente acto se denominara LA EMPRESA, y el señor(a)";
 
         if ($data['TIPO_PROVEEDOR'] == 'Natural') {
 
@@ -386,7 +387,7 @@ class ContratoVinculacionRepository extends BaseRepository
 
 <p><b>NOVENA. SANCIÓN E INTERES POR MORA:</b> Acorde con el articulo 1610 y 1617 del Código Civil y demás normas concordantes, el incumplimiento en el pago de las obligaciones referentes a la cuota de administración o sanciones y perjuicios ocasionados a  LA EMPRESA, acarreará a <b>EL CONTRATISTA</b> la respectiva sanción por mora, viéndose obligado a pagar el interés legal permitido al momento de la mora.  En caso  de incumplimiento de alguna de las obligaciones de tipo económico que libremente se imponen a <b>EL CONTRATISTA, LA EMPRESA</b> queda facultada  a promover,  independientemente  las acciones civiles pertinentes, como también  a adoptar  la fórmula de no autorizar el servicio de transporte contratado en el vehículo  hasta tanto se cumplan  las obligaciones o se garantice  el pago  de las mismas.  En tal evento, EL CONTRATISTA renuncia a promover  acciones de cualquier naturaleza con miras a obtener resarcimiento de perjuicios.</p>
 
-<p><b>DECIMA. EXTRACTO DEL CONTRATO:</b> Durante toda la prestación del servicio, el conductor del vehículo deberá portar en papel membreteado de la empresa y firmado por el representante legal de la misma  o quien este delegue, un extracto del contrato que contenga como mínimo los datos del contrato a ejecutar. Queda prohibido que <b>EL CONTRATISTA</b> o su conductor celebren contratos de Servicio Público de Transporte Terrestre Automotor Especial de forma directa con particulares. En todo caso, si <b>EL CONTRATISTA</b> y/o el conductor es sorprendido por las autoridades competentes prestando el servicio de transporte sin el correspondiente extracto contrato, será responsabilidad exclusiva de <b>EL CONTRATISTA,</b> quien responderá por el cien por ciento (100%) de la sanción económica y/o perjuicios que le ocasione a <b>LA EMPRESA.</b> Por disposición del artículo 2.2.1.6.3.3 del Decreto 1079 de 2015, está terminantemente PROHIBIDO que EL CONTRATISTA permita o no verifique que su automotor preste el <b>SERVICIO PÚBLICO DE TRANSPORTE TERRESTRE AUTOMOTOR ESPECIAL</b> sin haber un contrato <b>DE PRESTACIÓN DE SERVICIOS DE TRANSPORTE</b> suscrito con la empresa <b>".$data['NOMBRE_EMPRESA']."</b> y mucho menos salir a prestar el servicio sin portar el <b>EXTRACTO DEL CONTRATO, SO PENA DE ASUMIR TODA LA RESPONSABILIDAD CIVIL, PENAL Y ADMINISTRATIVA</b> de las infracciones que impongan las autoridades de control o los accidentes que ocurran durante la prestación del servicio.</p>
+<p><b>DECIMA. EXTRACTO DEL CONTRATO:</b> Durante toda la prestación del servicio, el conductor del vehículo deberá portar en papel membreteado de la empresa y firmado por el representante legal de la misma  o quien este delegue, un extracto del contrato que contenga como mínimo los datos del contrato a ejecutar. Queda prohibido que <b>EL CONTRATISTA</b> o su conductor celebren contratos de Servicio Público de Transporte Terrestre Automotor Especial de forma directa con particulares. En todo caso, si <b>EL CONTRATISTA</b> y/o el conductor es sorprendido por las autoridades competentes prestando el servicio de transporte sin el correspondiente extracto contrato, será responsabilidad exclusiva de <b>EL CONTRATISTA,</b> quien responderá por el cien por ciento (100%) de la sanción económica y/o perjuicios que le ocasione a <b>LA EMPRESA.</b> Por disposición del artículo 2.2.1.6.3.3 del Decreto 1079 de 2015, está terminantemente PROHIBIDO que EL CONTRATISTA permita o no verifique que su automotor preste el <b>SERVICIO PÚBLICO DE TRANSPORTE TERRESTRE AUTOMOTOR ESPECIAL</b> sin haber un contrato <b>DE PRESTACIÓN DE SERVICIOS DE TRANSPORTE</b> suscrito con la empresa <b>".$data['mi_empresa_nombre']."</b> y mucho menos salir a prestar el servicio sin portar el <b>EXTRACTO DEL CONTRATO, SO PENA DE ASUMIR TODA LA RESPONSABILIDAD CIVIL, PENAL Y ADMINISTRATIVA</b> de las infracciones que impongan las autoridades de control o los accidentes que ocurran durante la prestación del servicio.</p>
 
 
 <p><b>DECIMA PRIMERA.  CLAUSULA COMPROMISORIA:</b> Toda controversia o diferencia relativa a este contrato, se resolverá por un tribunal de arbitramento que por economía será designado por las partes y será del domicilio donde se debió ejecutar el servicio contratado. El tribunal de Arbitramento se sujetara a lo dispuesto en el estatuto orgánico de los sistemas alternativos de solución de conflictos y demás normas concordantes.</p>
@@ -474,11 +475,11 @@ ________/\\\\\\\\\__/\\\\\\\\\\\\\___
         */
     function CP_P1($data){
         $view = "
-<p>Entre los suscritos a saber, <b>".$data['NOMBRE_RTE_LEGAL_MI_EMPRESA']."</b>, identificado(a) con Cédula de Ciudadanía Nro. <b>".$data['CEDULA_RTE_LEGAL_MI_EMPRESA']."</b>, en calidad de Gerente y Representante Legal de <b>".$data['NOMBRE_EMPRESA'].".</b> Con Nit ".$data['NIT_MI_EMPRESA'].", y quien para efectos del presente contrato se denominará <b>EL CONTRATANTE</b>; y el señor (a) <b>".$data['contratista_nombre'].",</b> con Cédula de Ciudadanía. Nro. <b>".$data['contratista_cedula']."</b> expedida en ".$data['contratista_cedula_ref'].", quien actua como ".$data['TIPO_POSEEDOR_O_TENEDOR']." DEL VEHICULO  de servicio público inscrito en el organismo de transito correspondiente.</p>
+<p>Entre los suscritos a saber, <b>".$data['mi_empresa_rt_nombre']."</b>, identificado(a) con Cédula de Ciudadanía Nro. <b>".$data['mi_empresa_rt_cedula']."</b>, en calidad de Gerente y Representante Legal de <b>".$data['mi_empresa_nombre'].".</b> Con Nit ".$data['mi_empresa_nit'].", y quien para efectos del presente contrato se denominará <b>EL CONTRATANTE</b>; y el señor (a) <b>".$data['contratista_nombre'].",</b> con Cédula de Ciudadanía. Nro. <b>".$data['contratista_cedula']."</b> expedida en ".$data['contratista_cedula_ref'].", quien actua como ".$data['TIPO_POSEEDOR_O_TENEDOR']." DEL VEHICULO  de servicio público inscrito en el organismo de transito correspondiente.</p>
 
 <p><b>PARAGRAFO 1: ".$data['TIPO_POSEEDOR_O_TENEDOR']."</b> acredita  la tenencia de la  propiedad del vehiculo y además que, el automotor se encuentra libre de pleitos pendientes, embargos judiciales, condiciones resolutorias, acciones reales y en general, que se encuentra ajustada a derecho y es consecuencia de una cadena lógica de dominio.  Así mismo que su patrimonio liquido proviene de actividades lícitas; y quien para los efectos del presente documento se denominará el <b>PROPIETARIO</b>, acuerdan celebrar el presente <b>CONTRATO DE SUMINISTRO DE VEHÍCULO</b>, contrato que se rige por las siguientes estipulaciones:</p>
 
-<p><b>PRIMERA</b>: MOTIVO DE LA CONTRATACIÓN Que la empresa <b>".$data['NOMBRE_EMPRESA']."</b>, tiene contratos suscritos con clientes que demandan cada vez mas servicios en la modalidad de Contrato para transporte empresarial. especialmente de empleados de Fincas, y aunque la empresa presta servicios de transporte público especial, debidamente autorizada y habilitada por el Ministerio de Transporte,  en la actualidad no cuenta con la cantidad  de vehículos que exige la empresa y sus filiales a la cual le prestamos servicios,  para tal objeto contractual.</p>
+<p><b>PRIMERA</b>: MOTIVO DE LA CONTRATACIÓN Que la empresa <b>".$data['mi_empresa_nombre']."</b>, tiene contratos suscritos con clientes que demandan cada vez mas servicios en la modalidad de Contrato para transporte empresarial. especialmente de empleados de Fincas, y aunque la empresa presta servicios de transporte público especial, debidamente autorizada y habilitada por el Ministerio de Transporte,  en la actualidad no cuenta con la cantidad  de vehículos que exige la empresa y sus filiales a la cual le prestamos servicios,  para tal objeto contractual.</p>
 
 <p><b>SEGUNDA</b>: OBJETO DEL CONTRATO: Para una eficiente racionalización en el uso del equipo automotor y la mejor prestación del servicio, el PROPIETARIO se obliga para con el contratante a suministrarle y prestar el servicio de transporte a través de los siguientes rodante debidamente inscrito en el  Organismo de Tránsito correspondiente, distinguido por las siguientes características  así:</p>
 

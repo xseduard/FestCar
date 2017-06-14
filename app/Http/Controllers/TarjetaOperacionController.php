@@ -35,7 +35,7 @@ class TarjetaOperacionController extends AppBaseController
     public function index(Request $request)
     {
         $this->tarjetaOperacionRepository->pushCriteria(new RequestCriteria($request));
-        $tarjetaOperacions = $this->tarjetaOperacionRepository->paginate(15);
+        $tarjetaOperacions = $this->tarjetaOperacionRepository->orderBy('updated_at', 'desc')->paginate(15);
         $fecha_actual = \Carbon\Carbon::now();
 
         /**

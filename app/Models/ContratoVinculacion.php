@@ -39,7 +39,12 @@ class ContratoVinculacion extends Model
         'user_id',
         'aprobado',
         'fecha_aprobacion',
-        'usuario_aprobacion'
+        'usuario_aprobacion',
+        'rl_id',
+        'rl_id_ref',
+        'rl_name',
+        'rl_lastname',
+
     ];
     /**
      * Estos atributos son casteados en su tipo nativo.
@@ -59,7 +64,11 @@ class ContratoVinculacion extends Model
         'user_id' => 'integer',
         'aprobado' => 'boolean',
         'fecha_aprobacion' => 'datetime',
-        'usuario_aprobacion' => 'integer'
+        'usuario_aprobacion' => 'integer',
+        'rl_id' =>  'string',
+        'rl_id_ref' =>  'string',
+        'rl_name'   =>  'string',
+        'rl_lastname'   =>  'string',
     ];
     /**
      * Reglas de Validacón
@@ -107,4 +116,13 @@ class ContratoVinculacion extends Model
     /**
      * Funciones Especiales
      */
+
+      /**
+     * Ascensor
+     */
+
+    public function getRlFullNameAttribute()
+    {
+       return $this->rl_name . ' ' . $this->rl_lastname;
+    }
 }

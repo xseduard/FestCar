@@ -35,7 +35,7 @@ class LicenciaConduccionController extends AppBaseController
     public function index(Request $request)
     {
         $this->licenciaConduccionRepository->pushCriteria(new RequestCriteria($request));
-        $licenciaConduccions = $this->licenciaConduccionRepository->paginate(15);
+        $licenciaConduccions = $this->licenciaConduccionRepository->orderBy('updated_at', 'desc')->paginate(15);
 
         /**
          * $licenciaConduccions = $this->licenciaConduccionRepository->all();

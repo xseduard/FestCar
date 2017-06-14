@@ -36,6 +36,7 @@ class CreateContratoPrestacionServiciosTable extends Migration
             $table->integer('usuario_aprobacion')->unsigned()->comment('Usuario que Verifica la firma');
 
             $table->integer('responsable_id')->unsigned()->comment('Responsable');
+            $table->integer('valor')->unsigned()->comment('valor del contrato');
 
             $table->timestamps();
             $table->softDeletes();
@@ -46,10 +47,10 @@ class CreateContratoPrestacionServiciosTable extends Migration
             $table->boolean('s4')->comment('Salud');
             $table->boolean('s5')->comment('Turismo');
             
-            $table->string('rl_id', 14)->default('50914925')->comment('Repre. legal');
-            $table->string('rl_id_ref', 30)->default('Monteria Córdoba')->comment('Repre. legal');
-            $table->string('rl_name', 5)->default('Tana')->comment('Repre. legal');
-            $table->string('rl_lastname', 18)->default('Coronado Calderin')->comment('Repre. legal');
+            $table->string('rl_id', 14)->default('0000000')->comment('Repre. legal');
+            $table->string('rl_id_ref', 15)->default('city')->comment('Repre. legal');
+            $table->string('rl_name', 5)->default('name')->comment('Repre. legal');
+            $table->string('rl_lastname', 18)->default('lastname')->comment('Repre. legal'); 
 
             
 

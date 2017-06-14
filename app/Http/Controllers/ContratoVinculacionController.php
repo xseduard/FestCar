@@ -15,6 +15,7 @@ use Response;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
+use App\Models\Empresa;
 
  
 
@@ -40,7 +41,7 @@ class ContratoVinculacionController extends AppBaseController
     public function index(Request $request)
     {
         $this->contratoVinculacionRepository->pushCriteria(new RequestCriteria($request));
-        $contratoVinculacions = $this->contratoVinculacionRepository->paginate(15);
+        $contratoVinculacions = $this->contratoVinculacionRepository->orderBy('updated_at', 'desc')->paginate(15);
 
         /**
          * $contratoVinculacions = $this->contratoVinculacionRepository->all();
@@ -82,8 +83,14 @@ class ContratoVinculacionController extends AppBaseController
      */
     public function store(CreateContratoVinculacionRequest $request)
     {
+        $empresa = Empresa::first();
+
         $input = $request->all();
-        $input['user_id'] = Auth::id();
+        $input['user_id']       = Auth::id();
+        $input['rl_id']         = $empresa->rte_cedula;
+        $input['rl_id_ref']     = $empresa->lugar_expedicion;
+        $input['rl_name']       = $empresa->rte_nombre;
+        $input['rl_lastname']   = $empresa->rte_apellido;
 
         if ($this->centralRepository->validar_numero_interno($input['vehiculo_id'])) {                     
              return Redirect::back()->withInput(Input::all());

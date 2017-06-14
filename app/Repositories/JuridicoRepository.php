@@ -11,17 +11,10 @@ class JuridicoRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'nit',
-        'nombre',
-        'natural_id',
-        'actividad',
-        'telefono',
-        'direccion_fiscal',
-        'direccion_envio',
-        'email',
-        'observaciones',
-        'estado',
-        'user_id'
+        'nit' => 'like',
+        'nombre' => 'like',      
+        'email' => 'like',
+        
     ];
 
     /**

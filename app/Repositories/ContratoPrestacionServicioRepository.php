@@ -44,7 +44,8 @@ class ContratoPrestacionServicioRepository extends BaseRepository
         $codigo_cont = 'CPS'.str_pad($contrato->id, 4, "0", STR_PAD_LEFT);
         $codigo = 'CPS'.str_pad($contrato->id, 4, "0", STR_PAD_LEFT);
         global $codigo_cont; 
-           
+        
+        $empresa = Empresa::first();
         $contrato =  ContratoPrestacionServicio::with('natural')
         ->with('juridico.natural')
         ->with('origen.departamento')
@@ -65,18 +66,20 @@ class ContratoPrestacionServicioRepository extends BaseRepository
             $contratista_cedula_ref = $contrato->juridico->natural->municipio->nombre.", ".$contrato->natural->municipio->departamento->nombre;
         }
         $data = [        
-        'mi_empresa_nit'                    =>  '9004148119',
-        'mi_empresa_nombre'                 =>  'TRANSPORTES ESPECIALES BUSES Y MIXTOS TRANSEBA S.A.S',
-        'mi_empresa_nombre_corto'            => 'TRANSEBA S.A.S',
-        'mi_empresa_domicilio'              =>  'APARTADÓ, ANTIOQUIA',
-        'mi_empresa_contacto'               =>  'Carrera 107 Nro. 95ª-12 Barrio Nuevo Apartado, Teléfono 828 00 35, e-mail: transsebax@gmail.com , Apartado Antioquia.',
+        'mi_empresa_nit'                    =>  $empresa->nit,
+        'mi_empresa_nombre'                 =>  $empresa->razon_social,
+        'mi_empresa_nombre_corto'           =>  $empresa->nombre_corto,
+        'mi_empresa_domicilio'              =>  $empresa->domicilio,
+        'mi_empresa_contacto'               =>  $empresa->direccion.' '.$empresa->telefono.' '.$empresa->correo,
         'mi_empresa_rt_nombre'              =>  mb_strtoupper($contrato->rlfullname,'utf-8'),
         'mi_empresa_rt_cedula'              =>  number_format($contrato->rl_id, 0, '.', '.' ),
-        'mi_empresa_rt_cedula_ref'          => $contrato->rl_id_ref,
+        'mi_empresa_rt_cedula_ref'          =>  $contrato->rl_id_ref,
         'contratista_nombre'                =>  mb_strtoupper($contratista_nombre,'utf-8'),
         'contratista_residencia_actual'     => "",
         'contratista_cedula_ref'            =>  mb_strtoupper($contratista_cedula_ref,'utf-8'),
         'contratista_cedula'                =>  number_format($contratista_cedula, 0, '.', '.' ),
+        'valor'                             =>  number_format($contrato->valor, 0, '.', '.' ),
+        'valor_letras'                      =>  \NumeroALetras::convertir($contrato->valor),
         'origen'                            =>  mb_strtoupper($contrato->origen->nombre." ".$contrato->origen->departamento->nombre,'utf-8'),
         'destino'                           =>  mb_strtoupper($contrato->destino->nombre." ".$contrato->destino->departamento->nombre,'utf-8'),
         'fecha_inicio'                      =>  $contrato->fecha_inicio->day." de ".$contrato->fecha_inicio->format('F')." del ".$contrato->fecha_inicio->year,
@@ -91,7 +94,7 @@ $text = "
 <p>Entre los suscritos a saber, por una parte,  ".$data['mi_empresa_rt_nombre']."  mayor de edad, identificado con la cédula de ciudadanía número ".$data['mi_empresa_rt_cedula']." , con domicilio en la ciudad de Apartado, actuando en mi condición de Representante Legal de la empresa. ".$data['mi_empresa_nombre'].", entidad con domicilio principal en la ciudad ".$data['mi_empresa_domicilio']." identificada con el NIT ".$data['mi_empresa_nit']." , Empresa domiciliada en Apartado y que en adelante se denominara EL CONTRATISTA, y de otra parte  ".$data['contratista_nombre']." , mayor de edad identificado(a) con número de cédula ".$data['contratista_cedula'].", expedida en el municipio de ".$data['contratista_cedula_ref'].", quien obra en su propio nombre y en representación de un grupo específico de usuarios quien en adelante se denominara simplemente el CONTRATANTE,  hemos convenido en suscribir mediante este documento CONTRATO PARA  TRANSPORTE DE    GRUPO ESPECÍFICO DE USUARIOS (TRANSPORTE DE PARTICULARES) dando cumplimiento al  ARTICULO  2.2.6.3.2 DECRETO 431 DE 2017.  Declaramos que :  
 </p>
 
-<p> 1. Que TRANSPORTES ESPECIALES BUSES Y MIXTOS TRANSEBA S.A.S es una empresa debidamente habilitada y reconocida en el sector del transporte.
+<p> 1. Que ".$data['mi_empresa_nombre']." es una empresa debidamente habilitada y reconocida en el sector del transporte.
 </p>
 <p>2. Que las partes tienen la suficiente solvencia técnica, administrativa y financiera para cumplir las obligaciones derivadas de la suscripción y ejecución del presente contrato. 
 </p>
@@ -106,7 +109,7 @@ $text = "
 </p>
 <p>CONDICIONES DEL CONTRATO: EL CONTRATISTA se compromete a transportar de manera diligente y con toda la documentación exigida por las autoridades gubernamentales, al grupo de usuarios. En caso de algún inconveniente mecánico, suministrará un vehículo de similares condiciones en un tiempo prudencial de acuerdo al tiempo de distancia entre su sede y el lugar donde el vehículo se encuentre. Así mismo, EL CONTRATISTA será responsable por pérdida de objetos que mediante documento se pruebe que han sido confiadas a su custodia. MODIFICACIÓN CONDICIONES: Cualquier cambio de destino o de horario al inicialmente contratado, tendrá tarifa adicional que será acordada entre las partes. 
 </p>
-<p>VALOR DEL CONTRATO Y FORMA DE PAGO: El presente contrato tiene un valor de 4.500.000. El valor total del contrato deberá estar cancelado al momento de iniciarse el servicio. Para los efectos del presente contrato, no se entenderá que existe incumplimiento por parte del CONTRATISTA en caso de que se presenten retrasos en la salida y/o regreso cuando estos provengan de incumplimientos o retrasos en de alguno de los usuarios y/o de la autoridad, retrasos en las vías, aquellos que se presente con ocasión a derrumbes y/o cierres, así como, eventos de fuerza mayor o caso fortuitos o hechos de terceros, tales como incendio, huelgas, paros forzosos, epidemia, conflictos laborales, reglamentos o disposiciones gubernamentales, guerra, motín, conmoción civil, terremoto, inundación, accidente, siniestro o cualquier otra causa ajena al control de la voluntad del CONTRATISTA. En tales eventos, el CONTRATISTA pondrá todo su diligencia, esfuerzo y capacidad para ejecutar las prestaciones derivadas del presente contrato en las mejores condiciones. 
+<p>VALOR DEL CONTRATO Y FORMA DE PAGO: El presente contrato tiene un valor de ".$data['valor_letras']." PESOS ( <b>".$data['valor']." </b>) El valor total del contrato deberá estar cancelado al momento de iniciarse el servicio. Para los efectos del presente contrato, no se entenderá que existe incumplimiento por parte del CONTRATISTA en caso de que se presenten retrasos en la salida y/o regreso cuando estos provengan de incumplimientos o retrasos en de alguno de los usuarios y/o de la autoridad, retrasos en las vías, aquellos que se presente con ocasión a derrumbes y/o cierres, así como, eventos de fuerza mayor o caso fortuitos o hechos de terceros, tales como incendio, huelgas, paros forzosos, epidemia, conflictos laborales, reglamentos o disposiciones gubernamentales, guerra, motín, conmoción civil, terremoto, inundación, accidente, siniestro o cualquier otra causa ajena al control de la voluntad del CONTRATISTA. En tales eventos, el CONTRATISTA pondrá todo su diligencia, esfuerzo y capacidad para ejecutar las prestaciones derivadas del presente contrato en las mejores condiciones. 
 </p>
 <p>CAUSALES DE TERMINACIÓN: El presente contrato terminará en cualquiera de los siguientes eventos: 1. Por orden de autoridad competente. 2 .Vencimiento del término de duración. 3. Por mutuo acuerdo que conste por escrito. 4. Por incumplimiento y/o daños al vehículo por parte del contratante y/o cualquiera del grupo de usuarios. 5. Por las demás causas establecidas en la ley. 
 </p>

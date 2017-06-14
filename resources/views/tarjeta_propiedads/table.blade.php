@@ -12,7 +12,7 @@
     <tbody>
     @foreach($tarjetaPropiedads as $tarjetaPropiedad)
         <tr>
-            <td>{!! $tarjetaPropiedad->vehiculo->placa !!}</td>
+            <td><span class="label label-default">{!! $tarjetaPropiedad->vehiculo->placa !!}</span></td>
             <td>{!! $tarjetaPropiedad->licencia_transito !!}</td>
             <td>{!! strtoupper($tarjetaPropiedad->vehiculo->marca) !!}</td>
             <td>{!! strtoupper($tarjetaPropiedad->linea) !!}</td>
