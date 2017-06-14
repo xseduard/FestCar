@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\ContratoPrestacionServicio;
+use App\Models\Empresa;
 use InfyOm\Generator\Common\BaseRepository;
 
 use App\Repositories\FPDF_CPS;
@@ -68,7 +69,7 @@ class ContratoPrestacionServicioRepository extends BaseRepository
         'mi_empresa_nombre'                 =>  'TRANSPORTES ESPECIALES BUSES Y MIXTOS TRANSEBA S.A.S',
         'mi_empresa_nombre_corto'            => 'TRANSEBA S.A.S',
         'mi_empresa_domicilio'              =>  'APARTADÓ, ANTIOQUIA',
-        'mi_empresa_contacto'               =>  'Carrera 107 Nro. 95ª-12 Barrio Nuevo Apartado, Teléfono 828 00 35, e mail: transsebax@gmail.com , Apartado Antioquia.',
+        'mi_empresa_contacto'               =>  'Carrera 107 Nro. 95ª-12 Barrio Nuevo Apartado, Teléfono 828 00 35, e-mail: transsebax@gmail.com , Apartado Antioquia.',
         'mi_empresa_rt_nombre'              =>  mb_strtoupper($contrato->rlfullname,'utf-8'),
         'mi_empresa_rt_cedula'              =>  number_format($contrato->rl_id, 0, '.', '.' ),
         'mi_empresa_rt_cedula_ref'          => $contrato->rl_id_ref,

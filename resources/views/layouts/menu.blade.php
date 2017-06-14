@@ -1,26 +1,33 @@
 <li class="{{ Request::is('home*') ? 'active' : '' }}">
     <a href="{!! url('/home') !!}"><i class="fa fa-home"></i><span>Inicio</span></a>
 </li>
-<!--
-<li class="{{ Request::is('generator_builder*') ? 'active' : '' }}">
-    <a href="{!! url('/generator_builder') !!}"><i class="fa fa-tasks"></i><span>GUI Generador</span></a>
-</li>
--->
-<!-- route('rosas.index') -->
-<li class="treeview 
-@if (Request::is('departamentos*') or Request::is('municipios*'))
-	active
-@endif">
-<a href="#"><i class="fa fa-sliders"></i><span>Ajustes Generales</span> <i class="fa fa-angle-left pull-right"></i></a>
-	<ul class="treeview-menu">
-		<li class="{{ Request::is('departamentos*') ? 'active' : '' }}">
-		    <a href="{!! route('departamentos.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Departamentos</span></a>
-		</li>
-		<li class="{{ Request::is('municipios*') ? 'active' : '' }}">
-		    <a href="{!! route('municipios.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Municipios</span></a>
-		</li>	
-	</ul>
-</li>
+
+
+@if(Auth::user()->role == 'administrador')
+    <li class="treeview 
+    @if (Request::is('departamentos*') or Request::is('municipios*') or Request::is('empresas*'))
+    	active
+    @endif">
+    <a href="#"><i class="fa fa-sliders"></i><span>Ajustes Generales</span> <i class="fa fa-angle-left pull-right"></i></a>
+    	<ul class="treeview-menu">
+            <li class="{{ Request::is('empresas*') ? 'active' : '' }}">
+                <a href="{!! route('empresas.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Empresa</span></a>
+            </li>
+    		<li class="{{ Request::is('departamentos*') ? 'active' : '' }}">
+    		    <a href="{!! route('departamentos.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Departamentos</span></a>
+    		</li>
+    		<li class="{{ Request::is('municipios*') ? 'active' : '' }}">
+    		    <a href="{!! route('municipios.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Municipios</span></a>
+    		</li>	
+    	</ul>
+    </li>
+    <!--
+        <li class="{{ Request::is('generator_builder*') ? 'active' : '' }}">
+            <a href="{!! url('/generator_builder') !!}"><i class="fa fa-tasks"></i><span>GUI Generador</span></a>
+        </li>
+    -->
+    <!-- route('rosas.index') -->
+@endif
 <!--
 <li class="{{ Request::is('triangulos*') ? 'active' : '' }}">
     <a href="{!! route('triangulos.index') !!}"><i class="fa fa-indent"></i><span>triangulos</span></a>
@@ -122,6 +129,8 @@
 <li class="{{ Request::is('extractos*') ? 'active' : '' }}">
     <a href="{!! route('extractos.index') !!}"><i class="ion ion-clipboard"></i><span>Extractos</span></a>
 </li>
+
+
 
 
 

@@ -108,6 +108,7 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('licenciaConduccions', 'LicenciaConduccionController');
     Route::resource('extractos', 'ExtractoController');    
     Route::resource('hojaVidas', 'HojaVidaController');
+    Route::resource('empresas', 'EmpresaController');
     
 });
 
@@ -115,8 +116,4 @@ Route::group(['middleware' => 'web'], function() {
 Route::get('error', function(){ 
     abort(500);
 });
-
-
-
-
 

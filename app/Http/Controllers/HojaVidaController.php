@@ -81,7 +81,7 @@ class HojaVidaController extends AppBaseController
 
         $hojaVida = $this->hojaVidaRepository->create($input);
 
-        Flash::success('Hoja Vida registrado correctamente.');
+        Flash::success('Hoja de Vida registrado correctamente.');
 
         return redirect(route('hojaVidas.index'));
     }
@@ -98,7 +98,7 @@ class HojaVidaController extends AppBaseController
         $hojaVida = $this->hojaVidaRepository->findWithoutFail($id);
 
         if (empty($hojaVida)) {
-            Flash::error('Hoja Vida No se encuentra registrado.');
+            Flash::error('Hoja de Vida No se encuentra registrada.');
 
             return redirect(route('hojaVidas.index'));
         }
@@ -118,7 +118,7 @@ class HojaVidaController extends AppBaseController
         $hojaVida = $this->hojaVidaRepository->findWithoutFail($id);
 
         if (empty($hojaVida)) {
-            Flash::error('Hoja Vida No se encuentra registrado.');
+            Flash::error('Hoja de Vida No se encuentra registrada.');
 
             return redirect(route('hojaVidas.index'));
         }
@@ -141,7 +141,7 @@ class HojaVidaController extends AppBaseController
         $hojaVida = $this->hojaVidaRepository->findWithoutFail($id);
 
         if (empty($hojaVida)) {
-            Flash::error('Hoja Vida No se encuentra registrado.');
+            Flash::error('Hoja de Vida No se encuentra registrada.');
 
             return redirect(route('hojaVidas.index'));
         }
@@ -150,7 +150,7 @@ class HojaVidaController extends AppBaseController
 
         $hojaVida = $this->hojaVidaRepository->update($input, $id);
 
-        Flash::success('Hoja Vida actualizado correctamente.');
+        Flash::success('Hoja de Vida actualizada correctamente.');
 
         return redirect(route('hojaVidas.index'));
     }
@@ -167,14 +167,14 @@ class HojaVidaController extends AppBaseController
         $hojaVida = $this->hojaVidaRepository->findWithoutFail($id);
 
         if (empty($hojaVida)) {
-            Flash::error('Hoja Vida No se encuentra registrado.');
+            Flash::error('Hoja de Vida No se encuentra registrada.');
 
             return redirect(route('hojaVidas.index'));
         }
 
         $this->hojaVidaRepository->delete($id);
 
-        Flash::success('Hoja Vida eliminado correctamente.');
+        Flash::success('Hoja de Vida eliminada correctamente.');
 
         return redirect(route('hojaVidas.index'));
     }
