@@ -83,7 +83,7 @@
 <!-- documentos conductores -->
 <li class="treeview 
 @if (Request::is('licenciaConduccions*') 
-    or Request::is('hojavidas*')    
+    or Request::is('hojaVidas*')    
     )
     active
 @endif">
@@ -93,6 +93,9 @@
         <li class="{{ Request::is('licenciaConduccions*') ? 'active' : '' }}">
             <a href="{!! route('licenciaConduccions.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Licencias de Conducción</span></a>
         </li>   
+        <li class="{{ Request::is('hojaVidas*') ? 'active' : '' }}">
+            <a href="{!! route('hojaVidas.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Hojas de Vida</span></a>
+        </li>
 
     </ul>
 </li>
@@ -119,4 +122,7 @@
 <li class="{{ Request::is('extractos*') ? 'active' : '' }}">
     <a href="{!! route('extractos.index') !!}"><i class="ion ion-clipboard"></i><span>Extractos</span></a>
 </li>
+
+
+
 

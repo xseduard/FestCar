@@ -106,7 +106,8 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('contratoVinculacions', 'ContratoVinculacionController');
     Route::resource('contratoPrestacionServicios', 'ContratoPrestacionServicioController');
     Route::resource('licenciaConduccions', 'LicenciaConduccionController');
-    Route::resource('extractos', 'ExtractoController');
+    Route::resource('extractos', 'ExtractoController');    
+    Route::resource('hojaVidas', 'HojaVidaController');
     
 });
 
@@ -114,5 +115,8 @@ Route::group(['middleware' => 'web'], function() {
 Route::get('error', function(){ 
     abort(500);
 });
+
+
+
 
 

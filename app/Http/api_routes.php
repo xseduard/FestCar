@@ -60,3 +60,7 @@ Route::resource('contrato_prestacion_servicios', 'ContratoPrestacionServicioAPIC
 Route::resource('licencia_conduccions', 'LicenciaConduccionAPIController');
 
 Route::resource('extractos', 'ExtractoAPIController');
+
+
+
+Route::resource('hoja_vidas', 'HojaVidaAPIController');
