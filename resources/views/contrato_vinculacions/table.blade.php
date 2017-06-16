@@ -5,8 +5,9 @@
         <th>Nit/CC</th>
         <th>Nombres/Razón Social</th>        
         <th>Vehículo</th>
-        <th>Fecha Inicio</th>
-        <th>Fecha Final</th>
+        <th width="100px">Fecha Inicio</th>
+        <th width="10px"></th>
+        <th width="100px">Fecha Final</th>
         <th>Estado</th>
                 
         <th  width="110px">Acciones</th>
@@ -40,8 +41,11 @@
                 <td>{!! $contratoVinculacion->juridico->nit !!}</td>
                 <td>{!! $contratoVinculacion->juridico->nombre !!}</td>
             @endif   
-            <td><span class="label label-default">{!! $contratoVinculacion->vehiculo->placa !!}</span></td>         
+            <td><span class="label label-default">{!! $contratoVinculacion->vehiculo->placa !!}</span></td>
             <td>{!! $contratoVinculacion->fecha_inicio->format('d-m-Y') !!}</td>
+            <td>
+                <span class="pie" data-peity='{ "fill": ["#d2d6de", "#00b0a3"],  "innerRadius": 0, "radius": 9 }'>{!! $contratoVinculacion->dias_actual_diferencia !!}/{!! $contratoVinculacion->dias_diferencia !!}</span>
+            </td>
             <td>{!! $contratoVinculacion->fecha_final->format('d-m-Y') !!}</td>
             <td> 
                 @if ($contratoVinculacion->vigente)                    

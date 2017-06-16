@@ -74,6 +74,8 @@
         'AGRALE'    =>  'AGRALE',
         'MAHINDRA'  =>  'MAHINDRA',
         'DODGE'     =>  'DODGE',
+        'HINO'      =>  'HINO',
+        'IVECO'     =>  'IVECO',
         'INTERNATIONAL' =>  'INTERNATIONAL',
         'MERCEDES BENZ' =>  'MERCEDES BENZ',
         'OTRA'      =>  'OTRA'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'']) !!}

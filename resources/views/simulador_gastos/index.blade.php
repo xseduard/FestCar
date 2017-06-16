@@ -2,9 +2,9 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Contrato de Vinculación</h1>
+        <h1 class="pull-left">Simulador Gastos</h1>
         <h1 class="pull-right">
-           <a class="btn btn-primary btn-flat pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('contratoVinculacions.create') !!}"><i class="fa fa-plus"></i> &nbsp; Aregar</a>
+           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('simuladorGastos.create') !!}"><i class="fa fa-plus"></i> &nbsp; Aregar</a>
         </h1>
     </section>
     <div class="content">
@@ -18,27 +18,19 @@
         <div class="animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
             <div class="box box-primary">
                 <div class="box-body">
-                    @if($contratoVinculacions->isEmpty())
+                    @if($simuladorGastos->isEmpty())
                         <div class="alert alert-info alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                             <h4><i class="icon fa fa-info"></i>Sistema de Información</h4>
-                           No se encontraron registros de contrato de Vinculación en esta consulta.
+                           No se encontraron registros de SimuladorGastos en esta consulta.
                       </div>                    
                     @else
-                        @include('contrato_vinculacions.table')
+                        @include('simulador_gastos.table')
                     @endif
-                    @include('common.paginate', ['records' => $contratoVinculacions])
+                    @include('common.paginate', ['records' => $simuladorGastos])
                 </div>
             </div>
         </div>
     </div>
 @endsection
-@section('scripts')
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/peity/3.2.1/jquery.peity.min.js"></script>
 
-    <script>
-        $(document).ready(function () { 
-            $("span.pie").peity("pie")
-        }); 
-    </script>
-@endsection

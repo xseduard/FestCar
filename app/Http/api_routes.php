@@ -66,3 +66,5 @@ Route::resource('extractos', 'ExtractoAPIController');
 Route::resource('hoja_vidas', 'HojaVidaAPIController');
 
 Route::resource('empresas', 'EmpresaAPIController');
+
+Route::resource('simulador_gastos', 'SimuladorGastoAPIController');

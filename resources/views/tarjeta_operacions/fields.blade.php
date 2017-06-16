@@ -12,13 +12,13 @@
 <!-- Modalidad Servicio Campo de texto -->
 <div class="form-group col-sm-6">
     {!! Form::label('modalidad_servicio', 'Modalidad de Servicio') !!}
-    {!! Form::text('modalidad_servicio', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
+    {!! Form::select('modalidad_servicio', ['Especial' => 'Especial', 'Otro' => 'Otro'], 'Especial', ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
 
 <!-- Radio Accion Campo de texto -->
 <div class="form-group col-sm-6">
     {!! Form::label('radio_accion', 'Radio de Acción') !!}
-    {!! Form::text('radio_accion', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
+    {!! Form::select('radio_accion', ['Municipal' => 'Municipal', 'Urbana' => 'Urbana', 'Nacional' => 'Nacional'], 'Nacional', ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
 
 <!-- Razon Social Empresa Campo de texto -->

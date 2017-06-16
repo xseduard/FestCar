@@ -38,7 +38,7 @@
 <!-- Servicio Campo de texto -->
 <div class="form-group col-sm-2">
     {!! Form::label('servicio', 'Servicio') !!}
-    {!! Form::text('servicio', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
+    {!! Form::select('servicio', ['Publico' => 'Publico', 'Particular'=>'Particular'],  'Publico', ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
 
 <!-- Clase Vehiculo Campo de texto -->
@@ -51,13 +51,13 @@
 <!-- Tipo Carroceria Campo de texto -->
 <div class="form-group col-sm-2">
     {!! Form::label('tipo_carroceria', 'Tipo Carroceria') !!}
-    {!! Form::text('tipo_carroceria', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
+    {!! Form::select('tipo_carroceria',['Cerrada' => 'Cerrada', 'Abierta'=>'Abierta'],  'Cerrada', ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
 
 <!-- Combustible Campo de texto -->
 <div class="form-group col-sm-4">
     {!! Form::label('combustible', 'Combustible') !!}
-    {!! Form::text('combustible', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
+    {!! Form::select('combustible', ['Gasolina' => 'Gasolina', 'Diesel' => 'Diesel'], 'Diesel', ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
 
 <!-- Numero Motor Campo de texto -->

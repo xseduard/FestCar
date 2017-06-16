@@ -24,5 +24,19 @@ trait DatesTranslatorContrato
             return false;
         }
     }
+    public function getDiasActualDiferenciaAttribute()
+    {       
+        if ($this->fecha_inicio <=  Carbon::now() && $this->fecha_final >= Carbon::now()) {
+            return Carbon::now()->diffInDays($this->fecha_final);
+        } elseif ($this->fecha_inicio >  Carbon::now() && $this->fecha_final > Carbon::now()) {
+            return $this->fecha_inicio->diffInDays($this->fecha_final);
+        } elseif ($this->fecha_inicio <  Carbon::now() && $this->fecha_final < Carbon::now()) {
+        	return 0;
+        }
+    }
+    public function getDiasDiferenciaAttribute()
+    {       
+        return $this->fecha_inicio->diffInDays($this->fecha_final);        
+    }
 	
 }

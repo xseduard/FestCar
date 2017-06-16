@@ -5,13 +5,16 @@
 
 @if(Auth::user()->role == 'administrador')
     <li class="treeview 
-    @if (Request::is('departamentos*') or Request::is('municipios*') or Request::is('empresas*'))
+    @if (Request::is('departamentos*') or Request::is('municipios*') or Request::is('empresas*') or Request::is('simuladorGastos*'))
     	active
     @endif">
     <a href="#"><i class="fa fa-sliders"></i><span>Ajustes Generales</span> <i class="fa fa-angle-left pull-right"></i></a>
     	<ul class="treeview-menu">
             <li class="{{ Request::is('empresas*') ? 'active' : '' }}">
                 <a href="{!! route('empresas.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Empresa</span></a>
+            </li>
+            <li class="{{ Request::is('simuladorGastos*') ? 'active' : '' }}">
+                <a href="{!! route('simuladorGastos.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Simulador de Gastos</span></a>
             </li>
     		<li class="{{ Request::is('departamentos*') ? 'active' : '' }}">
     		    <a href="{!! route('departamentos.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Departamentos</span></a>
@@ -129,6 +132,8 @@
 <li class="{{ Request::is('extractos*') ? 'active' : '' }}">
     <a href="{!! route('extractos.index') !!}"><i class="ion ion-clipboard"></i><span>Extractos</span></a>
 </li>
+
+
 
 
 

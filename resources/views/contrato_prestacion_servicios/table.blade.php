@@ -4,8 +4,9 @@
         <th>Tipo Cliente</th>
         <th>Nit/CC</th>
         <th>Nombres/Razón Social</th>  
-        <th>Fecha Inicio</th>
-        <th>Fecha final</th>
+        <th width="100px">Fecha Inicio</th>
+        <th width="10px"></th>
+        <th width="100px">Fecha Final</th>
         <th>Estado</th>
        
      
@@ -26,6 +27,9 @@
             @endif   
                         
            <td>{!! $contratoPrestacionServicio->fecha_inicio->format('d-m-Y') !!}</td>
+           <td>
+                <span class="pie" data-peity='{ "fill": ["#d2d6de", "#00b0a3"],  "innerRadius": 0, "radius": 9 }'>{!! $contratoPrestacionServicio->dias_actual_diferencia !!}/{!! $contratoPrestacionServicio->dias_diferencia !!}</span>
+            </td>
             <td>{!! $contratoPrestacionServicio->fecha_final->format('d-m-Y') !!}</td>
             <td> 
                 @if ($contratoPrestacionServicio->vigente)                    
