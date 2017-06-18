@@ -4,6 +4,7 @@
         <th>Codigo</th>        
         <th>Fecha Expedicion</th>
         <th>Fecha de Inicio Vigencia</th>
+        <th></th>
         <th>Fecha de Final Vigencia</th>
          <th>Estado</th>
         <th width="70px">Acciones</th>
@@ -15,12 +16,15 @@
             <td>{!! $tarjetaOperacion->codigo !!}</td>            
             <td>{!! $tarjetaOperacion->fecha_expedicion->format('d-M-Y') !!}</td>
             <td>{!! $tarjetaOperacion->fecha_vigencia_inicio->format('d-M-Y') !!}</td>
+            <td title="{!! $tarjetaOperacion->dias_actual_diferencia !!}/{!! $tarjetaOperacion->dias_diferencia !!}">
+                 <span class="pie" data-peity='{ "fill": ["#00b0a3", "#d2d6de"],  "innerRadius": 0, "radius": 9 }'>{!! $tarjetaOperacion->dias_actual_diferencia !!}/{!! $tarjetaOperacion->dias_diferencia !!}</span>            
+            </td>
             <td>{!! $tarjetaOperacion->fecha_vigencia_final->format('d-M-Y') !!}</td>
             <td>
                 @if ($tarjetaOperacion->vigente)
-                    <span class="label label-success">Vigente</span>
+                    <span class="badge badge-success">Vigente</span>
                 @else
-                    <span class="label label-warning">No Vigente</span>
+                    <span class="badge badge-warning">No Vigente</span>
                 @endif
             </td>
             <td>

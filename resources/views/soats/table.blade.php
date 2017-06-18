@@ -3,24 +3,40 @@
         <th>Vehículo</th>
         <th>Poliza</th>
         <th>Fecha de Expedición</th>
-        <th>Fecha de Inicio Vigencia</th>
-        <th>Fecha de Final Vigencia</th>
+        <th width="100px">Inicio Vigencia</th>
+        <th width="10px"></th>
+        <th width="100px">Final Vigencia</th>
+        <th></th>
         <th>Estado</th>        
-        <th colspan="3">Acciones</th>
+        <th width="70px">Acciones</th>
     </thead>
     <tbody>
     @foreach($soats as $soat)
-        <tr>
+        <tr 
+            @if ($soat->fecha_vigencia_inicio != $soat->fecha_vigencia_final->subYear()->addDay())                    
+                class="danger"
+            @endif
+        >
             <td><span class="label label-default">{!! $soat->vehiculo->placa !!}</span></td>
             <td>{!! $soat->poliza !!}</td>
             <td>{!! $soat->fecha_expedicion->format('d-M-Y') !!}</td>
             <td>{!! $soat->fecha_vigencia_inicio->format('d-M-Y') !!}</td>
+            <td title="{!! $soat->dias_actual_diferencia !!}/{!! $soat->dias_diferencia !!}">
+                 <span class="pie" data-peity='{ "fill": ["#00b0a3", "#d2d6de"],  "innerRadius": 0, "radius": 9 }'>{!! $soat->dias_actual_diferencia !!}/{!! $soat->dias_diferencia !!}</span>            
+            </td>
             <td>{!! $soat->fecha_vigencia_final->format('d-M-Y') !!}</td>
             <td>
-                @if ($soat->vigente)
-                    <span class="label label-success">Vigente</span>
+               
+            </td>
+            <td>
+                @if ($soat->fecha_vigencia_inicio != $soat->fecha_vigencia_final->subYear()->addDay())                   
+                        <span class="badge badge-danger" title="Verfiqué los datos ingresados, {!! $soat->user->fullname !!}"><i class='fa fa fa-exclamation fa-spin fa-fw'></i> Fechas Inconsistentes</span>
                 @else
-                    <span class="label label-warning">No Vigente</span>
+                    @if ($soat->vigente)
+                        <span class="badge badge-success">Vigente</span>
+                    @else
+                        <span class="badge badge-warning">No Vigente</span>
+                    @endif
                 @endif
             </td>
             <td>
@@ -43,3 +59,4 @@
     @endforeach
     </tbody>
 </table>
+

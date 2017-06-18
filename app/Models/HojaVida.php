@@ -201,6 +201,9 @@ class HojaVida extends Model
     public function natural(){
         return $this->belongsTo('App\Models\Natural');
     }
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 
     /**
      * Funciones Especiales

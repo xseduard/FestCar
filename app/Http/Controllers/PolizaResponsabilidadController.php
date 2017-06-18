@@ -12,6 +12,7 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Auth;
 use Response;
+use Jenssegers\Date\Date;
 
 class PolizaResponsabilidadController extends AppBaseController
 {
@@ -78,6 +79,7 @@ class PolizaResponsabilidadController extends AppBaseController
     {
         $input = $request->all();
         $input['user_id'] = Auth::id();
+        $input['fecha_vigencia_inicio'] = (new Date ($input['fecha_vigencia_final']))->subYear();
 
         $polizaResponsabilidad = $this->polizaResponsabilidadRepository->create($input);
 
@@ -147,6 +149,7 @@ class PolizaResponsabilidadController extends AppBaseController
         }
         $input = $request->all();
         $input['user_id'] = Auth::id();
+        $input['fecha_vigencia_inicio'] = (new Date ($input['fecha_vigencia_final']))->subYear();
 
         $polizaResponsabilidad = $this->polizaResponsabilidadRepository->update($input, $id);
 

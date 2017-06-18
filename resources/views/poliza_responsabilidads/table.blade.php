@@ -3,22 +3,34 @@
         <th>Vehiculo</th>
         <th>Codigo</th>
         <th>Fecha de Inicio Vigencia</th>
+        <th></th>
         <th>Fecha de Final Vigencia</th>
          <th>Estado</th>
         <th colspan="3">Acciones</th>
     </thead>
     <tbody>
     @foreach($polizaResponsabilidads as $polizaResponsabilidad)
-        <tr>
+        <tr 
+            @if ($polizaResponsabilidad->fecha_vigencia_inicio != $polizaResponsabilidad->fecha_vigencia_final->subYear())                    
+                class="danger"
+            @endif
+        >
             <td><span class="label label-default">{!! $polizaResponsabilidad->vehiculo->placa !!}</span></td>
             <td>{!! $polizaResponsabilidad->codigo !!}</td>
             <td>{!! $polizaResponsabilidad->fecha_vigencia_inicio->format('d-M-Y') !!}</td>
+            <td title="{!! $polizaResponsabilidad->dias_actual_diferencia !!}/{!! $polizaResponsabilidad->dias_diferencia !!}">
+                 <span class="pie" data-peity='{ "fill": ["#00b0a3", "#d2d6de"],  "innerRadius": 0, "radius": 9 }'>{!! $polizaResponsabilidad->dias_actual_diferencia !!}/{!! $polizaResponsabilidad->dias_diferencia !!}</span>            
+            </td>
             <td>{!! $polizaResponsabilidad->fecha_vigencia_final->format('d-M-Y') !!}</td>
            <td>
-                @if ($polizaResponsabilidad->vigente)
-                    <span class="label label-success">Vigente</span>
+                @if ($polizaResponsabilidad->fecha_vigencia_inicio != $polizaResponsabilidad->fecha_vigencia_final->subYear())
+                    <span class="badge badge-danger" title="Verfiqué los datos ingresados, {!! $polizaResponsabilidad->user->fullname !!}"><i class='fa fa fa-exclamation fa-spin fa-fw'></i> Fechas Inconsistentes</span>
                 @else
-                    <span class="label label-warning">No Vigente</span>
+                    @if ($polizaResponsabilidad->vigente)
+                        <span class="badge badge-success">Vigente</span>
+                    @else
+                        <span class="badge badge-warning">No Vigente</span>
+                    @endif
                 @endif
             </td>
             <td>

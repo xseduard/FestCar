@@ -52,7 +52,9 @@ class Recibo extends Model
         return $this->belongsTo('App\Models\Modelo');
     }
     */
-    
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 
     /**
      * Funciones Especiales

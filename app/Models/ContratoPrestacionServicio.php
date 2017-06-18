@@ -121,7 +121,7 @@ class ContratoPrestacionServicio extends Model
     public function destino(){
         return $this->belongsTo('App\Models\Municipio');
     }   
-    public function usuario(){
+    public function user(){
         return $this->belongsTo('App\User');
     }
     public function usuario_aprueba(){

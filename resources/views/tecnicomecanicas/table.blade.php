@@ -3,6 +3,7 @@
         <th>Vehículo</th>        
         <th>Consecutivo Runt</th>
         <th>Fecha de Expedición</th>
+        <th></th>
         <th>Fecha de Vencimiento</th>
         <th>Estado</th>
         
@@ -10,15 +11,26 @@
     </thead>
     <tbody>
     @foreach($tecnicomecanicas as $tecnicomecanica)
-        <tr>
+        <tr 
+            @if ($tecnicomecanica->fecha_vigencia_inicio != $tecnicomecanica->fecha_vigencia_final->subYear())                    
+                class="danger"
+            @endif
+        >
             <td><span class="label label-default">{!! $tecnicomecanica->vehiculo->placa !!}</span></td> <td>{!! $tecnicomecanica->consecutivo_runt !!}</td>           
             <td>{!! $tecnicomecanica->fecha_vigencia_inicio->format('d-M-Y') !!}</td>
+            <td title="{!! $tecnicomecanica->dias_actual_diferencia !!}/{!! $tecnicomecanica->dias_diferencia !!}">
+                 <span class="pie" data-peity='{ "fill": ["#00b0a3", "#d2d6de"],  "innerRadius": 0, "radius": 9 }'>{!! $tecnicomecanica->dias_actual_diferencia !!}/{!! $tecnicomecanica->dias_diferencia !!}</span>            
+            </td>
             <td>{!! $tecnicomecanica->fecha_vigencia_final->format('d-M-Y') !!}</td>
             <td>
-                @if ($tecnicomecanica->vigente)
-                    <span class="label label-success">Vigente</span>
+                @if ($tecnicomecanica->fecha_vigencia_inicio != $tecnicomecanica->fecha_vigencia_final->subYear())                   
+                        <span class="badge badge-danger" title="Verfiqué los datos ingresados, {!! $tecnicomecanica->user->fullname !!}"><i class='fa fa fa-exclamation fa-spin fa-fw'></i> Fechas Inconsistentes</span>
                 @else
-                    <span class="label label-warning">No Vigente</span>
+                    @if ($tecnicomecanica->vigente)
+                        <span class="badge badge-success">Vigente</span>
+                    @else
+                        <span class="badge badge-warning">No Vigente</span>
+                    @endif
                 @endif
             </td>
             

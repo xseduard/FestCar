@@ -12,6 +12,7 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Auth;
 use Response;
+use Jenssegers\Date\Date;
 
 class TecnicomecanicaController extends AppBaseController
 {
@@ -77,7 +78,8 @@ class TecnicomecanicaController extends AppBaseController
     public function store(CreateTecnicomecanicaRequest $request)
     {
         $input = $request->all();
-        $input['user_id'] = Auth::id();
+        $input['user_id'] = Auth::id();        
+        $input['fecha_vigencia_inicio'] = (new Date ($input['fecha_vigencia_final']))->subYear();
 
         $tecnicomecanica = $this->tecnicomecanicaRepository->create($input);
 
@@ -147,6 +149,8 @@ class TecnicomecanicaController extends AppBaseController
         }
         $input = $request->all();
         $input['user_id'] = Auth::id();
+        $input['fecha_vigencia_inicio'] = (new Date ($input['fecha_vigencia_final']))->subYear();
+        
 
         $tecnicomecanica = $this->tecnicomecanicaRepository->update($input, $id);
 

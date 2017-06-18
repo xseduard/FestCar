@@ -112,7 +112,11 @@ class LicenciaConduccion extends Model
         
     }
 
+
     /**
      * Funciones Especiales
      */
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }

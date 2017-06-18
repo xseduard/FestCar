@@ -186,16 +186,23 @@ class CentralRepository extends BaseRepository
      public function ContratoPrestacionServicio_id(){
         
         $modelo = ContratoPrestacionServicio::with('natural')->with('juridico')->get()->toArray();
-    
+        $array = [];
+
+        if (!empty($modelo)) {
+          
             foreach ($modelo as $key => $value) {
 
                 if ($value['tipo_cliente'] == 'Natural') {
-                   $array[$value['id']]="CPS".str_pad($value['id'], 4, "0", STR_PAD_LEFT)." - ".$value['natural']['cedula']." ".$value['natural']['nombres']." ".$value['natural']['apellidos'];
-                } elseif ($value['tipo_cliente'] == 'Juridico') {
+
+                   $array[$value['id']] = "CPS".str_pad($value['id'], 4, "0", STR_PAD_LEFT)." - ".$value['natural']['cedula']." ".$value['natural']['nombres']." ".$value['natural']['apellidos'];  
+
+                } elseif ($value['tipo_cliente'] == 'Juridico') {   
+
                     $array[$value['id']]="CPS".str_pad($value['id'], 4, "0", STR_PAD_LEFT)." - ".$value['juridico']['nit']." ".$value['juridico']['nombre'];
                 }
-                
+                                
             }
+        }
         return ($array);               
           
     }

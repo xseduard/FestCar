@@ -34,3 +34,12 @@
     </div>
 @endsection
 
+@section('scripts')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/peity/3.2.1/jquery.peity.min.js"></script>
+
+    <script>
+        $(document).ready(function () { 
+            $("span.pie").peity("pie")
+        }); 
+    </script>
+@endsection

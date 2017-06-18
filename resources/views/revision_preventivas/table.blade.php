@@ -2,21 +2,33 @@
     <thead>
         <th>Vehiculo</th>
         <th>Fecha de Inicio Vigencia</th>
+        <th></th>
         <th>Fecha de Final Vigencia</th>
         <th>Estado</th>
         <th width="70px">Acciones</th>
     </thead>
     <tbody>
     @foreach($revisionPreventivas as $revisionPreventiva)
-        <tr>
+        <tr 
+            @if ($revisionPreventiva->fecha_vigencia_inicio != $revisionPreventiva->fecha_vigencia_final->subMonth(2))                    
+                class="danger"
+            @endif
+        >
             <td><span class="label label-default">{!! $revisionPreventiva->vehiculo->placa !!}</span></td>
             <td>{!! $revisionPreventiva->fecha_vigencia_inicio->format('d-M-Y') !!}</td>
+            <td title="{!! $revisionPreventiva->dias_actual_diferencia !!}/{!! $revisionPreventiva->dias_diferencia !!}">
+                 <span class="pie" data-peity='{ "fill": ["#00b0a3", "#d2d6de"],  "innerRadius": 0, "radius": 9 }'>{!! $revisionPreventiva->dias_actual_diferencia !!}/{!! $revisionPreventiva->dias_diferencia !!}</span>            
+            </td>
             <td>{!! $revisionPreventiva->fecha_vigencia_final->format('d-M-Y') !!}</td>
             <td>
-                @if ($revisionPreventiva->vigente)
-                    <span class="label label-success">Vigente</span>
+                @if ($revisionPreventiva->fecha_vigencia_inicio != $revisionPreventiva->fecha_vigencia_final->subMonth(2))                   
+                        <span class="badge badge-danger" title="Verfiqué los datos ingresados, {!! $revisionPreventiva->user->fullname !!}"><i class='fa fa fa-exclamation fa-spin fa-fw'></i> Fechas Inconsistentes</span>
                 @else
-                    <span class="label label-warning">No Vigente</span>
+                    @if ($revisionPreventiva->vigente)
+                        <span class="badge badge-success">Vigente</span>
+                    @else
+                        <span class="badge badge-warning">No Vigente</span>
+                    @endif
                 @endif
             </td>
             <td>

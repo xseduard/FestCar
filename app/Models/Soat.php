@@ -53,7 +53,7 @@ class Soat extends Model
         'vehiculo_id' => 'required',
         'poliza' => 'required',
         'fecha_expedicion' => 'date|required',
-        'fecha_vigencia_inicio' => 'date|required',
+        'fecha_vigencia_inicio' => '',
         'fecha_vigencia_final' => 'date|required',
         'tomador_cedula' => 'numeric'
     ];
@@ -67,6 +67,9 @@ class Soat extends Model
     */
     public function vehiculo(){
         return $this->belongsTo('App\Models\Vehiculo');
+    }
+    public function user(){
+        return $this->belongsTo('App\User');
     }
 
     /**

@@ -53,7 +53,7 @@ class Tecnicomecanica extends Model
         'codigo_control' => 'numeric',
         'cda_nombre' => '',
         'cda_nit' => '',
-        'fecha_vigencia_inicio' => 'required|date',
+        'fecha_vigencia_inicio' => '',
         'fecha_vigencia_final' => 'required|date'
     ];
     /**
@@ -66,6 +66,9 @@ class Tecnicomecanica extends Model
     */
     public function vehiculo(){
         return $this->belongsTo('App\Models\Vehiculo');
+    }
+    public function user(){
+        return $this->belongsTo('App\User');
     }
 
     /**

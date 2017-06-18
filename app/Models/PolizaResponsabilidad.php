@@ -44,7 +44,7 @@ class PolizaResponsabilidad extends Model
      */
     public static $rules = [
         'vehiculo_id' => 'required',
-        'fecha_vigencia_inicio' => 'required|date',
+        'fecha_vigencia_inicio' => '',
         'fecha_vigencia_final' => 'required|date'
     ];
     /**
@@ -57,6 +57,9 @@ class PolizaResponsabilidad extends Model
     */
     public function vehiculo(){
         return $this->belongsTo('App\Models\Vehiculo');
+    }
+    public function user(){
+        return $this->belongsTo('App\User');
     }
 
     /**

@@ -77,8 +77,8 @@ class Juridico extends Model
     public function municipio(){
         return $this->belongsTo('App\Models\Municipio', 'municipio_id');
     }
-    public function usuario(){
-        return $this->belongsTo('App\User', 'user_id');
+    public function user(){
+        return $this->belongsTo('App\User');
     }
     
 

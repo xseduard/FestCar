@@ -26,6 +26,9 @@
     -->
     <!-- FLATICONS Custom -->
     {!! Html::style('/css/flaticon_bus/flaticon.css') !!}
+
+    <!-- CSS PRINCIPAL WEB PAGE CUSTOM-->
+    {!! Html::style('/css/main.css') !!}
     <!-- FavICONS ================================================== -->
 
         <link rel="apple-touch-icon" sizes="57x57" href="{!! url('/favicon/apple-icon-57x57.png') !!}">

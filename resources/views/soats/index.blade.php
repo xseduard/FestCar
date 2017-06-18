@@ -4,6 +4,7 @@
     <section class="content-header">
         <h1 class="pull-left">Soat</h1>
         <h1 class="pull-right">
+
            <a class="btn btn-primary btn-flat pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('soats.create') !!}"><i class="fa fa-plus"></i> &nbsp; Aregar</a>
         </h1>
     </section>
@@ -32,5 +33,16 @@
             </div>
         </div>
     </div>
+    
 @endsection
+@section('scripts')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/peity/3.2.1/jquery.peity.min.js"></script>
+
+    <script>
+        $(document).ready(function () { 
+            $("span.pie").peity("pie")
+        }); 
+    </script>
+@endsection
+
 

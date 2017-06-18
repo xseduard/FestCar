@@ -44,18 +44,18 @@
             <td><span class="label label-default">{!! $contratoVinculacion->vehiculo->placa !!}</span></td>
             <td>{!! $contratoVinculacion->fecha_inicio->format('d-m-Y') !!}</td>
             <td>
-                <span class="pie" data-peity='{ "fill": ["#d2d6de", "#00b0a3"],  "innerRadius": 0, "radius": 9 }'>{!! $contratoVinculacion->dias_actual_diferencia !!}/{!! $contratoVinculacion->dias_diferencia !!}</span>
+                <span class="pie" data-peity='{ "fill": ["#00b0a3", "#d2d6de"],  "innerRadius": 0, "radius": 9 }'>{!! $contratoVinculacion->dias_actual_diferencia !!}/{!! $contratoVinculacion->dias_diferencia !!}</span>
             </td>
             <td>{!! $contratoVinculacion->fecha_final->format('d-m-Y') !!}</td>
             <td> 
                 @if ($contratoVinculacion->vigente)                    
                     @if($contratoVinculacion->aprobado)
-                        <span class="label label-success">Vigente</span>
+                        <span class="badge badge-success">Vigente</span>
                     @else
-                        <span class="label label-warning">Pendiente de Aprobación</span>
+                        <span class="badge badge-warning">Pendiente de Aprobación</span>
                     @endif
                 @else
-                    <span class="label label-default">No Vigente</span>
+                    <span class="badge badge-default">No Vigente</span>
                 @endif
             </td>
             <td>

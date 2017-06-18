@@ -68,6 +68,10 @@ class ExtractoController extends AppBaseController
     {
         $selectores = $this->selectoresComunes();
 
+        if (empty($selectores['ContratoPrestacionServicio_id'])) {
+           Flash::error('No Existen contratos de prestacion de servicios Vigentes');           
+             return Redirect::back()->withInput(Input::all());
+        }
         return view('extractos.create')->with(['selectores' => $selectores]);
     }
 

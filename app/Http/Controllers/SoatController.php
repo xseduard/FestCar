@@ -80,6 +80,7 @@ class SoatController extends AppBaseController
     {
         $input = $request->all();
         $input['user_id'] = Auth::id();
+        $input['fecha_vigencia_inicio'] = (new Date ($input['fecha_vigencia_final']))->subYear()->addDay();
 
         $soat = $this->soatRepository->create($input);
 
@@ -150,11 +151,8 @@ class SoatController extends AppBaseController
         }
         $input = $request->all();
         $input['user_id'] = Auth::id();
-        // $input['fecha_vigencia_final'] = $input['fecha_vigencia_inicio'];
-        // dd($input);
-        //$input['fecha_vigencia_final'] = new Date ($input['fecha_vigencia_final']);
-        //dd($input['fecha_vigencia_final']->addYear()->subDay());
-
+        $input['fecha_vigencia_inicio'] = (new Date ($input['fecha_vigencia_final']))->subYear()->addDay();
+       
         $soat = $this->soatRepository->update($input, $id);
 
         Flash::success('Soat actualizado correctamente.');

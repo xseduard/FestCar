@@ -82,8 +82,8 @@ class Extracto extends Model
     }
 
     */
-    public function usuario(){
-        return $this->belongsTo('App\User', 'user_id');
+    public function user(){
+        return $this->belongsTo('App\User');
     }
     public function vehiculo(){
         return $this->belongsTo('App\Models\Vehiculo');

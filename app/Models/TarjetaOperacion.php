@@ -83,6 +83,9 @@ class TarjetaOperacion extends Model
     public function vehiculo(){
         return $this->belongsTo('App\Models\Vehiculo');
     }
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 
     /**
      * Funciones Especiales

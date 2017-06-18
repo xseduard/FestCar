@@ -19,9 +19,9 @@
             <td>{!! $licenciaConduccion->fecha_vigencia->format('d-M-Y') !!}</td>
             <td>
                 @if ($licenciaConduccion->vigente)
-                    <span class="label label-success">Vigente</span>
+                    <span class="badge badge-success">Vigente</span>
                 @else
-                    <span class="label label-warning">No Vigente</span>
+                    <span class="badge badge-warning">No Vigente</span>
                 @endif
             </td>
 

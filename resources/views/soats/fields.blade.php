@@ -23,7 +23,7 @@
     {!! Form::label('fecha_vigencia_inicio', 'Fecha inicio de Vigencia') !!}
     <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-    	{!! Form::text('fecha_vigencia_inicio', null, ['class' => 'form-control datepicker', 'placeholder' => 'AAAA-MM-DD']) !!}
+    	{!! Form::text('fecha_vigencia_inicio', null, ['disabled' => true,  'class' => 'form-control datepicker', 'placeholder' => 'AAAA-MM-DD']) !!}
     </div>
 </div>
 
