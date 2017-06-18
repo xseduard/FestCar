@@ -2,7 +2,7 @@
     <thead>
         <th>Vehículo</th>
         <th>Poliza</th>
-        <th>Fecha de Expedicion</th>
+        <th>Fecha de Expedición</th>
         <th>Fecha de Inicio Vigencia</th>
         <th>Fecha de Final Vigencia</th>
         <th>Estado</th>        

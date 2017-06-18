@@ -137,6 +137,15 @@
 
 
 
+<li class="{{ Request::is('reciboProductos*') ? 'active' : '' }}">
+    <a href="{!! route('reciboProductos.index') !!}"><i class="fa fa-edit"></i><span>Productos</span></a>
+</li>
 
+<li class="{{ Request::is('recibos*') ? 'active' : '' }}">
+    <a href="{!! route('recibos.index') !!}"><i class="fa fa-edit"></i><span>Recibos</span></a>
+</li>
 
+<li class="{{ Request::is('reciboDetalles*') ? 'active' : '' }}">
+    <a href="{!! route('reciboDetalles.index') !!}"><i class="fa fa-edit"></i><span>Detalles</span></a>
+</li>
 

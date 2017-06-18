@@ -92,6 +92,7 @@ class CreateHojaVidasTable extends Migration
             $table->string('examen_ingreso');
             $table->string('estatura', 5);
             $table->string('grupo_sanguineo', 3);
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });

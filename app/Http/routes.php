@@ -110,6 +110,10 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('hojaVidas', 'HojaVidaController');
     Route::resource('empresas', 'EmpresaController');
     Route::resource('simuladorGastos', 'SimuladorGastoController');
+
+    Route::resource('reciboProductos', 'ReciboProductoController');
+    Route::resource('recibos', 'ReciboController');
+    Route::resource('reciboDetalles', 'ReciboDetalleController');
     
 });
 
@@ -117,6 +121,8 @@ Route::group(['middleware' => 'web'], function() {
 Route::get('error', function(){ 
     abort(500);
 });
+
+
 
 
 

@@ -54,7 +54,9 @@ class SimuladorGasto extends Model
         'sistema_comunicacion',
         'gps',
         'margen',
-        'otros'
+        'otros',
+        'user_id'
+
     ];
     /**
      * Estos atributos son casteados en su tipo nativo.
@@ -62,7 +64,8 @@ class SimuladorGasto extends Model
     protected $casts = [
         'min' => 'integer',
         'max' => 'integer',
-        'margen' => 'integer'
+        'margen' => 'integer',
+        'user_id' => 'integer'
     ];
     /**
      * Reglas de Validacón

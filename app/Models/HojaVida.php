@@ -97,7 +97,9 @@ class HojaVida extends Model
         'seguridad_social',
         'examen_ingreso',
         'estatura',
-        'grupo_sanguineo'
+        'grupo_sanguineo',
+        'user_id'
+
     ];
     /**
      * Estos atributos son casteados en su tipo nativo.
@@ -176,7 +178,8 @@ class HojaVida extends Model
         'seguridad_social' => 'string',
         'examen_ingreso' => 'string',
         'estatura' => 'string',
-        'grupo_sanguineo' => 'string'
+        'grupo_sanguineo' => 'string',
+        'user_id' => 'integer'
     ];
     /**
      * Reglas de Validacón
