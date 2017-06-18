@@ -14,7 +14,7 @@
          <div class="box box-primary">
              <div class="box-body">
                  <div class="row">
-                     {!! Form::model($juridico, ['route' => ['juridicos.update', $juridico->id], 'method' => 'patch']) !!} {{ csrf_field() }}
+                     {!! Form::model($juridico, ['route' => ['juridicos.update', $juridico->id], 'method' => 'patch']) !!}  
 
                           @include('juridicos.fields')
 

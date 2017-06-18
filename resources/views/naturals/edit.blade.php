@@ -14,7 +14,7 @@
          <div class="box box-primary">
              <div class="box-body">
                  <div class="row">
-                     {!! Form::model($natural, ['route' => ['naturals.update', $natural->id], 'method' => 'patch']) !!} {{ csrf_field() }}
+                     {!! Form::model($natural, ['route' => ['naturals.update', $natural->id], 'method' => 'patch']) !!}  
 
                           @include('naturals.fields')
 

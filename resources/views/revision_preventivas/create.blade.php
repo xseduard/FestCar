@@ -15,7 +15,7 @@
 
                 <div class="box-body">
                     <div class="row">
-                        {!! Form::open(['route' => 'revisionPreventivas.store']) !!} {{ csrf_field() }}
+                        {!! Form::open(['route' => 'revisionPreventivas.store']) !!}  
 
                             @include('revision_preventivas.fields')
 

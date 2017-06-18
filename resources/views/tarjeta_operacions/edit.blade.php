@@ -14,7 +14,7 @@
          <div class="box box-primary">
              <div class="box-body">
                  <div class="row">
-                     {!! Form::model($tarjetaOperacion, ['route' => ['tarjetaOperacions.update', $tarjetaOperacion->id], 'method' => 'patch']) !!} {{ csrf_field() }}
+                     {!! Form::model($tarjetaOperacion, ['route' => ['tarjetaOperacions.update', $tarjetaOperacion->id], 'method' => 'patch']) !!}  
 
                           @include('tarjeta_operacions.fields')
 

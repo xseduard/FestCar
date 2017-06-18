@@ -13,7 +13,7 @@
          <div class="box box-primary">
              <div class="box-body">
                  <div class="row">
-                     {!! Form::model($tarjetaPropiedad, ['route' => ['tarjetaPropiedads.update', $tarjetaPropiedad->id], 'method' => 'patch']) !!} {{ csrf_field() }}
+                     {!! Form::model($tarjetaPropiedad, ['route' => ['tarjetaPropiedads.update', $tarjetaPropiedad->id], 'method' => 'patch']) !!}  
 
                           @include('tarjeta_propiedads.fields')
 

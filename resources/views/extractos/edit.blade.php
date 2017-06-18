@@ -21,7 +21,7 @@
          <div class="box box-primary">
              <div class="box-body">
                  <div class="row">
-                     {!! Form::model($extracto, ['route' => ['extractos.update', $extracto->id], 'method' => 'patch']) !!} {{ csrf_field() }}
+                     {!! Form::model($extracto, ['route' => ['extractos.update', $extracto->id], 'method' => 'patch']) !!}  
 
                           @include('extractos.fields')
 

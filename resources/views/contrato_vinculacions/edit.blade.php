@@ -20,7 +20,7 @@
          <div class="box box-primary">
              <div class="box-body">
                  <div class="row">
-                     {!! Form::model($contratoVinculacion, ['route' => ['contratoVinculacions.update', $contratoVinculacion->id], 'method' => 'patch']) !!} {{ csrf_field() }}
+                     {!! Form::model($contratoVinculacion, ['route' => ['contratoVinculacions.update', $contratoVinculacion->id], 'method' => 'patch']) !!}  
 
                           @include('contrato_vinculacions.fields')
 

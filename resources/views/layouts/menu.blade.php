@@ -142,7 +142,7 @@
 </li>
 
 <li class="{{ Request::is('recibos*') ? 'active' : '' }}">
-    <a href="{!! route('recibos.index') !!}"><i class="fa fa-edit"></i><span>Recibos</span></a>
+    <a href="{!! route('recibos.index') !!}"><i class="ion-ios-cart"></i> <span>Recibos</span></a>
 </li>
 
 <li class="{{ Request::is('reciboDetalles*') ? 'active' : '' }}">

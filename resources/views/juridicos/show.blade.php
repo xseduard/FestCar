@@ -99,7 +99,7 @@
 
               <hr>
               <small class="text-muted">Última Actualiación</small>
-              <small><p class="text-muted">{!! $juridico->updated_at !!} por {!! $juridico->usuario->nombres," ",$juridico->usuario->apellidos !!}</p></small>
+              <small><p class="text-muted">{!! $juridico->updated_at !!} por {!! $juridico->user->fullname !!}</p></small>
             </div>
             <!-- /.box-body -->
           </div>

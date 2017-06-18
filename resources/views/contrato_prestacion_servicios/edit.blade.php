@@ -16,7 +16,7 @@
          <div class="box box-primary">
              <div class="box-body">
                  <div class="row">
-                     {!! Form::model($contratoPrestacionServicio, ['route' => ['contratoPrestacionServicios.update', $contratoPrestacionServicio->id], 'method' => 'patch']) !!} {{ csrf_field() }}
+                     {!! Form::model($contratoPrestacionServicio, ['route' => ['contratoPrestacionServicios.update', $contratoPrestacionServicio->id], 'method' => 'patch']) !!}  
 
                           @include('contrato_prestacion_servicios.fields')
 
