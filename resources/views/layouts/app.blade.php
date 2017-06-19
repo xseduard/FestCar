@@ -203,7 +203,9 @@
     <!-- AdminLTE App -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/js/app.min.js"></script>
     <!-- Vue.js -->
+    <!-- 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.0/vue.js" ></script>
+    -->
     <!-- select2 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <!-- select2 español -->
@@ -212,6 +214,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
     <!-- datepicker español -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.es.min.js"></script>
+
+    <!-- input mask -->
+    {{ HTML::script('/js/jquery.inputmask.bundle.min.js') }}
     <!-- Animsition -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.min.js"></script>
      <!-- Animsition ini -->
@@ -239,6 +244,8 @@
             overlayParentElement : 'body',
             transition: function(url){ window.location.href = url; }
           });
+
+          console.log('Welcome To FestCar - PowerBy XS EDUARD');
         });
     </script>
      <!-- Animsition end ini -->

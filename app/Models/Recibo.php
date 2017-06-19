@@ -55,6 +55,12 @@ class Recibo extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+    public function natural(){
+        return $this->belongsTo('App\Models\Natural');
+    }
+    public function articulos(){
+        return $this->hasMany('App\Models\ReciboDetalle', 'recibo_id', 'id');
+    }
 
     /**
      * Funciones Especiales

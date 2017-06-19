@@ -53,38 +53,38 @@ class ContratoPrestacionServicioRepository extends BaseRepository
         ->where('id',$id)
         ->first(); 
 
-        $contratista_nombre = "";
+        $contratista_nombre     = "";
         $contratista_cedula_ref = "";
-        $contratista_cedula = "";
+        $contratista_cedula     = "";
         if ($contrato->tipo_cliente == 'Natural') {
-            $contratista_nombre = $contrato->natural->fullname;    
-            $contratista_cedula = $contrato->natural->cedula;
+            $contratista_nombre     = $contrato->natural->fullname;    
+            $contratista_cedula     = $contrato->natural->cedula;
             $contratista_cedula_ref = $contrato->natural->municipio->nombre.", ".$contrato->natural->municipio->departamento->nombre;
         } elseif ($contrato->tipo_cliente == 'Juridico') {
-            $contratista_nombre = $contrato->juridico->natural->fullname;    
-            $contratista_cedula = $contrato->juridico->natural->cedula;
+            $contratista_nombre     = $contrato->juridico->natural->fullname;    
+            $contratista_cedula     = $contrato->juridico->natural->cedula;
             $contratista_cedula_ref = $contrato->juridico->natural->municipio->nombre.", ".$contrato->natural->municipio->departamento->nombre;
         }
         $data = [        
-        'mi_empresa_nit'                    =>  $empresa->nit,
-        'mi_empresa_nombre'                 =>  $empresa->razon_social,
-        'mi_empresa_nombre_corto'           =>  $empresa->nombre_corto,
-        'mi_empresa_domicilio'              =>  $empresa->domicilio,
-        'mi_empresa_contacto'               =>  $empresa->direccion.' '.$empresa->telefono.' '.$empresa->correo,
-        'mi_empresa_rt_nombre'              =>  mb_strtoupper($contrato->rlfullname,'utf-8'),
-        'mi_empresa_rt_cedula'              =>  number_format($contrato->rl_id, 0, '.', '.' ),
-        'mi_empresa_rt_cedula_ref'          =>  $contrato->rl_id_ref,
-        'contratista_nombre'                =>  mb_strtoupper($contratista_nombre,'utf-8'),
-        'contratista_residencia_actual'     => "",
-        'contratista_cedula_ref'            =>  mb_strtoupper($contratista_cedula_ref,'utf-8'),
-        'contratista_cedula'                =>  number_format($contratista_cedula, 0, '.', '.' ),
-        'valor'                             =>  number_format($contrato->valor, 0, '.', '.' ),
-        'valor_letras'                      =>  \NumeroALetras::convertir($contrato->valor),
-        'origen'                            =>  mb_strtoupper($contrato->origen->nombre." ".$contrato->origen->departamento->nombre,'utf-8'),
-        'destino'                           =>  mb_strtoupper($contrato->destino->nombre." ".$contrato->destino->departamento->nombre,'utf-8'),
-        'fecha_inicio'                      =>  $contrato->fecha_inicio->day." de ".$contrato->fecha_inicio->format('F')." del ".$contrato->fecha_inicio->year,
-        'fecha_final'                       =>  $contrato->fecha_final->day." de ".$contrato->fecha_final->format('F')." del ".$contrato->fecha_final->year,
-        'fecha_creacion'                    =>  $contrato->created_at->day." días del mes de ".$contrato->created_at->format('F')." de ".$contrato->created_at->year,
+        'mi_empresa_nit'                =>  $empresa->nit,
+        'mi_empresa_nombre'             =>  $empresa->razon_social,
+        'mi_empresa_nombre_corto'       =>  $empresa->nombre_corto,
+        'mi_empresa_domicilio'          =>  $empresa->domicilio,
+        'mi_empresa_contacto'           =>  $empresa->direccion.' '.$empresa->telefono.' '.$empresa->correo,
+        'mi_empresa_rt_nombre'          =>  mb_strtoupper($contrato->rlfullname,'utf-8'),
+        'mi_empresa_rt_cedula'          =>  number_format($contrato->rl_id, 0, '.', '.' ),
+        'mi_empresa_rt_cedula_ref'      =>  $contrato->rl_id_ref,
+        'contratista_nombre'            =>  mb_strtoupper($contratista_nombre,'utf-8'),
+        'contratista_residencia_actual' => "",
+        'contratista_cedula_ref'        =>  mb_strtoupper($contratista_cedula_ref,'utf-8'),
+        'contratista_cedula'            =>  number_format($contratista_cedula, 0, '.', '.' ),
+        'valor'                         =>  number_format($contrato->valor, 0, '.', '.' ),
+        'valor_letras'                  =>  \NumeroALetras::convertir($contrato->valor),
+        'origen'                        =>  mb_strtoupper($contrato->origen->nombre." ".$contrato->origen->departamento->nombre,'utf-8'),
+        'destino'                       =>  mb_strtoupper($contrato->destino->nombre." ".$contrato->destino->departamento->nombre,'utf-8'),
+        'fecha_inicio'                  =>  $contrato->fecha_inicio->day." de ".$contrato->fecha_inicio->format('F')." del ".$contrato->fecha_inicio->year,
+        'fecha_final'                   =>  $contrato->fecha_final->day." de ".$contrato->fecha_final->format('F')." del ".$contrato->fecha_final->year,
+        'fecha_creacion'                =>  $contrato->created_at->day." días del mes de ".$contrato->created_at->format('F')." de ".$contrato->created_at->year,
         ];
 
          

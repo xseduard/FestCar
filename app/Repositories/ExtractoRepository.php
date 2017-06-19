@@ -121,43 +121,43 @@ class ExtractoRepository extends BaseRepository
             $data['contratante_nombre'] = mb_strtoupper($extracto->cps->juridico->nombre,'utf-8');
             $data['documento_contratante'] = $extracto->cps->juridico->nit; 
         }
-            $c2_nombre      = "";
-            $c2_apellidos   = "";
-            $c2_cedula      = "";
-            $c2_licencia    = "";
-            $c2_vigencia    = "";
-            $c3_nombre      = "";
-            $c3_apellidos   = "";
-            $c3_cedula      = "";
-            $c3_licencia    = "";
-            $c3_vigencia    = "";
+            $c2_nombre    = "";
+            $c2_apellidos = "";
+            $c2_cedula    = "";
+            $c2_licencia  = "";
+            $c2_vigencia  = "";
+            $c3_nombre    = "";
+            $c3_apellidos = "";
+            $c3_cedula    = "";
+            $c3_licencia  = "";
+            $c3_vigencia  = "";
 
-            $r_nombre      = "";
-            $r_apellidos    = "";
-            $r_cedula       = "";
-            $r_telefono     = "";
-            $r_direccion    = "";
+            $r_nombre    = "";
+            $r_apellidos = "";
+            $r_cedula    = "";
+            $r_telefono  = "";
+            $r_direccion = "";
 
         if (!is_null($extracto->conductordos)) {
-            $c2_nombre      = mb_strtoupper($extracto->conductordos->nombres,'utf-8');
-            $c2_apellidos   = mb_strtoupper($extracto->conductordos->apellidos,'utf-8');
-            $c2_cedula      = number_format($extracto->conductordos->cedula, 0, '.', '.' );
-            $c2_licencia    = $extracto->conductordos->cedula;
-            $c2_vigencia    = $extracto->f_licencia_dos;
+            $c2_nombre    = mb_strtoupper($extracto->conductordos->nombres,'utf-8');
+            $c2_apellidos = mb_strtoupper($extracto->conductordos->apellidos,'utf-8');
+            $c2_cedula    = number_format($extracto->conductordos->cedula, 0, '.', '.' );
+            $c2_licencia  = $extracto->conductordos->cedula;
+            $c2_vigencia  = $extracto->f_licencia_dos;
         }
         if (!is_null($extracto->conductortres)) {
-            $c3_nombre      = mb_strtoupper($extracto->conductortres->nombres,'utf-8');
-            $c3_apellidos   = mb_strtoupper($extracto->conductortres->apellidos,'utf-8');
-            $c3_cedula      = number_format($extracto->conductortres->cedula, 0, '.', '.' );
-            $c3_licencia    = $extracto->conductortres->cedula;
-            $c3_vigencia    = $extracto->f_licencia_tres;
+            $c3_nombre    = mb_strtoupper($extracto->conductortres->nombres,'utf-8');
+            $c3_apellidos = mb_strtoupper($extracto->conductortres->apellidos,'utf-8');
+            $c3_cedula    = number_format($extracto->conductortres->cedula, 0, '.', '.' );
+            $c3_licencia  = $extracto->conductortres->cedula;
+            $c3_vigencia  = $extracto->f_licencia_tres;
         }
         if (!is_null($extracto->cps->responsable)) {
-            $r_nombre      = mb_strtoupper($extracto->cps->responsable->nombres,'utf-8');
-            $r_apellidos    = mb_strtoupper($extracto->cps->responsable->apellidos,'utf-8');
-            $r_cedula       = number_format($extracto->cps->responsable->cedula, 0, '.', '.' );
-            $r_telefono     = $extracto->cps->responsable->telefono;
-            $r_direccion    = substr($extracto->cps->responsable->direccion, 0, 73);
+            $r_nombre    = mb_strtoupper($extracto->cps->responsable->nombres,'utf-8');
+            $r_apellidos = mb_strtoupper($extracto->cps->responsable->apellidos,'utf-8');
+            $r_cedula    = number_format($extracto->cps->responsable->cedula, 0, '.', '.' );
+            $r_telefono  = $extracto->cps->responsable->telefono;
+            $r_direccion = substr($extracto->cps->responsable->direccion, 0, 73);
         }
         
 

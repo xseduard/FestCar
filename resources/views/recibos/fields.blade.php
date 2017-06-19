@@ -13,72 +13,73 @@
 <!-- cuerpo recibo -->
 <div class="form-group col-sm-8">
     {!! Form::label('art_1', 'Articulos') !!}
-    {!! Form::select('art_1', $selectores['recibo_producto_id'], 'Efectivo', ['class' => 'form-control select_art', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+    {!! Form::select('art_1', $selectores['recibo_producto_id'], 1, ['class' => 'form-control select_art', 'id' => 'art_1', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
+
 
 <div class="form-group col-sm-1">
     {!! Form::label('cantidad_1', 'Cant.') !!}    
-    {!! Form::number('cantidad_1', 0, ['class' => 'form-control', 'style' => 'text-align: right;', 'placeholder'=>'']) !!}       
+    {!! Form::number('cantidad_1', 1, ['class' => 'form-control cant', 'id' => 'cantidad_1', 'style' => 'text-align: right;', 'placeholder'=>'']) !!}       
 </div>
 
 <div class="form-group col-sm-3">
     {!! Form::label('precio_1', 'Precio') !!}
     <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-            {!! Form::number('precio_1', null, ['class' => 'form-control', 'style' => 'text-align: right;', 'placeholder'=>'']) !!}
+            {!! Form::number('precio_1', 10000, ['class' => 'form-control price', 'id' => 'precio_1', 'style' => 'text-align: right;', 'placeholder'=>'']) !!}
         </div>
 </div>
 
 
 <div class="form-group col-sm-8">
-    {!! Form::select('art_2', $selectores['recibo_producto_id'], 'Efectivo', ['class' => 'form-control select_art', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+    {!! Form::select('art_2', $selectores['recibo_producto_id'], null, ['class' => 'form-control select_art', 'id' => 'art_2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
 
 <div class="form-group col-sm-1">    
-    {!! Form::number('cantidad_2', 0, ['class' => 'form-control', 'style' => 'text-align: right;', 'placeholder'=>'']) !!}       
+    {!! Form::number('cantidad_2', 0, ['class' => 'form-control cant', 'id' => 'cantidad_2', 'style' => 'text-align: right;', 'placeholder'=>'']) !!}       
 </div>
 
 <div class="form-group col-sm-3">
     <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-            {!! Form::number('precio_2', null, ['class' => 'form-control', 'style' => 'text-align: right;', 'placeholder'=>'']) !!}
+            {!! Form::number('precio_2', 0, ['class' => 'form-control price', 'id' => 'precio_2', 'style' => 'text-align: right;', 'placeholder'=>'']) !!}
         </div>
 </div>
 
 <div class="form-group col-sm-8">
-    {!! Form::select('art_3', $selectores['recibo_producto_id'], 'Efectivo', ['class' => 'form-control select_art', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+    {!! Form::select('art_3', $selectores['recibo_producto_id'], null, ['class' => 'form-control select_art', 'id' => 'art_3', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
 
 <div class="form-group col-sm-1">    
-    {!! Form::number('cantidad_3', 0, ['class' => 'form-control', 'style' => 'text-align: right;', 'placeholder'=>'']) !!}       
+    {!! Form::number('cantidad_3', 0, ['class' => 'form-control cant', 'id' => 'cantidad_3', 'style' => 'text-align: right;', 'placeholder'=>'']) !!}       
 </div>
 
 <div class="form-group col-sm-3">
     <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-            {!! Form::number('precio_3', null, ['class' => 'form-control', 'style' => 'text-align: right;', 'placeholder'=>'']) !!}
+            {!! Form::number('precio_3', 0, ['class' => 'form-control price', 'id' => 'precio_3', 'style' => 'text-align: right;', 'placeholder'=>'']) !!}
         </div>
 </div>
 
 <div class="form-group col-sm-8">
-    {!! Form::select('art_4', $selectores['recibo_producto_id'], 'Efectivo', ['class' => 'form-control select_art', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+    {!! Form::select('art_4', $selectores['recibo_producto_id'], null, ['class' => 'form-control select_art', 'id' => 'art_4', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
 
 <div class="form-group col-sm-1">    
-    {!! Form::number('cantidad_4', 0, ['class' => 'form-control', 'style' => 'text-align: right;', 'placeholder'=>'']) !!}       
+    {!! Form::number('cantidad_4', 0, ['class' => 'form-control cant', 'id' => 'cantidad_4', 'style' => 'text-align: right;', 'placeholder'=>'']) !!}       
 </div>
 
 <div class="form-group col-sm-3">
     <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-            {!! Form::number('precio_4', null, ['class' => 'form-control', 'style' => 'text-align: right;', 'placeholder'=>'']) !!}
+            {!! Form::number('precio_4', 0, ['class' => 'form-control price', 'id' => 'precio_4', 'style' => 'text-align: right;', 'placeholder'=>'']) !!}
         </div>
 </div>
 
 <div class="form-group col-sm-4 col-sm-offset-8">   
     <div class="input-group">
         <div class="input-group-addon">SubTotal</div>
-            {!! Form::number('subtotal', null, ['class' => 'form-control', 'id' => 'subtotal', 'style' => 'text-align: right;', 'disabled' => true]) !!}
+            {!! Form::text('subtotal', 10000, ['class' => 'form-control money-mask', 'id' => 'subtotal', 'style' => 'text-align: right;', 'disabled' => true]) !!}
         </div>
 </div>
 
@@ -97,17 +98,22 @@
 <!-- Descuento Campo de texto -->
 <div class="form-group col-sm-4 ">
     {!! Form::label('descuento', 'Descuento') !!}
-    {!! Form::text('descuento', null, ['class' => 'form-control', 'style' => 'text-align: right;']) !!}
-
+    <div class="input-group">
+            <div class="input-group-addon">%</div>
+            {!! Form::text('descuento', 0, ['class' => 'form-control', 'id' => 'descuento', 'style' => 'text-align: right;', 'disabled' => true]) !!}
+    </div>
     {!! Form::label('incremento', 'Incremento') !!}
-    {!! Form::text('incremento', null, ['class' => 'form-control', 'style' => 'text-align: right;']) !!}
+        <div class="input-group">
+            <div class="input-group-addon">%</div>
+            {!! Form::text('incremento', 0, ['class' => 'form-control', 'id' => 'incremento', 'style' => 'text-align: right;', 'disabled' => true]) !!}
+    </div>
 </div>
 
-<div class="form-group col-sm-4">
+<div class="form-group col-sm-4  col-sm-offset-8">
     {!! Form::label('total', 'Total a Pagar') !!}
     <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-            {!! Form::number('total', null, ['class' => 'form-control', 'id' => 'total', 'style' => 'text-align: right;', 'disabled' => true]) !!}
+        <div class="input-group-addon"><i class="fa fa-money" aria-hidden="true"></i></div>
+            {!! Form::text('total', 10000, ['class' => 'form-control money-mask', 'id' => 'total', 'style' => 'text-align: right;', 'disabled' => true]) !!}
         </div>
 </div>
 

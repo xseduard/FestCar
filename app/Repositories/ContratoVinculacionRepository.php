@@ -91,26 +91,26 @@ class ContratoVinculacionRepository extends BaseRepository
         $fecha_creacion = $this->traducir_fecha($contrato->created_at);       
 
 
-            $contratista_nombre = '';
-            $contratista_cedula_ref = '';
-            $contratista_cedula = '';
-            $id_propietario_vehiculo = '';
-            $TIPO_POSEEDOR_O_TENEDOR = '';
+            $contratista_nombre           = '';
+            $contratista_cedula_ref       = '';
+            $contratista_cedula           = '';
+            $id_propietario_vehiculo      = '';
+            $TIPO_POSEEDOR_O_TENEDOR      = '';
             $DIR_MUNINCIPIO_PROP_VEHICULO = '';
-            $JURIDICO_NOMBRE = '';
-            $JURIDICO_NIT = '';
+            $JURIDICO_NOMBRE              = '';
+            $JURIDICO_NIT                 = '';
             $NOMBRE_RTE_LEGAL_CONTRATISTA = '';
-            $CEDULA_RTE_LEGAL = '';
-            $LUGAR_EXP_RTE_LEGAL = '';
+            $CEDULA_RTE_LEGAL             = '';
+            $LUGAR_EXP_RTE_LEGAL          = '';
         
 
         if ($contrato->tipo_proveedor == 'Natural') {
 
-           $contratista_nombre     =  $contrato->natural->fullname;
-           $contratista_cedula_ref  =  $contrato->natural->municipio->nombre.", ".$contrato->natural->municipio->departamento->nombre;
-           $contratista_cedula     =  $contrato->natural->cedula;           
-           $id_propietario_vehiculo  =  $contrato->natural->id;
-           $contratista_residencia_actual  =  $contrato->natural->residenciamunicipio->nombre.", ".$contrato->natural->residenciamunicipio->departamento->nombre;
+           $contratista_nombre            =  $contrato->natural->fullname;
+           $contratista_cedula_ref        =  $contrato->natural->municipio->nombre.", ".$contrato->natural->municipio->departamento->nombre;
+           $contratista_cedula            =  $contrato->natural->cedula;           
+           $id_propietario_vehiculo       =  $contrato->natural->id;
+           $contratista_residencia_actual =  $contrato->natural->residenciamunicipio->nombre.", ".$contrato->natural->residenciamunicipio->departamento->nombre;
            
             if ($contrato->vehiculo->tipo_propietario == "Natural") {
                 if ($contrato->natural_id == $contrato->vehiculo->natural_id) {
@@ -130,16 +130,16 @@ class ContratoVinculacionRepository extends BaseRepository
 
         } elseif ($contrato->tipo_proveedor == 'Juridico') {
 
-            $JURIDICO_NOMBRE            = $contrato->juridico->nombre;
-            $JURIDICO_NIT               = $contrato->juridico->nit;
-            $contratista_nombre       = $contrato->juridico->natural->fullname;
-            $contratista_cedula_ref    = $contrato->juridico->natural->municipio->nombre.", ".$contrato->juridico->natural->municipio->departamento->nombre;
-            $contratista_cedula       = $contrato->juridico->natural->cedula;
-            $id_propietario_vehiculo    = '';
-            $NOMBRE_RTE_LEGAL_CONTRATISTA = $this->buscar_juridico($contrato->juridico_id)->natural->nombres." ".$this->buscar_juridico($contrato->juridico_id)->natural->apellidos;
-            $CEDULA_RTE_LEGAL           = number_format($this->buscar_juridico($contrato->juridico_id)->natural->cedula, 0, '.', '.' );
-            $LUGAR_EXP_RTE_LEGAL        = $this->municipio_departamento($this->buscar_juridico($contrato->juridico_id)->natural->municipio_id);
-            $contratista_residencia_actual  =  $this->municipio_departamento($this->buscar_vehiculo($contrato->vehiculo_id)->natural->direccion_municipio);
+            $JURIDICO_NOMBRE               = $contrato->juridico->nombre;
+            $JURIDICO_NIT                  = $contrato->juridico->nit;
+            $contratista_nombre            = $contrato->juridico->natural->fullname;
+            $contratista_cedula_ref        = $contrato->juridico->natural->municipio->nombre.", ".$contrato->juridico->natural->municipio->departamento->nombre;
+            $contratista_cedula            = $contrato->juridico->natural->cedula;
+            $id_propietario_vehiculo       = '';
+            $NOMBRE_RTE_LEGAL_CONTRATISTA  = $this->buscar_juridico($contrato->juridico_id)->natural->nombres." ".$this->buscar_juridico($contrato->juridico_id)->natural->apellidos;
+            $CEDULA_RTE_LEGAL              = number_format($this->buscar_juridico($contrato->juridico_id)->natural->cedula, 0, '.', '.' );
+            $LUGAR_EXP_RTE_LEGAL           = $this->municipio_departamento($this->buscar_juridico($contrato->juridico_id)->natural->municipio_id);
+            $contratista_residencia_actual =  $this->municipio_departamento($this->buscar_vehiculo($contrato->vehiculo_id)->natural->direccion_municipio);
 
 
             if ($contrato->vehiculo->tipo_propietario == "Juridico") {
@@ -183,37 +183,37 @@ class ContratoVinculacionRepository extends BaseRepository
         
 
         $data = [        
-        'mi_empresa_nit'                    =>  $empresa->nit,
-        'mi_empresa_nombre'                 =>  $empresa->razon_social,
-        'mi_empresa_nombre_corto'           =>  $empresa->nombre_corto,
-        'mi_empresa_rt_nombre'              =>  mb_strtoupper($contrato->rlfullname,'utf-8'),
-        'mi_empresa_rt_cedula'              =>  number_format($contrato->rl_id, 0, '.', '.' ),
-        'mi_empresa_rt_cedula_ref'          => $contrato->rl_id_ref,
-        'contratista_nombre'                =>  mb_strtoupper($contratista_nombre,'utf-8'),
-        'contratista_residencia_actual'     =>  $contratista_residencia_actual,
-        'contratista_cedula_ref'            =>  $contratista_cedula_ref,
-        'contratista_cedula'                =>  number_format($contratista_cedula, 0, '.', '.' ),
-        'DIR_MUNINCIPIO_PROP_VEHICULO'      =>  $DIR_MUNINCIPIO_PROP_VEHICULO,
-        'MUNICIPIO_MI_EMPRESA'              =>  'APARTADÓ, ANTIOQUIA',
-        'DATOS_VEHICULO'                    =>  'FALTA TABLA VEHICULO',
-        'DURACION_CONTRATO'                 =>  $this->traducir_fecha($contrato->fecha_inicio)->timespan($contrato->fecha_final),
-        'FECHA_INICIO'                      =>  $this->traducir_fecha($contrato->fecha_inicio)->format('l d, F Y'),
-        'FECHA_FINAL'                       =>  $this->traducir_fecha($contrato->fecha_final)->subDay()->format('l d, F Y'), 
-        'FECHA_PERFEC_DIA'                  =>  $fecha_creacion->day,
-        'FECHA_PERFEC_MES'                  =>  $fecha_creacion->format('F'),
-        'FECHA_PERFEC_ANO'                  =>  $fecha_creacion->year,
-        'FECHA_PERFEC_ANO_LETRAS'           =>  strtolower(\NumeroALetras::convertir($fecha_creacion->year)),
-        'FECHA_PERFECCIONAMIENTO'           =>  $this->traducir_fecha($contrato->created_at)->format('l d, F Y'),
-        'TIPO_POSEEDOR_O_TENEDOR'           =>  $TIPO_POSEEDOR_O_TENEDOR,
-        'CUOTA_ADMIN_PORCENTAJE'            =>  $empresa->cuota_admin,
-        'CUOTA_ADMIN_PORCENTAJE_LETRAS'     =>  strtolower(\NumeroALetras::convertir($empresa->cuota_admin)),
-        'CUOTA_ADMIN'                       =>  number_format($CUOTA_ADMIN, 0, '.', '.' ),
-        'TIPO_PROVEEDOR'                    =>  $contrato->tipo_proveedor,
-        'JURIDICO_NOMBRE'                   =>  $JURIDICO_NOMBRE,
-        'JURIDICO_NIT'                      =>  $JURIDICO_NIT,
-        'NOMBRE_RTE_LEGAL_CONTRATISTA'      =>  $NOMBRE_RTE_LEGAL_CONTRATISTA,
-        'CEDULA_RTE_LEGAL'                  =>  $CEDULA_RTE_LEGAL,
-        'LUGAR_EXP_RTE_LEGAL'               =>  $LUGAR_EXP_RTE_LEGAL,
+        'mi_empresa_nit'                =>  $empresa->nit,
+        'mi_empresa_nombre'             =>  $empresa->razon_social,
+        'mi_empresa_nombre_corto'       =>  $empresa->nombre_corto,
+        'mi_empresa_rt_nombre'          =>  mb_strtoupper($contrato->rlfullname,'utf-8'),
+        'mi_empresa_rt_cedula'          =>  number_format($contrato->rl_id, 0, '.', '.' ),
+        'mi_empresa_rt_cedula_ref'      => $contrato->rl_id_ref,
+        'contratista_nombre'            =>  mb_strtoupper($contratista_nombre,'utf-8'),
+        'contratista_residencia_actual' =>  $contratista_residencia_actual,
+        'contratista_cedula_ref'        =>  $contratista_cedula_ref,
+        'contratista_cedula'            =>  number_format($contratista_cedula, 0, '.', '.' ),
+        'DIR_MUNINCIPIO_PROP_VEHICULO'  =>  $DIR_MUNINCIPIO_PROP_VEHICULO,
+        'MUNICIPIO_MI_EMPRESA'          =>  'APARTADÓ, ANTIOQUIA',
+        'DATOS_VEHICULO'                =>  'FALTA TABLA VEHICULO',
+        'DURACION_CONTRATO'             =>  $this->traducir_fecha($contrato->fecha_inicio)->timespan($contrato->fecha_final),
+        'FECHA_INICIO'                  =>  $this->traducir_fecha($contrato->fecha_inicio)->format('l d, F Y'),
+        'FECHA_FINAL'                   =>  $this->traducir_fecha($contrato->fecha_final)->subDay()->format('l d, F Y'), 
+        'FECHA_PERFEC_DIA'              =>  $fecha_creacion->day,
+        'FECHA_PERFEC_MES'              =>  $fecha_creacion->format('F'),
+        'FECHA_PERFEC_ANO'              =>  $fecha_creacion->year,
+        'FECHA_PERFEC_ANO_LETRAS'       =>  strtolower(\NumeroALetras::convertir($fecha_creacion->year)),
+        'FECHA_PERFECCIONAMIENTO'       =>  $this->traducir_fecha($contrato->created_at)->format('l d, F Y'),
+        'TIPO_POSEEDOR_O_TENEDOR'       =>  $TIPO_POSEEDOR_O_TENEDOR,
+        'CUOTA_ADMIN_PORCENTAJE'        =>  $empresa->cuota_admin,
+        'CUOTA_ADMIN_PORCENTAJE_LETRAS' =>  strtolower(\NumeroALetras::convertir($empresa->cuota_admin)),
+        'CUOTA_ADMIN'                   =>  number_format($CUOTA_ADMIN, 0, '.', '.' ),
+        'TIPO_PROVEEDOR'                =>  $contrato->tipo_proveedor,
+        'JURIDICO_NOMBRE'               =>  $JURIDICO_NOMBRE,
+        'JURIDICO_NIT'                  =>  $JURIDICO_NIT,
+        'NOMBRE_RTE_LEGAL_CONTRATISTA'  =>  $NOMBRE_RTE_LEGAL_CONTRATISTA,
+        'CEDULA_RTE_LEGAL'              =>  $CEDULA_RTE_LEGAL,
+        'LUGAR_EXP_RTE_LEGAL'           =>  $LUGAR_EXP_RTE_LEGAL,
         ];
         $pdf = new FPDF_VIN('P','mm','A4');
 

@@ -50,6 +50,9 @@ class ReciboDetalle extends Model
         return $this->belongsTo('App\Models\Modelo');
     }
     */
+    public function producto(){
+        return $this->belongsTo('App\Models\ReciboProducto', 'recibo_producto_id');
+    }
     
 
     /**
