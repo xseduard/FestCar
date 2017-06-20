@@ -7,7 +7,7 @@ use App\Models\Empresa;
 use InfyOm\Generator\Common\BaseRepository;
 use Carbon\Carbon;
 use Jenssegers\Date\Date;
-use App\Repositories\FPDF_EXTRACTOS;
+use App\Repositories\FPDF_EXTRACTOS; //SIN USO
 
 use Anouar\Fpdf\Fpdf as baseFpdf;
 
@@ -161,7 +161,7 @@ class ExtractoRepository extends BaseRepository
         }
         
 
-        $pdf = new PDF('P','mm',array(216,279));
+        $pdf = new PDF_EXTRACTO('P','mm',array(216,279));
 
         //$pdf->Cell(Ancho,Alto,"Texto",borde,Ln 0=derecha 1=siguiente linea 2=debajo,'L/C/R',relleno true/false);
         $pdf->AddPage();
@@ -374,7 +374,7 @@ class ExtractoRepository extends BaseRepository
 }
 
 
-class PDF extends baseFpdf
+class PDF_EXTRACTO extends baseFpdf
 {
        function Header()
     {

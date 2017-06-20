@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
+use Illuminate\Session\TokenMismatchException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Carbon\Carbon;
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -45,19 +49,67 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+
         if ($this->isHttpException($e))
-    {       
-        if($e instanceof NotFoundHttpException)
-        {
-            return response()->view('errors.500', [], 404);
+        {  
+         
+            $error = [];                
+            $error['code'] = $e->getStatusCode();
+            $error['date'] = Carbon::now();
+
+                     
+            switch ($error['code']) {
+                case '400':
+                    $error['msg'] = "La URL a la que se intenta acceder tiene un formato/sintaxis no valido";
+                    break;
+                case '401':
+                    $error['msg'] = "No tienes Permisos suficientes para esta acción, Consulte a su Superior";
+                    break;
+                case '403':
+                    $error['msg'] = "Acceso Denegado";
+                    break; 
+                case '404':
+                    $error['msg'] = "Pagina no encontrada.";
+                    break;
+                case '406':
+                    $error['msg'] = "Su navegador web  requiere actualizaciones para mostrar este contenido.";
+                    break;
+                case '500':
+                    $error['msg'] = "Se ha encontrado un error, por favor envie una captura de esta pantalla al departamento de Sistemas";
+                    break;
+                case '504':
+                    $error['msg'] = "El tiempo de espera para esta petición se ha agotado, Verifique su conexion a internet";
+                    break;
+                case '509':
+                    $error['msg'] = "Se ha superado el límite de ancho de banda disponible, Contacte a su Hosting";
+                    break;                               
+                default:
+                    $error['msg'] = "Ha ocurrido un error, por favor envie una captura de esta pantalla al departamento de Sistemas";
+                    break;
+            }
+
+            return response()->view('errors.error_all', ['code' =>  $error['code'], 'msg' => $error['msg'], 'date' => $error['date']], 404);
+            
+            /*
+            if($e instanceof NotFoundHttpException)
+            {
+                return response()->view('errors.500', [], 404);
+            }
+            */
+            // return $this->renderHttpException($e); //lo descative por que aun no se lo que hace
         }
-        return $this->renderHttpException($e);
-    }
-    /*
-        if ($e->getStatusCode() == 500) {
-            return response()->view('errors.500', [], 500);
+
+
+        if ($e instanceof ModelNotFoundException) {
+            $e = new NotFoundHttpException($e->getMessage(), $e);
         }
-        */
+
+   
+        if ($e instanceof TokenMismatchException) {  //mensaje de error en caso de mistake token
+            //return redirect(route('token.error'))->with('message', 'You page session expired. Please try again');
+            return redirect(route('token.error'));
+        }
+
         return parent::render($request, $e);
     }
 }

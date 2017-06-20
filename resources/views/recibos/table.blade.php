@@ -7,7 +7,7 @@
         <th>Incremento</th>
         <th>Total</th>
         <th>Observaciones</th>
-        <th>Fecha</th>
+        <th width="110px">Fecha</th>
         <th></th>
         <th width="70px">Acciones</th>
     </thead>
@@ -20,10 +20,11 @@
             <td>$ {!! $recibo->descuento !!}</td>
             <td>$ {!! $recibo->incremento !!}</td>
             <td>
-            {{ $val = 0 }}
+                @php ($total_view = 0) 
                  @foreach($recibo->articulos as $articulo)
-                        {{ $val = $val+$articulo->precio_final }}  
+                        @php ($total_view = $total_view+$articulo->precio_final)                         
                  @endforeach
+                 $ {!! $total_view !!}
              </td>
             <td>{!! $recibo->observaciones !!}</td>
             <td>{!! $recibo->created_at->format('d-m-Y') !!}</td>
@@ -36,6 +37,8 @@
                   
                     <a href="{!! route('recibos.edit', [$recibo->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
                     -->
+                    <a href="{!! route('recibos.print', [$recibo->id]) !!}" class='btn btn-default btn-xs' title="Imprimir" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
+
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                         'type' => 'submit',
                         'class' => 'btn btn-danger btn-xs',

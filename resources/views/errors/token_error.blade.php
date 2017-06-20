@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>500 | FestCar.</title>
+        <title>Sesión ha Expirado | FestCar.</title>
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
         <style>
             html, body {
@@ -38,7 +38,7 @@
             <div class="content">
 
                 <img src="{{ asset('/multimedia/web/logo-error.jpg') }}">
-                <div class="title">500.</div>
+                <div class="title">Tu Sesión ha expirado.</div>
                 <h3>Para continuar click <a href="http://fury.transeba.com/home">Aquí</a></h3>
             </div>
         </div>

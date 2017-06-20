@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\DatesTranslator;
 
 /**
  * Class Recibo
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Recibo extends Model
 {
-    use SoftDeletes;
+    use DatesTranslator, SoftDeletes;
 
     public $table = 'recibos';
     

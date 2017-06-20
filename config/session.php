@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'lifetime' => 120,
+    'lifetime' => 200,  //tiempo en que puede mantenerse la session
 
     'expire_on_close' => false,
 

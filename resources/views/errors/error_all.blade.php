@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Be right back.</title>
+        <title>{!! $code !!} Error | FestCar</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -14,7 +14,8 @@
                 margin: 0;
                 padding: 0;
                 width: 100%;
-                color: #B0BEC5;
+                /*color: #B0BEC5; */
+                color: #8e989d;
                 display: table;
                 font-weight: 100;
                 font-family: 'Lato';
@@ -32,15 +33,26 @@
             }
 
             .title {
-                font-size: 72px;
-                margin-bottom: 40px;
+                font-size: 200px;
+                margin-bottom: 10px;
             }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Be right back.</div>
+                <!--<img src="{{ asset('/multimedia/web/logo-error.jpg') }}"> -->
+
+                <div class="title">{!! $code !!}</div>
+                <h1>{!! $msg !!}</h3>                
+                @if($code >= 500)                   
+
+                    <h2>{!! $date->format('d/F/Y  h:i:s A e') !!} - </h2>
+
+                @endif
+
+
+                <h3><a href="http://fury.transeba.com/home">Continuar</a></h3>  
             </div>
         </div>
     </body>

@@ -233,4 +233,16 @@ class ReciboController extends AppBaseController
 
         return redirect(route('recibos.index'));
     }
+    public function print_space($id)
+    {
+        $recibo = $this->reciboRepository->findWithoutFail($id);
+
+        if (empty($recibo)) {
+            Flash::error('Recibo No se encuentra registrado.');
+
+            return redirect(route('recibos.index'));
+        }
+       $this->reciboRepository->print_recibos($id);
+        
+    }
 }

@@ -14,6 +14,24 @@ use Illuminate\Support\Facades\Input;
 Route::get('/', function () {
     return redirect('/home');
 });
+
+
+Route::get('token/error', [
+            'as' => 'token.error',
+            'uses' => function () {
+                return view('errors.token_error');
+            },
+        ]);
+
+Route::get('400', function () { abort(400); });
+Route::get('401', function () { abort(401); });
+Route::get('403', function () { abort(403); });
+Route::get('404', function () { abort(404); });
+Route::get('500', function () { abort(500); });
+Route::get('504', function () { abort(504); });
+Route::get('509', function () { abort(509); });
+
+
 /*
 Route::get('/', function () {
     return view('auth.login');
@@ -84,6 +102,11 @@ Route::group(['middleware' => 'web'], function() {
             'as' => 'contratoPrestacionServicios.aprobar',
             'uses' => 'ContratoPrestacionServicioController@aprobar',
         ]);
+
+    Route::get('recibos/print/{id}', [
+            'as' => 'recibos.print',
+            'uses' => 'ReciboController@print_space',
+        ]);
 /*
     Route::get('contratoVinculacions/print/{id}', [
             'as' => 'contratoVinculacions.print',
@@ -116,13 +139,3 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('reciboDetalles', 'ReciboDetalleController');
     
 });
-
-
-Route::get('error', function(){ 
-    abort(500);
-});
-
-
-
-
-
