@@ -10,6 +10,7 @@
     {!! Form::text('codigo', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
 </div>
 
+<div class="clearfix"></div>
 <!-- Fecha de Inicio Vigencia campo de fecha -->
 <div class="form-group col-sm-6">
     {!! Form::label('fecha_vigencia_inicio', 'Fecha de Inicio Vigencia') !!}

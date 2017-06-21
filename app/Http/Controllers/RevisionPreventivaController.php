@@ -79,7 +79,7 @@ class RevisionPreventivaController extends AppBaseController
     {
         $input = $request->all();
         $input['user_id'] = Auth::id();
-        $input['fecha_vigencia_inicio'] = (new Date ($input['fecha_vigencia_final']))->subYear();
+        $input['fecha_vigencia_inicio'] = (new Date ($input['fecha_vigencia_final']))->subMonth(2);
 
         $revisionPreventiva = $this->revisionPreventivaRepository->create($input);
 
@@ -149,7 +149,7 @@ class RevisionPreventivaController extends AppBaseController
         }
         $input = $request->all();
         $input['user_id'] = Auth::id();
-        $input['fecha_vigencia_inicio'] = (new Date ($input['fecha_vigencia_final']))->subYear();
+        $input['fecha_vigencia_inicio'] = (new Date ($input['fecha_vigencia_final']))->subMonth(2);
 
         $revisionPreventiva = $this->revisionPreventivaRepository->update($input, $id);
 

@@ -35,7 +35,8 @@ trait DatesTranslatorDocumentosVehiculo
 	public function getDiasActualDiferenciaAttribute()
     {       
         if ($this->fecha_vigencia_inicio <=  Carbon::now() && $this->fecha_vigencia_final >= Carbon::now()) {
-            return Carbon::now()->diffInDays($this->fecha_vigencia_final);
+            //return Carbon::now()->diffInDays($this->fecha_vigencia_final);
+            return $this->fecha_vigencia_inicio->diffInDays(Carbon::now());
         } elseif ($this->fecha_vigencia_inicio >  Carbon::now() && $this->fecha_vigencia_final > Carbon::now()) {
             return 0;
         } elseif ($this->fecha_vigencia_inicio <  Carbon::now() && $this->fecha_vigencia_final < Carbon::now()) {

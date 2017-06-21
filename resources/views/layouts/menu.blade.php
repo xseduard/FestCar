@@ -5,7 +5,12 @@
 
 @if(Auth::user()->role == 'administrador')
     <li class="treeview 
-    @if (Request::is('departamentos*') or Request::is('municipios*') or Request::is('empresas*') or Request::is('simuladorGastos*'))
+    @if (Request::is('departamentos*')
+     or Request::is('municipios*')
+     or Request::is('empresas*')
+     or Request::is('simuladorGastos*')
+     or Request::is('reciboProductos*')
+     or Request::is('reciboDetalles*'))
     	active
     @endif">
     <a href="#"><i class="fa fa-sliders"></i><span>Ajustes Generales</span> <i class="fa fa-angle-left pull-right"></i></a>
@@ -21,9 +26,17 @@
     		</li>
     		<li class="{{ Request::is('municipios*') ? 'active' : '' }}">
     		    <a href="{!! route('municipios.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Municipios</span></a>
-    		</li>	
+    		</li>
+            <li class="{{ Request::is('reciboProductos*') ? 'active' : '' }}">
+                <a href="{!! route('reciboProductos.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Recibo (Productos)</span></a>
+            </li>
+            <li class="{{ Request::is('reciboDetalles*') ? 'active' : '' }}">
+                <a href="{!! route('reciboDetalles.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Recibo (Articulos)</span></a>
+            </li>	
     	</ul>
     </li>
+    
+
     <!--
         <li class="{{ Request::is('generator_builder*') ? 'active' : '' }}">
             <a href="{!! url('/generator_builder') !!}"><i class="fa fa-tasks"></i><span>GUI Generador</span></a>
@@ -137,15 +150,10 @@
 
 
 
-<li class="{{ Request::is('reciboProductos*') ? 'active' : '' }}">
-    <a href="{!! route('reciboProductos.index') !!}"><i class="fa fa-edit"></i><span>Productos</span></a>
-</li>
+
 
 <li class="{{ Request::is('recibos*') ? 'active' : '' }}">
     <a href="{!! route('recibos.index') !!}"><i class="ion-ios-cart"></i> <span>Recibos</span></a>
 </li>
 
-<li class="{{ Request::is('reciboDetalles*') ? 'active' : '' }}">
-    <a href="{!! route('reciboDetalles.index') !!}"><i class="fa fa-edit"></i><span>Detalles</span></a>
-</li>
 

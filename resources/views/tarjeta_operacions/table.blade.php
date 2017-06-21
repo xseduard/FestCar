@@ -3,9 +3,9 @@
         <th>Vehiculo</th>
         <th>Codigo</th>        
         <th>Fecha Expedicion</th>
-        <th>Fecha de Inicio Vigencia</th>
-        <th></th>
-        <th>Fecha de Final Vigencia</th>
+        <th width="120px">Fecha de Inicio Vigencia</th>
+        <th width="10px"></th>
+        <th width="120px">Fecha de Final Vigencia</th>
          <th>Estado</th>
         <th width="70px">Acciones</th>
     </thead>

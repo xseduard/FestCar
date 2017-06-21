@@ -36,6 +36,13 @@
                 font-size: 200px;
                 margin-bottom: 10px;
             }
+            html { 
+                  background: url({{ asset('/multimedia/web/background-error-2.jpg') }}) no-repeat center center fixed; 
+                  -webkit-background-size: cover;
+                  -moz-background-size: cover;
+                  -o-background-size: cover;
+                  background-size: cover;
+                }
         </style>
     </head>
     <body>
