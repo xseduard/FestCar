@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="contratoPrestacionServicios-table">
+<table class="table table-responsive table-hover" id="contratoPrestacionServicios-table">
     <thead>
         <th>No.</th>
         <th>Tipo Cliente</th>

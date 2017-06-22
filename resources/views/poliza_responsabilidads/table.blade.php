@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="polizaResponsabilidads-table">
+<table class="table table-responsive table-hover" id="polizaResponsabilidads-table">
     <thead>
         <th>Vehiculo</th>
         <th>Codigo</th>

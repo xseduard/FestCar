@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="tarjetaOperacions-table">
+<table class="table table-responsive table-hover" id="tarjetaOperacions-table">
     <thead>
         <th>Vehiculo</th>
         <th>Codigo</th>        

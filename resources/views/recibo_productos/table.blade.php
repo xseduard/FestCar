@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="reciboProductos-table">
+<table class="table table-responsive table-hover" id="reciboProductos-table">
     <thead>
         <th>Nombre</th>
         <th>Precio</th>

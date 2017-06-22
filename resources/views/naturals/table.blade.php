@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="naturals-table">
+<table class="table table-responsive table-hover" id="naturals-table">
     <thead>
         <th>Cédula</th>
         <th>Nombres</th>

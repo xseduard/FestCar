@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="triangulos-table">
+<table class="table table-responsive table-hover" id="triangulos-table">
     <thead>
         <th>Texto</th>
         <th>Numero</th>

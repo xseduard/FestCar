@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="simuladorGastos-table">
+<table class="table table-responsive table-hover" id="simuladorGastos-table">
     <thead>
         <th>Min</th>
         <th>Max</th>

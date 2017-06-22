@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="soats-table">
+<table class="table table-responsive table-hover" id="soats-table">
     <thead>
         <th>Vehículo</th>
         <th>Poliza</th>

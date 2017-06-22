@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="licenciaConduccions-table">
+<table class="table table-responsive table-hover" id="licenciaConduccions-table">
     <thead>
         <th>Cédula</th>
         <th>Nombres</th>

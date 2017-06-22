@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="departamentos-table">
+<table class="table table-responsive table-hover" id="departamentos-table">
     <thead>
         <th>Nombre</th>
         <th>Fecha de creación</th>

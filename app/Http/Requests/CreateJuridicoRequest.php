@@ -34,7 +34,8 @@ class CreateJuridicoRequest extends Request
     public function attributes() {
         return [
         "natural_id" => "Representante Legal",
-        "nombre" => "Nombre o Razón Social",    
+        "nombre" => "Nombre o Razón Social",
+        "municipio_id" => "Ciudad/Departamento", 
         ];
     }
     /*

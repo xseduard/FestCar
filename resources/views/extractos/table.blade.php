@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="extractos-table">
+<table class="table table-responsive table-hover" id="extractos-table">
     <thead>
         <th>Codigo</th>
         <th>CPS</th>

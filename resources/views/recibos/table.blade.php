@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="recibos-table">
+<table class="table table-responsive table-hover" id="recibos-table">
     <thead>
         <th>No.</th>
         <th>Cliente</th>

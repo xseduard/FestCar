@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="hojaVidas-table">
+<table class="table table-responsive table-hover" id="hojaVidas-table">
     <thead>
         <th>Natural</th>
         <th>Fecha</th>

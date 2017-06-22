@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="tecnicomecanicas-table">
+<table class="table table-responsive table-hover" id="tecnicomecanicas-table">
     <thead>
         <th>Vehículo</th>        
         <th>Consecutivo Runt</th>

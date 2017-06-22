@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="contratoVinculacions-table">
+<table class="table table-responsive table-hover" id="contratoVinculacions-table">
     <thead>
         <th>Tipo/No.</th>
         <th>Tipo Proveedor</th>

@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="juridicos-table">
+<table class="table table-responsive table-hover" id="juridicos-table">
     <thead>
         <th>Nit</th>
         <th>Nombre o Razón Social</th>

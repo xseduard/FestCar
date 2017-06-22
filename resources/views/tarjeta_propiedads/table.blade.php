@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="tarjetaPropiedads-table">
+<table class="table table-responsive table-hover" id="tarjetaPropiedads-table">
     <thead>
         <th>Placa Vehículo</th>
         <th>Licencia Transito</th>

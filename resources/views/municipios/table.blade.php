@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="municipios-table">
+<table class="table table-responsive table-hover" id="municipios-table">
     <thead>
         <th>Nombre</th>
         <th>Departamento</th>

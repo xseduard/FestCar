@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="revisionPreventivas-table">
+<table class="table table-responsive table-hover" id="revisionPreventivas-table">
     <thead>
         <th>Vehiculo</th>
         <th>Fecha de Inicio Vigencia</th>
