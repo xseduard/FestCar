@@ -225,18 +225,25 @@ class CentralRepository extends BaseRepository
         return ($array);
     }
     public function vehiculo_id (){
-         $modelo = Vehiculo::with('natural')->get()->toArray();
+         $modelo = Vehiculo::with('natural')->with('juridico')->get()->toArray();
             foreach ($modelo as $key => $value) {               
-                $array[$value['id']]=$value['placa']." - ".$value['natural']['cedula']." ".$value['natural']['nombres']." ".$value['natural']['apellidos'] ;
-                
+                //$array[$value['id']]=$value['placa']." - ".$value['natural']['cedula']." ".$value['natural']['nombres']." ".$value['natural']['apellidos'] ;
+                 if ($value['tipo_propietario'] == 'Natural') {
+                    $array[$value['id']]=$value['placa']." - ".$value['natural']['cedula']." ".$value['natural']['nombres']." ".$value['natural']['apellidos'] ;
+                }  elseif ($value['tipo_propietario'] == 'Juridico') {
+                   $array[$value['id']]=$value['placa']." - ".$value['juridico']['nit']." ".$value['juridico']['nombre'];
+                }
             }
         return ($array);
     }
     public function vehiculo_con_tarjeta_propiedad (){
-         $modelo = Tarjeta_Propiedad::with('vehiculo')->with('vehiculo.natural')->get()->toArray(); //demo doble relacion
-            foreach ($modelo as $key => $value) {               
-                $array[$value['vehiculo_id']]=$value['vehiculo']['placa']." - ".$value['vehiculo']['natural']['cedula']." ".$value['vehiculo']['natural']['nombres']." ".$value['vehiculo']['natural']['apellidos'] ;
-                
+         $modelo = Tarjeta_Propiedad::with('vehiculo.natural')->with('vehiculo.juridico')->get()->toArray(); //demo doble relacion
+            foreach ($modelo as $key => $value) {              
+                if ($value['vehiculo']['tipo_propietario'] == 'Natural') {
+                    $array[$value['vehiculo_id']]=$value['vehiculo']['placa']." - ".$value['vehiculo']['natural']['cedula']." ".$value['vehiculo']['natural']['nombres']." ".$value['vehiculo']['natural']['apellidos'] ;
+                }  elseif ($value['vehiculo']['tipo_propietario'] == 'Juridico') {
+                   $array[$value['vehiculo_id']]=$value['vehiculo']['placa']." - ".$value['vehiculo']['juridico']['nit']." ".$value['vehiculo']['juridico']['nombre'];
+                }
             }
         return ($array);
     }

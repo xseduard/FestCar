@@ -27,7 +27,7 @@
             @endif   
                         
            <td>{!! $contratoPrestacionServicio->fecha_inicio->format('d-m-Y') !!}</td>
-           <td>
+           <td title="{!! $soat->dias_actual_diferencia !!}/{!! $soat->dias_diferencia !!}">
                 <span class="pie" data-peity='{ "fill": ["#00b0a3", "#d2d6de"],  "innerRadius": 0, "radius": 9 }'>{!! $contratoPrestacionServicio->dias_actual_diferencia !!}/{!! $contratoPrestacionServicio->dias_diferencia !!}</span>
             </td>
             <td>{!! $contratoPrestacionServicio->fecha_final->format('d-m-Y') !!}</td>

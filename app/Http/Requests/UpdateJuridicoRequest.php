@@ -24,8 +24,10 @@ class UpdateJuridicoRequest extends Request
      * @return array
      */
     public function rules()
-    {
-        return Juridico::$rules;
+    {        
+        $array = Juridico::$rules;
+        $array['nit'] = "";
+         return $array;
     }
 
     /**

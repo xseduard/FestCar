@@ -43,7 +43,7 @@
             @endif   
             <td><span class="label label-default">{!! $contratoVinculacion->vehiculo->placa !!}</span></td>
             <td>{!! $contratoVinculacion->fecha_inicio->format('d-m-Y') !!}</td>
-            <td>
+            <td title="{!! $contratoVinculacion->dias_actual_diferencia !!}/{!! $contratoVinculacion->dias_diferencia !!}">
                 <span class="pie" data-peity='{ "fill": ["#00b0a3", "#d2d6de"],  "innerRadius": 0, "radius": 9 }'>{!! $contratoVinculacion->dias_actual_diferencia !!}/{!! $contratoVinculacion->dias_diferencia !!}</span>
             </td>
             <td>{!! $contratoVinculacion->fecha_final->format('d-m-Y') !!}</td>

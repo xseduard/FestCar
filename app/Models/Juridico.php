@@ -55,7 +55,7 @@ class Juridico extends Model
      * Reglas de Validacón
      */
     public static $rules = [
-        'nit' => 'required',
+        'nit' => 'required|unique:juridicos|digits_between:6,15',
         'nombre' => 'required',
         'natural_id' => 'required',
         'email' => 'email',

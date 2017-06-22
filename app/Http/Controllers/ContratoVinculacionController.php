@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 use App\Models\Empresa;
+use App\Models\ContratoVinculacion;
 
  
 
@@ -83,14 +84,21 @@ class ContratoVinculacionController extends AppBaseController
      */
     public function store(CreateContratoVinculacionRequest $request)
     {
-        $empresa = Empresa::first();
-
+        
         $input = $request->all();
-        $input['user_id']       = Auth::id();
-        $input['rl_id']         = $empresa->rte_cedula;
-        $input['rl_id_ref']     = $empresa->lugar_expedicion;
-        $input['rl_name']       = $empresa->rte_nombre;
-        $input['rl_lastname']   = $empresa->rte_apellido;
+
+        $contratos_duplicados = ContratoVinculacion::where('vehiculo_id',$input['vehiculo_id'])->get();
+        
+        if (!$contratos_duplicados->isEmpty()) {
+                foreach ($contratos_duplicados->toArray() as $key => $value) {
+                    if ($value['fecha_inicio'] <=  Carbon::now() && $value['fecha_final'] >= Carbon::now()) {                     
+                         Flash::error("Ya existe un  <a href='contratoVinculacions/print/".$value['id']."'  target='_blank'> Contrato </a> Vigente para el vehículo ingresado");
+                         return Redirect::back()->withInput(Input::all());
+                    }               
+                }               
+        }
+       
+        
 
         if ($this->centralRepository->validar_numero_interno($input['vehiculo_id'])) {                     
              return Redirect::back()->withInput(Input::all());
@@ -102,6 +110,13 @@ class ContratoVinculacionController extends AppBaseController
             Flash::error($validar_documentos_vehiculo['mensaje']);           
              return Redirect::back()->withInput(Input::all());
         }
+
+        $empresa = Empresa::first();
+        $input['user_id']       = Auth::id();
+        $input['rl_id']         = $empresa->rte_cedula;
+        $input['rl_id_ref']     = $empresa->lugar_expedicion;
+        $input['rl_name']       = $empresa->rte_nombre;
+        $input['rl_lastname']   = $empresa->rte_apellido;
 
         $contratoVinculacion = $this->contratoVinculacionRepository->create($input);
 
@@ -170,6 +185,17 @@ class ContratoVinculacionController extends AppBaseController
             return redirect(route('contratoVinculacions.index'));
         }
         $input = $request->all();
+
+        $contratos_duplicados = ContratoVinculacion::where('vehiculo_id',$input['vehiculo_id'])->where('id', '=!', $id)->get();  //se agrega segundo where para que no se encuentre a si mismo      
+        if (!$contratos_duplicados->isEmpty()) {
+                foreach ($contratos_duplicados->toArray() as $key => $value) {
+                    if ($value['fecha_inicio'] <=  Carbon::now() && $value['fecha_final'] >= Carbon::now()) {                     
+                         Flash::error("Ya existe un  <a href='contratoVinculacions/print/".$value['id']."'  target='_blank'> Contrato </a> Vigente para el vehículo ingresado");
+                         return Redirect::back()->withInput(Input::all());
+                    }               
+                }               
+        }
+
         $input['user_id'] = Auth::id();
 
         if ($this->centralRepository->validar_numero_interno($input['vehiculo_id'])) {                     

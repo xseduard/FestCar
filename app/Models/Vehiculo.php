@@ -74,6 +74,9 @@ class Vehiculo extends Model
     public function natural(){
         return $this->belongsTo('App\Models\Natural');
     }
+    public function juridico(){
+        return $this->belongsTo('App\Models\Juridico');
+    }
     public function tarjetapropiedad(){
         return $this->hasOne('App\Models\Tarjeta_Propiedad', 'vehiculo_id', 'id');
     }

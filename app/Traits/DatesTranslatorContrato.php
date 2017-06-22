@@ -27,7 +27,8 @@ trait DatesTranslatorContrato
     public function getDiasActualDiferenciaAttribute()
     {       
         if ($this->fecha_inicio <=  Carbon::now() && $this->fecha_final >= Carbon::now()) {
-            return Carbon::now()->diffInDays($this->fecha_final);
+            //return Carbon::now()->diffInDays($this->fecha_final);
+            return $this->fecha_inicio->diffInDays(Carbon::now());
         } elseif ($this->fecha_inicio >  Carbon::now() && $this->fecha_final > Carbon::now()) {
             return 0;
         } elseif ($this->fecha_inicio <  Carbon::now() && $this->fecha_final < Carbon::now()) {        	

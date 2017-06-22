@@ -54,7 +54,7 @@
     {!! Form::label('servicio', 'Servicio(s)') !!}
     {!! Form::text('servicio', null, ['class' => 'form-control', 'placeholder'=>'']) !!}
 </div>
-
+<div class="clearfix"></div>
 <!-- Fecha Inicio campo de fecha -->
 <div class="form-group col-sm-6">
     {!! Form::label('fecha_inicio', 'Fecha de Inicio') !!}
