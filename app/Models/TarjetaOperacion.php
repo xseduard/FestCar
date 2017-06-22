@@ -65,7 +65,7 @@ class TarjetaOperacion extends Model
         'nit' => 'required',
         'fecha_expedicion' => 'required|date',
         'fecha_vigencia_inicio' => 'required|date',
-        'fecha_vigencia_final' => 'required|date'
+        'fecha_vigencia_final' => 'required|date|after:fecha_vigencia_inicio'
     ];
     /**
      * Ascensores

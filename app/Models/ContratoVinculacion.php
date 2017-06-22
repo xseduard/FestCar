@@ -84,7 +84,7 @@ class ContratoVinculacion extends Model
         'numero_cuenta_bancaria' => 'required',
         'entidad_bancaria' => 'required',
         'fecha_inicio' => 'required|date',
-        'fecha_final' => 'required|date'
+        'fecha_final' => 'required|date|after:fecha_inicio'
     ];
     /**
      * Relaciones entre Modelos

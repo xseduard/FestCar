@@ -95,12 +95,11 @@ class ContratoVinculacionRepository extends BaseRepository
             $contratista_cedula_ref       = '';
             $contratista_cedula           = '';
             $id_propietario_vehiculo      = '';
-            $TIPO_POSEEDOR_O_TENEDOR      = '';
-            $DIR_MUNINCIPIO_PROP_VEHICULO = '';
-            $JURIDICO_NOMBRE              = '';
-            $JURIDICO_NIT                 = '';
+            $contratista_poseedor_or_prop      = '';
+            $contratista_razonsocial      = '';
+            $contratista_nit              = '';
             $NOMBRE_RTE_LEGAL_CONTRATISTA = '';
-            $CEDULA_RTE_LEGAL             = '';
+            $contratista_cedula             = '';
             $LUGAR_EXP_RTE_LEGAL          = '';
         
 
@@ -114,51 +113,43 @@ class ContratoVinculacionRepository extends BaseRepository
            
             if ($contrato->vehiculo->tipo_propietario == "Natural") {
                 if ($contrato->natural_id == $contrato->vehiculo->natural_id) {
-                   $TIPO_POSEEDOR_O_TENEDOR = 'PROPIETARIO';
+                   $contratista_poseedor_or_prop = 'PROPIETARIO';
                 } else {
-                    $TIPO_POSEEDOR_O_TENEDOR = 'POSEEDOR';
+                    $contratista_poseedor_or_prop = 'POSEEDOR';
                 }
             }
             else {
-                 $TIPO_POSEEDOR_O_TENEDOR = 'POSEEDOR';
+                 $contratista_poseedor_or_prop = 'POSEEDOR';
             }            
-            if (empty($contrato->natural->direccion_municipio)) {
-                $DIR_MUNINCIPIO_PROP_VEHICULO = $this->municipio_departamento($contrato->natural->municipio_id);
-            } else {
-                $DIR_MUNINCIPIO_PROP_VEHICULO = $this->municipio_departamento($contrato->natural->direccion_municipio);
-            }
+            
 
         } elseif ($contrato->tipo_proveedor == 'Juridico') {
 
-            $JURIDICO_NOMBRE               = $contrato->juridico->nombre;
-            $JURIDICO_NIT                  = $contrato->juridico->nit;
+            $contratista_razonsocial       = $contrato->juridico->nombre;
+            $contratista_nit               = $contrato->juridico->nit;
             $contratista_nombre            = $contrato->juridico->natural->fullname;
             $contratista_cedula_ref        = $contrato->juridico->natural->municipio->nombre.", ".$contrato->juridico->natural->municipio->departamento->nombre;
             $contratista_cedula            = $contrato->juridico->natural->cedula;
             $id_propietario_vehiculo       = '';
-            $NOMBRE_RTE_LEGAL_CONTRATISTA  = $this->buscar_juridico($contrato->juridico_id)->natural->nombres." ".$this->buscar_juridico($contrato->juridico_id)->natural->apellidos;
-            $CEDULA_RTE_LEGAL              = number_format($this->buscar_juridico($contrato->juridico_id)->natural->cedula, 0, '.', '.' );
-            $LUGAR_EXP_RTE_LEGAL           = $this->municipio_departamento($this->buscar_juridico($contrato->juridico_id)->natural->municipio_id);
-            $contratista_residencia_actual =  $this->municipio_departamento($this->buscar_vehiculo($contrato->vehiculo_id)->natural->direccion_municipio);
-
+            $contratista_residencia_actual =  $contrato->juridico->natural->residenciamunicipio->nombre.", ".$contrato->juridico->natural->residenciamunicipio->departamento->nombre; 
 
             if ($contrato->vehiculo->tipo_propietario == "Juridico") {
                 if ($contrato->juridico_id == $contrato->vehiculo->juridico_id) {
-                   $TIPO_POSEEDOR_O_TENEDOR = 'PROPIETARIO';
+                   $contratista_poseedor_or_prop = 'PROPIETARIO';
                 } else {
-                    $TIPO_POSEEDOR_O_TENEDOR = 'POSEEDOR';
+                    $contratista_poseedor_or_prop = 'POSEEDOR';
                 }
             }
             else {
-                 $TIPO_POSEEDOR_O_TENEDOR = 'POSEEDOR';
+                 $contratista_poseedor_or_prop = 'POSEEDOR';
             }  
             
         }
-                // Determianr cuota
+        // Determianr cuota
         if ($contrato->vehiculo->capacidad > 19) {
-            $CUOTA_ADMIN = $empresa->cuota_admin_valor;
+            $determinar_cuota_valor = $empresa->cuota_admin_valor;
         } else {
-            $CUOTA_ADMIN = $empresa->cuota_admin_valor_dos;
+            $determinar_cuota_valor = $empresa->cuota_admin_valor_dos;
         }
 
         //Tipo de contrato
@@ -183,37 +174,35 @@ class ContratoVinculacionRepository extends BaseRepository
         
 
         $data = [        
-        'mi_empresa_nit'                =>  $empresa->nit,
-        'mi_empresa_nombre'             =>  $empresa->razon_social,
-        'mi_empresa_nombre_corto'       =>  $empresa->nombre_corto,
-        'mi_empresa_rt_nombre'          =>  mb_strtoupper($contrato->rlfullname,'utf-8'),
-        'mi_empresa_rt_cedula'          =>  number_format($contrato->rl_id, 0, '.', '.' ),
-        'mi_empresa_rt_cedula_ref'      => $contrato->rl_id_ref,
-        'contratista_nombre'            =>  mb_strtoupper($contratista_nombre,'utf-8'),
-        'contratista_residencia_actual' =>  $contratista_residencia_actual,
-        'contratista_cedula_ref'        =>  $contratista_cedula_ref,
-        'contratista_cedula'            =>  number_format($contratista_cedula, 0, '.', '.' ),
-        'DIR_MUNINCIPIO_PROP_VEHICULO'  =>  $DIR_MUNINCIPIO_PROP_VEHICULO,
-        'MUNICIPIO_MI_EMPRESA'          =>  'APARTADÓ, ANTIOQUIA',
-        'DATOS_VEHICULO'                =>  'FALTA TABLA VEHICULO',
-        'DURACION_CONTRATO'             =>  $this->traducir_fecha($contrato->fecha_inicio)->timespan($contrato->fecha_final),
-        'FECHA_INICIO'                  =>  $this->traducir_fecha($contrato->fecha_inicio)->format('l d, F Y'),
-        'FECHA_FINAL'                   =>  $this->traducir_fecha($contrato->fecha_final)->subDay()->format('l d, F Y'), 
-        'FECHA_PERFEC_DIA'              =>  $fecha_creacion->day,
-        'FECHA_PERFEC_MES'              =>  $fecha_creacion->format('F'),
-        'FECHA_PERFEC_ANO'              =>  $fecha_creacion->year,
-        'FECHA_PERFEC_ANO_LETRAS'       =>  strtolower(\NumeroALetras::convertir($fecha_creacion->year)),
-        'FECHA_PERFECCIONAMIENTO'       =>  $this->traducir_fecha($contrato->created_at)->format('l d, F Y'),
-        'TIPO_POSEEDOR_O_TENEDOR'       =>  $TIPO_POSEEDOR_O_TENEDOR,
-        'CUOTA_ADMIN_PORCENTAJE'        =>  $empresa->cuota_admin,
-        'CUOTA_ADMIN_PORCENTAJE_LETRAS' =>  strtolower(\NumeroALetras::convertir($empresa->cuota_admin)),
-        'CUOTA_ADMIN'                   =>  number_format($CUOTA_ADMIN, 0, '.', '.' ),
-        'TIPO_PROVEEDOR'                =>  $contrato->tipo_proveedor,
-        'JURIDICO_NOMBRE'               =>  $JURIDICO_NOMBRE,
-        'JURIDICO_NIT'                  =>  $JURIDICO_NIT,
-        'NOMBRE_RTE_LEGAL_CONTRATISTA'  =>  $NOMBRE_RTE_LEGAL_CONTRATISTA,
-        'CEDULA_RTE_LEGAL'              =>  $CEDULA_RTE_LEGAL,
-        'LUGAR_EXP_RTE_LEGAL'           =>  $LUGAR_EXP_RTE_LEGAL,
+          'mi_empresa_nit'                           =>  $empresa->nit,
+          'mi_empresa_nombre'                        =>  $empresa->razon_social,
+          'mi_empresa_nombre_corto'                  =>  $empresa->nombre_corto,
+          'mi_empresa_rt_nombre'                     =>  mb_strtoupper($contrato->rlfullname,'utf-8'),
+          'mi_empresa_rt_cedula'                     =>  number_format($contrato->rl_id, 0, '.', '.' ),
+          'mi_empresa_rt_cedula_ref'                 => $contrato->rl_id_ref,
+          'mi_empresa_domicilio'                     =>   $empresa->domicilio,
+          'mi_empresa_admin_cuota_porcentaje'        =>  $empresa->cuota_admin,
+          'mi_empresa_admin_cuota_porcentaje_letras' =>  strtolower(\NumeroALetras::convertir($empresa->cuota_admin)),
+          'mi_empresa_admin_cuota_valor'             =>  number_format($determinar_cuota_valor, 0, '.', '.' ),
+          
+          'contratista_nombre'                       =>  mb_strtoupper($contratista_nombre,'utf-8'),
+          'contratista_residencia_actual'            =>  $contratista_residencia_actual,
+          'contratista_cedula_ref'                   =>  $contratista_cedula_ref,
+          'contratista_cedula'                       =>  number_format($contratista_cedula, 0, '.', '.' ),
+          'contratista_poseedor_or_prop'             =>  $contratista_poseedor_or_prop,
+          'contratista_razonsocial'                  =>  $contratista_razonsocial,
+          'contratista_nit'                          =>  $contratista_nit,
+          'tipo_proveedor'                           =>  $contrato->tipo_proveedor,
+          
+          'contrato_duracion'                        =>  $this->traducir_fecha($contrato->fecha_inicio)->timespan($contrato->fecha_final),
+          'FECHA_INICIO'                             =>  $this->traducir_fecha($contrato->fecha_inicio)->format('l d, F Y'),
+          'FECHA_FINAL'                              =>  $this->traducir_fecha($contrato->fecha_final)->subDay()->format('l d, F Y'), 
+          'FECHA_PERFEC_DIA'                         =>  $fecha_creacion->day,
+          'FECHA_PERFEC_MES'                         =>  $fecha_creacion->format('F'),
+          'FECHA_PERFEC_ANO'                         =>  $fecha_creacion->year,
+          'FECHA_PERFEC_ANO_LETRAS'                  =>  strtolower(\NumeroALetras::convertir($fecha_creacion->year)),
+          'FECHA_PERFECCIONAMIENTO'                  =>  $this->traducir_fecha($contrato->created_at)->format('l d, F Y'),          
+          
         ];
         $pdf = new FPDF_VIN('P','mm','A4');
 
@@ -259,9 +248,9 @@ class ContratoVinculacionRepository extends BaseRepository
                 $pdf->Cell(75,10,utf8_decode('REPRESENTANTE LEGAL'),1,0,"C");
                 $pdf->Multicell(0,10,utf8_decode($data['mi_empresa_rt_cedula']),1,'C');
                 $pdf->Cell(75,10,utf8_decode('EMPRESA DE CONVENIO EMPRESARIAL'),1,0,"C");
-                $pdf->Multicell(0,10,utf8_decode($data['JURIDICO_NOMBRE']),1,'C');
+                $pdf->Multicell(0,10,utf8_decode($data['contratista_razonsocial']),1,'C');
                 $pdf->Cell(75,10,utf8_decode('NIT'),1,0,"C");
-                $pdf->Multicell(0,10,utf8_decode($data['JURIDICO_NIT']),1,'C');
+                $pdf->Multicell(0,10,utf8_decode($data['contratista_nit']),1,'C');
                 $pdf->Cell(75,10,utf8_decode('REPRESENTANTE LEGAL'),1,0,"C");
                 $pdf->Multicell(0,10,utf8_decode($data['contratista_nombre']),1,'C');
                 $pdf->Cell(75,10,utf8_decode('CONVENIO A DESARROLLLAR'),1,0,"C");
@@ -333,7 +322,7 @@ class ContratoVinculacionRepository extends BaseRepository
         $pdf->Cell(65,5,utf8_decode("CC ".$data['contratista_cedula']),0,1,"L"); 
         $pdf->Cell(65,5,utf8_decode($data['mi_empresa_nombre_corto']),0,0,"L");        
         $pdf->Cell(30,5,'',0,0,"L");
-        $pdf->Multicell(65,5,utf8_decode(mb_strtoupper($data['JURIDICO_NOMBRE'],'utf-8')),0,'L',0);
+        $pdf->Multicell(65,5,utf8_decode(mb_strtoupper($data['contratista_razonsocial'],'utf-8')),0,'L',0);
 
 
         $pdf->AliasNbPages();
@@ -355,19 +344,19 @@ class ContratoVinculacionRepository extends BaseRepository
     function CV_P1($data){
         $view = "<p>Entre <b>".$data['mi_empresa_nombre']."</b>, Sociedad Comercial con domicilio en Apartado Antioquia, representada legalmente por la señor(a) <b>".$data['mi_empresa_rt_nombre']."</b>, mayor de edad, identificado(a) con la cedula de ciudadanía  N° <b>".$data['mi_empresa_rt_cedula']."</b>  expedida en  <b>".$data['mi_empresa_rt_cedula_ref']."</b>, y que en el  presente acto se denominara LA EMPRESA, y el señor(a)";
 
-        if ($data['TIPO_PROVEEDOR'] == 'Natural') {
+        if ($data['tipo_proveedor'] == 'Natural') {
 
             $view .= " <b>".$data['contratista_nombre']."</b>, portador de la cedula de ciudadanía N° <b>".$data['contratista_cedula']."</b>, expedida en ".$data['contratista_cedula_ref'].", y quien para efectos legales del presente documento se denominara EL CONTRATISTA, se ha celebrado el presente contrato de VINCULACIÓN Y ADMINISTRACIÓN DELEGADA DE UN VEHÍCULO AUTOMOTOR en ejercicio de nuestra libertad contractual, el cual se regirá por las siguientes CLAUSULAS: </p>
         ";
         } else {
             $view .= "
-<b> ".$data['NOMBRE_RTE_LEGAL_CONTRATISTA']."</b>, mayor de edad y vecino de <b>".$data['MUNICIPIO_MI_EMPRESA']."</b>, portador de la cedula de ciudadanía N° <b>".$data['CEDULA_RTE_LEGAL']."</b>, expedida en <b>".$data['LUGAR_EXP_RTE_LEGAL']."</b>, y quien actua en representacion legal de <b>".$data['JURIDICO_NOMBRE']."</b> Con Nit  <b>".$data['JURIDICO_NIT']."</b> y que para todos los efectos legales del presente documento se denominara EL CONTRATISTA, se ha celebrado el presente contrato de VINCULACION Y ADMINISTRACION DELEGADA DE UN VEHÍCULO AUTOMOTOR en ejercicio de nuestra libertad contractual, el cual se regirá por las siguientes CLAUSULAS: </p>
+<b> ".$data['contratista_nombre']."</b>, mayor de edad y vecino de <b>".$data['mi_empresa_domicilio']."</b>, portador de la cedula de ciudadanía N° <b>".$data['contratista_cedula']."</b>, expedida en <b>".$data['contratista_cedula_ref']."</b>, y quien actua en representacion legal de <b>".$data['contratista_razonsocial']."</b> Con Nit  <b>".$data['contratista_nit']."</b> y que para todos los efectos legales del presente documento se denominara EL CONTRATISTA, se ha celebrado el presente contrato de VINCULACION Y ADMINISTRACION DELEGADA DE UN VEHÍCULO AUTOMOTOR en ejercicio de nuestra libertad contractual, el cual se regirá por las siguientes CLAUSULAS: </p>
 
             ";
         }
 
         $view .="
-<p><b>PRIMERA. OBJETO: EL CONTRATISTA</b>, en calidad de ".$data['TIPO_POSEEDOR_O_TENEDOR']." se obliga a vincular un equipo automotor a <b>LA EMPRESA</b>,  con el ánimo de que este último lo incorpore a su parque automotor y lo administre delegadamente. <b>EL CONTRATISTA</b> prestara los servicios de transporte de pasajeros que autorice  <b>LA EMPRESA</b>, en  los diferentes contratos de Servicio Público de Transporte Terrestre Automotor Especial y con los cuales explota la actividad transportadora  de pasajeros en un radio de acción Nacional. Para los efectos referidos, las características del vehículo que se vincula y que será administrado por <b>LA EMPRESA</b> son las siguientes: </p>
+<p><b>PRIMERA. OBJETO: EL CONTRATISTA</b>, en calidad de ".$data['contratista_poseedor_or_prop']." se obliga a vincular un equipo automotor a <b>LA EMPRESA</b>,  con el ánimo de que este último lo incorpore a su parque automotor y lo administre delegadamente. <b>EL CONTRATISTA</b> prestara los servicios de transporte de pasajeros que autorice  <b>LA EMPRESA</b>, en  los diferentes contratos de Servicio Público de Transporte Terrestre Automotor Especial y con los cuales explota la actividad transportadora  de pasajeros en un radio de acción Nacional. Para los efectos referidos, las características del vehículo que se vincula y que será administrado por <b>LA EMPRESA</b> son las siguientes: </p>
         ";
         return $view;
     }
@@ -376,9 +365,9 @@ class ContratoVinculacionRepository extends BaseRepository
         $view = "
 <p><b>SEGUNDA: EL CONTRATISTA</b> garantiza que el equipo automotor  descrito en la cláusula anterior se encuentra en perfecto estado de funcionamiento y de presentación, que en igual condiciones se comprometen a tenerlo durante el término de duración del presente contrato. De igual forma, <b>EL CONTRATISTA</b> manifiesta que el automotor referido se encuentra libre de embargos, pleitos pendientes de cualquier naturaleza, limitaciones al dominio y todo tipo de gravamen. <b>PARAGRAFO:</b> No obstante lo anterior, la empresa se reserva el derecho de admitir según cada caso, los vehículos  que se encontraren en alguna de las situaciones citadas en precedencia, siempre y cuando no perjudiquen ni la marcha de LA EMPRESA, ni su patrimonio.</p>
 
-<p><b>TERCERA. DURACION DEL CONTRATO:</b> El presente contrato tendrá una Duracion de <b>".$data['DURACION_CONTRATO']."</b>, contados a partir del <b>".$data['FECHA_INICIO']."</b> Hasta <b>".$data['FECHA_FINAL']."</b>. En ningun caso se produciran renovaciones automaticas del contrato.</p> 
+<p><b>TERCERA. DURACION DEL CONTRATO:</b> El presente contrato tendrá una Duracion de <b>".$data['contrato_duracion']."</b>, contados a partir del <b>".$data['FECHA_INICIO']."</b> Hasta <b>".$data['FECHA_FINAL']."</b>. En ningun caso se produciran renovaciones automaticas del contrato.</p> 
 
-<p><b>CUARTA. CUOTA DE ADMINISTRACION</b>: <b>EL CONTRATISTA</b> se obliga a pagar a <b>LA EMPRESA</b> como cuota de administración mensual, el <b>".$data['CUOTA_ADMIN_PORCENTAJE_LETRAS']." por ciento</b> (<b>".$data['CUOTA_ADMIN_PORCENTAJE']."%</b>) del valor que facture en el mes; en todo caso, la cuota mensual no podrá ser inferior a la suma de <b>".$data['CUOTA_ADMIN']."</b>, valor que se incrementará cada año de acuerdo al IPC. <b>EL CONTRATISTA</b> autoriza a <b>LA EMPRESA</b> a que descuente automáticamente el porcentaje correspondiente a la cuota de administración del producido del vehiculo. o en en su defecto, la suma será cancelada  por <b>EL CONTRATISTA</b> en la oficina  de LA EMPRESA, dentro de los  tres (3) primeros días hábiles de cada  mes vencido.</p> 
+<p><b>CUARTA. CUOTA DE ADMINISTRACION</b>: <b>EL CONTRATISTA</b> se obliga a pagar a <b>LA EMPRESA</b> como cuota de administración mensual, el <b>".$data['mi_empresa_admin_cuota_porcentaje_letras']." por ciento</b> (<b>".$data['mi_empresa_admin_cuota_porcentaje']."%</b>) del valor que facture en el mes; en todo caso, la cuota mensual no podrá ser inferior a la suma de <b>".$data['mi_empresa_admin_cuota_valor']."</b>, valor que se incrementará cada año de acuerdo al IPC. <b>EL CONTRATISTA</b> autoriza a <b>LA EMPRESA</b> a que descuente automáticamente el porcentaje correspondiente a la cuota de administración del producido del vehiculo. o en en su defecto, la suma será cancelada  por <b>EL CONTRATISTA</b> en la oficina  de LA EMPRESA, dentro de los  tres (3) primeros días hábiles de cada  mes vencido.</p> 
 
 <p><b>QUINTA. OBLIGACIONES DEL CONTRATISTA</b>: <b>EL CONTRATISTA</b> se compromete con la empresa a: 1) mantener el vehículo descrito en la cláusula primera de este contrato, en perfectas condiciones mecánicas, de presentación,  comodidad e higiene, necesarias para que  el  mismo pueda  cumplir el objetivo de la vinculación, esto es, prestar Servicio Público de Transporte Terrestre Automotor Especial durante todo el día  y en forma continua, excluidos en todo caso todos los días asignados para el mantenimiento y reparación del automotor. 2) A cancelar cumplidamente  y en forma establecida en la cláusula cuarta,  las obligaciones económicas adquiridas para con la empresa. 3) A informar por escrito el nombre de la persona que habrá de actuar como conductor del vehículo y a suministrar a LA EMPRESA copia del contrato laboral firmado entre  EL <b>CONTRATISTA Y EL CONDUCTOR</b>,   así  como informar de las modificaciones que a dicho contrato se le efectúen. 4) Pagar en forma oportuna los salarios  y prestaciones  económicas a  que tenga derecho el conductor, a afiliarlo al Sistema de Seguridad Social Integral (salud, pensiones, riesgos profesionales), y aportes parafiscales en las cuantías de ley, dentro de los periodos de tiempo estipulados  por la Ley. 5). Liquidar correctamente al conductor en el momento de cancelación  o terminación del  contrato y como previo requisito a la contratación de nuevo conductor, de todo lo cual deberá aportar copias a LA EMPRESA. En todo caso, <b>EL CONTRATISTA</b> cubre a <b>LA EMPRESA</b> de los perjuicios que se le ocasionen como consecuencia de incumplimiento de las obligaciones laborales a que esté obligado <b>EL CONTRATISTA,</b> derivadas de la contratación del personal utilizado para la ejecución del contrato, pactando la obligación de <b>EL CONTRATISTA</b> de mantenerla libre de cualquier daño o perjuicio originado en reclamaciones de terceros y que se deriven de sus actuaciones de sus subcontratistas o dependientes. 6). Cumplir órdenes dadas por <b>LA EMPRESA</b> y acatar las disposiciones y reglamentos de la misma. <b>EL CONTRATISTA</b> exigirá al conductor el cumplimiento de tales obligaciones. 7).<b>EL CONTRATISTA,</b> deberá responder con su vehículo y con otros bienes de su patrimonio, si fuere necesario, por conceptos de pagos que la empresa se viere obligada a efectuar  por él o por el conductor  o su ayudante. Si la empresa fuera demandada civil, laboral o administrativamente, por actuaciones  correspondientes  a <b>EL CONTRATISTA</b>, este último pagara todos y cada  uno  de los gastos que cause el litigio, tales como honorarios, costos y gastos judiciales, pagos de sentencias y perjuicios, conceptos que deberá cubrir en forma total y que en caso de efectuarlos, <b>LA EMPRESA</b> podrá exigir su cumplimiento por la vía  ejecutiva. Para lo anterior  bastara la sola presentación del contrato y la liquidación  correspondiente a la obligación  incumplida  por <b>EL CONTRATISTA</b> 8). Deberá igualmente EL CONTRATISTA obtener una póliza de seguros  que cubra los eventos de responsabilidad civil contractual y extracontractual en caso de muerte, lesiones, daños a  terceros o sus bienes. Las anteriores pólizas deben estar siempre vigentes durante la duración de este contrato, en los montos establecidos por la ley. 9) A cancelar oportunamente los valores mensuales que adeuda a <b>LA EMPRESA,</b> independiente de que la finca, gremio bananero y demás, paguen o no oportunamente los servicios de transporte contratados y prestados. 10). Acogerse  a lo estipulado por la ley, en cuanto a las obligaciones  de aportes al Fondo de Reposición  establecido en la cuantía  que establezca el <b>MINISTERIO DEL TRANSPORTE</b> o la autoridad encargada y a respetar el reglamento que adopte <b>LA EMPRESA</b> 11). En caso  de venta y retiro del automotor de la empresa, se perderá el cupo en la misma, dado que este contrato cubre solo el equipo automotor descrito en la cláusula primera de este convenio y dejando claro que el cupo utilizado es de la empresa y hace parte de su capacidad transportadora  otorgada a la empresa por el MINISTERIO DE TRANSPORTE. 12). Avisar oportunamente a LA  EMPRESA cuando el vehículo no esté en condiciones de prestar el servicio contratado. Dicho aviso se hará en horarios de oficina (de 8 a 12 AM  y de 2 a 6 PM). Para proceder a asignar un reemplazo, deberá avisar con antelación de: a) De tres (03) horas antes del cierre de la oficina, es decir máximo hasta las 3:00 PM., cuando el servicio sea para el siguiente día. b) De seis (06) horas, antes del cierre de oficina, es decir máximo hasta las 12:00 AM, cuando el servicio sea para el horario de recogida de personal el mismo día. 13) Durante toda la prestación del servicio, el conductor del equipo automotor deberá portar en papel membreteado de la empresa y firmado por el representante legal de la misma o un empleado designado por él, un extracto del contrato que ejecuta.<b>EL CONTRATISTA</b> será responsable del cumplimiento del mismo. 14) El equipo automotor de propiedad del <b>CONTRATISTA</b>  deberá llevar los colores verde y/o blanco distribuidos a lo largo y ancho de la carrocería. 15) Si el equipo automotor transporta estudiantes, además de lo mencionado en el numeral anterior, debe pintar en la parte posterior de la carrocería del vehículo franjas alternas de diez (10) centímetros de ancho en colores amarillo pantone 109 Y negro, con inclinación de 45 grados y una altura mínima de 60 centímetros. Igualmente, en la parte superior y delantera de la carrocería en caracteres destacados, de altura mínima de 10 centímetros, deberán llevar la leyenda *Escolar. 16) El equipo automotor vinculado y administrado deberá cumplir con las condiciones técnico-mecánicas y con las especificaciones de tipología vehicular requeridas y homologadas por el Ministerio de Transporte para la prestación de este servicio. 17) El conductor del equipo automotor no admitirá pasajeros de pie en ningún caso. Cada pasajero ocupará un (1) puesto de acuerdo con la capacidad establecida en la ficha de homologación del vehículo y de la licencia de tránsito. Será responsabilidad de EL CONTRATISTA vigilar el cumplimiento de tal prohibición por parte del conductor del equipo automotor, siendo <b>EL CONTRATISTA</b> el responsable civil y penal ante cualquier accidente. 18) EL CONTRATISTA y su conductor deben cumplir en forma estricta con el REGLAMENTO de LA EMPRESA y así mismo manifiestan tener pleno conocimiento del mismo y haber recibido una copia  de <b>LA EMPRESA</b> al momento de la suscripción del presente contrato. 19) <b>EL CONTRATISTA</b> y/o el conductor del equipo automotor deberá portar el original de la tarjeta de operación y presentarla a la autoridad competente que la solicite. 20) El conductor del equipo automotor durante la prestación del servicio de transporte de pasajeros deberá portar la camiseta y el carnet que lo identifique como el conductor del vehículo y que contengan los emblemas de la empresa. Será responsabilidad de <b>EL CONTRATISTA</b> proveer al conductor de esta dotación en los tiempos que estipula la ley.</p>
 
@@ -395,7 +384,7 @@ class ContratoVinculacionRepository extends BaseRepository
 
 <p><b>DECIMA TERCERA. PAGO DE LOS SERVICIOS DE TRANSPORTE:</b> Durante la prestación del Servicio Público de Transporte Terrestre Automotor Especial, se le cancelara a EL CONTRATISTA los servicios de transporte ejecutados, una vez estos sean pagados a LA EMPRESA por el usuario del servicio. <b>LA EMPRESA</b> no responderá por el pago de los servicios que no cancelen los usuarios-contratantes.</p>
 
-<p>En constancia de aceptación, se firma el presente contrato en el Municipio de ".$data['MUNICIPIO_MI_EMPRESA']." a los <b>".$data['FECHA_PERFEC_DIA']."</b> días del mes de <b>".$data['FECHA_PERFEC_MES']."</b> del año ".$data['FECHA_PERFEC_ANO_LETRAS']."(<b>".$data['FECHA_PERFEC_ANO']."</b>); por las partes que han intervenido, quienes procederán a suscribir y plasmar su huella dactilar (dedo índice) en el presente contrato,  advirtiéndose  que al mismo  se entienden incorporadas las disposiciones que sobre administración delegada  consagra la normatividad legal vigente y que este contrato presta mérito ejecutivo por contener una obligación clara, expresa y exigible para las partes.</p>
+<p>En constancia de aceptación, se firma el presente contrato en el Municipio de ".$data['mi_empresa_domicilio']." a los <b>".$data['FECHA_PERFEC_DIA']."</b> días del mes de <b>".$data['FECHA_PERFEC_MES']."</b> del año ".$data['FECHA_PERFEC_ANO_LETRAS']."(<b>".$data['FECHA_PERFEC_ANO']."</b>); por las partes que han intervenido, quienes procederán a suscribir y plasmar su huella dactilar (dedo índice) en el presente contrato,  advirtiéndose  que al mismo  se entienden incorporadas las disposiciones que sobre administración delegada  consagra la normatividad legal vigente y que este contrato presta mérito ejecutivo por contener una obligación clara, expresa y exigible para las partes.</p>
         ";
         return $view;
     }
@@ -454,7 +443,7 @@ ________/\\\\\\\\\________/\\\\\\\\\_
 
 <p><b>DECIMA TERCERA:</b> el presente convenio se enviara para su registro al Ministerio de Transporte para que surta plenos efectos según el artículo  2.2.1.6.3.4. del decreto 431 del 2017.</b>
 
-<p>El presente contrato tendrá una Duracion de <b>".$data['DURACION_CONTRATO'].",</b> contados a partir del <b>".$data['FECHA_INICIO']."</b> Hasta <b>".$data['FECHA_FINAL']."</b>.En ningun caso se produciran renovaciones automaticas del contrato </p> . 
+<p>El presente contrato tendrá una Duracion de <b>".$data['contrato_duracion'].",</b> contados a partir del <b>".$data['FECHA_INICIO']."</b> Hasta <b>".$data['FECHA_FINAL']."</b>.En ningun caso se produciran renovaciones automaticas del contrato </p> . 
 
 <p>En constancia de aceptación, se firma el presente contrato en el Municipio de Apartadó (Antioquia) a los  <b>".$data['FECHA_PERFECCIONAMIENTO']."</b>; por las partes que han intervenido, quienes procederán a suscribir el presente contrato,  advirtiéndose  que al mismo  se entienden incorporadas las disposiciones que sobre administración delegada  consagra la normatividad legal vigente.</p>
         ";
@@ -475,9 +464,9 @@ ________/\\\\\\\\\__/\\\\\\\\\\\\\___
         */
     function CP_P1($data){
         $view = "
-<p>Entre los suscritos a saber, <b>".$data['mi_empresa_rt_nombre']."</b>, identificado(a) con Cédula de Ciudadanía Nro. <b>".$data['mi_empresa_rt_cedula']."</b>, en calidad de Gerente y Representante Legal de <b>".$data['mi_empresa_nombre'].".</b> Con Nit ".$data['mi_empresa_nit'].", y quien para efectos del presente contrato se denominará <b>EL CONTRATANTE</b>; y el señor (a) <b>".$data['contratista_nombre'].",</b> con Cédula de Ciudadanía. Nro. <b>".$data['contratista_cedula']."</b> expedida en ".$data['contratista_cedula_ref'].", quien actua como ".$data['TIPO_POSEEDOR_O_TENEDOR']." DEL VEHICULO  de servicio público inscrito en el organismo de transito correspondiente.</p>
+<p>Entre los suscritos a saber, <b>".$data['mi_empresa_rt_nombre']."</b>, identificado(a) con Cédula de Ciudadanía Nro. <b>".$data['mi_empresa_rt_cedula']."</b>, en calidad de Gerente y Representante Legal de <b>".$data['mi_empresa_nombre'].".</b> Con Nit ".$data['mi_empresa_nit'].", y quien para efectos del presente contrato se denominará <b>EL CONTRATANTE</b>; y el señor (a) <b>".$data['contratista_nombre'].",</b> con Cédula de Ciudadanía. Nro. <b>".$data['contratista_cedula']."</b> expedida en ".$data['contratista_cedula_ref'].", quien actua como ".$data['contratista_poseedor_or_prop']." DEL VEHICULO  de servicio público inscrito en el organismo de transito correspondiente.</p>
 
-<p><b>PARAGRAFO 1: ".$data['TIPO_POSEEDOR_O_TENEDOR']."</b> acredita  la tenencia de la  propiedad del vehiculo y además que, el automotor se encuentra libre de pleitos pendientes, embargos judiciales, condiciones resolutorias, acciones reales y en general, que se encuentra ajustada a derecho y es consecuencia de una cadena lógica de dominio.  Así mismo que su patrimonio liquido proviene de actividades lícitas; y quien para los efectos del presente documento se denominará el <b>PROPIETARIO</b>, acuerdan celebrar el presente <b>CONTRATO DE SUMINISTRO DE VEHÍCULO</b>, contrato que se rige por las siguientes estipulaciones:</p>
+<p><b>PARAGRAFO 1: ".$data['contratista_poseedor_or_prop']."</b> acredita  la tenencia de la  propiedad del vehiculo y además que, el automotor se encuentra libre de pleitos pendientes, embargos judiciales, condiciones resolutorias, acciones reales y en general, que se encuentra ajustada a derecho y es consecuencia de una cadena lógica de dominio.  Así mismo que su patrimonio liquido proviene de actividades lícitas; y quien para los efectos del presente documento se denominará el <b>PROPIETARIO</b>, acuerdan celebrar el presente <b>CONTRATO DE SUMINISTRO DE VEHÍCULO</b>, contrato que se rige por las siguientes estipulaciones:</p>
 
 <p><b>PRIMERA</b>: MOTIVO DE LA CONTRATACIÓN Que la empresa <b>".$data['mi_empresa_nombre']."</b>, tiene contratos suscritos con clientes que demandan cada vez mas servicios en la modalidad de Contrato para transporte empresarial. especialmente de empleados de Fincas, y aunque la empresa presta servicios de transporte público especial, debidamente autorizada y habilitada por el Ministerio de Transporte,  en la actualidad no cuenta con la cantidad  de vehículos que exige la empresa y sus filiales a la cual le prestamos servicios,  para tal objeto contractual.</p>
 
@@ -494,23 +483,23 @@ ________/\\\\\\\\\__/\\\\\\\\\\\\\___
 
 <p>Bajo las obligaciones que más adelante se detallan.</p>
 
-<p><b>TERCERA. TÉRMINO</b>El presente contrato tendrá una Duracion de <b>".$data['DURACION_CONTRATO']."</b>, contados a partir del <b>".$data['FECHA_INICIO']."</b> Hasta <b>".$data['FECHA_FINAL']."</b>.En ningun caso se produciran renovaciones automaticas del contrato. </p>
+<p><b>TERCERA. TÉRMINO</b>El presente contrato tendrá una Duracion de <b>".$data['contrato_duracion']."</b>, contados a partir del <b>".$data['FECHA_INICIO']."</b> Hasta <b>".$data['FECHA_FINAL']."</b>.En ningun caso se produciran renovaciones automaticas del contrato. </p>
 
-<p><b>CUARTA. VALOR. CUARTA: VALOR  DEL CONTRATO Y FORMA DE PAGO</b>: LA EMPRESA CONTRATANTE  pagará al <b>".$data['TIPO_POSEEDOR_O_TENEDOR']."</b> la suma que estará determinado de  acuerdo a las cláusulas establecidas en documento posterior, por  el suministro de cada vehículo por viaje realizado conforme lo dispone la cláusula siguiente.</p>
+<p><b>CUARTA. VALOR. CUARTA: VALOR  DEL CONTRATO Y FORMA DE PAGO</b>: LA EMPRESA CONTRATANTE  pagará al <b>".$data['contratista_poseedor_or_prop']."</b> la suma que estará determinado de  acuerdo a las cláusulas establecidas en documento posterior, por  el suministro de cada vehículo por viaje realizado conforme lo dispone la cláusula siguiente.</p>
 
-<p><b>QUINTA. FORMA DE PAGO</b>. LA EMPRESA CONTRATANTE  pagará al <b>".$data['TIPO_POSEEDOR_O_TENEDOR']."</b>,   la suma indicada de la siguiente manera: los clientes que demandan los servicios,  pagarán directamente el costo del contrato de manera global a LA EMPRESA CONTRATANTE, previa consignación en la cuenta suministrada por LA EMPRESA CONTRATANTE, y está a su vez le reconocerá al <b>".$data['TIPO_POSEEDOR_O_TENEDOR']."</b> por sus SERVICIOS el valor de los servicios pactados, por el suministro de cada viaje realizado.</p>
+<p><b>QUINTA. FORMA DE PAGO</b>. LA EMPRESA CONTRATANTE  pagará al <b>".$data['contratista_poseedor_or_prop']."</b>,   la suma indicada de la siguiente manera: los clientes que demandan los servicios,  pagarán directamente el costo del contrato de manera global a LA EMPRESA CONTRATANTE, previa consignación en la cuenta suministrada por LA EMPRESA CONTRATANTE, y está a su vez le reconocerá al <b>".$data['contratista_poseedor_or_prop']."</b> por sus SERVICIOS el valor de los servicios pactados, por el suministro de cada viaje realizado.</p>
 
-<p><b>SEXTA. OBLIGACIONES ESPECÍFICAS DEL ".$data['TIPO_POSEEDOR_O_TENEDOR'].".</b> EL ".$data['TIPO_POSEEDOR_O_TENEDOR']." se obliga para con LA EMPRESA CONTRATANTE: A) a cumplir con el suministro del vehículo con las características descritas y exigidas por el el cliente, en el tiempo pactado y con las descripciones exactas con el fin de atender las necesidades presentadas en el CONTRATO con el cliente respectivo; B) Demás actividades que asigne CONTRATANTE,  relacionado con el objeto contractual; C) ".$data['TIPO_POSEEDOR_O_TENEDOR']."  debe cumplir con todas las condiciones de seguridad y de revisión técnico mecánica y de emisiones contaminantes de que trata el artículo 51 de la Ley 769 de 2002, modificado por el artículo 11 de la Ley 1383 de 2010, modificado por el artículo 201 del Decreto número 019 de 2012, además del adecuado mantenimiento del vehículo de manera pre-ventiva y correctiva; D) el servicio debe hacerse de manera inmediata al usuario; E) El procedimiento debe ser continuo, permanente y ágil, y de la mejor calidad; F) Debe tenerse prevista la eventualidad de daños, a fin que el proceso sea permanente, repuestos, reparaciones, y vehículo de reemplazo.  G) El servicio deberá ser resuelta por lo menos en un día hábil.  H) Abstenerse de utilizar la información entregada por LA EMPRESA CONTRATANTE para fines distintos a los establecidos en el presente contrato, o para beneficio personal o de personas ajenas. I) Es obligación del <b>".$data['TIPO_POSEEDOR_O_TENEDOR']."</b> y su vehículo que entre desde el lugar de origen hasta el lugar de destino, que la prestación del servicio se haga a través de CONDUCTOR ASALARIADO, pagado directamente por el ".$data['TIPO_POSEEDOR_O_TENEDOR']." de conformidad con el Art. 36 de la Ley 336 de 1996 y será solidariamente responsable con la EMPRESA VINCULADORA del automotor de todas las obligaciones o sanciones que surgieran por este aspecto, además que deben estar afiliados al régimen de seguridad social (Salud, pensión y Riesgos Laborales si hubiere lugar).</p>
+<p><b>SEXTA. OBLIGACIONES ESPECÍFICAS DEL ".$data['contratista_poseedor_or_prop'].".</b> EL ".$data['contratista_poseedor_or_prop']." se obliga para con LA EMPRESA CONTRATANTE: A) a cumplir con el suministro del vehículo con las características descritas y exigidas por el el cliente, en el tiempo pactado y con las descripciones exactas con el fin de atender las necesidades presentadas en el CONTRATO con el cliente respectivo; B) Demás actividades que asigne CONTRATANTE,  relacionado con el objeto contractual; C) ".$data['contratista_poseedor_or_prop']."  debe cumplir con todas las condiciones de seguridad y de revisión técnico mecánica y de emisiones contaminantes de que trata el artículo 51 de la Ley 769 de 2002, modificado por el artículo 11 de la Ley 1383 de 2010, modificado por el artículo 201 del Decreto número 019 de 2012, además del adecuado mantenimiento del vehículo de manera pre-ventiva y correctiva; D) el servicio debe hacerse de manera inmediata al usuario; E) El procedimiento debe ser continuo, permanente y ágil, y de la mejor calidad; F) Debe tenerse prevista la eventualidad de daños, a fin que el proceso sea permanente, repuestos, reparaciones, y vehículo de reemplazo.  G) El servicio deberá ser resuelta por lo menos en un día hábil.  H) Abstenerse de utilizar la información entregada por LA EMPRESA CONTRATANTE para fines distintos a los establecidos en el presente contrato, o para beneficio personal o de personas ajenas. I) Es obligación del <b>".$data['contratista_poseedor_or_prop']."</b> y su vehículo que entre desde el lugar de origen hasta el lugar de destino, que la prestación del servicio se haga a través de CONDUCTOR ASALARIADO, pagado directamente por el ".$data['contratista_poseedor_or_prop']." de conformidad con el Art. 36 de la Ley 336 de 1996 y será solidariamente responsable con la EMPRESA VINCULADORA del automotor de todas las obligaciones o sanciones que surgieran por este aspecto, además que deben estar afiliados al régimen de seguridad social (Salud, pensión y Riesgos Laborales si hubiere lugar).</p>
 
-<p><b>SÉPTIMA. OBLIGACIONES DE LA EMPRESA CONTRATANTE .</b> LA EMPRESA CONTRATANTE se obliga: 1º) Facilitarle al ".$data['TIPO_POSEEDOR_O_TENEDOR']."  para el cumplimiento de sus obligaciones, todos los documentos e información que requiera para este fin. 2°) Pagarle oportunamente la contraprestación. 3º). Facilitarle los recursos de que dispone LA EMPRESA CONTRATANTE que le sean necesarios para el buen desempeño de las labores a realizar. PARÁGRAFO: Esto tiene que ver con información y logística, más no así suministro de materiales, combustibles lubricantes, peajes, viáticos, gastos de viajes, etc.</p>
+<p><b>SÉPTIMA. OBLIGACIONES DE LA EMPRESA CONTRATANTE .</b> LA EMPRESA CONTRATANTE se obliga: 1º) Facilitarle al ".$data['contratista_poseedor_or_prop']."  para el cumplimiento de sus obligaciones, todos los documentos e información que requiera para este fin. 2°) Pagarle oportunamente la contraprestación. 3º). Facilitarle los recursos de que dispone LA EMPRESA CONTRATANTE que le sean necesarios para el buen desempeño de las labores a realizar. PARÁGRAFO: Esto tiene que ver con información y logística, más no así suministro de materiales, combustibles lubricantes, peajes, viáticos, gastos de viajes, etc.</p>
 
 <p><b>OCTAVA: SUPERVISIÓN</b>: Será ejercida por el Jefe Operativo de LA EMPRESA CONTRATANTE  o quien haga sus veces, quien para cumplir con esta función deberá realizar el seguimiento, control y vigilancia de la ejecución del presente contrato y de sus actuaciones, de lo cual dejará constancia escrita.</p>
 
-<p><b>NOVENA: CUMPLIMIENTO AL SISTEMA GENERAL DE SEGURIDAD SOCIAL.</b> Es obligación del <b>".$data['TIPO_POSEEDOR_O_TENEDOR']."</b>,   la suma indicada de la siguiente manera: los clientes que demandan los servicios,  pagarán directamente el costo del contrato de manera global a LA EMPRESA CONTRATANTE, previa consignación en la cuenta suministrada por LA EMPRESA CONTRATANTE, y está a su vez le reconocerá al <b>".$data['TIPO_POSEEDOR_O_TENEDOR']."</b> por sus SERVICIOS el valor de los servicios pactados, por el suministro de cada viaje realizado.</p>
+<p><b>NOVENA: CUMPLIMIENTO AL SISTEMA GENERAL DE SEGURIDAD SOCIAL.</b> Es obligación del <b>".$data['contratista_poseedor_or_prop']."</b>,   la suma indicada de la siguiente manera: los clientes que demandan los servicios,  pagarán directamente el costo del contrato de manera global a LA EMPRESA CONTRATANTE, previa consignación en la cuenta suministrada por LA EMPRESA CONTRATANTE, y está a su vez le reconocerá al <b>".$data['contratista_poseedor_or_prop']."</b> por sus SERVICIOS el valor de los servicios pactados, por el suministro de cada viaje realizado.</p>
 
-<p><b>SEXTA. OBLIGACIONES ESPECÍFICAS DEL ".$data['TIPO_POSEEDOR_O_TENEDOR'].".</b> ".$data['TIPO_POSEEDOR_O_TENEDOR']." garantizar y demostrar el cumplimiento de sus obligaciones frente al SISTEMA DE SEGURIDAD SOCIAL de su CONDUCTOR, lo que deberá acreditar antes de cada pago de sus honorarios, mediante la entrega de los respectivos soportes de pago, los cuales adjuntará a las cuentas de cobro  y que formarán parte del presente contrato.</p>
+<p><b>SEXTA. OBLIGACIONES ESPECÍFICAS DEL ".$data['contratista_poseedor_or_prop'].".</b> ".$data['contratista_poseedor_or_prop']." garantizar y demostrar el cumplimiento de sus obligaciones frente al SISTEMA DE SEGURIDAD SOCIAL de su CONDUCTOR, lo que deberá acreditar antes de cada pago de sus honorarios, mediante la entrega de los respectivos soportes de pago, los cuales adjuntará a las cuentas de cobro  y que formarán parte del presente contrato.</p>
 
-<p><b>DECIMA: INDEPENDENCIA DEL PROPITARIO:</b> ".$data['TIPO_POSEEDOR_O_TENEDOR']." actuará por su propia cuenta con absoluta autonomía y no estará sometido a subordinación laboral con LA EMPRESA CONTRATANTE u horario laboral alguno y sus derechos se limitarán de acuerdo  con la naturaleza del contrato, las obligaciones inherentes al mismo.</p> 
+<p><b>DECIMA: INDEPENDENCIA DEL PROPITARIO:</b> ".$data['contratista_poseedor_or_prop']." actuará por su propia cuenta con absoluta autonomía y no estará sometido a subordinación laboral con LA EMPRESA CONTRATANTE u horario laboral alguno y sus derechos se limitarán de acuerdo  con la naturaleza del contrato, las obligaciones inherentes al mismo.</p> 
 
 <p><b>UNDÉCIMA. CESION</b> Este contrato no podrá ser cedido total ni parcialmente, salvo autorización expresa de LA EMPRESA CONTRATANTE.</p>
 
@@ -518,17 +507,17 @@ ________/\\\\\\\\\__/\\\\\\\\\\\\\___
 
 <p><b>DÉCIMA TERCERA. CAUSALES DE TERMINACIÓN.</b>  El presente contrato termina por las siguientes causales: 1)  En forma regular cuando se configure: a) La ejecución total  del objeto del contrato.  b)  El cumplimiento del plazo estipulado y 2)  En forma anticipada cuando se configure: a) El incumplimiento parcial o total  de una de las obligaciones pactadas en el presente contrato, y b)  por mutuo acuerdo entre las partes.</p>
 
-<p><b>DÉCIMA CUARTA. CLÁUSULA PENAL.</b> En caso de incumplimiento por alguna de las partes de cualquiera de las obligaciones previstas en este contrato dará derecho a LA EMPRESA CONTRATANTE  a cobrar al ".$data['TIPO_POSEEDOR_O_TENEDOR']." una suma igual a la afectacion sufrida por incumplimiento.</p>
+<p><b>DÉCIMA CUARTA. CLÁUSULA PENAL.</b> En caso de incumplimiento por alguna de las partes de cualquiera de las obligaciones previstas en este contrato dará derecho a LA EMPRESA CONTRATANTE  a cobrar al ".$data['contratista_poseedor_or_prop']." una suma igual a la afectacion sufrida por incumplimiento.</p>
 
-<p><b>DÉCIMA QUINTA: DOCUMENTOS:</b> Hacen parte integral del presente contrato los siguientes, documentos del automotor, certificado de existencia y representación legal de LA EMPRESA CONTRATANTE, copias de la cédulas del Representante Legal y del ".$data['TIPO_POSEEDOR_O_TENEDOR']."  que es contratado, certificado de antecedentes judiciales, Registro Único Tributario (RUT), antecedentes, constancia de pago de aportes al Sistema General de Seguridad Social, y demás documentos relacionados con la ejecución del contrato.</p>
+<p><b>DÉCIMA QUINTA: DOCUMENTOS:</b> Hacen parte integral del presente contrato los siguientes, documentos del automotor, certificado de existencia y representación legal de LA EMPRESA CONTRATANTE, copias de la cédulas del Representante Legal y del ".$data['contratista_poseedor_or_prop']."  que es contratado, certificado de antecedentes judiciales, Registro Único Tributario (RUT), antecedentes, constancia de pago de aportes al Sistema General de Seguridad Social, y demás documentos relacionados con la ejecución del contrato.</p>
 
 <p><b>DÉCIMA SEXTA:</b> Impuestos y Contabilización. En relación con el manejo contable y tributario del presente contrato, las partes expresamente declaran: 1) Contabilización del ingreso: Cada una de las partes registra en su respectiva contabilidad, como ingreso, el valor correspondiente a la participación pactada para cada una. 2) Contabilización de impuestos; Cada una de las partes deberá causar, declarar y pagar los impuestos que correspondan por la actividad, en proporción del ingreso que cada una percibe.</p>
 
-<p><b>DÉCIMA SÉPTIMA:</b> Independencia: LA EMPRESA CONTRATANTE  y ".$data['TIPO_POSEEDOR_O_TENEDOR']." y/o  EL CONDUCTOR del vehículo conservan su Independencia y responden cada una de por sus obligaciones laborales y contractuales. PARÁGRAFO: Se deja expresa constancia que por la celebración del presente contrato no se entenderá de ninguna manera la constitución de Agencia Comercial de una parte hacia la otra, ni la celebración de Contrato de Cuentas en Participación, o constitución de Sociedad de Hecho ni ninguna otra forma asociativa, como tampoco la prestación de un servicio. Los derechos y obligaciones de las partes quedan recogidos bajo los términos y condiciones del presente Contrato, según lo convenido en el Objeto del mismo y expresamente aceptado por las partes, previa deliberación y conocimiento de su alcance, que queda circunscrito estrictamente a lo allí señalado.</p>
+<p><b>DÉCIMA SÉPTIMA:</b> Independencia: LA EMPRESA CONTRATANTE  y ".$data['contratista_poseedor_or_prop']." y/o  EL CONDUCTOR del vehículo conservan su Independencia y responden cada una de por sus obligaciones laborales y contractuales. PARÁGRAFO: Se deja expresa constancia que por la celebración del presente contrato no se entenderá de ninguna manera la constitución de Agencia Comercial de una parte hacia la otra, ni la celebración de Contrato de Cuentas en Participación, o constitución de Sociedad de Hecho ni ninguna otra forma asociativa, como tampoco la prestación de un servicio. Los derechos y obligaciones de las partes quedan recogidos bajo los términos y condiciones del presente Contrato, según lo convenido en el Objeto del mismo y expresamente aceptado por las partes, previa deliberación y conocimiento de su alcance, que queda circunscrito estrictamente a lo allí señalado.</p>
 
 <p><b>DECIMA NOVENA:</b> Solución de conflictos Cláusula Compromisoria: Con excepción de las obligaciones económicas que se encuentren establecidas en forma cierta e indiscutible, y que serán exigibles por la vía judicial, todas las diferencias que se susciten entre las partes con motivo de la validez, existencia, celebración, interpretación, alcance o ejecución, forma, términos y condiciones de exigir los derechos y cumplir las obligaciones derivadas del contrato o sobre su terminación, consecuencias y liquidación se someterán a las disposiciones de la ley colombiana en materia de conciliación y arbitraje, tanto técnico como jurídico, para lo cual deberá agotarse el siguiente trámite: Toda discrepancia o controversia procurará resolverse por los respectivos representantes de las partes. En caso de no puedan ser resueltas directamente por los Representantes legales de las partes, el conflicto se someterá a la Justicia Ordinaria.</p>
  
-<p>El presente contrato tendrá una Duracion de <b>".$data['DURACION_CONTRATO']."</b>, contados a partir del <b>".$data['FECHA_INICIO']."</b> Hasta <b>".$data['FECHA_FINAL']."</b>.En ningun caso se produciran renovaciones automaticas del contrato.</p> 
+<p>El presente contrato tendrá una Duracion de <b>".$data['contrato_duracion']."</b>, contados a partir del <b>".$data['FECHA_INICIO']."</b> Hasta <b>".$data['FECHA_FINAL']."</b>.En ningun caso se produciran renovaciones automaticas del contrato.</p> 
 
 <p>En constancia de aceptación, se firma el presente contrato en el Municipio de Apartadó (Antioquia) a los  <b>".$data['FECHA_PERFECCIONAMIENTO']."</b>; por las partes que han intervenido, quienes procederán a suscribir el presente contrato.</p>
         ";

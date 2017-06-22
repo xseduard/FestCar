@@ -27,6 +27,7 @@ class UpdateVehiculoRequest extends Request
     {
         $array = Vehiculo::$rules;
         $array['placa'] = "";
+        $array['numero_interno'] = "";
          return $array;
         
     }

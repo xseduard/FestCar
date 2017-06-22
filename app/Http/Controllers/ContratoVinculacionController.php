@@ -85,10 +85,14 @@ class ContratoVinculacionController extends AppBaseController
     public function store(CreateContratoVinculacionRequest $request)
     {
         
-        $input = $request->all();
+        $input = $request->all();        
 
-        $contratos_duplicados = ContratoVinculacion::where('vehiculo_id',$input['vehiculo_id'])->get();
-        
+        if ($input['tipo_contrato'] == 'CP' and $input['tipo_proveedor'] == 'Juridico') {
+                    Flash::error("Contratos de tipo Proveedor (CP) solo pueden registrarse con personas Naturales");
+                    return Redirect::back()->withInput(Input::all());
+                } 
+
+        $contratos_duplicados = ContratoVinculacion::where('vehiculo_id',$input['vehiculo_id'])->get();       
         if (!$contratos_duplicados->isEmpty()) {
                 foreach ($contratos_duplicados->toArray() as $key => $value) {
                     if ($value['fecha_inicio'] <=  Carbon::now() && $value['fecha_final'] >= Carbon::now()) {                     
@@ -96,8 +100,7 @@ class ContratoVinculacionController extends AppBaseController
                          return Redirect::back()->withInput(Input::all());
                     }               
                 }               
-        }
-       
+        }      
         
 
         if ($this->centralRepository->validar_numero_interno($input['vehiculo_id'])) {                     
@@ -185,6 +188,11 @@ class ContratoVinculacionController extends AppBaseController
             return redirect(route('contratoVinculacions.index'));
         }
         $input = $request->all();
+
+        if ($input['tipo_contrato'] == 'CP' and $input['tipo_proveedor'] == 'Juridico') {
+                    Flash::error("Contratos de tipo Proveedor (CP) solo pueden registrarse con personas Naturales");
+                    return Redirect::back()->withInput(Input::all());
+                }
 
         $contratos_duplicados = ContratoVinculacion::where('vehiculo_id',$input['vehiculo_id'])->where('id', '=!', $id)->get();  //se agrega segundo where para que no se encuentre a si mismo      
         if (!$contratos_duplicados->isEmpty()) {

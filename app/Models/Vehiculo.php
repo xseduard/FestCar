@@ -59,7 +59,7 @@ class Vehiculo extends Model
         'tipo_propietario' => 'required',
         'natural_id' => 'required_if:tipo_propietario,Natural',
         'juridico_id' => 'required_if:tipo_propietario,Juridico',      
-        'numero_interno' => 'numeric',
+        'numero_interno' => 'numeric|unique:vehiculos',
         'capacidad' => 'numeric',
         'modelo' => 'numeric',
         'marca' => 'required',
