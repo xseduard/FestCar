@@ -85,7 +85,7 @@ class ContratoPrestacionServicio extends Model
         'usuario_aprobacion' => '',
         'fecha_inicio' => 'required|date',
         'fecha_final' => 'required|date|after:fecha_inicio',
-        'responsable_id' => '',
+        'responsable_id' => 'required',
         'valor' => 'required|numeric',
     ];
     /**

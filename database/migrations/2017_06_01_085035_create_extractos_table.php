@@ -39,7 +39,7 @@ class CreateExtractosTable extends Migration
             $table->string('recorrido', 150);
             
             $table->integer('conductor_uno')->unsigned();
-            $table->foreign('conductor_uno')->references('id')->on('naturales');
+            $table->foreign('conductor_uno')->references('id')->on('licencia_conduccions');
 
             $table->integer('conductor_dos');
             $table->integer('conductor_tres');

@@ -15,6 +15,9 @@ use Response;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 
+use App\Models\Extracto;
+USE DB;
+
 
 class ExtractoController extends AppBaseController
 {
@@ -119,10 +122,24 @@ class ExtractoController extends AppBaseController
             $input['f_licencia_tres'] = $this->centralRepository->buscar_licencia($input['conductor_tres'])->format('d-m-Y');
         }
         
-
+        $cv = $this->centralRepository->verificar_contrato_vinculacion($input['vehiculo_id']);        
+        if ($cv != false) {            
+           $input['contratovinculacion_id'] = $cv['id'];
+        }
         //$input['contratovinculacion_id']    = '';
 
+       
+        $codigo = Extracto::where('ContratoPrestacionServicio_id',$input['ContratoPrestacionServicio_id'])->max('codigo');
+        if (is_null($codigo)) {
+            $input['codigo'] = 1;
+        } else {
+            $input['codigo'] = $codigo+1;
+        }
+        
+
         $extracto = $this->extractoRepository->create($input);
+
+        //dd(DB::getQueryLog());
 
         Flash::success('Extracto registrado correctamente.');
 
@@ -206,8 +223,20 @@ class ExtractoController extends AppBaseController
              return Redirect::back()->withInput(Input::all());
         }
 
+
         if($this->centralRepository->validar_conductores_duplicados($input)) {
             return Redirect::back()->withInput(Input::all());
+        }
+
+
+        if (!empty($input['conductor_uno'])) {
+            $input['f_licencia_uno'] = $this->centralRepository->buscar_licencia($input['conductor_uno'])->format('d-m-Y');
+        }
+        if (!empty($input['conductor_dos'])) {
+            $input['f_licencia_dos'] = $this->centralRepository->buscar_licencia($input['conductor_dos'])->format('d-m-Y');
+        }
+        if (!empty($input['conductor_tres'])) {
+            $input['f_licencia_tres'] = $this->centralRepository->buscar_licencia($input['conductor_tres'])->format('d-m-Y');
         }
 
         $input['tarjetaoperacion_id']       = $validar_documentos_vehiculo['tarjetaoperacion']->id;

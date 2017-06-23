@@ -44,6 +44,7 @@ class ExtractoRepository extends BaseRepository
         ->with('vehiculo.tarjetaoperacion')
         ->with('cps.origen.departamento')
         ->with('cps.destino.departamento')
+        ->with('contratovinculacion.juridico')
         ->with('tarjetaoperacion')
         ->with('conductoruno')
         ->with('conductordos')
@@ -121,6 +122,17 @@ class ExtractoRepository extends BaseRepository
             $data['contratante_nombre'] = mb_strtoupper($extracto->cps->juridico->nombre,'utf-8');
             $data['documento_contratante'] = $extracto->cps->juridico->nit; 
         }
+
+            $convenio_con   = '';
+            $convenio_marca = '';
+
+        if (!is_null($extracto->contratovinculacion)) {            
+            if ($extracto->contratovinculacion->tipo_contrato == 'CC') {
+                $convenio_con = mb_strtoupper(substr($extracto->contratovinculacion->juridico->nombre, 0, 40),'utf-8');
+                $convenio_marca = '(X)';
+            }
+        }
+
             $c2_nombre    = "";
             $c2_apellidos = "";
             $c2_cedula    = "";
@@ -139,26 +151,29 @@ class ExtractoRepository extends BaseRepository
             $r_direccion = "";
 
         if (!is_null($extracto->conductordos)) {
-            $c2_nombre    = mb_strtoupper($extracto->conductordos->nombres,'utf-8');
-            $c2_apellidos = mb_strtoupper($extracto->conductordos->apellidos,'utf-8');
-            $c2_cedula    = number_format($extracto->conductordos->cedula, 0, '.', '.' );
-            $c2_licencia  = $extracto->conductordos->cedula;
+            $c2_nombre    = mb_strtoupper($extracto->conductordos->natural->nombres,'utf-8');
+            $c2_apellidos = mb_strtoupper($extracto->conductordos->natural->apellidos,'utf-8');
+            $c2_cedula    = number_format($extracto->conductordos->natural->cedula, 0, '.', '.' );
+            $c2_licencia  = $extracto->conductordos->natural->cedula;
             $c2_vigencia  = $extracto->f_licencia_dos;
         }
+
         if (!is_null($extracto->conductortres)) {
-            $c3_nombre    = mb_strtoupper($extracto->conductortres->nombres,'utf-8');
-            $c3_apellidos = mb_strtoupper($extracto->conductortres->apellidos,'utf-8');
-            $c3_cedula    = number_format($extracto->conductortres->cedula, 0, '.', '.' );
-            $c3_licencia  = $extracto->conductortres->cedula;
+             
+            $c3_nombre    = mb_strtoupper($extracto->conductortres->natural->nombres,'utf-8');
+            $c3_apellidos = mb_strtoupper($extracto->conductortres->natural->apellidos,'utf-8');
+            $c3_cedula    = number_format($extracto->conductortres->natural->cedula, 0, '.', '.' );
+            $c3_licencia  = $extracto->conductortres->natural->cedula;
             $c3_vigencia  = $extracto->f_licencia_tres;
-        }
-        if (!is_null($extracto->cps->responsable)) {
+        }        
+        if (!is_null($extracto->cps->responsable)) {           
             $r_nombre    = mb_strtoupper($extracto->cps->responsable->nombres,'utf-8');
             $r_apellidos = mb_strtoupper($extracto->cps->responsable->apellidos,'utf-8');
             $r_cedula    = number_format($extracto->cps->responsable->cedula, 0, '.', '.' );
-            $r_telefono  = $extracto->cps->responsable->telefono;
-            $r_direccion = substr($extracto->cps->responsable->direccion, 0, 73);
+            $r_telefono  = substr($extracto->cps->responsable->telefono, 0, 12);
+            $r_direccion = substr($extracto->cps->responsable->direccion, 0, 25);
         }
+
         
 
         $pdf = new PDF_EXTRACTO('P','mm',array(216,279));
@@ -182,13 +197,13 @@ class ExtractoRepository extends BaseRepository
          * INICIO CUERPO
          */
         $pdf->SetFont('helvetica','',12);
-        $pdf->Cell(0,6,utf8_decode("FORMATO ÚNICO DE EXTRACTO DEL CONTRATO DEL SERVICIO PÚBLICO DE"),0,1,"C");
-        $pdf->Cell(0,6,utf8_decode("TRANSPORTE TERRESTRE AUTOMOTOR ESPECIAL"),0,1,"C");
+        $pdf->Cell(0,6,utf8_decode("FORMATO ÚNICO DE EXTRACTO DEL CONTRATO DEL SERVICIO PÚBLICO"),0,1,"C");
+        $pdf->Cell(0,6,utf8_decode("DE TRANSPORTE TERRESTRE AUTOMOTOR ESPECIAL"),0,1,"C");
         $pdf->SetFont('helvetica','B',12);
         $pdf->Cell(0,6,utf8_decode("No. 305-075-12-".$extracto->created_at->year."-".str_pad($extracto->cps->id, 4, "0", STR_PAD_LEFT)."-".str_pad($extracto->codigo, 4, "0", STR_PAD_LEFT)),0,1,"C");
         $pdf->ln();
         $pdf->SetFont('helvetica','',10);
-        $pdf->Cell(146,5,utf8_decode("RAZÓN SOCIAL DE LA EMPRESA DE TRANSPORTE EPECIAL"),"LT",0,"L");
+        $pdf->Cell(146,5,utf8_decode("RAZÓN SOCIAL DE LA EMPRESA DE TRANSPORTE ESPECIAL"),"LT",0,"L");
         $pdf->Cell(50,5,utf8_decode("NIT"),"TR",1,"L");
         $pdf->Cell(146,$HC,utf8_decode("".$data['mi_empresa_nombre']),"LB",0,"L");
         $pdf->Cell(50,$HC,utf8_decode("".$data['mi_empresa_nit']),"BR",1,"L");
@@ -203,10 +218,10 @@ class ExtractoRepository extends BaseRepository
         $pdf->Cell(0,$HC,utf8_decode("ORIGEN-DESTINO, DESCRIBIENDO EL RECORRIDO:"),"LTR",1,"L");
         $pdf->Cell(0,$HC,utf8_decode(mb_strtoupper($extracto->recorrido,'utf-8')),"LBR",1,"L");
 
-        $pdf->Cell(28,$HC,utf8_decode('CONVENIO'),"LB",0,"L");
+        $pdf->Cell(28,$HC,utf8_decode('CONVENIO '.$convenio_marca),"LB",0,"L");
         $pdf->Cell(30,$HC,utf8_decode('CONSORCIO'),"B",0,"L");
         $pdf->Cell(38,$HC,utf8_decode('UNION TEMPORAL'),"B",0,"L");
-        $pdf->Cell(100,$HC,utf8_decode('CON:'),"RB",1,"L");
+        $pdf->Cell(100,$HC,utf8_decode('CON: '.$convenio_con),"RB",1,"L");
 
         /**
          * VIGENCIA CONTRATO
@@ -281,13 +296,13 @@ class ExtractoRepository extends BaseRepository
         $pdf->SetFont('helvetica','',10);
         
         $pdf->Cell(50,4,utf8_decode("DATOS DEL CONDUCTOR 1"),"LR",0,"C");
-        $pdf->Cell(56,4,utf8_decode("".mb_strtoupper($extracto->conductoruno->nombres,'utf-8')),"R",0,"C");
-        $pdf->Cell(25,4,utf8_decode("".number_format($extracto->conductoruno->cedula, 0, '.', '.' )),"R",0,"C");
-        $pdf->Cell(40,4,$extracto->conductoruno->cedula,"R",0,"C");
+        $pdf->Cell(56,4,utf8_decode("".mb_strtoupper($extracto->conductoruno->natural->nombres,'utf-8')),"R",0,"C");
+        $pdf->Cell(25,4,utf8_decode("".number_format($extracto->conductoruno->natural->cedula, 0, '.', '.' )),"R",0,"C");
+        $pdf->Cell(40,4,$extracto->conductoruno->natural->cedula,"R",0,"C");
         $pdf->Cell(25,4,$extracto->f_licencia_uno,"R",1,"C");
 
         $pdf->Cell(50,5,utf8_decode(""),"LBR",0,"C");
-        $pdf->Cell(56,5,utf8_decode("".mb_strtoupper($extracto->conductoruno->apellidos,'utf-8')),"BR",0,"C");
+        $pdf->Cell(56,5,utf8_decode("".mb_strtoupper($extracto->conductoruno->natural->apellidos,'utf-8')),"BR",0,"C");
         $pdf->Cell(25,5,utf8_decode(""),"BR",0,"C");
         $pdf->Cell(40,5,utf8_decode(""),"BR",0,"C");
         $pdf->Cell(25,5,utf8_decode(""),"BR",1,"C");

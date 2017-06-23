@@ -95,6 +95,10 @@ class Vehiculo extends Model
     public function revisionpreventiva(){
         return $this->hasMany('App\Models\RevisionPreventiva', 'vehiculo_id', 'id');
     }
+    public function contratovinculacion(){
+        return $this->hasMany('App\Models\ContratoVinculacion', 'vehiculo_id', 'id');
+    }
+    
     public function user(){
         return $this->belongsTo('App\User');
     }

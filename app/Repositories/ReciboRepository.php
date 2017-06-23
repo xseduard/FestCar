@@ -117,11 +117,12 @@ class ReciboRepository extends BaseRepository
             $cnt_articulos--;
             $total = $total + ($value->cantidad * $value->precio_final);
         }
-
+        //dd($cnt_articulos);
         while ( $cnt_articulos > 0) {
-            $pdf->ln(8);
+            $pdf->ln(13);
             $cnt_articulos--;
         }
+        
         $pdf->ln(8);
 
         

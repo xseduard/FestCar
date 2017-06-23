@@ -3,21 +3,31 @@
         <th>Nit</th>
         <th>Nombre o Razón Social</th>
         <th>Representante Legal</th>
+        <th></th>
         <th>Estado</th>        
         <th>Ultima modificación</th>
         <th colspan="3">Acciones</th>
     </thead>
     <tbody>
     @foreach($juridicos as $juridico)
-        <tr>
+        <tr 
+            @if ($juridico->natural->nombres == 'No disponible')                    
+                class="warning"
+            @endif
+        >
             <td>{!! $juridico->nit !!}</td>
             <td><a href="{!! route('juridicos.show', [$juridico->id]) !!}" class='' title="Ver">{!! $juridico->nombre !!}</a></td>
             <td>{!! $juridico->natural->nombres," ",$juridico->natural->apellidos !!}</td>
             <td>
+                @if ($juridico->natural->nombres == 'No disponible')                   
+                        <span class="badge badge-warning" title="Verfiqué los datos ingresados, {!! $juridico->user->fullname !!}"><i class='fa fa fa-exclamation fa-spin fa-fw'></i> Sin Representante Legal</span>
+                @endif
+            </td>
+            <td>
                 @if ($juridico->estado)
-                    <span class="label label-success">Activo</span>
+                    <span class="badge badge-success">Activo</span>
                 @else
-                    <span class="label label-default">Desactivado</span>
+                    <span class="badge badge-default">Desactivado</span>
                 @endif
             </td>
             <td>{!! $juridico->updated_at->diffForHumans() !!}</td>

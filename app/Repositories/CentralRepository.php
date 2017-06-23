@@ -9,6 +9,7 @@ use App\Models\Natural;
 use App\Models\Juridico;
 use App\Models\Vehiculo;
 use App\Models\ContratoPrestacionServicio;
+use App\Models\ContratoVinculacion;
 use App\Models\LicenciaConduccion;
 use App\Models\Tarjeta_Propiedad;
 use InfyOm\Generator\Common\BaseRepository;
@@ -204,6 +205,19 @@ class CentralRepository extends BaseRepository
             }
         }
         return ($array);               
+          
+    }
+    public function verificar_contrato_vinculacion($vehiculo_id){
+
+        $connt_vinculacion = ContratoVinculacion::where('vehiculo_id',$vehiculo_id)->get();       
+        if (!$connt_vinculacion->isEmpty()) {
+                foreach ($connt_vinculacion->toArray() as $key => $value) {
+                    if ($value['fecha_inicio'] <=  Carbon::now() && $value['fecha_final'] >= Carbon::now()) {                                        
+                         return $value;
+                    }               
+                }               
+        }
+        return false;            
           
     }
     public function natural_id_nombre(){                      

@@ -104,13 +104,13 @@ class Extracto extends Model
         return $this->belongsTo('App\Models\ContratoVinculacion', 'contratovinculacion_id');
     }
     public function conductoruno(){
-        return $this->belongsTo('App\Models\Natural', 'conductor_uno');
+        return $this->belongsTo('App\Models\LicenciaConduccion', 'conductor_uno', 'id');
     }
     public function conductordos(){
-        return $this->belongsTo('App\Models\Natural', 'conductor_dos');
+        return $this->belongsTo('App\Models\LicenciaConduccion', 'conductor_dos', 'id');
     }
     public function conductortres(){
-        return $this->belongsTo('App\Models\Natural', 'conductor_tres');
+        return $this->belongsTo('App\Models\LicenciaConduccion', 'conductor_tres', 'id');
     }
      public function cps(){
         return $this->belongsTo('App\Models\ContratoPrestacionServicio', 'ContratoPrestacionServicio_id');

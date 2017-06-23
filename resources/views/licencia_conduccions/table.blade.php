@@ -12,7 +12,7 @@
     <tbody>
     @foreach($licenciaConduccions as $licenciaConduccion)
         <tr>
-            <td>{!! $licenciaConduccion->natural->cedula !!}</td>
+            <td>{!! number_format($licenciaConduccion->natural->cedula, 0, '.', '.' ) !!}</td>
             <td>{!! $licenciaConduccion->natural->nombres !!}</td>
             <td>{!! $licenciaConduccion->natural->apellidos !!}</td>
             <td>{!! $licenciaConduccion->fecha_expedicion->format('d-M-Y') !!}</td>

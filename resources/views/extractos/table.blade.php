@@ -1,7 +1,9 @@
 <table class="table table-responsive table-hover" id="extractos-table">
     <thead>
-        <th>Codigo</th>
+        <th>Consecutivo FUEC</th>
         <th>CPS</th>
+        <th>Vehículo</th>
+        <th>Contratista</th>
         <th>Recorrido</th>
         <th>Conductor Ppal</th>
         <th>Usuario Creador</th>
@@ -11,11 +13,21 @@
     <tbody>
     @foreach($extractos as $extracto)
         <tr>
-            <td>{!! $extracto->codigo !!}</td>
+            <td>305-075-12-<b>{!! $extracto->created_at->format('Y'),"-",str_pad($extracto->ContratoPrestacionServicio_id, 4, "0", STR_PAD_LEFT),"-",str_pad($extracto->codigo, 4, "0", STR_PAD_LEFT) !!}</b></td>
             <td>{!! "CPS",str_pad($extracto->ContratoPrestacionServicio_id, 4, "0", STR_PAD_LEFT) !!}</td>
+            <td><span class="label label-default">{!! $extracto->vehiculo->placa !!}</span></td>
+            <td>
+                @if($extracto->cps->tipo_cliente == 'Natural')
+                    {!! $extracto->cps->natural->fullname !!}
+                @else
+                    @if($extracto->cps->tipo_cliente == 'Juridico')
+                        {!! $extracto->cps->juridico->nombre !!}
+                    @endif
+                @endif
+            </td>
             <td>{!! $extracto->recorrido !!}</td>
-            <td>{!! $extracto->conductoruno->nombres," ", $extracto->conductoruno->apellidos !!}</td>   
-            <td>{!! $extracto->usuario->nombres," ",$extracto->usuario->apellidos !!}</td>        
+            <td>{!! $extracto->conductoruno->natural->fullname !!}</td>   
+            <td>{!! $extracto->user->fullname !!}</td>        
             <td>
                 {!! Form::open(['route' => ['extractos.destroy', $extracto->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>
