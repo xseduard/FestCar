@@ -154,8 +154,13 @@
 
 @endsection
 @section('scripts')
+
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+
+
  <script>
+
     $(document).ready(function () {  
         
     });
@@ -239,10 +244,10 @@
         responsive: true
 
     };
-
+/*
     var ctx3 = document.getElementById("polarChart").getContext("2d");
     new Chart(ctx3, {type: 'polarArea', data: polarData, options:polarOptions});
-
+*/
     var doughnutData = {
         labels: ["App","Software","Laptop" ],
         datasets: [{
@@ -256,10 +261,10 @@
         responsive: true
     };
 
-
+/*
     var ctx4 = document.getElementById("doughnutChart").getContext("2d");
     new Chart(ctx4, {type: 'doughnut', data: doughnutData, options:doughnutOptions});
-
+*/
 
     var radarData = {
         labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
@@ -282,10 +287,10 @@
     var radarOptions = {
         responsive: true
     };
-
+/*
     var ctx5 = document.getElementById("radarChart").getContext("2d");
     new Chart(ctx5, {type: 'radar', data: radarData, options:radarOptions});
-
+*/
 });
  </script>
 @endsection

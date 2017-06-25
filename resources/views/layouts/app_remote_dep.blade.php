@@ -5,24 +5,21 @@
     <title>Transeba | FestCar</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-    {!! Html::style('/bower_components/admin-lte/bootstrap/css/bootstrap.min.css') !!}
-    {!! Html::style('/bower_components/components-font-awesome/css/font-awesome.min.css') !!}
-    {!! Html::style('/bower_components/select2/dist/css/select2.min.css') !!}
-    {!! Html::style('/bower_components/admin-lte/dist/css/AdminLTE.min.css') !!}
-    {!! Html::style('/bower_components/admin-lte/dist/css/skins/_all-skins.min.css') !!}
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/css/skins/_all-skins.min.css">
     <!-- Linear Icons -->
-    {!! Html::style('/dependencia_local/icon-font.min.css') !!}
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <!-- Simple Line icons -->
-    {!! Html::style('/dependencia_local/simple-line-icons.min.css') !!}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
     <!-- Ionicons -->
-    {!! Html::style('/bower_components/Ionicons/css/ionicons.min.css') !!}
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Animsitun -->
-    {!! Html::style('/dependencia_local/animsition.min.css') !!}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.min.css">
     <!-- datepicker -->
-    {!! Html::style('/dependencia_local/bootstrap-datepicker.min.css') !!}
-
-    <!-- /dependencia_local/ -->
-
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css">
     <!-- select2 -->
     <!--
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
@@ -198,28 +195,30 @@
     @endif
 
     <!-- jQuery 2.1.4 -->
-    {{ HTML::script('/dependencia_local/jquery.min.js') }}
-    {{ HTML::script('/bower_components/admin-lte/bootstrap/js/bootstrap.min.js') }}
-    {{ HTML::script('/bower_components/select2/dist/js/select2.min.js') }}
-    {{ HTML::script('/bower_components/admin-lte/plugins/iCheck/icheck.min.js') }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
 
     <!-- AdminLTE App -->
-    {{ HTML::script('/bower_components/admin-lte/dist/js/app.min.js') }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/js/app.min.js"></script>
     <!-- Vue.js -->
     <!-- 
-    {{ HTML::script('/dependencia_local/vue.js"') }}
-    --> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.0/vue.js" ></script>
+    -->
+    <!-- select2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <!-- select2 español -->
-    {{ HTML::script('/bower_components/select2/dist/js/i18n/es.js') }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/i18n/es.js"></script>
     <!-- datepicker  -->
-    {{ HTML::script('/bower_components/admin-lte/plugins/datepicker/bootstrap-datepicker.js') }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
     <!-- datepicker español -->
-    {{ HTML::script('/bower_components/admin-lte/plugins/datepicker/locales/bootstrap-datepicker.es.js') }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.es.min.js"></script>
 
     <!-- input mask -->
     {{ HTML::script('/js/jquery.inputmask.bundle.min.js') }}
     <!-- Animsition -->
-    {{ HTML::script('/dependencia_local/animsition.min.js') }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.min.js"></script>
      <!-- Animsition ini -->
     <script type="text/javascript">
         $(document).ready(function() {
