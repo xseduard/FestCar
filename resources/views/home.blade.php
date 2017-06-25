@@ -32,26 +32,30 @@
 		            <div class="icon">
 		              <i class="fa fa-bus" aria-hidden="true"></i>
 		            </div>
-		            <a href="#" class="small-box-footer">
+		            <a href="{!! route('vehiculos.index') !!}" class="small-box-footer">
 		             Mas Información <i class="fa fa-arrow-circle-right"></i>
 		            </a>
 		          </div>
 		        </div>
-
+            <!-- ./col -->
+                <div class="col-lg-1 col-sm-1 col-md-1 col-xs-6">
+                    <!-- weather widget start --><a target="_blank" href="http://hotelmix.es/weather/apartado-w613092"><img src="https://w.bookcdn.com/weather/picture/25_w613092_1_4_17bc9c_250_13a085_ffffff_ffffff_1_2071c9_ffffff_0_6.png?scode=124&domid=&anc_id=16966"  alt="booked.net"/></a><!-- weather widget end -->
+                    
+                </div>
 		        <div class="col-lg-2 col-xs-6">
 		          <!-- small box -->
 		          <div class="small-box bg-green">
 		            <div class="inner">
-		              <h3>53<sup style="font-size: 20px">%</sup></h3>
+		              <h3>73.1<sup style="font-size: 20px">%</sup></h3>
 
 		              <p>Relación</p>
 		            </div>
 		            <div class="icon">
 		              <i class="ion ion-stats-bars"></i>
 		            </div>
-		            <a href="#" class="small-box-footer">
+		            <!-- <a href="#" class="small-box-footer">
 		             Mas Información <i class="fa fa-arrow-circle-right"></i>
-		            </a>
+		            </a> -->
 		          </div>
 		        </div>
 		        <!-- ./col -->
@@ -84,16 +88,12 @@
 		            <div class="icon">
 		              <i class="fa fa-building" aria-hidden="true"></i>
 		            </div>
-		            <a href="{!! route('naturals.index') !!}" class="small-box-footer">
+		            <a href="{!! route('juridicos.index') !!}" class="small-box-footer">
 		             Mas Información <i class="fa fa-arrow-circle-right"></i>
 		            </a>
 		          </div>
 		        </div>
-		        <!-- ./col -->
-		        <div class="col-lg-1 col-xs-6">
-		        	<!-- weather widget start --><a target="_blank" href="http://hotelmix.es/weather/apartado-w613092"><img src="https://w.bookcdn.com/weather/picture/25_w613092_1_4_17bc9c_250_13a085_ffffff_ffffff_1_2071c9_ffffff_0_6.png?scode=124&domid=&anc_id=16966"  alt="booked.net"/></a><!-- weather widget end -->
-		        	
-		        </div>
+		        
 		       
       </div>
 
@@ -102,7 +102,7 @@
           <!-- LINE CHART -->
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Seccion uno</h3>
+              <h3 class="box-title">Sección uno</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -124,7 +124,7 @@
           <!-- BAR CHART -->
           <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Seccion dos</h3>
+              <h3 class="box-title">Sección dos</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
