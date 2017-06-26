@@ -57,6 +57,7 @@ class Pago extends Model
      */
     public static $rules = [
         'cps_id' => 'required',
+        'contrato_vinculacion_id' => 'required',
         'fecha_planilla' => 'date',
         'fecha_inicio' => 'date',
         'fecha_final' => 'date'

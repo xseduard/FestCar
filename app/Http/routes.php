@@ -107,6 +107,11 @@ Route::group(['middleware' => 'web'], function() {
             'as' => 'recibos.print',
             'uses' => 'ReciboController@print_space',
         ]);
+
+    Route::post('ruta/buscar_id', [
+            'as' => 'ruta.buscarid',
+            'uses' => 'RutaController@buscar_by_id',
+        ]);
 /*
     Route::get('contratoVinculacions/print/{id}', [
             'as' => 'contratoVinculacions.print',

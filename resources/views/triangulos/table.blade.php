@@ -2,8 +2,8 @@
     <thead>
         <th>Texto</th>
         <th>Numero</th>
-        <th>Created At</th>
-        <th>Updated At</th>
+        <th>Fecha Registro</th>
+        <th>Fecha Actualización</th>
         <th colspan="3">Action</th>
     </thead>
     <tbody>

@@ -22,4 +22,8 @@ class DescuentoRepository extends BaseRepository
     {
         return Descuento::class;
     }
+
+    public function descuento_id(){                        
+           return Descuento::lists('nombre', 'id');
+    }
 }

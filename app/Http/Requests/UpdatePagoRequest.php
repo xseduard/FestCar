@@ -33,8 +33,16 @@ class UpdatePagoRequest extends Request
      */
     public function attributes() {
         return [
-        "" => "",
-        "" => "",    
+        'cps_id' => 'contrato prestación de servicio',
+        'contrato_vinculacion_id' => 'contrato cinculacion / vehículo',
+        'fecha_planilla' => 'fecha de planilla',
+        'fecha_inicio' => 'semana inicio',
+        'fecha_final' => 'semana final',
+        'desc_transaccion' => 'descuento transacción',
+        'desc_finca' => 'descuento finca',
+        'cuatro_por_mil' => '4x100',
+        'desc_sobrecosto' => 'descuento sobrecosto',
+        'irregularidad' => 'irregularidades',   
         ];
     }
     /*

@@ -49,14 +49,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-
         if ($this->isHttpException($e))
-        {  
-         
+        {           
             $error = [];                
             $error['code'] = $e->getStatusCode();
             $error['date'] = Carbon::now();
-
                      
             switch ($error['code']) {
                 case '400':
@@ -90,26 +87,40 @@ class Handler extends ExceptionHandler
 
             return response()->view('errors.error_all', ['code' =>  $error['code'], 'msg' => $error['msg'], 'date' => $error['date']], 404);
             
-            /*
-            if($e instanceof NotFoundHttpException)
-            {
-                return response()->view('errors.500', [], 404);
-            }
-            */
-            // return $this->renderHttpException($e); //lo descative por que aun no se lo que hace
+           
         }
 
 
         if ($e instanceof ModelNotFoundException) {
             $e = new NotFoundHttpException($e->getMessage(), $e);
         }
-
    
         if ($e instanceof TokenMismatchException) {  //mensaje de error en caso de mistake token
             //return redirect(route('token.error'))->with('message', 'You page session expired. Please try again');
             return redirect(route('token.error'));
         }
+         
+        //debugger lines
+       /* if (config('app.debug'))
+        {
+            return $this->renderExceptionWithWhoops($e);
+        } 
+        */  
+        
 
-        return parent::render($request, $e);
+        return parent::render($request, $e);  //ORIGINAL
+    }
+
+//para el debbuger 
+     protected function renderExceptionWithWhoops(Exception $e)
+    {
+        $whoops = new \Whoops\Run;
+        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
+
+        return new \Illuminate\Http\Response(
+            $whoops->handleException($e),
+            $e->getStatusCode(),
+            $e->getHeaders()
+        );
     }
 }

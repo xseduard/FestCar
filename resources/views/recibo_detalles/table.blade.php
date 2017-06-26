@@ -4,8 +4,8 @@
         <th>Recibo Producto Id</th>
         <th>Cantidad</th>
         <th>Precio Final</th>
-        <th>Created At</th>
-        <th>Updated At</th>
+        <th>Fecha Registro</th>
+        <th>Fecha Actualización</th>
         <th colspan="3">Acciones</th>
     </thead>
     <tbody>

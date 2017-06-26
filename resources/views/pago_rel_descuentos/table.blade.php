@@ -3,8 +3,8 @@
         <th>Pago Id</th>
         <th>Descuento Id</th>
         <th>User Id</th>
-        <th>Created At</th>
-        <th>Updated At</th>
+        <th>Fecha Registro</th>
+        <th>Fecha Actualización</th>
         <th colspan="3">Acciones</th>
     </thead>
     <tbody>

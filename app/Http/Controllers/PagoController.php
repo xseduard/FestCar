@@ -4,8 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePagoRequest;
 use App\Http\Requests\UpdatePagoRequest;
+
 use App\Repositories\PagoRepository;
 use App\Repositories\CentralRepository;
+use App\Repositories\DescuentoRepository;
+use App\Repositories\FacturaRepository;
+use App\Repositories\RutaRepository;
+use App\Repositories\PagoRelFacturaRepository;
+use App\Repositories\PagoRelDescuentoRepository;
+use App\Repositories\PagoRelRutaRepository;
+
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -18,14 +26,34 @@ class PagoController extends AppBaseController
     /** @var  PagoRepository */
     private $pagoRepository;
     private $centralRepository;
+    private $descuentoRepository;
+    private $facturaRepository;
+    private $rutaRepository;
+    private $pagoRelFacturaRepository;
+    private $pagoRelDescuentoRepository;
+    private $pagoRelRutaRepository;
 
-    public function __construct(PagoRepository $pagoRepo, CentralRepository $centralRepo)
+    public function __construct(
+        PagoRepository $pagoRepo, 
+        CentralRepository $centralRepo,
+        DescuentoRepository $descuentoRepo,
+        FacturaRepository $facturaRepo,
+        RutaRepository $rutaRepo,
+        PagoRelFacturaRepository $pagoRelFacturaRepo,
+        PagoRelDescuentoRepository $pagoRelDescuentoRepo,
+        PagoRelRutaRepository $pagoRelRutaRepo
+        )
     {
         $this->middleware('auth');
         $this->pagoRepository = $pagoRepo;
         $this->centralRepository = $centralRepo;
+        $this->descuentoRepository = $descuentoRepo;
+        $this->facturaRepository = $facturaRepo;
+        $this->rutaRepository = $rutaRepo;
+        $this->pagoRelFacturaRepository = $pagoRelFacturaRepo;
+        $this->pagoRelDescuentoRepository = $pagoRelDescuentoRepo;
+        $this->pagoRelRutaRepository = $pagoRelRutaRepo;
     }
-
     /**
      * Display a listing of the Pago.
      *
@@ -51,7 +79,9 @@ class PagoController extends AppBaseController
     {
         $selectores = [];
         $selectores['ContratoPrestacionServicio_id'] = $this->centralRepository->ContratoPrestacionServicio_id();
+        $selectores['ruta_id'] = $this->centralRepository->ruta_id();
         $selectores['ContratoVinculacion_id'] = $this->centralRepository->ContratoVinculacion_id();
+        $selectores['descuento_id'] = $this->descuentoRepository->descuento_id();
         return $selectores;
     }
     /**
@@ -77,6 +107,8 @@ class PagoController extends AppBaseController
     {
         $input = $request->all();
         $input['user_id'] = Auth::id();
+
+        dd($input);
 
         $pago = $this->pagoRepository->create($input);
 

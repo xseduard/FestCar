@@ -34,6 +34,7 @@ class Ruta extends Model
      */
     protected $casts = [
         'nombre' => 'string',
+        'duracion' => 'integer',
         'valor_sugerido' => 'integer',
         'predefinido' => 'boolean',
         'descripcion' => 'string',

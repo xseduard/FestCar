@@ -6,6 +6,7 @@
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
     {!! Html::style('/bower_components/admin-lte/bootstrap/css/bootstrap.min.css') !!}
+    {!! Html::style('/dependencia_local/bootstrap-xlgrid.min.css') !!}
     {!! Html::style('/bower_components/components-font-awesome/css/font-awesome.min.css') !!}
     {!! Html::style('/bower_components/select2/dist/css/select2.min.css') !!}
     {!! Html::style('/bower_components/admin-lte/dist/css/AdminLTE.min.css') !!}
@@ -20,6 +21,9 @@
     {!! Html::style('/dependencia_local/animsition.min.css') !!}
     <!-- datepicker -->
     {!! Html::style('/dependencia_local/bootstrap-datepicker.min.css') !!}
+    <!-- skin icheck -->
+    {!! Html::style('/bower_components/admin-lte/plugins/iCheck/square/blue.css') !!}
+
 
     <!-- /dependencia_local/ -->
 
@@ -197,29 +201,29 @@
     </div>
     @endif
 
-    <!-- jQuery 2.1.4 -->
-    {{ HTML::script('/dependencia_local/jquery.min.js') }}
-    {{ HTML::script('/bower_components/admin-lte/bootstrap/js/bootstrap.min.js') }}
-    {{ HTML::script('/bower_components/select2/dist/js/select2.min.js') }}
-    {{ HTML::script('/bower_components/admin-lte/plugins/iCheck/icheck.min.js') }}
+    <!-- jQuery -->
+    {!! HTML::script('/dependencia_local/jquery.min.js') !!}
+    {!! HTML::script('/bower_components/admin-lte/bootstrap/js/bootstrap.min.js') !!}
+    {!! HTML::script('/bower_components/select2/dist/js/select2.min.js') !!} 
 
     <!-- AdminLTE App -->
-    {{ HTML::script('/bower_components/admin-lte/dist/js/app.min.js') }}
+    {!! HTML::script('/bower_components/admin-lte/dist/js/app.min.js') !!}
     <!-- Vue.js -->
     <!-- 
-    {{ HTML::script('/dependencia_local/vue.js"') }}
+    {!! HTML::script('/dependencia_local/vue.js"') !!} // COMENTADO
     --> 
     <!-- select2 español -->
-    {{ HTML::script('/bower_components/select2/dist/js/i18n/es.js') }}
+    {!! HTML::script('/bower_components/select2/dist/js/i18n/es.js') !!}
     <!-- datepicker  -->
-    {{ HTML::script('/bower_components/admin-lte/plugins/datepicker/bootstrap-datepicker.js') }}
+    {!! HTML::script('/bower_components/admin-lte/plugins/datepicker/bootstrap-datepicker.js') !!}
     <!-- datepicker español -->
-    {{ HTML::script('/bower_components/admin-lte/plugins/datepicker/locales/bootstrap-datepicker.es.js') }}
+    {!! HTML::script('/bower_components/admin-lte/plugins/datepicker/locales/bootstrap-datepicker.es.js') !!}
+    {!! HTML::script('/bower_components/admin-lte/plugins/iCheck/icheck.min.js') !!}
 
     <!-- input mask -->
-    {{ HTML::script('/js/jquery.inputmask.bundle.min.js') }}
+    {!! HTML::script('/js/jquery.inputmask.bundle.min.js') !!}
     <!-- Animsition -->
-    {{ HTML::script('/dependencia_local/animsition.min.js') }}
+    {!! HTML::script('/dependencia_local/animsition.min.js') !!}
      <!-- Animsition ini -->
     <script type="text/javascript">
         $(document).ready(function() {

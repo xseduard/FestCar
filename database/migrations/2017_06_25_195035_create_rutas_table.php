@@ -16,8 +16,8 @@ class CreateRutasTable extends Migration
         Schema::create('rutas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre', 100);
-            $table->decimal('distancia', 5, 2);
-            $table->decimal('duracion', 3, 2);
+            $table->decimal('distancia', 5, 2)->comment('km');
+            $table->integer('duracion')->unsigned()->comment('minutos');
             $table->integer('valor_sugerido')->unsigned();
             $table->boolean('predefinido')->default(false);
             $table->text('descripcion');

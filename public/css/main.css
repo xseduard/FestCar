@@ -99,3 +99,18 @@ body {
   background-color: #e6e6e6;
   border-color: #999;
 }
+
+.addon-custom {
+    padding: 4px 6px;
+    
+}
+
+.select-addon-custom{
+  padding: 0px 0px;
+  border: 0px solid red !important;
+  text-align: left;
+}
+
+.texto-right{
+  text-align: right;
+}

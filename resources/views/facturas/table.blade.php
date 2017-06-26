@@ -5,8 +5,8 @@
         <th>Fecha Final</th>
         <th>Total</th>
         <th>Observacion</th>
-        <th>Created At</th>
-        <th>Updated At</th>
+        <th>Fecha Registro</th>
+        <th>Fecha Actualización</th>
         <th colspan="3">Acciones</th>
     </thead>
     <tbody>

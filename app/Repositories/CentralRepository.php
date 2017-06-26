@@ -12,6 +12,7 @@ use App\Models\ContratoPrestacionServicio;
 use App\Models\ContratoVinculacion;
 use App\Models\LicenciaConduccion;
 use App\Models\Tarjeta_Propiedad;
+use App\models\Ruta;
 use InfyOm\Generator\Common\BaseRepository;
 use Carbon\Carbon;
 use Flash;
@@ -155,9 +156,10 @@ class CentralRepository extends BaseRepository
      * Generador de selects
      */
     // Departamento::all()->pluck('nombre', 'id')->toArray();
-
-    public function id_departamento(){
-                        
+    public function ruta_id(){                        
+           return Ruta::lists('nombre', 'id');
+    }
+    public function id_departamento(){                        
            return Departamento::lists('nombre', 'id');
     }
     public function municipio_id_only(){               

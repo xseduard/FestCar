@@ -3,11 +3,10 @@
         <th>Nombre</th>
         <th>Distancia</th>
         <th>Duración</th>
-        <th>Valor Sugerido</th>
+        <th>Valor</th>
         <th>Predefinido</th>
-        <th>Descripción</th>
-        <th>Created At</th>
-        <th>Updated At</th>
+        <th>Fecha Registro</th>
+        <th>Fecha Actualización</th>
         <th colspan="3">Acciones</th>
     </thead>
     <tbody>
@@ -17,8 +16,13 @@
             <td>{!! $ruta->distancia !!}</td>
             <td>{!! $ruta->duracion !!}</td>
             <td>{!! $ruta->valor_sugerido !!}</td>
-            <td>{!! $ruta->predefinido !!}</td>
-            <td>{!! $ruta->descripcion !!}</td>
+            <td>
+                @if($ruta->predefinido)
+                  Si
+                @else
+                  No
+                @endif
+            </td>
             <td>{!! $ruta->created_at !!}</td>
             <td>{!! $ruta->updated_at !!}</td>
             <td>

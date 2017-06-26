@@ -25,7 +25,8 @@
 <!-- Predefinido Selector -->
 <div class="form-group col-sm-6">
     {!! Form::label('predefinido', 'Predefinido') !!}
-    {!! Form::select('predefinido', ['Si' => 'Si' ,'No' => 'No'], 'Si', ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+    {!! Form::hidden('predefinido', false) !!}
+        {!! Form::checkbox('predefinido', '1', true) !!}
 </div>
 
 <!-- Descripcion Field -->

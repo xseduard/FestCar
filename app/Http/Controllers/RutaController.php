@@ -176,4 +176,19 @@ class RutaController extends AppBaseController
 
         return redirect(route('rutas.index'));
     }
+
+    public function buscar_by_id(Request $request)
+    {       
+        $ruta = $this->rutaRepository->findWithoutFail($request->id);
+
+
+        return response()->json($ruta);
+
+        dd($ruta->toArray());
+
+        if (empty($ruta)) {
+            
+        }
+
+    }
 }
