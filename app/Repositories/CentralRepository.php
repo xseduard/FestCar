@@ -207,6 +207,31 @@ class CentralRepository extends BaseRepository
         return ($array);               
           
     }
+
+    public function ContratoVinculacion_id(){
+        
+        $modelo = ContratoVinculacion::with('vehiculo')->with('natural')->with('juridico')->get()->toArray();
+        $array = [];
+
+        if (!empty($modelo)) {
+          
+            foreach ($modelo as $key => $value) {
+
+                if ($value['tipo_proveedor'] == 'Natural') {
+
+                   $array[$value['id']] = $value['tipo_contrato'].str_pad($value['id'], 4, "0", STR_PAD_LEFT)." - ".$value['vehiculo']['placa']." - ".$value['natural']['cedula']." ".$value['natural']['nombres']." ".$value['natural']['apellidos'];  
+
+                } elseif ($value['tipo_proveedor'] == 'Juridico') {   
+
+                    $array[$value['id']] = $value['tipo_contrato'].str_pad($value['id'], 4, "0", STR_PAD_LEFT)." - ".$value['vehiculo']['placa']." - ".$value['juridico']['nit']." ".$value['juridico']['nombre'];
+                }
+                                
+            }
+        }
+        return ($array);               
+          
+    }
+
     public function verificar_contrato_vinculacion($vehiculo_id){
 
         $connt_vinculacion = ContratoVinculacion::where('vehiculo_id',$vehiculo_id)->get();       

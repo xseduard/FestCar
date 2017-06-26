@@ -165,8 +165,20 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('empresas', 'EmpresaController');
     Route::resource('simuladorGastos', 'SimuladorGastoController');
 
+    // Recibos
     Route::resource('reciboProductos', 'ReciboProductoController');
     Route::resource('recibos', 'ReciboController');
     Route::resource('reciboDetalles', 'ReciboDetalleController');
+
+    // Pagos
+    Route::resource('descuentos', 'DescuentoController');
+    Route::resource('facturas', 'FacturaController');
+    Route::resource('rutas', 'RutaController');
+    Route::resource('pagos', 'PagoController');
+    Route::resource('pagoRelFacturas', 'PagoRelFacturaController');
+    Route::resource('pagoRelDescuentos', 'PagoRelDescuentoController');
+    Route::resource('pagoRelRutas', 'PagoRelRutaController');
     
 });
+
+

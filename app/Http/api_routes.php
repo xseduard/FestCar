@@ -74,3 +74,17 @@ Route::resource('recibo_productos', 'ReciboProductoAPIController');
 Route::resource('recibos', 'ReciboAPIController');
 
 Route::resource('recibo_detalles', 'ReciboDetalleAPIController');
+
+Route::resource('descuentos', 'DescuentoAPIController');
+
+Route::resource('facturas', 'FacturaAPIController');
+
+Route::resource('rutas', 'RutaAPIController');
+
+Route::resource('pagos', 'PagoAPIController');
+
+Route::resource('pago_rel_facturas', 'PagoRelFacturaAPIController');
+
+Route::resource('pago_rel_descuentos', 'PagoRelDescuentoAPIController');
+
+Route::resource('pago_rel_rutas', 'PagoRelRutaAPIController');
