@@ -65,18 +65,28 @@ class CentralRepository extends BaseRepository
         $resultado['error'] = false;
         $msg = "";
 
+        $validar_tecnicomencanica = true; //swith para validar tecnicomecanica
+
         if (is_null($car->tarjetapropiedad)) {
-            $resultado['tarjetapropiedad'] = false;
+            $resultado['tarjetapropiedad'] = 'notfound';
             $resultado['error'] =  true;
             $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Tarjeta de propiedad:</b> No se encuentra registrada, <a href='/tarjetaPropiedads/create' target='_blank'>Registrar aquí</a></p>";
         } else {
             $resultado['tarjetapropiedad'] = $car->tarjetapropiedad;
+
+            //Validación tecnicomecanica no requerida
             if($car->tarjetapropiedad->fecha_matricula->diffInDays(Carbon::now()) <= 730) {
                 $resultado['tecnicomecanica'] = 'Vehiculo nuevo';
-                $resultado['error'] =  false; 
+                $resultado['error'] =  false;
+                $validar_tecnicomencanica = false; 
             } else {
-                if ($car->tecnicomecanica->isEmpty()) {
-                    $resultado['tecnicomecanica'] = false;
+                
+            }
+            
+        }
+        if ($validar_tecnicomencanica) {
+            if ($car->tecnicomecanica->isEmpty()) {
+                    $resultado['tecnicomecanica'] = 'notfound';
                         $resultado['error'] =  true;                        
                         $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Técnicomecánica</b> No se encuentra registrada o esta vencida, <a href='/tecnicomecanicas/create' target='_blank'>Registrar aquí</a></p>";
                     } else {
@@ -85,16 +95,16 @@ class CentralRepository extends BaseRepository
                                 $resultado['tecnicomecanica'] = $value;
                                 break;
                             } 
-                            $resultado['tecnicomecanica'] = false;
+                            $resultado['tecnicomecanica'] = 'notfound';
+                            $resultado['tecnicomecanica-lasted'] = $car->tecnicomecanica;
                             $resultado['error'] =  true;
                             $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Técnicomecánica</b> No se encuentra registrada o esta vencida, <a href='/tecnicomecanicas/create' target='_blank'>Registrar aquí</a></p>";                      
                     }
                 }
-            }
-            
         }
+
         if ($car->tarjetaoperacion->isEmpty()) {
-            $resultado['tarjetaoperacion'] = false;
+            $resultado['tarjetaoperacion'] = 'notfound';
             $resultado['error'] =  true; 
             $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Tarjeta de Operación:</b> No se encuentra registrada o esta vencida, <a href='/tarjetaOperacions/create' target='_blank'>Registrar aquí</a></p>";  
             } else {
@@ -103,14 +113,15 @@ class CentralRepository extends BaseRepository
                         $resultado['tarjetaoperacion'] = $value;
                         break;
                     }
-                    $resultado['tarjetaoperacion'] = false;
+                    $resultado['tarjetaoperacion'] = 'notfound';
+                    $resultado['tarjetaoperacion-lasted'] = $car->tarjetaoperacion;
                     $resultado['error'] =  true; 
                     $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Tarjeta de Operación:</b> No se encuentra registrada o esta vencida, <a href='/tarjetaOperacions/create' target='_blank'>Registrar aquí</a></p>";        
 
                 }
         }
         if ($car->soat->isEmpty()) {
-            $resultado['soat'] = false;
+            $resultado['soat'] = 'notfound';
             $resultado['error'] =  true; 
             $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Soat:</b> No se encuentra registrado o esta vencido, <a href='/soats/create' target='_blank'>Registrar aquí</a> </p>";
          } else { 
@@ -119,14 +130,15 @@ class CentralRepository extends BaseRepository
                     $resultado['soat'] = $value;
                     break;
                 } 
-                $resultado['soat'] = false;
+                $resultado['soat'] = 'notfound';
+                $resultado['soat-lasted'] = $car->soat;
                 $resultado['error'] =  true; 
                 $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Soat:</b> No se encuentra registrado o esta vencido, <a href='/soats/create' target='_blank'>Registrar aquí</a> </p>";
                            
             }
         }
         if ($car->polizaresponsabilidad->isEmpty()) {
-            $resultado['polizaresponsabilidad'] = false; 
+            $resultado['polizaresponsabilidad'] = 'notfound'; 
             $resultado['error'] =  true;
             $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b> Poliza de responsabilidad (RCC RCE):</b> No se encuentra registrada o esta vencida, <a href='/polizaResponsabilidads/create' target='_blank'>Registrar aquí</a></p>";
          } else {       
@@ -135,7 +147,8 @@ class CentralRepository extends BaseRepository
                     $resultado['polizaresponsabilidad'] = $value;
                     break;
                 } 
-                $resultado['polizaresponsabilidad'] = false; 
+                $resultado['polizaresponsabilidad'] = 'notfound';
+                $resultado['polizaresponsabilidad-lasted'] = $car->polizaresponsabilidad;
                 $resultado['error'] =  true;
                 $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b> Poliza de responsabilidad (RCC RCE):</b> No se encuentra registrada o esta vencida, <a href='/polizaResponsabilidads/create' target='_blank'>Registrar aquí</a></p>";                            
             }

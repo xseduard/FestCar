@@ -1,5 +1,27 @@
  <!-- timeline item -->
-                  @if($documentos['tecnicomecanica'] != false)
+                  @if($documentos['tecnicomecanica'] == 'Vehiculo nuevo')
+                     <!-- timeline item -->                      
+                   <li class="time-label">
+                          <span class="bg-aqua">
+                            Técnicomecánica
+                          </span>
+                    </li>
+                     
+                      <li>
+                        <i class="fa fa-check bg-aqua"></i>
+
+                        <div class="timeline-item">
+                          <!-- <span class="time"><i class="fa fa-clock-o"></i> Hace 5 minutos</span>-->
+
+                          <h3 class="timeline-header no-border"><span class=""> Vehículo Nuevo
+                          </h3>
+                        </div>
+                      </li>
+                      <!-- END timeline item -->
+                   @else 
+
+
+                  @if($documentos['tecnicomecanica'] != 'notfound')
                     <li class="time-label">
                           <span class="bg-aqua">
                             Técnicomecánica
@@ -8,7 +30,7 @@
 
                      
                       <li>
-                        <i class="fa fa-plus bg-aqua"></i>
+                        <i class="fa fa-check bg-aqua"></i>
 
                         <div class="timeline-item">
                           <span class="time" title="Última modificación"><i class="fa fa-clock-o"></i> {!! $documentos['tecnicomecanica']->updated_at->diffForHumans() !!}</span>
@@ -42,9 +64,8 @@
                         </div>
                       </li>
                   @else
-                   @if($documentos['tecnicomecanica'] == 'Vehiculo nuevo')
-                     <!-- timeline item -->
-                      <li>
+
+                  <li>
                         <i class='fa fa fa-exclamation fa-spin fa-fw bg-red'></i>
 
                         <div class="timeline-item">
@@ -54,25 +75,9 @@
                           </h3>
                         </div>
                       </li>
-                      <!-- END timeline item -->
-                   @else 
-                     <li class="time-label">
-                          <span class="bg-aqua">
-                            Técnicomecánica
-                          </span>
-                    </li>
+                  @endif                 
                      
-                      <li>
-                        <i class="fa fa-plus bg-aqua"></i>
+                @endif
 
-                        <div class="timeline-item">
-                          <!-- <span class="time"><i class="fa fa-clock-o"></i> Hace 5 minutos</span>-->
-
-                          <h3 class="timeline-header no-border"><span class="text-red"> Vehiculo Nuevo
-                          </h3>
-                        </div>
-                      </li>
-                   @endif
-                  @endif
 
                   <!--final item -->

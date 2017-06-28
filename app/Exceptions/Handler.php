@@ -101,11 +101,11 @@ class Handler extends ExceptionHandler
         }
          
         //debugger lines
-        /*if (config('app.debug'))
+        if (config('app.debug'))
         {
             return $this->renderExceptionWithWhoops($e);
         } 
-          */
+          
         
 
         return parent::render($request, $e);  //ORIGINAL

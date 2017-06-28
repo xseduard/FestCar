@@ -1,12 +1,12 @@
 <!-- timeline item -->
-                  @if($documentos['tarjetaoperacion'] != false)
+                  @if($documentos['tarjetaoperacion'] != 'notfound')
                     <li class="time-label">
                           <span class="bg-aqua">
                             Tarjeta Operación
                           </span>
                     </li>
                       <li>
-                        <i class="fa fa-plus bg-aqua"></i>
+                        <i class="fa fa-check bg-aqua"></i>
                         <div class="timeline-item">
                           <span class="time" title="Última modificación"><i class="fa fa-clock-o"></i> {!! $documentos['tarjetaoperacion']->updated_at->diffForHumans() !!}</span>
 

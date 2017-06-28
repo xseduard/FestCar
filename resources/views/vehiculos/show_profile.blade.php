@@ -81,7 +81,10 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">              
-            @if(!$documentos['tarjetapropiedad'] == false)
+            @if(!$documentos['tarjetapropiedad'] == 'notfound')
+                          
+                  <p class="text-muted text-yellow">  <i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i> No se ha Registrado</p>
+             @else
                 <div class="row">
                    <div class="col-sm-6">
                       <strong> Licencia transito</strong>
@@ -135,6 +138,7 @@
                        <p class="text-muted">{!! $documentos['tarjetapropiedad']->organismo_transito !!}</p>
                    </div>
                 </div>
+            
             @endif
             <hr>
               <strong><i class="fa fa-file-text-o margin-r-5"></i> Observaciones</strong>

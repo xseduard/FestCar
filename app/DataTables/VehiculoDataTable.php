@@ -17,6 +17,43 @@ class VehiculoDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('acciones', 'vehiculos.datatables_actions')
+            ->addColumn('documento', function($vehiculos) {
+                    if ($vehiculos->tipo_propietario == 'Natural') {
+                      return number_format($vehiculos->natural['cedula'], 0, '.', '.' );
+                    } else {
+                        return $vehiculos->juridico['nit'];
+                    }
+                    
+                })
+            ->addColumn('propietario', function($vehiculos) {
+                    if ($vehiculos->tipo_propietario == 'Natural') {
+                      return $vehiculos->natural['fullname'];
+                    } else {
+                        return $vehiculos->juridico['nombre'];
+                    }
+                    
+                })
+            ->addColumn('contratovinculacion', function($vehiculos) {
+                  //return ($vehiculos->contratovinculacion->isEmpty());
+                    if ($vehiculos->contratovinculacion->isEmpty()) {
+                       return "Sin contrato";
+                    } else { 
+                     foreach ($vehiculos->contratovinculacion as $key => $value) {
+                            if ($value->vigente) {
+                                return $value->tipo_contrato.str_pad($value->id, 4, "0", STR_PAD_LEFT);
+                                break;
+                            }  
+                            return "Contrato Vencido";                   
+                    }      
+                        
+
+                    }
+                    
+                    
+                    
+                                          
+                    
+                })
             ->editColumn('updated_at', function ($vehiculos) {
                 return $vehiculos->updated_at->diffForHumans();
             })
@@ -30,7 +67,8 @@ class VehiculoDataTable extends DataTable
      */
     public function query()
     {
-        $vehiculos = Vehiculo::with('natural')->select('vehiculos.*');
+        //$vehiculos = Vehiculo::with('natural')->select('vehiculos.*');
+        $vehiculos = Vehiculo::with('natural')->with('juridico')->with('contratovinculacion');
         //$vehiculos = Vehiculo::query();
         //dd($vehiculos);
 
@@ -49,14 +87,15 @@ class VehiculoDataTable extends DataTable
             //->addAction(['width' => '140px'])
             ->ajax('')
             ->parameters([
-                'dom' => 'Bfrtip',
+                'dom' => '<"col-sm-6"B> <"col-sm-2 pull-left"l> <"col-sm-3 pull-right"f> <"col-sm-12"t> <"col-sm-4"i> <"col-sm-8"p>',
                 'scrollX' => false,
                 'language' => ['url' => '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json'],
+                'order'   => [[0, 'asc']],
                 'buttons' => [
                     [
                         'extend' => 'print',
-                            'text'=> '<i class="fa fa-print"></i> Imprimir',
-                            'titleAttr'=> 'Imprimir Tabla',
+                            'text'=> '<i class="fa fa-bars"></i> Vista Completa',
+                            'titleAttr'=> 'Ver todos los vehículos',
                             'className'=> '',
                     ],
                     [
@@ -94,15 +133,20 @@ class VehiculoDataTable extends DataTable
     private function getColumns()
     {
         return [
-            'Placa'                => ['name' => 'placa', 'data' => 'placa'],
-            'Interno'              => ['name' => 'numero_interno', 'data' => 'numero_interno'],
-            //'id'              => ['name' => 'naturals.clase', 'data' => 'clase'], 
-            'Capacidad'            => ['name' => 'capacidad', 'data' => 'capacidad'],            
-            'Clase'                => ['name' => 'clase', 'data' => 'clase'],
-            'modelo'               => ['name' => 'modelo', 'data' => 'modelo'],
-            'Marca'                => ['name' => 'marca', 'data' => 'marca'],
-            'Última_actualización' => ['name' => 'updated_at', 'data' => 'updated_at'],
-            'Acciones'             => ['name' => 'acciones', 'data' => 'acciones', 'orderable' => false, 'searchable' => false],
+            
+            'placa'               => ['name' => 'placa', 'data' => 'placa'],
+            'documento'           => ['name' => 'documento', 'data' => 'documento', 'title' => 'CC/Nit', 'orderable' => false, 'searchable' => false, 'exportable' => true, 'printable' => true],
+            'propietario'         => ['name' => 'propietario', 'data' => 'propietario', 'title' => 'Propietario', 'orderable' => false, 'searchable' => false, 'exportable' => true, 'printable' => true],
+            'contratovinculacion' => ['name' => 'contratovinculacion', 'data' => 'contratovinculacion', 'title' => 'Contrato', 'orderable' => false, 'searchable' => false, 'exportable' => true, 'printable' => true],
+            'numero_interno'      => ['name' => 'numero_interno', 'data' => 'numero_interno', 'title' => 'Interno'],
+            'capacidad'           => ['name' => 'capacidad', 'data' => 'capacidad'],            
+            'clase'               => ['name' => 'clase', 'data' => 'clase'],
+            'modelo'              => ['name' => 'modelo', 'data' => 'modelo'],
+            'marca'               => ['name' => 'marca', 'data' => 'marca'],
+            'updated_at'          => ['name' => 'updated_at', 'data' => 'updated_at','title' => 'Última actualización', 'orderable' => true, 'searchable' => false, 'exportable' => false, 'printable' => false],
+            'acciones'            => ['name' => 'acciones', 'data' => 'acciones', 'title' => 'Acciones', 'orderable' => false, 'searchable' => false, 'exportable' => false, 'printable' => false],
+            //'propietario'       => ['name' => 'natural.nombres', 'data' => 'natural.nombres', 'title' => 'Propietario', 'orderable' => false, 'searchable' => false, 'exportable' => true, 'printable' => true],
+            //'id'                => ['name' => 'naturals.clase', 'data' => 'clase'], 
             
             
         ];

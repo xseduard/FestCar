@@ -44,13 +44,13 @@
                 <div class=' pull-right'>
                     <!-- 
                         <a href="$ {!! route('simuladorGastos.show', [$simuladorGasto->id]) !!}" class='btn btn-default btn-xs' title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
-                    -->
-                    <a href="$ {!! route('simuladorGastos.edit', [$simuladorGasto->id]) !!}" class='btn btn-default btn-sm' style="width: 89px" title="Editar"><i class="glyphicon glyphicon-edit"></i>EDITAR</a>
+                    -->                    
+                    <a href="{!! route('simuladorGastos.edit', [$simuladorGasto->id]) !!}" class='btn btn-app bg-aqua btn-flat' title="Editar"> <i class="fa fa-edit"></i>Editar</a>
                     <br>
                     <br>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i> ELIMINAR', [
+                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i> ', [
                         'type' => 'submit',
-                        'class' => 'btn btn-danger btn-sm',
+                        'class' => 'btn btn-app bg-maroon btn-flat',
                         'onclick' => "return confirm('¿Confirma que desea eliminar?')",
                         'title' => 'Eliminar'
                         ]) !!}
