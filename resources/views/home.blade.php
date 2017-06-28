@@ -25,7 +25,7 @@
 		          <!-- small box -->
 		          <div class="small-box bg-aqua">
 		            <div class="inner">
-		              <h3>{!! $datos['contador_vehiculo'] !!}</h3>
+		              <h3>{!! $cont['vehiculo'] !!}</h3>
 
 		              <p>Vehículos</p>
 		            </div>
@@ -63,7 +63,7 @@
 		          <!-- small box -->
 		          <div class="small-box bg-blue">
 		            <div class="inner">
-		              <h3>{!! $datos['contador_natural'] !!}</h3>
+		              <h3>{!! $cont['natural'] !!}</h3>
 
 		              <p>Naturales Registrados</p>
 		            </div>
@@ -81,7 +81,7 @@
 		          <!-- small box -->
 		          <div class="small-box bg-blue">
 		            <div class="inner">
-		              <h3>{!! $datos['contador_juridico'] !!}</h3>
+		              <h3>{!! $cont['juridico'] !!}</h3>
 
 		              <p>Empresas Registradas</p>
 		            </div>
@@ -97,7 +97,43 @@
 		       
       </div>
 
-          <div class="row">
+      <div class="row">
+          <div class="col-sm-3">
+              <div class="box box-info">
+                  <div class="box-header with-border">
+                      <h3 class="box-title">Contratos Vinculación</h3>
+                      <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                      </div>
+                    </div>
+
+                <div class="box-body">                   
+
+                    <!-- chart -->
+                   <div style="height: 30%; margin: auto;">
+                        <canvas id="chart_contratos" width="200" height="200"></canvas>
+                   </div>
+
+                       <div class="row text-center m-t-30">
+                            <div class="col-xs-4">
+                                <h3 data-plugin="counterup">{!! $cont['cv-total'] !!}</h3>
+                                <p class="text-muted text-overflow">Registrados</p>
+                            </div>
+                            <div class="col-xs-4">
+                                <h3 data-plugin="counterup">{!! $cont['cv-vigente'] !!}</h3>
+                                <p class="text-muted text-overflow" title="Open Compaign">Vigentes</p>
+                            </div>
+                            <div class="col-xs-4">
+                                <h3 data-plugin="counterup">0%</h3>
+                                <p class="text-muted text-overflow">Rel</p>
+                            </div>
+                        </div>
+                </div>
+              </div>
+          </div>
+  
            <div class="col-md-6">
           <!-- LINE CHART -->
           <div class="box box-info">
@@ -120,30 +156,7 @@
           </div>
           <!-- /.box -->
           </div>
-          <div class="col-md-6">
-          <!-- BAR CHART -->
-          <div class="box box-success">
-            <div class="box-header with-border">
-              <h3 class="box-title">Sección dos</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <div class="box-body">
-              <!-- Content -->
-              <div><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
-                                <canvas id="barChart" height="355" style="display: block; width: 762px; height: 355px;" width="762"></canvas>
-                            </div>
-              
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-
-        	</div>
+          
         	</div>
         </div>
     </div>
@@ -154,143 +167,6 @@
 
 @endsection
 @section('scripts')
-
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
-
-
- <script>
-
-    $(document).ready(function () {  
-        
-    });
-    $(function () {
-
-    var lineData = {
-        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"],
-        datasets: [
-
-            {
-                label: "Data 1",
-                backgroundColor: 'rgba(26,179,148,0.5)',
-                borderColor: "rgba(26,179,148,0.7)",
-                pointBackgroundColor: "rgba(26,179,148,1)",
-                pointBorderColor: "#fff",
-                data: [28, 48, 40, 19, 86, 27, 90]
-            },{
-                label: "Data 2",
-                backgroundColor: 'rgba(220, 220, 220, 0.5)',
-                pointBorderColor: "#fff",
-                data: [65, 59, 80, 81, 56, 55, 40]
-            }
-        ]
-    };
-
-    var lineOptions = {
-        responsive: true
-    };
-
-
-    var ctx = document.getElementById("lineChart").getContext("2d");
-    new Chart(ctx, {type: 'line', data: lineData, options:lineOptions});
-
-    var barData = {
-        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"],
-        datasets: [
-            {
-                label: "Data 1",
-                backgroundColor: 'rgba(220, 220, 220, 0.5)',
-                pointBorderColor: "#fff",
-                data: [65, 59, 80, 81, 56, 55, 40]
-            },
-            {
-                label: "Data 2",
-                backgroundColor: 'rgba(26,179,148,0.5)',
-                borderColor: "rgba(26,179,148,0.7)",
-                pointBackgroundColor: "rgba(26,179,148,1)",
-                pointBorderColor: "#fff",
-                data: [28, 48, 40, 19, 86, 27, 90]
-            }
-        ]
-    };
-
-    var barOptions = {
-        responsive: true
-    };
-
-
-    var ctx2 = document.getElementById("barChart").getContext("2d");
-    new Chart(ctx2, {type: 'bar', data: barData, options:barOptions});
-
-    var polarData = {
-        datasets: [{
-            data: [
-                300,140,200
-            ],
-            backgroundColor: [
-                "#a3e1d4", "#dedede", "#b5b8cf"
-            ],
-            label: [
-                "My Radar chart"
-            ]
-        }],
-        labels: [
-            "App","Software","Laptop"
-        ]
-    };
-
-    var polarOptions = {
-        segmentStrokeWidth: 2,
-        responsive: true
-
-    };
-/*
-    var ctx3 = document.getElementById("polarChart").getContext("2d");
-    new Chart(ctx3, {type: 'polarArea', data: polarData, options:polarOptions});
-*/
-    var doughnutData = {
-        labels: ["App","Software","Laptop" ],
-        datasets: [{
-            data: [300,50,100],
-            backgroundColor: ["#a3e1d4","#dedede","#b5b8cf"]
-        }]
-    } ;
-
-
-    var doughnutOptions = {
-        responsive: true
-    };
-
-/*
-    var ctx4 = document.getElementById("doughnutChart").getContext("2d");
-    new Chart(ctx4, {type: 'doughnut', data: doughnutData, options:doughnutOptions});
-*/
-
-    var radarData = {
-        labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
-        datasets: [
-            {
-                label: "My First dataset",
-                backgroundColor: "rgba(220,220,220,0.2)",
-                borderColor: "rgba(220,220,220,1)",
-                data: [65, 59, 90, 81, 56, 55, 40]
-            },
-            {
-                label: "My Second dataset",
-                backgroundColor: "rgba(26,179,148,0.2)",
-                borderColor: "rgba(26,179,148,1)",
-                data: [28, 48, 40, 19, 96, 27, 100]
-            }
-        ]
-    };
-
-    var radarOptions = {
-        responsive: true
-    };
-/*
-    var ctx5 = document.getElementById("radarChart").getContext("2d");
-    new Chart(ctx5, {type: 'radar', data: radarData, options:radarOptions});
-*/
-});
- </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+    @include('home_script') 
 @endsection

@@ -90,8 +90,22 @@
         });
 
         //$("input[name*='ruta_nombre']").on('change',function(){ 
-        $("#rutaname").on('change',function(){ 
-            console.log('inicio cambio');    
+        $(".rutaname").on('change',function(){ 
+             $(".rutabox").each(function (index) 
+            { 
+               // console.log($(this));
+
+                //console.log($(this).children("input[name='valor_final[]']"));
+                console.log($(this).children('div').children('div').children('input'));
+                /*
+                $(this).removeClass();
+                $(this).addClass("parrafo"); 
+                $(this).text('Parrafo ' + index);
+                */
+            }) 
+
+            //var variable = $('#valor_final').val();
+            //console.log(variable);
             buscar_ruta();             
         });
 
@@ -101,6 +115,7 @@
     });
 
     function buscar_ruta(){
+        console.log('inicio cambio'); 
         var id = '1';
          $.ajax({
             data: "id="+id+"&_token={{ csrf_token()}}",
@@ -111,6 +126,8 @@
          .done(function( data, textStatus, jqXHR ) {
              if ( console && console.log ) {
                  console.log( "La solicitud se ha completado correctamente." );
+                 console.log(data);
+                 console.log(data['valor_sugerido']);
              }
          })
          .fail(function( jqXHR, textStatus, errorThrown ) {

@@ -16,7 +16,10 @@ class VehiculoDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', 'vehiculos.datatables_actions')
+            ->addColumn('acciones', 'vehiculos.datatables_actions')
+            ->editColumn('updated_at', function ($vehiculos) {
+                return $vehiculos->updated_at->diffForHumans();
+            })
             ->make(true);
     }
 
@@ -27,7 +30,9 @@ class VehiculoDataTable extends DataTable
      */
     public function query()
     {
-        $vehiculos = Vehiculo::query();
+        $vehiculos = Vehiculo::with('natural')->select('vehiculos.*');
+        //$vehiculos = Vehiculo::query();
+        //dd($vehiculos);
 
         return $this->applyScopes($vehiculos);
     }
@@ -41,7 +46,7 @@ class VehiculoDataTable extends DataTable
     {
         return $this->builder()
             ->columns($this->getColumns())
-            ->addAction(['width' => '10%'])
+            //->addAction(['width' => '140px'])
             ->ajax('')
             ->parameters([
                 'dom' => 'Bfrtip',
@@ -89,12 +94,16 @@ class VehiculoDataTable extends DataTable
     private function getColumns()
     {
         return [
-            'placa' => ['name' => 'placa', 'data' => 'placa'],
-            'numero_interno' => ['name' => 'numero_interno', 'data' => 'numero_interno'],            
-            'capacidad' => ['name' => 'capacidad', 'data' => 'capacidad'],            
-            'clase' => ['name' => 'clase', 'data' => 'clase'],
-            'modelo' => ['name' => 'modelo', 'data' => 'modelo'],
-            'marca' => ['name' => 'marca', 'data' => 'marca'],
+            'Placa'                => ['name' => 'placa', 'data' => 'placa'],
+            'Interno'              => ['name' => 'numero_interno', 'data' => 'numero_interno'],
+            //'id'              => ['name' => 'naturals.clase', 'data' => 'clase'], 
+            'Capacidad'            => ['name' => 'capacidad', 'data' => 'capacidad'],            
+            'Clase'                => ['name' => 'clase', 'data' => 'clase'],
+            'modelo'               => ['name' => 'modelo', 'data' => 'modelo'],
+            'Marca'                => ['name' => 'marca', 'data' => 'marca'],
+            'Última_actualización' => ['name' => 'updated_at', 'data' => 'updated_at'],
+            'Acciones'             => ['name' => 'acciones', 'data' => 'acciones', 'orderable' => false, 'searchable' => false],
+            
             
         ];
     }

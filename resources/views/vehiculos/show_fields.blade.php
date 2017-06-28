@@ -10,30 +10,6 @@
     <p>{!! $vehiculo->placa !!}</p>
 </div>
 
-<!-- Propietario Nombre Field -->
-<div class="form-group">
-    {!! Form::label('propietario_nombre', 'Propietario Nombre:') !!}
-    <p>{!! $vehiculo->propietario_nombre !!}</p>
-</div>
-
-<!-- Propietario Cedula Field -->
-<div class="form-group">
-    {!! Form::label('propietario_cedula', 'Propietario Cedula:') !!}
-    <p>{!! $vehiculo->propietario_cedula !!}</p>
-</div>
-
-<!-- Poseedor Nombre Field -->
-<div class="form-group">
-    {!! Form::label('poseedor_nombre', 'Poseedor Nombre:') !!}
-    <p>{!! $vehiculo->poseedor_nombre !!}</p>
-</div>
-
-<!-- Poseedor Cedula Field -->
-<div class="form-group">
-    {!! Form::label('poseedor_cedula', 'Poseedor Cedula:') !!}
-    <p>{!! $vehiculo->poseedor_cedula !!}</p>
-</div>
-
 <!-- Numero Interno Field -->
 <div class="form-group">
     {!! Form::label('numero_interno', 'Numero Interno:') !!}

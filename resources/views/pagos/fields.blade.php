@@ -52,7 +52,7 @@
 </div>
 <div id="space-factura"></div>
 <div class="col-sm-2 col-xl-2" style="padding-top: 25px">
-    <button id="agregar-factura" name="agregar-factura" type="button" class="btn btn-default btn-flat"><i class="fa fa-plus"></i> Agregar Factura</button>
+    <button id="agregar-factura" name="agregar-factura" type="button" class="btn btn-default btn-flat btn-primary-inverted"><i class="fa fa-plus"></i> Agregar Factura</button>
 </div>
 
 
@@ -66,9 +66,11 @@
 <!-- /////////////////////////////////////////////// -->
 
 <!-- Predefinido -->
+<div class="rutabox">
+    
 <div class="form-group col-sm-4">
     {!! Form::label('ruta_nombre[]', 'Nombre Ruta') !!}
-    {!! Form::select('ruta_nombre[]', $selectores['ruta_id'], null, ['id' => 'rutaname', 'class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+    {!! Form::select('ruta_nombre[]', $selectores['ruta_id'], null, ['id' => 'rutaname', 'class' => 'form-control select2 rutaname', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
 
 <div class="form-group col-sm-2">
@@ -96,10 +98,10 @@
 </div>
 
 <div class="form-group col-sm-2">
-    {!! Form::label('valor_final', 'Valor C/U') !!}
+    {!! Form::label('valor_final[]', 'Valor C/U') !!}
     <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-        {!! Form::text('valor_final', null, ['class' => 'form-control texto-right', 'placeholder'=>'0']) !!}
+        {!! Form::text('valor_final[]', 111111, ['class' => 'form-control texto-right', 'placeholder'=>'0']) !!}
     </div>
 </div>
 
@@ -107,8 +109,57 @@
     {!! Form::hidden('predefinido', 0, ['class' => 'form-control']) !!}
 </div>
 
+</div>
 <!-- ////////////////////////////////////////// -->
+<div class="clearfix"></div>
 
+<!-- /////////////////////////////////////////////// -->
+
+<!-- Predefinido -->
+<div class="rutabox">
+    <div class="form-group col-sm-4">
+    {!! Form::label('ruta_nombre[]', 'Nombre Ruta') !!}
+    {!! Form::select('ruta_nombre[]', $selectores['ruta_id'], null, ['id' => 'rutaname', 'class' => 'form-control select2 rutaname', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+</div>
+
+<div class="form-group col-sm-2">
+    {!! Form::label('distancia[]', 'Distancia') !!}
+    <div class="input-group">        
+        {!! Form::text('distancia[]', null, ['class' => 'form-control texto-right', 'placeholder'=>'0', 'readonly']) !!}
+        <span class="input-group-addon">Km</span>
+    </div>
+</div>
+
+<div class="form-group col-sm-2">
+    {!! Form::label('duracion[]', 'Duración (Ida-Vuelta)') !!}
+    <div class="input-group">
+        {!! Form::text('duracion[]', null, ['class' => 'form-control texto-right', 'placeholder'=>'0', 'readonly']) !!}
+        <span class="input-group-addon">minutos</span>
+    </div>
+</div>
+
+<div class="form-group col-sm-2">
+    {!! Form::label('cantidad[]', 'Cantidad') !!}
+    <div class="input-group">
+        {!! Form::text('cantidad[]', null, ['class' => 'form-control texto-right', 'placeholder'=>'0']) !!}
+        <span class="input-group-addon">Viajes</span>
+    </div>
+</div>
+
+<div class="form-group col-sm-2">
+    {!! Form::label('valor_final[]', 'Valor C/U') !!}
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+        {!! Form::text('valor_final[]', 22222, ['class' => 'form-control texto-right', 'placeholder'=>'0']) !!}
+    </div>
+</div>
+
+<div class="form-group col-sm-2">
+    {!! Form::hidden('predefinido', 0, ['class' => 'form-control']) !!}
+</div>
+
+</div>
+<!-- ////////////////////////////////////////// -->
 
 
 <div class="clearfix"></div>
@@ -155,9 +206,9 @@
 <!-- Desc Finca Campo de texto -->
 <div class="form-group col-sm-3 col-xl-2">
     {!! Form::label('desc_finca', 'Retención Finca') !!}
-     <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-percent"></i></div>
+     <div class="input-group">       
         {!! Form::text('desc_finca', 3.4, ['class' => 'form-control texto-right']) !!}
+        <div class="input-group-addon"><i class="fa fa-percent"></i></div>
     </div>
 </div>
 
@@ -165,21 +216,10 @@
 <div class="form-group col-sm-3 col-xl-2">
     {!! Form::label('desc_admin', 'Administración') !!}
      <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-percent"></i></div>
         {!! Form::text('desc_admin', 5, ['class' => 'form-control texto-right']) !!}
+        <div class="input-group-addon"><i class="fa fa-percent"></i></div>
     </div>
 </div>
-
-<div class="form-descuento">
-    <div class="form-group col-sm-3 col-xl-2">
-        {!! Form::label('desc_transaccion', 'Transacción') !!}
-         <div class="input-group">
-            <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-            {!! Form::text('desc_transaccion', 3000, ['class' => 'form-control texto-right']) !!}
-        </div>
-    </div>
-</div>
-
 <!--
 <div class="form-descuento">
     <div class="form-group col-sm-6 col-xl-6">
@@ -198,7 +238,7 @@
 
 <div id="space-descuento"></div>
 <div class="col-sm-2 col-xl-2" style="padding-top: 25px">
-    <button id="agregar-descuento" name="agregar-descuento" type="button" class="btn btn-default btn-flat"><i class="fa fa-plus"></i> Agregar Descuento</button>
+    <button id="agregar-descuento" name="agregar-descuento" type="button" class="btn btn-default btn-flat btn-primary-inverted"><i class="fa fa-plus"></i> Agregar Descuento</button>
 </div>
 
 <div class="clearfix"></div>

@@ -113,6 +113,7 @@ class SimuladorGastoController extends AppBaseController
      */
     public function edit($id)
     {
+        dd('hola');
         $simuladorGasto = $this->simuladorGastoRepository->findWithoutFail($id);
 
         if (empty($simuladorGasto)) {

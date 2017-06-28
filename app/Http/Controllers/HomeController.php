@@ -11,6 +11,7 @@ use App\Models\Natural;
 use App\Models\Juridico;
 use App\Models\Vehiculo;
 use App\Models\ContratoPrestacionServicio;
+use App\Models\ContratoVinculacion;
 use App\Models\LicenciaConduccion;
 use App\Models\Tarjeta_Propiedad;
 use Carbon\Carbon;
@@ -35,11 +36,23 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $cont  = [];
         $datos = [];
-        $datos['contador_natural'] = Natural::get()->count();
-        $datos['contador_juridico'] = Juridico::get()->count();
-        $datos['contador_vehiculo'] = Vehiculo::get()->count();
-        //dd($datos);
-        return view('home')->with(['datos' => $datos]);
+
+        $cont['natural']  = Natural::get()->count();
+        $cont['juridico'] = Juridico::get()->count();
+        $cont['vehiculo'] = Vehiculo::get()->count();
+
+        $cv = ContratoVinculacion::get();
+
+        $cont['cv-total']      = $cv->count();
+        $cont['cv-vigente']    = $cv->where('vigente',true)->count();
+        $cont['cv-cv-vigente'] = $cv->where('tipo_contrato','CV')->where('vigente',true)->count();
+        $cont['cv-cp-vigente'] = $cv->where('tipo_contrato','CP')->where('vigente',true)->count();
+        $cont['cv-cc-vigente'] = $cv->where('tipo_contrato','CC')->where('vigente',true)->count();
+        $cont['cv-af-vigente'] = $cv->where('tipo_contrato','AF')->where('vigente',true)->count();
+
+        //dd($cont);
+        return view('home')->with(['cont' => $cont, 'datos' => $datos]);
     }
 }

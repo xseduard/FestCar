@@ -146,12 +146,6 @@
     <a href="{!! route('extractos.index') !!}"><i class="ion ion-clipboard"></i><span>Extractos</span></a>
 </li>
 
-
-
-
-
-
-
 <li class="{{ Request::is('recibos*') ? 'active' : '' }}">
     <a href="{!! route('recibos.index') !!}"><i class="ion-ios-cart"></i> <span>Recibos</span></a>
 </li>

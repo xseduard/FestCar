@@ -1,5 +1,14 @@
+/*
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Poppins|Rubik:300');
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Rubik:300');
 body {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Rubik",Helvetica,Arial,sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Rubik',sans-serif;
 }
 
 .badge {
@@ -112,5 +121,53 @@ body {
 }
 
 .texto-right{
+  text-align: right;
+}
+
+
+.texto-primary{
+  color: #0095d8;
+}
+
+.btn-primary-inverted{
+  border-color: #0095d8;
+}
+.btn-primary-inverted:hover, .btn-primary-inverted:focus, .btn-primary-inverted:active{
+  border-color: #0095d8;
+  background-color: #0095d8 !important;
+  color: white !important;
+}
+.placa {
+  padding: 0px 15px 2px 15px;
+  background-color: #f39c12;
+  border: 2px solid #cc820e;
+  border-radius: 4px;
+  font-weight: 800;
+  color: white;
+}
+
+.vehicle-profile {
+    margin: 0 auto;
+    width: 100px;
+    padding: 3px;
+    border: 3px solid #f39c12;
+}
+.table-custom-posed{
+  //position: static;
+}
+
+.timeline-item{
+      background: #f6f6f6 !important;
+      border: 0px solid #ddd !important;
+}
+
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
+
+.porcentaje_chart{
+  font-size: 18px;
+  font-weight: 600;
+  color: #00b0a3;
   text-align: right;
 }

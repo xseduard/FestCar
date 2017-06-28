@@ -32,6 +32,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     -->
     <!-- FLATICONS Custom -->
+
     {!! Html::style('/css/flaticon_bus/flaticon.css') !!}
 
     <!-- CSS PRINCIPAL WEB PAGE CUSTOM-->
@@ -225,6 +226,7 @@
     <!-- Animsition -->
     {!! HTML::script('/dependencia_local/animsition.min.js') !!}
      <!-- Animsition ini -->
+    {!! HTML::script('/js/main.js') !!}
     <script type="text/javascript">
         $(document).ready(function() {
           $(".animsition").animsition({
@@ -250,7 +252,7 @@
             transition: function(url){ window.location.href = url; }
           });
 
-          console.log('Welcome To FestCar - PowerBy XS EDUARD');
+          console.log('Welcome To FestCar - PowerBy XS EDUARD');          
         });
     </script>
      <!-- Animsition end ini -->

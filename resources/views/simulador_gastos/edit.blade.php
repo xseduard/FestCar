@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Simulador Gasto <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Editar
+            Simulador de Gastos <small><i class="fa fa-angle-right" aria-hidden="true"></i></small> Editar
         </h1>
    </section>
    <div class="content">

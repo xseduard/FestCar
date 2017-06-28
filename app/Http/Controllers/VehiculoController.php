@@ -89,13 +89,15 @@ class VehiculoController extends AppBaseController
     {
         $vehiculo = $this->vehiculoRepository->findWithoutFail($id);
 
+        $documentos = $this->centralRepository->validar_documentos_vehiculo($id);       
+        //dd($documentos);
         if (empty($vehiculo)) {
             Flash::error('Vehículo  No se encuentra registrado.');
 
             return redirect(route('vehiculos.index'));
         }
 
-        return view('vehiculos.show')->with('vehiculo', $vehiculo);
+        return view('vehiculos.show')->with(['vehiculo' => $vehiculo, 'documentos' => $documentos]);
     }
 
     /**
