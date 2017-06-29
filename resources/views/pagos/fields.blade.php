@@ -64,10 +64,10 @@
 </div>
 
 <!-- /////////////////////////////////////////////// -->
-
-<!-- Predefinido -->
 <div class="rutabox">
-    
+
+    {!! Form::text('predefinido[]', 'yes') !!}
+
 <div class="form-group col-sm-4">
     {!! Form::label('ruta_nombre[]', 'Nombre Ruta') !!}
     {!! Form::select('ruta_nombre[]', $selectores['ruta_id'], null, ['id' => 'rutaname', 'class' => 'form-control select2 rutaname', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
@@ -105,18 +105,17 @@
     </div>
 </div>
 
-<div class="form-group col-sm-2">
-    {!! Form::hidden('predefinido', 0, ['class' => 'form-control']) !!}
-</div>
 
 </div>
-<!-- ////////////////////////////////////////// -->
+<!-- ////////////////////    1   ////////////////////// -->
 <div class="clearfix"></div>
 
-<!-- /////////////////////////////////////////////// -->
+<!-- /////////////////////   2  ////////////////////////// -->
 
-<!-- Predefinido -->
 <div class="rutabox">
+
+    {!! Form::text('predefinido[]', 'yes') !!}
+
     <div class="form-group col-sm-4">
     {!! Form::label('ruta_nombre[]', 'Nombre Ruta') !!}
     {!! Form::select('ruta_nombre[]', $selectores['ruta_id'], null, ['id' => 'rutaname', 'class' => 'form-control select2 rutaname', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
@@ -154,8 +153,50 @@
     </div>
 </div>
 
+</div>
+<!-- /////////////////////   2  ///////////////////// -->
+<div class="clearfix"></div>
+<!-- //////////////////////  3 ///////////////////////// -->
+
+<div class="rutabox">
+
+    {!! Form::text('predefinido[]', 'not') !!}
+
+    <div class="form-group col-sm-4">
+    {!! Form::label('ruta_nombre[]', 'Nombre Ruta') !!}
+    {!! Form::text('ruta_nombre[]', null, ['id' => 'new_rutaname', 'class' => 'form-control new_rutaname', 'placeholder'=>'Nueva Ruta']) !!}
+</div>
+
 <div class="form-group col-sm-2">
-    {!! Form::hidden('predefinido', 0, ['class' => 'form-control']) !!}
+    {!! Form::label('distancia[]', 'Distancia') !!}
+    <div class="input-group">        
+        {!! Form::text('distancia[]', null, ['class' => 'form-control texto-right', 'placeholder'=>'0' ]) !!}
+        <span class="input-group-addon">Km</span>
+    </div>
+</div>
+
+<div class="form-group col-sm-2">
+    {!! Form::label('duracion[]', 'Duración (Ida-Vuelta)') !!}
+    <div class="input-group">
+        {!! Form::text('duracion[]', null, ['class' => 'form-control texto-right', 'placeholder'=>'0']) !!}
+        <span class="input-group-addon">minutos</span>
+    </div>
+</div>
+
+<div class="form-group col-sm-2">
+    {!! Form::label('cantidad[]', 'Cantidad') !!}
+    <div class="input-group">
+        {!! Form::text('cantidad[]', null, ['class' => 'form-control texto-right', 'placeholder'=>'0']) !!}
+        <span class="input-group-addon">Viajes</span>
+    </div>
+</div>
+
+<div class="form-group col-sm-2">
+    {!! Form::label('valor_final[]', 'Valor C/U') !!}
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+        {!! Form::text('valor_final[]', 22222, ['class' => 'form-control texto-right', 'placeholder'=>'0']) !!}
+    </div>
 </div>
 
 </div>

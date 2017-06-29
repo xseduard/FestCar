@@ -1,13 +1,18 @@
 
           <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">              
-              <li class="active"><a href="#documentos" data-toggle="tab" aria-expanded="true">Soat / Técnicomcánica / Tarjeta operación</a></li>
+            <ul class="nav nav-tabs"> 
+
+              <li class=""><a href="#documentos" data-toggle="tab" aria-expanded="true">Documentos</a></li>
+
+              <li class="active"><a href="#simul_gastos" data-toggle="tab" aria-expanded="true">Simulador de gastos</a></li>
+
               <li class=""><a href="#settings" data-toggle="tab" aria-expanded="false">Ajustes</a></li>
+
             </ul>
             <div class="tab-content">             
 
               <!-- /.tab-pane -->
-              <div class="tab-pane active" id="documentos">
+              <div class="tab-pane" id="documentos">
                 <!-- The timeline -->
                 <ul class="timeline timeline-inverse">
                   
@@ -16,10 +21,19 @@
                  @include('vehiculos.show-tarjetaoperacion')
                  @include('vehiculos.show-polizaresponsabilidad')
                  
-                  <li>
+                  <li>                  
                     <i class="fa fa-clock-o bg-gray"></i>
                   </li>
                 </ul>
+              </div>
+              <!-- /.tab-pane -->
+               <!-- /.tab-pane -->
+              <div class="tab-pane active" id="simul_gastos">
+                <!-- The timeline -->   
+                
+                @include('vehiculos.show-simulador')  
+               
+
               </div>
               <!-- /.tab-pane -->
 
@@ -81,4 +95,6 @@
             <!-- /.tab-content -->
           </div>
           <!-- /.nav-tabs-custom -->
+
+
         

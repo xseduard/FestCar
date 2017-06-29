@@ -80,8 +80,8 @@
               <h3 class="box-title">Tarjeta de propiedad</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">              
-            @if(!$documentos['tarjetapropiedad'] == 'notfound')
+            <div class="box-body">            
+            @if($documentos['tarjetapropiedad'] == 'notfound')
                           
                   <p class="text-muted text-yellow">  <i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i> No se ha Registrado</p>
              @else

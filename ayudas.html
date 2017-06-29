@@ -202,3 +202,43 @@ Route::get('/config-cache', function() {
     $exitCode = Artisan::call('config:cache');
     return '<h1>Clear Config cleared</h1>';
 });
+
+
+
+
+//// copia de seguridad js pagos de proveedores
+
+$(".rutaname").on('change',function(){ 
+          /*
+             $(".rutabox").each(function (index) 
+            { 
+               // console.log($(this));
+
+                //console.log($(this).children("input[name='valor_final[]']"));
+                console.log($(this).children('div').children('div').children('input'));
+                
+                // $(this).removeClass();
+                // $(this).addClass("parrafo"); 
+                // $(this).text('Parrafo ' + index);
+                
+            }) 
+          */
+            //var variable = $('#valor_final').val();
+            //console.log(variable);
+            buscar_ruta();
+
+            /*var values = $("input[name='valor_final[]']").map(function(){
+              //console.log($(this).val());
+                return $(this).val();
+              }).get();
+
+              console.log( $("input[name='valor_final[1]']").val());
+              console.log(values[1]);
+*/
+              //console.log($('input[name^="valor_final"]').eq(1).val());
+              $('input[name^="predefinido"]').each(function( key, value ) {
+                 alert( key + ": " + value + " valor: "+$(this).val() );
+                 // alert($(this).val());
+              });  
+
+//// fin copia de seguridad

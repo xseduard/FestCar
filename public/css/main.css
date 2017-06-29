@@ -171,3 +171,13 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   color: #00b0a3;
   text-align: right;
 }
+
+canvas {
+  //background-color: blue; 
+  width: 100%;
+  height: auto;
+}
+div > svg  > text{
+    font-family : 'Rubik' !important;
+    padding : "3%";
+}

@@ -13,6 +13,8 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Support\Facades\Auth;
 use Response;
 
+use App\Models\SimuladorGasto;
+
 class VehiculoController extends AppBaseController
 {
     /** @var  VehiculoRepository */
@@ -89,7 +91,48 @@ class VehiculoController extends AppBaseController
     {
         $vehiculo = $this->vehiculoRepository->findWithoutFail($id);
 
-        $documentos = $this->centralRepository->validar_documentos_vehiculo($id);       
+        $documentos = $this->centralRepository->validar_documentos_vehiculo($id);  
+
+        
+        $sim_gasto = SimuladorGasto::where('min', '<=', $vehiculo->capacidad)
+        ->where('max', '>=', $vehiculo->capacidad)->first();
+
+        $subtotal = $sim_gasto->inversion
+                    + $sim_gasto->llantas_completas 
+                    + $sim_gasto->motor_caja_trasmision
+                    + $sim_gasto->ajuste_pintura
+                    + $sim_gasto->rodamiento
+                    + $sim_gasto->cojineria_vidrios
+                    + $sim_gasto->lavado
+                    + $sim_gasto->carroceria
+                    + $sim_gasto->salario_conductor
+                    + $sim_gasto->prestaciones_sociales
+                    + $sim_gasto->seguridad_social
+                    + $sim_gasto->soat
+                    + $sim_gasto->tecnicomecanica
+                    + $sim_gasto->revision_bimensual
+                    + $sim_gasto->contractual
+                    + $sim_gasto->extracontractual
+                    + ($sim_gasto->acpm_galon * $sim_gasto->galones_kilometro * 10)
+                    + $sim_gasto->aceites_filtros
+                    + $sim_gasto->aditivos
+                    + $sim_gasto->baterias
+                    + $sim_gasto->impuesto_rodamiento
+                    + $sim_gasto->impuesto_semaforizacion
+                    + $sim_gasto->parqueo
+                    + $sim_gasto->tramites_varios
+                    + $sim_gasto->administracion
+                    + $sim_gasto->plan_reposicion_equipo
+                    + $sim_gasto->sistema_comunicacion
+                    + $sim_gasto->gps
+                    + $sim_gasto->otros;
+        $margen = $subtotal*$sim_gasto->margen/100;
+        $total = $subtotal + ($subtotal*$sim_gasto->margen/100);
+
+        $valores =  [];
+        $valores['subtotal'] = $subtotal;
+        $valores['margen']   = $margen;
+        $valores['total']    = $total;
         //dd($documentos);
         if (empty($vehiculo)) {
             Flash::error('Vehículo  No se encuentra registrado.');
@@ -97,7 +140,7 @@ class VehiculoController extends AppBaseController
             return redirect(route('vehiculos.index'));
         }
 
-        return view('vehiculos.show')->with(['vehiculo' => $vehiculo, 'documentos' => $documentos]);
+        return view('vehiculos.show')->with(['vehiculo' => $vehiculo, 'documentos' => $documentos, 'sim_gasto' => $sim_gasto, 'valores' => $valores]);
     }
 
     /**
