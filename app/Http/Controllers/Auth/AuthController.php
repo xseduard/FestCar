@@ -72,7 +72,7 @@ class AuthController extends Controller
             'cedula' => $data['cedula'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'role' => 'secretaria',
+            'role' => 'autorizador_emdisalud',
         ]);
     }
 }

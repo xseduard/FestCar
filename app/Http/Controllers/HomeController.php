@@ -16,6 +16,7 @@ use App\Models\LicenciaConduccion;
 use App\Models\Tarjeta_Propiedad;
 use Carbon\Carbon;
 use Flash;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -36,8 +37,15 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+
         $cont  = [];
         $datos = [];
+
+        if (Auth::user()->role == 'autorizador_emdisalud') {
+            
+          return view('home_emdisalud')->with(['cont' => $cont, 'datos' => $datos]);
+        }
 
         $cont['natural']  = Natural::get()->count();
         $cont['juridico'] = Juridico::get()->count();
@@ -54,5 +62,15 @@ class HomeController extends Controller
 
         //dd($cont);
         return view('home')->with(['cont' => $cont, 'datos' => $datos]);
+    }
+
+        public function indexEmdisalud()
+    {
+        $cont  = [];
+        $datos = [];
+        
+
+        //dd($cont);
+        return view('home_emdisalud')->with(['cont' => $cont, 'datos' => $datos]);
     }
 }

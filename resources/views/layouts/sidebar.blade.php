@@ -6,8 +6,11 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ asset('/multimedia/profiles/default.png') }}" class="img-circle"
-                     alt="Imagen de usuario"/>
+                @if(!Auth::user()->role == 'autorizador_emdisalud')
+                    <img  src="{{ asset('/multimedia/profiles/default.png') }}" class="user-image" alt="imagen de usuario"/>
+                @else
+                    <img  src="{{ asset('/multimedia/profiles/logo_emdi.png') }}" class="user-image" alt="imagen de usuario"/>
+                @endif 
             </div>
             <div class="pull-left info">
                 @if (Auth::guest())

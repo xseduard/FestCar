@@ -2,23 +2,6 @@
     <a href="{!! url('/home') !!}"><i class="fa fa-home"></i><span>Inicio</span></a>
 </li>
 
-<li class="{{ Request::is('emdiPacientes*') ? 'active' : '' }}">
-    <a href="{!! route('emdiPacientes.index') !!}"><i class="fa fa-circle"></i><span>Afiliados/Pacientes</span></a>
-</li>
-
-<li class="{{ Request::is('emdiLugars*') ? 'active' : '' }}">
-    <a href="{!! route('emdiLugars.index') !!}"><i class="fa fa-circle"></i><span>Lugares</span></a>
-</li>
-
-<li class="{{ Request::is('emdiConductors*') ? 'active' : '' }}">
-    <a href="{!! route('emdiConductors.index') !!}"><i class="fa fa-circle"></i><span>Conductores</span></a>
-</li>
-
-<li class="{{ Request::is('emdiAutorizacions*') ? 'active' : '' }}">
-    <a href="{!! route('emdiAutorizacions.index') !!}"><i class="fa fa-circle"></i><span>Autorizaciones</span></a>
-</li>
-
-
 
 @if(Auth::user()->role == 'administrador')
     <li class="treeview 
@@ -61,6 +44,8 @@
     -->
     <!-- route('rosas.index') -->
 @endif
+
+@if(Auth::user()->role == 'secretaria' or Auth::user()->role == 'administrador')
 <!--
 <li class="{{ Request::is('triangulos*') ? 'active' : '' }}">
     <a href="{!! route('triangulos.index') !!}"><i class="fa fa-indent"></i><span>triangulos</span></a>
@@ -195,3 +180,47 @@
 <li class="{{ Request::is('pagoRelRutas*') ? 'active' : '' }}">
     <a href="{!! route('pagoRelRutas.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Pago-Rutas</span></a>
 </li>
+
+@endif
+
+@if(Auth::user()->role == 'autorizador_emdisalud' or Auth::user()->role == 'administrador')    
+   <li class="{{ Request::is('emdiPacientes*') ? 'active' : '' }}">
+    <a href="{!! route('emdiPacientes.index') !!}"><i class="fa fa-user" aria-hidden="true"></i><span>Afiliados/Pacientes</span></a>
+    </li>
+
+    <li class="{{ Request::is('emdiLugars*') ? 'active' : '' }}">
+        <a href="{!! route('emdiLugars.index') !!}"><i class="fa fa-hospital-o" aria-hidden="true"></i><span>Clinicas/Hospitales</span></a>
+    </li>
+
+    <li class="{{ Request::is('emdiConductors*') ? 'active' : '' }}">
+        <a href="{!! route('emdiConductors.index') !!}"><i class="fa fa-taxi" aria-hidden="true"></i><span>Conductores</span></a>
+    </li>
+
+    <li class="{{ Request::is('emdiAutorizacions*') ? 'active' : '' }}">
+        <a href="{!! route('emdiAutorizacions.index') !!}"><i class="fa fa-wpforms" aria-hidden="true"></i><span>Autorizaciones</span></a>
+    </li>     
+@endif 
+
+@if(Auth::user()->role == 'autorizador_emdisalud')
+    
+    @if(Request::is('home*') 
+        or Request::is('emdiPacientes*')
+        or Request::is('emdiLugars*')
+        or Request::is('emdiConductors*')
+        or Request::is('emdiAutorizacions*') )
+@else
+
+<script type="text/javascript">
+    alert('Su cuenta No cuenta con los permisos suficientes para acceder a esta ruta, FestCar te ha Desconectado por seguridad');     
+</script>
+    {!! Auth::logout(); !!}
+    {!! \Redirect::intended('/');  !!}
+    {!! header('Location: url("/logout")') !!}
+<script type="text/javascript">
+    window.locationf="{!! url('/logout') !!}";
+</script>
+       
+
+    @endif
+
+@endif

@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('cedula', 12)->unique();
             $table->string('email');
             $table->string('password', 60);
-            $table->enum('role', ['administrador', 'secretaria', 'gerencia', 'asesor', 'invitado', 'aux']);
+            $table->enum('role', ['administrador', 'secretaria', 'gerencia', 'asesor', 'invitado', 'aux', 'autorizador_emdisalud']);
             $table->rememberToken();
             $table->timestamps();
         });

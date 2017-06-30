@@ -105,16 +105,23 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img  src="{{ asset('/multimedia/profiles/default.png') }}"
-                                     class="user-image" alt="imagen de usuario"/>
+                                @if(!Auth::user()->role == 'autorizador_emdisalud')
+                                    <img  src="{{ asset('/multimedia/profiles/default.png') }}" class="user-image" alt="imagen de usuario"/>
+                                @else
+                                    <img  src="{{ asset('/multimedia/profiles/logo_emdi.png') }}" class="user-image" alt="imagen de usuario"/>
+                                @endif                                    
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                 <span class="hidden-xs">{!! Auth::user()->nombres !!}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img  src="{{ asset('/multimedia/profiles/default.png') }}"
-                                         class="img-circle" alt="Imagen de usuario"/>
+                                    @if(!Auth::user()->role == 'autorizador_emdisalud')
+                                        <img  src="{{ asset('/multimedia/profiles/default.png') }}" class="img-circle" alt="imagen de usuario"/>
+                                    @else
+                                        <img  src="{{ asset('/multimedia/profiles/logo_emdi.png') }}" class="img-circle" alt="imagen de usuario"/>
+                                    @endif 
+                                    
                                     <p>
                                         {!! Auth::user()->fullname !!}
 
