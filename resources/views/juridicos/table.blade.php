@@ -5,7 +5,7 @@
         <th>Representante Legal</th>
         <th></th>
         <th>Estado</th>        
-        <th>Ultima modificación</th>
+        <th>Última modificación</th>
         <th colspan="3">Acciones</th>
     </thead>
     <tbody>

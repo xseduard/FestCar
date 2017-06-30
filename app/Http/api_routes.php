@@ -73,3 +73,11 @@ Route::resource('pago_rel_facturas', 'PagoRelFacturaAPIController');
 Route::resource('pago_rel_descuentos', 'PagoRelDescuentoAPIController');
 
 Route::resource('pago_rel_rutas', 'PagoRelRutaAPIController');
+
+Route::resource('emdi_pacientes', 'EmdiPacienteAPIController');
+
+Route::resource('emdi_lugars', 'EmdiLugarAPIController');
+
+Route::resource('emdi_conductors', 'EmdiConductorAPIController');
+
+Route::resource('emdi_autorizacions', 'EmdiAutorizacionAPIController');

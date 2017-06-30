@@ -100,11 +100,8 @@ class Handler extends ExceptionHandler
             return redirect(route('token.error'));
         }
          
-        //debugger lines
-        if (config('app.debug'))
-        {
-            return $this->renderExceptionWithWhoops($e);
-        } 
+        //debugger lines        
+        if (config('app.debug')){  return $this->renderExceptionWithWhoops($e);} 
           
         
 

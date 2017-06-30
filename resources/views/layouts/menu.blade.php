@@ -2,6 +2,23 @@
     <a href="{!! url('/home') !!}"><i class="fa fa-home"></i><span>Inicio</span></a>
 </li>
 
+<li class="{{ Request::is('emdiPacientes*') ? 'active' : '' }}">
+    <a href="{!! route('emdiPacientes.index') !!}"><i class="fa fa-circle"></i><span>Afiliados/Pacientes</span></a>
+</li>
+
+<li class="{{ Request::is('emdiLugars*') ? 'active' : '' }}">
+    <a href="{!! route('emdiLugars.index') !!}"><i class="fa fa-circle"></i><span>Lugares</span></a>
+</li>
+
+<li class="{{ Request::is('emdiConductors*') ? 'active' : '' }}">
+    <a href="{!! route('emdiConductors.index') !!}"><i class="fa fa-circle"></i><span>Conductores</span></a>
+</li>
+
+<li class="{{ Request::is('emdiAutorizacions*') ? 'active' : '' }}">
+    <a href="{!! route('emdiAutorizacions.index') !!}"><i class="fa fa-circle"></i><span>Autorizaciones</span></a>
+</li>
+
+
 
 @if(Auth::user()->role == 'administrador')
     <li class="treeview 
@@ -178,4 +195,3 @@
 <li class="{{ Request::is('pagoRelRutas*') ? 'active' : '' }}">
     <a href="{!! route('pagoRelRutas.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Pago-Rutas</span></a>
 </li>
-

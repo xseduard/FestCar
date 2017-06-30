@@ -9,7 +9,7 @@
         <th>Fecha Nacimiento</th>
         <th>Estado Civil</th>       
         <th>Grupo Sanguineo</th>
-        <th>Ultima modificación</th>
+        <th>Última modificación</th>
         <th colspan="3">Acciones</th>
     </thead>
     <tbody>

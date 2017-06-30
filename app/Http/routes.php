@@ -108,6 +108,11 @@ Route::group(['middleware' => 'web'], function() {
             'uses' => 'ReciboController@print_space',
         ]);
 
+    Route::get('emdiAutorizacions/print/{id}', [
+            'as' => 'emdiAutorizacions.print',
+            'uses' => 'EmdiAutorizacionController@print_space',
+        ]);
+
     Route::post('ruta/buscar_id', [
             'as' => 'ruta.buscarid',
             'uses' => 'RutaController@buscar_by_id',
@@ -183,7 +188,15 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('pagoRelFacturas', 'PagoRelFacturaController');
     Route::resource('pagoRelDescuentos', 'PagoRelDescuentoController');
     Route::resource('pagoRelRutas', 'PagoRelRutaController');
+
+    //Emdisalud
+    Route::resource('emdiPacientes', 'EmdiPacienteController');
+    Route::resource('emdiLugars', 'EmdiLugarController');
+    Route::resource('emdiConductors', 'EmdiConductorController');
+    Route::resource('emdiAutorizacions', 'EmdiAutorizacionController');
     
 });
+
+
 
 

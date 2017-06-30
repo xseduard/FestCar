@@ -128,6 +128,19 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .texto-primary{
   color: #0095d8;
 }
+.texto-success{
+  color: #00b0a3;
+}
+
+.btn-success-inverted{
+  color: #00b0a3;
+  border-color: #00b0a3;
+}
+.btn-success-inverted:hover, .btn-success-inverted:focus, .btn-success-inverted:active{
+  border-color: #00b0a3;
+  background-color: #00b0a3 !important;
+  color: white !important;
+}
 
 .btn-primary-inverted{
   border-color: #0095d8;
@@ -137,6 +150,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   background-color: #0095d8 !important;
   color: white !important;
 }
+
 .placa {
   padding: 0px 15px 2px 15px;
   background-color: #f39c12;
