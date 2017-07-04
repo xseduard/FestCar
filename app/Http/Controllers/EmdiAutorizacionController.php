@@ -9,9 +9,12 @@ use App\Repositories\CentralRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Input;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Auth;
 use Response;
+use Carbon\Carbon;
 
 class EmdiAutorizacionController extends AppBaseController
 {
@@ -78,6 +81,14 @@ class EmdiAutorizacionController extends AppBaseController
     {
         $input = $request->all();
         $input['user_id'] = Auth::id();
+
+        $valid_date = Carbon::createFromFormat('Y-m-d', $input['cita_fecha']);
+        if ($valid_date >  Carbon::now()->addMonth(2) or $valid_date <  Carbon::now()->subMonth(2)) {
+             Flash::error("Fecha de Cita (".$valid_date->format('Y-m-d').") debe estar entre ".Carbon::now()->subMonth(2)->format('Y-m-d')." y ".Carbon::now()->addMonth(2)->format('Y-m-d'));
+             return Redirect::back()->withInput(Input::all());
+        }
+
+
 
         $emdiAutorizacion = $this->emdiAutorizacionRepository->create($input);
 

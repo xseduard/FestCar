@@ -5,14 +5,14 @@
 }
 
 .page-login-v2:before {
-  // background-image: url("http://i.imgur.com/SvnuN4Mr.png"); 
-
+  background-image: url(/multimedia/web/background-road.jpg); 
+/*
   background: #0095d8;
 background: -moz-linear-gradient(left,  #0095d8 0%, #00b0a3 90%);
 background: -webkit-linear-gradient(left,  #0095d8 0%,#00b0a3 90%);
 background: linear-gradient(to right,  #0095d8 0%,#00b0a3 90%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0095d8', endColorstr='#00b0a3',GradientType=1 );
-
+*/
 }
 
 .page-login-v2.page-dark.layout-full:after {

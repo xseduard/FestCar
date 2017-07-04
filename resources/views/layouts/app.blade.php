@@ -105,7 +105,7 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                @if(!Auth::user()->role == 'autorizador_emdisalud')
+                                @if(Auth::user()->role != 'autorizador_emdisalud')
                                     <img  src="{{ asset('/multimedia/profiles/default.png') }}" class="user-image" alt="imagen de usuario"/>
                                 @else
                                     <img  src="{{ asset('/multimedia/profiles/logo_emdi.png') }}" class="user-image" alt="imagen de usuario"/>
@@ -116,7 +116,7 @@
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    @if(!Auth::user()->role == 'autorizador_emdisalud')
+                                    @if(Auth::user()->role != 'autorizador_emdisalud')
                                         <img  src="{{ asset('/multimedia/profiles/default.png') }}" class="img-circle" alt="imagen de usuario"/>
                                     @else
                                         <img  src="{{ asset('/multimedia/profiles/logo_emdi.png') }}" class="img-circle" alt="imagen de usuario"/>
