@@ -1,11 +1,12 @@
 
 
 <!-- Paciente Id Selector -->
+<!--
 <div class="form-group col-sm-6">
     {!! Form::label('paciente_id', 'Afiliado / Paciente / Usuario') !!}
     {!! Form::select('paciente_id', $selectores['paciente_id'], null, ['class' => 'form-control select2', 'required', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
 </div>
-
+--> 
 <!-- Ruta Selector -->
 <div class="form-group col-sm-6">
     {!! Form::label('ruta', 'Ruta') !!}

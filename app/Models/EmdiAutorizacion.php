@@ -30,6 +30,7 @@ class EmdiAutorizacion extends Model
         'cita_hora',
         'cita_lugar_id',
         'conductor_id',
+        'cantidad',
         'user_id'
     ];
     /**
@@ -42,6 +43,7 @@ class EmdiAutorizacion extends Model
         'cita_hora' => 'string',
         'cita_lugar_id' => 'integer',
         'conductor_id' => 'integer',
+        'cantidad' => 'integer',
         'user_id' => 'integer'
     ];
     /**
@@ -49,11 +51,12 @@ class EmdiAutorizacion extends Model
      */
     public static $rules = [
         'ruta' => 'required',
-        'paciente_id' => 'required',
+        'paciente_id' => '',
         'cita_fecha' => 'date|required',
         'cita_hora' => 'required',
         'cita_lugar_id' => 'required',
-        'conductor_id' => 'required'
+        'conductor_id' => 'required',
+        'cantidad' => 'required'
     ];
     /**
      * Relaciones entre Modelos

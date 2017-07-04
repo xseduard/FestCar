@@ -29,7 +29,7 @@
                 <div class="inner">
                  <h2 class="text-center">Hola, {!!  Auth::user()->nombres !!} </h2>
                  <h4 class="text-center">Transeba S.A.S ha puesto a su disposición las siguientes herramientas</h4>
-                 <h5 class="text-center">Version 1.3 Beta, para errores por favor contactenos mediante el correo <a href="mailto:sistemas@transeba.com">sitemas@transeba.com</a></h5>
+                 <h5 class="text-center">Version 1.4 Beta, para errores por favor contactenos mediante el correo <a href="mailto:sistemas@transeba.com">sitemas@transeba.com</a></h5>
                 </div>
                 
                 
@@ -70,22 +70,21 @@
 
                 <div class="box-body">
                   <h4><b>Para iniciar el proceso de Autorización debe tener encuenta las siguietnes indicaciones:</b></h4>
-                  <ul>
-                    <li>Debe registrar con aterioridad la Información del afiliado / Paciente</li>
-                    <li>Debe registrar con aterioridad el Lugar de destino a seguir por el vehículo</li>
+                  <ul>                    
+                    <li>Debe registrar con aterioridad el Lugar de destino (Hospital, Clinica...)</li>
                     <li>Las rutas solo pueden ser Registradas y/o Modificadas por un usuario administrador</li>
                     <li>No todos los campos de los formularios son requeridos</li>
-                    <li>Todo registro y/o modificación quedara registrada a su nombre (En el modulo autorizaciones aparecerá su nombre como firma del autorizador)</li>
+                    <li>Todo registro y/o modificación quedara registrado a nombre del usuario que este loggeado en ese momento (En el modulo autorizaciones aparecerá su nombre como firma del autorizador)</li>
                   </ul>
 
                   <h4><b>Pasos para registrar una autorización</b></h4>
 
-                  <p><b style="font-size: 18px" class="text-blue">1.</b> Registrar Afiliado/Paciente y su Acompañante (Si lo tiene) a travez del menú  <b  class="text-blue">Afiliado/Paciente</b> y posteriormente en el boton <b  class="text-blue">Agregar</b> de la esquina superior derecha.</p>
-                  <p><b style="font-size: 18px" class="text-blue">2.</b> Registrar el nombre del lugar donde deberá ir el Afiliado/Paciente a cumplir su cita a travez del menú  <b  class="text-blue">Clinicas/Hospitales</b> y posteriormente en el boton <b  class="text-blue">Agregar</b> de la esquina superior derecha.</p>
+                  
+                  <p><b style="font-size: 18px" class="text-blue">1.</b> Verificar si existe el nombre del lugar donde deberá ir el Afiliado/Paciente a cumplir su cita en caso contrario diríjase a menú - <b  class="text-blue">Clinicas/Hospitales</b> y posteriormente en el boton <b  class="text-blue">Agregar</b> de la esquina superior derecha.</p>
 
-                  <p><b style="font-size: 18px" class="text-blue">3.</b> Registre la Autorización travez del menú  <b  class="text-blue">Autorizaciones</b> y posteriormente en el boton <b  class="text-blue">Agregar</b> de la esquina superior derecha.</p>
+                  <p><b style="font-size: 18px" class="text-blue">2.</b> Registre la Autorización travez del menú - <b  class="text-blue">Autorizaciones</b> y posteriormente en el boton <b  class="text-blue">Agregar</b> de la esquina superior derecha.</p>
 
-                  <p><b style="font-size: 18px" class="text-blue">4.</b> Genere la Autorización travez de la opción <a href="#" class="btn btn-success-inverted btn-sm btn-flat" title="boton de muestra"><i class="fa fa-print" aria-hidden="true"></i></a> ubicada en la tabla de <b  class="text-blue">Autorizaciones</b>.</p>
+                  <p><b style="font-size: 18px" class="text-blue">3.</b> Genere la Autorización desde la opción: <a href="#" class="btn btn-success-inverted btn-sm btn-flat" title="boton de muestra"><i class="fa fa-print" aria-hidden="true"></i></a> ubicada en la tabla de <b  class="text-blue">Autorizaciones</b>.</p>
 
 
 

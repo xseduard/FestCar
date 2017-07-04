@@ -15,6 +15,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Auth;
 use Response;
 use Carbon\Carbon;
+use App\Models\EmdiPaciente;
 
 class EmdiAutorizacionController extends AppBaseController
 {
@@ -87,9 +88,9 @@ class EmdiAutorizacionController extends AppBaseController
              Flash::error("Fecha de Cita (".$valid_date->format('Y-m-d').") debe estar entre ".Carbon::now()->subMonth(2)->format('Y-m-d')." y ".Carbon::now()->addMonth(2)->format('Y-m-d'));
              return Redirect::back()->withInput(Input::all());
         }
-
-
-
+        $paciente = EmdiPaciente::create($input);
+        $input['paciente_id'] = $paciente->id;
+        
         $emdiAutorizacion = $this->emdiAutorizacionRepository->create($input);
 
         Flash::success('Autorización registrado correctamente.');

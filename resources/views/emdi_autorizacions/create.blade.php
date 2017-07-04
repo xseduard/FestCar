@@ -21,7 +21,9 @@
                 <div class="box-body">
                     <div class="row">
                         {!! Form::open(['route' => 'emdiAutorizacions.store']) !!}
-
+                            @include('emdi_autorizacions.fields_paciente')
+                            <div class="clearfix"></div>
+                            <hr>
                             @include('emdi_autorizacions.fields')
 
                         {!! Form::close() !!}
@@ -46,6 +48,30 @@
             format: 'yyyy-mm-dd',        
             language: 'es',
         });
+        sw_acompanante();
+        $('#cantidad').on('change',function(){   
+            sw_acompanante();
+        });
+
     });
+
+     function sw_acompanante(){
+
+            var cantidad = $("#cantidad").val();
+            if (cantidad == '1') {
+                
+                $(".ac_field").val("");          
+                $(".ac_field").prop('readonly', true);
+                $("#ac_nombres").prop('required', false);                
+
+            } else if (cantidad > '1') {
+
+                $("#ac_nombres").prop('required', true);  
+                $(".ac_field").prop('readonly', false);
+
+            }  
+        
+    }
+
  </script>
 @endsection

@@ -28,6 +28,8 @@ class CreateEmdiAutorizacionsTable extends Migration
 
             $table->integer('conductor_id')->unsigned();
             $table->foreign('conductor_id')->references('id')->on('emdi_conductors');
+
+            $table->integer('cantidad')->unsigned();
             
             $table->integer('user_id')->unsigned();
             $table->timestamps();

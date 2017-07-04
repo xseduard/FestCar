@@ -95,7 +95,7 @@ class EmdiAutorizacionRepository extends BaseRepository
         $pdf->Cell(0,9,utf8_decode("Fecha: ".$autorizacion->created_at->format('d')." de ".mb_strtoupper($autorizacion->created_at->format('F'),'utf-8')." de ".$autorizacion->created_at->format('Y')),"",1,"L");
 
         $pdf->Multicell(0,10,utf8_decode("EMDISALUD ESS EPS-S con nit  811004055-5 Autoriza a TRANSEBA S.A.S. con nit 900414811-9 a prestar el servicio de transporte de usuario, con los siguientes datos:"),"",'L');
-        $pdf->ln();
+        $pdf->ln(3);
 
         $col = array();
         $col[] = array('text' => utf8_decode('Cédula'),
@@ -371,6 +371,7 @@ class EmdiAutorizacionRepository extends BaseRepository
         
 
         $pdf->ln();
+        $pdf->Multicell(0,10,utf8_decode("Este documento es valido para: ".\NumeroALetras::convertir($autorizacion->cantidad)." (".$autorizacion->cantidad.") Pasajero(s)"),"",'L');
         $pdf->Multicell(0,10,utf8_decode("Conductor: ".$autorizacion->conductor->fullname." celular: ".$autorizacion->conductor->celular),"",'L');
         $pdf->ln();
 
@@ -381,7 +382,7 @@ class EmdiAutorizacionRepository extends BaseRepository
 
         $pdf->Cell(70,5,"Firma Afiliado","",0,"C");       
         $pdf->Cell(10,4,"","",0,"C"); //divisor
-        $pdf->Cell(70,5,$autorizacion->user->fullname,"",1,"C");
+        $pdf->Cell(70,5,"Autorizador: ".$autorizacion->user->fullname,"",1,"C");
         $pdf->Cell(80,4,"","",0,"C"); //divisor
         $pdf->Cell(70,5,"CC: ".number_format($autorizacion->user->cedula, 0, '.', '.' ),"",1,"C");
 

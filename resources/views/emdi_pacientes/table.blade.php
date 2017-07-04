@@ -21,6 +21,9 @@
             <td>{!! $emdiPaciente->updated_at->diffForHumans() !!}</td>
             <td>{!! $emdiPaciente->user->fullname !!}</td>
             <td>
+
+             @if(Auth::user()->role != 'autorizador_emdisalud')
+                     
                 {!! Form::open(['route' => ['emdiPacientes.destroy', $emdiPaciente->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>
                     <!-- 
@@ -35,6 +38,17 @@
                         ]) !!}
                 </div>
                 {!! Form::close() !!}
+            @else
+                <a href="#" class='btn btn-default btn-xs' disabled title="Desabiliado por Administrador"><i class="glyphicon glyphicon-edit"></i></a>
+                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
+                        'type' => 'submit',
+                        'class' => 'btn btn-danger btn-xs',
+                        'disabled',
+                        'title' => 'Desabiliado por Administrador'
+                        ]) !!}
+            @endif 
+
+
             </td>
         </tr>
     @endforeach
