@@ -11,13 +11,11 @@ class RutaRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'nombre',
-        'distancia',
-        'duracion',
-        'valor_sugerido',
-        'predefinido',
-        'descripcion',
-        'user_id'
+        'nombre' => 'like',
+        'distancia' => 'like',
+        'duracion' => 'like',
+        'valor_sugerido' => 'like',
+        //'predefinido'
     ];
 
     /**

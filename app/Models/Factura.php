@@ -54,8 +54,10 @@ class Factura extends Model
         return $this->belongsTo('App\Models\Modelo');
     }
     */
+    public function pagorelfactura(){
+        return $this->hasMany('App\Models\PagoRelFactura');
+    }
     
-
     /**
      * Funciones Especiales
      */

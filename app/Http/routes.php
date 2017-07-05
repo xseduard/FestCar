@@ -112,6 +112,10 @@ Route::group(['middleware' => 'web'], function() {
             'as' => 'emdiAutorizacions.print',
             'uses' => 'EmdiAutorizacionController@print_space',
         ]);
+    Route::get('pagos/print/{id}', [
+            'as' => 'pagos.print',
+            'uses' => 'PagoController@print_space',
+        ]);
 
     Route::post('ruta/buscar_id', [
             'as' => 'ruta.buscarid',

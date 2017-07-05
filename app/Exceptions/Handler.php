@@ -101,7 +101,7 @@ class Handler extends ExceptionHandler
         }
          
         //debugger lines        
-        if (config('app.debug')){  return $this->renderExceptionWithWhoops($e);} 
+        //if (config('app.debug')){  return $this->renderExceptionWithWhoops($e);} 
           
         
 

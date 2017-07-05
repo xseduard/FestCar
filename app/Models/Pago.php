@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\DatesTranslator;
+
+use Jenssegers\Date\Date;
 
 /**
  * Class Pago
@@ -12,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Pago extends Model
 {
-    use SoftDeletes;
+    use DatesTranslator, SoftDeletes;
 
     public $table = 'pagos';
     
@@ -46,7 +49,6 @@ class Pago extends Model
         'fecha_inicio' => 'date',
         'fecha_final' => 'date',
         'desc_transaccion' => 'integer',
-        'desc_finca' => 'integer',
         'cuatro_por_mil' => 'boolean',
         'desc_sobrecosto' => 'integer',
         'irregularidad' => 'boolean',
@@ -65,14 +67,49 @@ class Pago extends Model
     /**
      * Relaciones entre Modelos
      */
-    /*
-    public function modelo(){
-        return $this->belongsTo('App\Models\Modelo');
+    // return $this->belongsToMany('App\Models\Factura', 'pago_rel_facturas')->withPivot('pago_id', 'factura_id');
+     public function pagorelfactura(){
+        return $this->hasMany('App\Models\PagoRelFactura');
     }
-    */
+
+     public function pagorelruta(){
+        return $this->hasMany('App\Models\PagoRelRuta');
+    }
+
+    public function pagoreldescuento(){
+        return $this->hasMany('App\Models\PagoRelDescuento');
+    }
+
+    public function contratovinculacion(){
+        return $this->belongsTo('App\Models\ContratoVinculacion', 'contrato_vinculacion_id', 'id');
+    }
+    public function cps(){
+        return $this->belongsTo('App\Models\ContratoPrestacionServicio', 'cps_id', 'id');
+    }
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
+    
+    //Express relationship
+    public function express_factura(){
+        return $this->belongsToMany('App\Models\Factura', 'pago_rel_facturas');
+    }
+     public function express_ruta(){
+        return $this->belongsToMany('App\Models\Ruta', 'pago_rel_rutas');
+    }
+    public function express_descuento(){
+        return $this->belongsToMany('App\Models\Descuento', 'pago_rel_descuentos');
+    }
+
+
     
 
     /**
      * Funciones Especiales
      */
+
+    public function getFechaPlanillaAttribute($fecha_planilla)
+    {
+        return new Date($fecha_planilla);
+    }
 }

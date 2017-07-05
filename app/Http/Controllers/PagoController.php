@@ -14,12 +14,21 @@ use App\Repositories\PagoRelFacturaRepository;
 use App\Repositories\PagoRelDescuentoRepository;
 use App\Repositories\PagoRelRutaRepository;
 
+use App\Models\Pago;
+use App\Models\Descuento;
+use App\Models\Factura;
+use App\Models\Ruta;
+use App\Models\PagoRelFactura;
+use App\Models\PagoRelDescuento;
+use App\Models\PagoRelRuta;
+
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Auth;
 use Response;
+use Carbon\Carbon;
 
 class PagoController extends AppBaseController
 {
@@ -63,8 +72,17 @@ class PagoController extends AppBaseController
     public function index(Request $request)
     {
         $this->pagoRepository->pushCriteria(new RequestCriteria($request));
-        $pagos = $this->pagoRepository->paginate(15);
+        $pagos = $this->pagoRepository->orderBy('updated_at', 'desc')->paginate(15);
 
+       /* dd($this->pagoRepository
+            ->with('pagorelfactura.factura')
+            ->with('pagorelruta.ruta')
+            ->with('pagoreldescuento.descuento')
+            ->with('express_factura')
+            ->with('express_ruta')
+            ->with('express_descuento')
+            ->all());
+            */
         /**
          * $pagos = $this->pagoRepository->all();
          */
@@ -108,11 +126,105 @@ class PagoController extends AppBaseController
         $input = $request->all();
         $input['user_id'] = Auth::id();
 
-        dd($input);
+        $input['fecha_inicio'] = Carbon::createFromFormat('Y-m-d',$request->fecha_inicio)->startOfWeek();
+        $input['fecha_final'] = Carbon::createFromFormat('Y-m-d', $request->fecha_final)->endOfWeek();
+
+        $subtotal   = 0;
+        $total      = 0;
+        $descuentos = 0;
+        //dd($input['factura'][1]);
+        //dd($request->desc_valor);
+        foreach ($request->factura as $key => $value) {
+
+            $dupli_factura = Factura::where('codigo', trim($value))->first();
+            //$dupli_factura = Factura::firstOrCreate(array('codigo' => $request->factura));           
+            if (is_null($dupli_factura)) {
+                $new_factura = Factura::create(['codigo' => $value, 'user_id' => Auth::id()]);
+                $input['pago_rel_factura'][$key] = $new_factura->id;
+            } else {
+                 $input['pago_rel_factura'][$key] = $dupli_factura->id; 
+            }        
+           
+        }
+        
+
+         foreach ($request->predefinido as $key => $value) {
+                     
+            if ($value == 'yes') {
+                $input['pago_rel_ruta'][$key]['ruta_id']         = $request->ruta_nombre[$key];
+                $input['pago_rel_ruta'][$key]['cantidad_viajes'] = $request->cantidad[$key];
+                $input['pago_rel_ruta'][$key]['valor_final']     = $request->valor_final[$key]; 
+
+            } else if ($value == 'not') {
+
+                $new_ruta = Ruta::create([
+                    'nombre'         => $request->ruta_nombre[$key],
+                    'distancia'       => $request->distancia[$key],
+                    'duracion'       => $request->duracion[$key],
+                    'valor_sugerido' => $request->valor_final[$key],
+                    'predefinido'    => false,
+                    'descripcion'    => 'Registrado desde modulo Pagos',
+                    'user_id'        => Auth::id()
+                    ]);
+
+                $input['pago_rel_ruta'][$key]['ruta_id']         = $new_ruta->id;
+                $input['pago_rel_ruta'][$key]['cantidad_viajes'] = $request->cantidad[$key];
+                $input['pago_rel_ruta'][$key]['valor_final']     = $request->valor_final[$key];                
+            }                      
+        }
+
+        foreach ($request->predefinido as $key => $value) {
+           $subtotal = $subtotal + ($request->cantidad[$key] * $request->valor_final[$key]);
+        }
+        
+        $descuentos = $request->desc_transaccion + $request->desc_sobrecosto + $request->text_cuatro_por_mil + ($subtotal*$request->desc_finca/100) + ($subtotal*$request->desc_admin/100);
+
+        if (!is_null($request->desc_valor)) {
+           foreach ($request->desc_valor as $key => $value) {
+                $descuentos = $descuentos + $value;
+            }
+        }
+        
+
+        $total = $subtotal - $descuentos;
+
+        $input['subtotal'] = $subtotal;
+        $input['total_descuentos'] = $descuentos;
+        $input['total'] = $total;
+        //dd($input['fecha_final']->weekOfYear);
 
         $pago = $this->pagoRepository->create($input);
 
-        Flash::success('Pago registrado correctamente.');
+         foreach ($input['pago_rel_factura'] as $key => $value) {
+            $new_rel_fac = PagoRelFactura::create([
+                        'pago_id'    => $pago->id,
+                        'factura_id' => $value,
+                        'user_id'    => Auth::id()
+                        ]);
+        }
+        if (!is_null($request->desc_valor)) {
+            foreach ($request->desc_tipo as $key => $value) {
+                $new_rel_desc = PagoRelDescuento::create([
+                            'pago_id'      => $pago->id,
+                            'descuento_id' => $value,
+                            'valor'        => $request->desc_valor[$key],
+                            'user_id'      => Auth::id()
+                            ]);
+            }
+        }
+        foreach ($input['pago_rel_ruta'] as $key => $value) {
+             $new_rel_ruta = PagoRelRuta::create([
+                        'pago_id'         => $pago->id,
+                        'ruta_id'         => $value['ruta_id'],
+                        'valor_final'     => $value['valor_final'],
+                        'cantidad_viajes' => $value['cantidad_viajes'],
+                        'user_id'         => Auth::id()
+                        ]);
+        }
+
+        //dd($input);        
+
+        Flash::success('Planilla de Pago registrada correctamente.');
 
         return redirect(route('pagos.index'));
     }
@@ -208,5 +320,17 @@ class PagoController extends AppBaseController
         Flash::success('Pago eliminado correctamente.');
 
         return redirect(route('pagos.index'));
+    }
+    public function print_space($id)
+    {
+        $pago = $this->pagoRepository->findWithoutFail($id);
+
+        if (empty($pago)) {
+            Flash::error('Pago No se encuentra registrado.');
+
+            return redirect(route('pagos.index'));
+        }
+       $this->pagoRepository->print_pagos($id);
+        
     }
 }

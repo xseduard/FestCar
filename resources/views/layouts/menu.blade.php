@@ -29,10 +29,23 @@
     		</li>
             <li class="{{ Request::is('reciboProductos*') ? 'active' : '' }}">
                 <a href="{!! route('reciboProductos.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Recibo (Productos)</span></a>
+            </li>           
+            <li class="header" style="color: #f5f5f5">Opciones Avanzadas</li>
+             <li class="{{ Request::is('reciboDetalles*') ? 'active' : '' }}">
+                <a href="{!! route('reciboDetalles.index') !!}"><i class="fa fa-cog" aria-hidden="true"></i><span>Recibo-Detalles</span></a>
             </li>
-            <li class="{{ Request::is('reciboDetalles*') ? 'active' : '' }}">
-                <a href="{!! route('reciboDetalles.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Recibo (Articulos)</span></a>
-            </li>	
+            <li class="{{ Request::is('pagoRelFacturas*') ? 'active' : '' }}">
+                <a href="{!! route('pagoRelFacturas.index') !!}"><i class="fa fa-cog" aria-hidden="true"></i><span>Pago-Facturas</span></a>
+            </li>
+
+            <li class="{{ Request::is('pagoRelDescuentos*') ? 'active' : '' }}">
+                <a href="{!! route('pagoRelDescuentos.index') !!}"><i class="fa fa-cog" aria-hidden="true"></i><span>Pago-Descuentos</span></a>
+            </li>
+
+            <li class="{{ Request::is('pagoRelRutas*') ? 'active' : '' }}">
+                <a href="{!! route('pagoRelRutas.index') !!}"><i class="fa fa-cog" aria-hidden="true"></i><span>Pago-Rutas</span></a>
+            </li>
+
     	</ul>
     </li>
     
@@ -141,9 +154,6 @@
     </ul>
 </li>
 
-
-
-
 <li class="{{ Request::is('extractos*') ? 'active' : '' }}">
     <a href="{!! route('extractos.index') !!}"><i class="ion ion-clipboard"></i><span>Extractos</span></a>
 </li>
@@ -152,34 +162,23 @@
     <a href="{!! route('recibos.index') !!}"><i class="ion-ios-cart"></i> <span>Recibos</span></a>
 </li>
 
-
 <li class="{{ Request::is('descuentos*') ? 'active' : '' }}">
-    <a href="{!! route('descuentos.index') !!}"><i class="fa fa-edit"></i><span>Descuentos</span></a>
+    <a href="{!! route('descuentos.index') !!}"><i class="fa fa-circle"></i><span>Descuentos</span></a>
 </li>
 
 <li class="{{ Request::is('facturas*') ? 'active' : '' }}">
-    <a href="{!! route('facturas.index') !!}"><i class="fa fa-edit"></i><span>Facturas</span></a>
+    <a href="{!! route('facturas.index') !!}"><i class="fa fa-circle"></i><span>Facturas</span></a>
 </li>
 
 <li class="{{ Request::is('rutas*') ? 'active' : '' }}">
-    <a href="{!! route('rutas.index') !!}"><i class="fa fa-edit"></i><span>Rutas</span></a>
+    <a href="{!! route('rutas.index') !!}"><i class="fa fa-circle"></i><span>Rutas</span></a>
 </li>
 
 <li class="{{ Request::is('pagos*') ? 'active' : '' }}">
     <a href="{!! route('pagos.index') !!}"><i class="fa fa-star"></i><span>Planillas de Pago</span></a>
 </li>
 
-<li class="{{ Request::is('pagoRelFacturas*') ? 'active' : '' }}">
-    <a href="{!! route('pagoRelFacturas.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Pago-Facturas</span></a>
-</li>
 
-<li class="{{ Request::is('pagoRelDescuentos*') ? 'active' : '' }}">
-    <a href="{!! route('pagoRelDescuentos.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Pago-Descuentos</span></a>
-</li>
-
-<li class="{{ Request::is('pagoRelRutas*') ? 'active' : '' }}">
-    <a href="{!! route('pagoRelRutas.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Pago-Rutas</span></a>
-</li>
 
 @endif
 

@@ -80,9 +80,16 @@
     <hr  style="margin-top: 0px;">
 </div>
 
+<div class="form-group col-sm-4">
+    {!! Form::label('responsable_id', 'Titular/Responsable (Quién recibe el pago)') !!}
+    <div class="input-group">
+        <div class="input-group-addon" title="En caso de ser selcccionado, este Aparecerá en los extractos del contrato"><i class="fa fa-shield" aria-hidden="true" ></i></div>
+        {!! Form::select('responsable_id', $selectores['natural_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+    </div>
+</div>
 
 <!-- Entidad Bancaria Campo de texto -->
-<div class="form-group col-sm-4">
+<div class="form-group col-sm-3">
     {!! Form::label('entidad_bancaria', 'Entidad Bancaria') !!}
     {!! Form::select('entidad_bancaria', [
 'BANCO DE LA REPÚBLICA'     => 'BANCO DE LA REPÚBLICA',
@@ -121,7 +128,7 @@
 </div>
 
 <!-- Numero Cuenta Bancaria Campo de texto -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-3">
     {!! Form::label('numero_cuenta_bancaria', 'Número Cuenta Bancaria') !!}
     <div class="input-group">
         <div class="input-group-addon">#</div>

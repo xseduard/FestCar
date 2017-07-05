@@ -23,6 +23,7 @@ class PagoRelDescuento extends Model
     public $fillable = [
         'pago_id',
         'descuento_id',
+        'valor',
         'user_id'
     ];
     /**
@@ -31,6 +32,7 @@ class PagoRelDescuento extends Model
     protected $casts = [
         'pago_id' => 'integer',
         'descuento_id' => 'integer',
+        'valor' => 'integer',
         'user_id' => 'integer'
     ];
     /**
@@ -47,7 +49,12 @@ class PagoRelDescuento extends Model
         return $this->belongsTo('App\Models\Modelo');
     }
     */
-    
+    public function descuento(){
+        return $this->belongsTo('App\Models\Descuento');
+    }
+    public function pago(){
+        return $this->belongsTo('App\Models\Pago');
+    }
 
     /**
      * Funciones Especiales

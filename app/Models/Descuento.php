@@ -47,7 +47,9 @@ class Descuento extends Model
         return $this->belongsTo('App\Models\Modelo');
     }
     */
-    
+    public function pagoreldescuento(){
+        return $this->hasMany('App\Models\PagoRelDescuento');
+    }
 
     /**
      * Funciones Especiales

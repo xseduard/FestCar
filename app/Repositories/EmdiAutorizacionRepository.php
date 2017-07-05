@@ -297,7 +297,7 @@ class EmdiAutorizacionRepository extends BaseRepository
          'drawcolor' => '0,0,0',
          'linewidth' => '0.4',
          'linearea' => 'LTBR');
-        $col[] = array('text' => utf8_decode("Lugar"),
+        $col[] = array('text' => utf8_decode("Dirección"),
          'width' => '53',
          'height' => '9',
          'align' => 'C',

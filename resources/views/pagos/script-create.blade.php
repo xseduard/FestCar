@@ -12,6 +12,8 @@
         $('.datepicker').datepicker({             
             format: 'yyyy-mm-dd',        
             language: 'es',
+            calendarWeeks: true,
+            weekStart: 1,
         });
     });
 
@@ -176,6 +178,7 @@
     });
 
     function calculos_totales(){
+      console.log('llega');
       var subtotal_rutas = 0;
       var subtotal_descuentos = 0;
 
@@ -212,6 +215,8 @@
        $('#total_descuentos').val(subtotal_descuentos.toFixed(2));
 
        $('#total').val(total.toFixed(2));
+
+       console.log(total.toFixed(2));
     }
 
     function buscar_ruta(ruta_id){

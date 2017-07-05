@@ -50,7 +50,12 @@ class PagoRelRuta extends Model
         return $this->belongsTo('App\Models\Modelo');
     }
     */
-    
+    public function ruta(){
+        return $this->belongsTo('App\Models\Ruta');
+    }
+    public function pago(){
+        return $this->belongsTo('App\Models\Pago');
+    }
 
     /**
      * Funciones Especiales

@@ -36,6 +36,7 @@ class ContratoVinculacion extends Model
         'entidad_bancaria',
         'fecha_inicio',
         'fecha_final',
+        'responsable_id',
         'user_id',
         'aprobado',
         'fecha_aprobacion',
@@ -58,6 +59,7 @@ class ContratoVinculacion extends Model
         'servicio' => 'string',
         'fecha_inicio' => 'string',
         'fecha_final' => 'string',
+        'responsable_id' => 'string',
         'tipo_cuenta_bancaria' => 'string',
         'numero_cuenta_bancaria' => 'string',
         'entidad_bancaria' => 'string',
@@ -84,7 +86,8 @@ class ContratoVinculacion extends Model
         'numero_cuenta_bancaria' => 'required',
         'entidad_bancaria' => 'required',
         'fecha_inicio' => 'required|date',
-        'fecha_final' => 'required|date|after:fecha_inicio'
+        'fecha_final' => 'required|date|after:fecha_inicio',
+        'responsable_id' => 'required',
     ];
     /**
      * Relaciones entre Modelos
@@ -111,6 +114,10 @@ class ContratoVinculacion extends Model
     public function usuario_aprueba(){
         return $this->belongsTo('App\User', 'usuario_aprobacion');
     }
+
+    public function responsable(){
+        return $this->belongsTo('App\Models\Natural', 'responsable_id');
+    }
     
 
     /**
@@ -124,5 +131,15 @@ class ContratoVinculacion extends Model
     public function getRlFullNameAttribute()
     {
        return $this->rl_name . ' ' . $this->rl_lastname;
+    }
+
+    public function getExistResponsableAttribute()
+    {
+        if ($this->responsable_id > 0) {
+            return true;
+        } else {
+            return false;
+        }
+       
     }
 }

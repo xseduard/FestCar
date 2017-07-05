@@ -52,8 +52,8 @@ class EmdiAutorizacion extends Model
     public static $rules = [
         'ruta' => 'required',
         'paciente_id' => '',
-        'cita_fecha' => 'date|required',
-        'cita_hora' => 'required',
+        'cita_fecha' => 'date',
+        'cita_hora' => '',
         'cita_lugar_id' => 'required',
         'conductor_id' => 'required',
         'cantidad' => 'required'

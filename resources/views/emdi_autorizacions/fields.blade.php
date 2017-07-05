@@ -10,7 +10,13 @@
 <!-- Ruta Selector -->
 <div class="form-group col-sm-6">
     {!! Form::label('ruta', 'Ruta') !!}
-    {!! Form::select('ruta',['ARBOLETES-MONTERIA (Ida y Regreso)'=>'ARBOLETES-MONTERIA (Ida y Regreso)'], null, ['class' => 'form-control select2', 'required', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*', 'required']) !!}
+    {!! Form::select('ruta',[
+    'ARBOLETES-MONTERIA (Ida)' => 'ARBOLETES-MONTERIA (Ida)',
+    'ARBOLETES-MONTERIA (Ida y Regreso)' => 'ARBOLETES-MONTERIA (Ida y Regreso)',
+    'SAN JUAN-MONTERIA (Ida)' => 'SAN-JUAN-MONTERIA (Ida)',
+    'SAN-JUAN-MONTERIA (Ida y Regreso)' => 'SAN-JUAN-MONTERIA (Ida y Regreso)'
+
+    ], null, ['class' => 'form-control select2', 'required', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*', 'required']) !!}
 </div>
 
 <div class="clearfix"></div>
@@ -30,7 +36,7 @@
     {!! Form::label('cita_hora', 'Hora de la cita') !!}
     <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-clock-o"></i></div>
-        {!! Form::text('cita_hora', null, ['class' => 'form-control', 'required', 'placeholder'=>'']) !!}
+        {!! Form::text('cita_hora', null, ['class' => 'form-control', '', 'placeholder'=>'']) !!}
     </div>
 </div>
 

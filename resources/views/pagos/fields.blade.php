@@ -212,7 +212,7 @@
         {!! Form::checkbox('irregularidad', '1', null) !!}
       </span>
       <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-      {!! Form::text('desc_sobrecosto', 0, ['class' => 'form-control texto-right']) !!}
+      {!! Form::text('desc_sobrecosto', 0, ['class' => 'form-control texto-right', 'placeholder'=>'']) !!}
     </div>
 </div>
 
@@ -288,7 +288,7 @@
 <div class="form-group col-sm-4 col-xl-4">
     <div class="input-group">
         <span class="input-group-addon">Total Descuentos <i class="fa fa-usd"></i></span>
-        {!! Form::text('total_descuentos', null, ['readonly', 'class' => 'form-control texto-right']) !!}
+        {!! Form::text('total_descuentos', null, ['readonly', 'id'=>'total_descuentos', 'class' => 'form-control texto-right']) !!}
     </div>
 </div>
 
@@ -299,6 +299,6 @@
     
     <div class="input-group">
         <span class="input-group-addon">Total <i class="fa fa-usd"></i></span>
-        {!! Form::text('total', null, ['readonly', 'class' => 'form-control texto-right', 'placeholder'=>'']) !!}
+        {!! Form::text('total', null, ['readonly', 'id'=>'total', 'class' => 'form-control texto-right', 'placeholder'=>'']) !!}
     </div>
 </div>

@@ -47,7 +47,12 @@ class PagoRelFactura extends Model
         return $this->belongsTo('App\Models\Modelo');
     }
     */
-    
+    public function factura(){
+        return $this->belongsTo('App\Models\Factura');
+    }
+    public function pago(){
+        return $this->belongsTo('App\Models\Pago');
+    }
 
     /**
      * Funciones Especiales

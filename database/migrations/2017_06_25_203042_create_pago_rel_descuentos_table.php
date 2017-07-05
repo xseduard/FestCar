@@ -20,7 +20,9 @@ class CreatePagoRelDescuentosTable extends Migration
             $table->foreign('pago_id')->references('id')->on('pagos');
 
             $table->integer('descuento_id')->unsigned();
-             $table->foreign('descuento_id')->references('id')->on('descuentos');
+            $table->foreign('descuento_id')->references('id')->on('descuentos');
+
+            $table->integer('valor')->unsigned();
 
             $table->integer('user_id')->unsigned();
             $table->timestamps();

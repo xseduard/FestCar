@@ -55,7 +55,9 @@ class Ruta extends Model
         return $this->belongsTo('App\Models\Modelo');
     }
     */
-    
+    public function pagorelruta(){
+        return $this->hasMany('App\Models\PagoRelRuta');
+    }
 
     /**
      * Funciones Especiales

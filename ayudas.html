@@ -11,10 +11,17 @@ mb_strtoupper($var,'utf-8');
 substr($var, 0, 40)
 
 // puntos comas
-number_format($var, 0, '.', '.' )
+number_format($var, 0, '.', ',' )
+//for money
+"$ ".number_format($var, 2, '.', ',' )
+
+//letras
+\NumeroALetras::convertir($var)."PESOS ***"
 
 //tipo variable 
 gettype() — Obtener el tipo de una variable
+
+
 
 php artisan tinker
 
@@ -22,6 +29,10 @@ php artisan tinker
 <input id="numbersOnly" pattern="[0-9.]+" type="text">
 
 $variable = App\Models\Nombre_modelo
+
+@if()
+@else
+@endif
 
 all()
 get()
