@@ -230,7 +230,7 @@
 <div class="form-group col-sm-3 col-xl-2">
     {!! Form::label('desc_finca', 'Retención Finca') !!}
      <div class="input-group">       
-        {!! Form::text('desc_finca', 3.4, ['class' => 'form-control texto-right']) !!}
+        {!! Form::text('desc_finca', 4.3, ['class' => 'form-control texto-right']) !!}
         <div class="input-group-addon"><i class="fa fa-percent"></i></div>
     </div>
 </div>

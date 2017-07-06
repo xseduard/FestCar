@@ -51,7 +51,7 @@ class Tarjeta_PropiedadController extends AppBaseController
     {
         $selectores = [];
         // $selectores['atributo_id'] = $this->centralRepository->atributo_id();
-        $selectores['vehiculo_id'] = $this->centralRepository->vehiculo_id_tarjeta_propiedad();
+        $selectores['vehiculo_id'] = $this->centralRepository->vehiculo_id();
         return $selectores;
     }
     /**

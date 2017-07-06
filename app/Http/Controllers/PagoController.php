@@ -134,9 +134,11 @@ class PagoController extends AppBaseController
         if (!empty($contratoVinculacion)) {
             $validar_documentos_vehiculo = $this->centralRepository->validar_documentos_vehiculo($contratoVinculacion->vehiculo_id);
 
-            if ($validar_documentos_vehiculo['error']) {  
-                Flash::error($validar_documentos_vehiculo['mensaje']);           
-                 return Redirect::back()->withInput(Input::all());
+            if ($validar_documentos_vehiculo['error']) {
+                
+                Flash::error($validar_documentos_vehiculo['mensaje']);
+                return redirect(route('pagos.index'));
+               
             }
         }
 

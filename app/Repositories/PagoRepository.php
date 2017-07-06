@@ -254,7 +254,7 @@ class PagoRepository extends BaseRepository
             }
         }
 
-        $descuentos = $pago->desc_transaccion + $pago->desc_sobrecosto + ($pago->subtotal*4/1000) + ($pago->subtotal*$pago->desc_finca/100) + ($pago->subtotal*$pago->desc_admin/100) + $desc_each;
+        $descuentos = $pago->desc_transaccion + $pago->desc_sobrecosto + ($pago->subtotal*4/1000) + ($pago->subtotal*$pago->desc_admin/100) + $desc_each;
         
 
         $total = $total_facturado - $descuentos;
