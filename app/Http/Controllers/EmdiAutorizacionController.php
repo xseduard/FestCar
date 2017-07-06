@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateEmdiAutorizacionRequest;
 use App\Http\Requests\UpdateEmdiAutorizacionRequest;
 use App\Repositories\EmdiAutorizacionRepository;
+use App\Repositories\EmdiPacienteRepository;
 use App\Repositories\CentralRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -21,12 +22,14 @@ class EmdiAutorizacionController extends AppBaseController
 {
     /** @var  EmdiAutorizacionRepository */
     private $emdiAutorizacionRepository;
+    private $emdiPacienteRepository;
     private $centralRepository;
 
-    public function __construct(EmdiAutorizacionRepository $emdiAutorizacionRepo, CentralRepository $centralRepo)
+    public function __construct(EmdiAutorizacionRepository $emdiAutorizacionRepo, EmdiPacienteRepository $emdiPacienteRepo, CentralRepository $centralRepo)
     {
         $this->middleware('auth');
         $this->emdiAutorizacionRepository = $emdiAutorizacionRepo;
+        $this->emdiPacienteRepository = $emdiPacienteRepo;
         $this->centralRepository = $centralRepo;
     }
 
@@ -184,9 +187,18 @@ class EmdiAutorizacionController extends AppBaseController
             return redirect(route('emdiAutorizacions.index'));
         }
 
-        $this->emdiAutorizacionRepository->delete($id);
+        //eliminar paciente
+       $emdiPaciente = $this->emdiPacienteRepository->findWithoutFail($emdiAutorizacion->paciente_id);
 
-        Flash::success('Autorización eliminado correctamente.');
+        if (!empty($emdiPaciente)) {
+            $this->emdiPacienteRepository->delete($emdiAutorizacion->paciente_id);
+        }
+
+        $this->emdiAutorizacionRepository->delete($id);
+        
+
+
+        Flash::success('Autorización eliminada correctamente.');
 
         return redirect(route('emdiAutorizacions.index'));
     }
@@ -200,6 +212,7 @@ class EmdiAutorizacionController extends AppBaseController
             return redirect(route('emdiAutorizacions.index'));
         }
        $this->emdiAutorizacionRepository->print_autorizaciones($id);
-        
+
+
     }
 }

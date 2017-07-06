@@ -238,9 +238,9 @@ class ExtractoRepository extends BaseRepository
 
         $pdf->SetFont('helvetica','',10);
         $pdf->Cell(106,5,utf8_decode('FECHA INICIAL'),"LR",0,"L");
-        $pdf->Cell(25,5,utf8_decode($extracto->cps->fecha_inicio->day),"R",0,"C");
-        $pdf->Cell(40,5,utf8_decode(mb_strtoupper($extracto->cps->fecha_inicio->format('F'),'utf-8')),"LR",0,"C");
-        $pdf->Cell(25,5,utf8_decode($extracto->cps->fecha_inicio->year),"LR",1,"C");
+        $pdf->Cell(25,5,utf8_decode($extracto->fecha_inicio->day),"R",0,"C");
+        $pdf->Cell(40,5,utf8_decode(mb_strtoupper($extracto->fecha_inicio->format('F'),'utf-8')),"LR",0,"C");
+        $pdf->Cell(25,5,utf8_decode($extracto->fecha_inicio->year),"LR",1,"C");
 
          $pdf->SetFont('helvetica','',6);
         $pdf->Cell(106,4,utf8_decode(''),"LTR",0,"C");
@@ -250,9 +250,9 @@ class ExtractoRepository extends BaseRepository
 
         $pdf->SetFont('helvetica','',10);
         $pdf->Cell(106,5,utf8_decode('FECHA FINAL'),"LBR",0,"L");
-        $pdf->Cell(25,5,utf8_decode("".$extracto->cps->fecha_final->day),"BR",0,"C");
-        $pdf->Cell(40,5,utf8_decode("".mb_strtoupper($extracto->cps->fecha_final->format('F'),'utf-8')),"LBR",0,"C");
-        $pdf->Cell(25,5,utf8_decode("".$extracto->cps->fecha_final->year),"LBR",1,"C");
+        $pdf->Cell(25,5,utf8_decode("".$extracto->fecha_final->day),"BR",0,"C");
+        $pdf->Cell(40,5,utf8_decode("".mb_strtoupper($extracto->fecha_final->format('F'),'utf-8')),"LBR",0,"C");
+        $pdf->Cell(25,5,utf8_decode("".$extracto->fecha_final->year),"LBR",1,"C");
 
         /**
          * DESCRIPCCIÓN VEHÍCULO

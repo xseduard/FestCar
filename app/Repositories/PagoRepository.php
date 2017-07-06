@@ -53,7 +53,7 @@ class PagoRepository extends BaseRepository
         ->where('id',$id)
         ->first();
 
-        $pdf = new PDF_PAGOS('L','mm',array(216, 279));
+        $pdf = new PDF_PAGOS('P','mm',array(139, 216));
         $pdf->AddPage();
         $pdf->SetTitle(str_pad($pago->id, 4, "0", STR_PAD_LEFT)." | AUTORIZACIÓN EMDISALUD",true);
         $pdf->SetSubject('Copia Autorización');

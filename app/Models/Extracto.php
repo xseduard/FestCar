@@ -6,6 +6,8 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\DatesTranslator;
 
+use Jenssegers\Date\Date;
+
 /**
  * Class Extracto
  * @package App\Models
@@ -23,6 +25,8 @@ class Extracto extends Model
 
     public $fillable = [
         'codigo',
+        'fecha_inicio',
+        'fecha_final',
         'ContratoPrestacionServicio_id',
         'vehiculo_id',
         'recorrido',
@@ -45,6 +49,8 @@ class Extracto extends Model
      */
     protected $casts = [
         'codigo' => 'integer',
+        'fecha_inicio' => 'string',
+        'fecha_final' => 'string',
         'ContratoPrestacionServicio_id' => 'integer',
         'vehiculo_id' => 'integer',
         'recorrido' => 'string',
@@ -66,6 +72,8 @@ class Extracto extends Model
      * Reglas de Validacón
      */
     public static $rules = [
+        'fecha_inicio' => 'required|date',
+        'fecha_final' => 'required|date',
         'ContratoPrestacionServicio_id' => 'required',
         'vehiculo_id' => 'required',
         'recorrido' => 'required',
@@ -125,4 +133,14 @@ class Extracto extends Model
     /**
      * Funciones Especiales
      */
+
+    public function getFechaInicioAttribute($fecha_inicio)
+    {
+        return new Date($fecha_inicio);
+    }
+
+    public function getFechaFinalAttribute($fecha_final)
+    {
+        return new Date($fecha_final);
+    }
 }

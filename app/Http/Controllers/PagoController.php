@@ -21,6 +21,7 @@ use App\Models\Ruta;
 use App\Models\PagoRelFactura;
 use App\Models\PagoRelDescuento;
 use App\Models\PagoRelRuta;
+use App\Models\ContratoVinculacion;
 
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -28,6 +29,8 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Auth;
 use Response;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 
 class PagoController extends AppBaseController
@@ -125,7 +128,19 @@ class PagoController extends AppBaseController
     {
         $input = $request->all();
         $input['user_id'] = Auth::id();
+        
+        $contratoVinculacion = ContratoVinculacion::where('id',  $input['contrato_vinculacion_id'])->first();
+        
+        if (!empty($contratoVinculacion)) {
+            $validar_documentos_vehiculo = $this->centralRepository->validar_documentos_vehiculo($contratoVinculacion->vehiculo_id);
 
+            if ($validar_documentos_vehiculo['error']) {  
+                Flash::error($validar_documentos_vehiculo['mensaje']);           
+                 return Redirect::back()->withInput(Input::all());
+            }
+        }
+
+        
         $input['fecha_inicio'] = Carbon::createFromFormat('Y-m-d',$request->fecha_inicio)->startOfWeek();
         $input['fecha_final'] = Carbon::createFromFormat('Y-m-d', $request->fecha_final)->endOfWeek();
 
@@ -314,6 +329,28 @@ class PagoController extends AppBaseController
 
             return redirect(route('pagos.index'));
         }
+
+        $pagoRelRuta = PagoRelRuta::where('pago_id', $id)->get();
+        if (!$pagoRelRuta->isEmpty()) {
+            foreach ($pagoRelRuta as $key => $value) {               
+               $this->pagoRelRutaRepository->delete($value->id);
+            }
+        }
+
+        $pagoRelFactura = PagoRelFactura::where('pago_id', $id)->get();
+        if (!$pagoRelFactura->isEmpty()) {
+            foreach ($pagoRelFactura as $key => $value) {               
+               $this->pagoRelFacturaRepository->delete($value->id);
+            }
+        }
+
+        $pagoRelDescuento = PagoRelDescuento::where('pago_id', $id)->get();
+        if (!$pagoRelDescuento->isEmpty()) {
+            foreach ($pagoRelDescuento as $key => $value) {               
+               $this->pagoRelDescuentoRepository->delete($value->id);
+            }
+        }
+        
 
         $this->pagoRepository->delete($id);
 

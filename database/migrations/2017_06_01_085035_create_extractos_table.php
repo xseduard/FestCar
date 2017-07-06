@@ -16,6 +16,9 @@ class CreateExtractosTable extends Migration
         Schema::create('extractos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('codigo');
+
+            $table->date('fecha_inicio');
+            $table->date('fecha_final');
             
             $table->integer('ContratoPrestacionServicio_id')->unsigned();
             $table->foreign('ContratoPrestacionServicio_id')->references('id')->on('contrato_prestacion_servicios');

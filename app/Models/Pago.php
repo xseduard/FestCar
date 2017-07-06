@@ -112,4 +112,14 @@ class Pago extends Model
     {
         return new Date($fecha_planilla);
     }
+
+    public function getFechaInicioAttribute($fecha_inicio)
+    {
+        return new Date($fecha_inicio);
+    }
+
+    public function getFechaFinalAttribute($fecha_final)
+    {
+        return new Date($fecha_final);
+    }
 }

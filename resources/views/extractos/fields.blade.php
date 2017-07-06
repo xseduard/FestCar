@@ -1,3 +1,4 @@
+
 <!-- Contratoprestacionservicio Id Selector -->
 <div class="form-group col-sm-6">
     {!! Form::label('ContratoPrestacionServicio_id', 'Contrato') !!}
@@ -7,6 +8,23 @@
 <div class="form-group col-sm-6">
     {!! Form::label('vehiculo_id', 'Vehículo') !!}
     {!! Form::select('vehiculo_id', $selectores['vehiculo_id'], null, ['class' => 'form-control select2', 'style' => 'width: 100%', 'placeholder'=>'Seleccione...*']) !!}
+</div>
+
+<div class="form-group col-sm-6">
+    {!! Form::label('fecha_inicio', 'Fecha de Inicio') !!}
+    <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+        {!! Form::text('fecha_inicio', null, ['class' => 'form-control datepicker', 'placeholder' => 'AAAA-MM-DD']) !!}
+    </div>
+</div>
+
+<!-- Fecha Final campo de fecha -->
+<div class="form-group col-sm-6">
+    {!! Form::label('fecha_final', 'Fecha de Final') !!}
+    <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+        {!! Form::text('fecha_final', null, ['class' => 'form-control datepicker', 'placeholder' => 'AAAA-MM-DD']) !!}
+    </div>
 </div>
 <!-- Recorrido Campo de texto -->
 <div class="form-group col-sm-12">
