@@ -47,7 +47,7 @@ class Pago extends Model
         'contrato_vinculacion_id' => 'integer',
         'fecha_planilla' => 'date',
         'fecha_inicio' => 'date',
-        'fecha_final' => 'date',
+        'fecha_final' => 'date|after:fecha_inicio',
         'desc_transaccion' => 'integer',
         'cuatro_por_mil' => 'boolean',
         'desc_sobrecosto' => 'integer',

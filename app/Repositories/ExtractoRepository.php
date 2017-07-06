@@ -394,7 +394,8 @@ class PDF_EXTRACTO extends baseFpdf
        function Header()
     {
         // Logo
-        $this->Image('pdf-templates/extractos-96pp.jpg',0,0,0);
+        //$this->Image('pdf-templates/extractos-96pp.jpg',0,0,0);
+        $this->Image('pdf-templates/without_membrete.jpg',0,0,0);
         $this->ln(30);
         // helvetica bold 15
 
