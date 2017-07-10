@@ -33,7 +33,6 @@ class PagoRelRuta extends Model
     protected $casts = [
         'pago_id' => 'integer',
         'ruta_id' => 'integer',
-        'cantidad_viajes' => 'integer',
         'user_id' => 'integer'
     ];
     /**

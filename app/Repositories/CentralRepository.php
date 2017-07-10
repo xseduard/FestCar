@@ -65,8 +65,17 @@ class CentralRepository extends BaseRepository
         $resultado['error'] = false;
         $msg = "";
 
+        $resultado['tarjetapropiedad'] = null;
+        $resultado['tecnicomecanica'] = null;
+        $resultado['tarjetaoperacion'] = null;
+        $resultado['soat'] = null;
+        $resultado['polizaresponsabilidad'] = null;
+
         $validar_tecnicomencanica = true; //swith para validar tecnicomecanica
 
+        /**
+         * TARJETA PROPIEDAD
+         */
         if (is_null($car->tarjetapropiedad)) {
             $resultado['tarjetapropiedad'] = 'notfound';
             $resultado['error'] =  true;
@@ -84,25 +93,35 @@ class CentralRepository extends BaseRepository
             }
             
         }
-        if ($validar_tecnicomencanica) {
+        /**
+         * TECNICOMECANICA
+         */
+        if ($validar_tecnicomencanica) { //En caso de que sea nuevo no se valida
             if ($car->tecnicomecanica->isEmpty()) {
                     $resultado['tecnicomecanica'] = 'notfound';
                         $resultado['error'] =  true;                        
                         $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Técnicomecánica</b> No se encuentra registrada o esta vencida, <a href='/tecnicomecanicas/create' target='_blank'>Registrar aquí</a></p>";
                     } else {
+                        
                         foreach ($car->tecnicomecanica as $key => $value) {
                             if ($value->vigente) {
-                                $resultado['tecnicomecanica'] = $value;
-                                break;
-                            } 
+                                $resultado['tecnicomecanica'] = $value;                                
+                            }                                               
+                        }
+
+                        if (is_null($resultado['tecnicomecanica'])) {                             
                             $resultado['tecnicomecanica'] = 'notfound';
                             $resultado['tecnicomecanica-lasted'] = $car->tecnicomecanica;
-                            $resultado['error'] =  true;
-                            $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Técnicomecánica</b> No se encuentra registrada o esta vencida, <a href='/tecnicomecanicas/create' target='_blank'>Registrar aquí</a></p>";                      
-                    }
-                }
-        }
 
+                            $resultado['error'] =  true;
+
+                            $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Técnicomecánica</b> No se encuentra registrada o esta vencida, <a href='/tecnicomecanicas/create' target='_blank'>Registrar aquí</a></p>";   
+                        }
+                    }
+        }
+        /**
+         * TARJETA OPERACION
+         */
         if ($car->tarjetaoperacion->isEmpty()) {
             $resultado['tarjetaoperacion'] = 'notfound';
             $resultado['error'] =  true; 
@@ -111,15 +130,19 @@ class CentralRepository extends BaseRepository
                 foreach ($car->tarjetaoperacion as $key => $value) {
                     if ($value->vigente) {
                         $resultado['tarjetaoperacion'] = $value;
-                        break;
-                    }
-                    $resultado['tarjetaoperacion'] = 'notfound';
+                    } 
+                }
+                if (is_null($resultado['tarjetaoperacion'])) {
+                   $resultado['tarjetaoperacion'] = 'notfound';
                     $resultado['tarjetaoperacion-lasted'] = $car->tarjetaoperacion;
                     $resultado['error'] =  true; 
-                    $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Tarjeta de Operación:</b> No se encuentra registrada o esta vencida, <a href='/tarjetaOperacions/create' target='_blank'>Registrar aquí</a></p>";        
-
+                    $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Tarjeta de Operación:</b> No se encuentra registrada o esta vencida, <a href='/tarjetaOperacions/create' target='_blank'>Registrar aquí</a></p>"; 
                 }
         }
+        
+        /**
+         * SOAT
+         */
         if ($car->soat->isEmpty()) {
             $resultado['soat'] = 'notfound';
             $resultado['error'] =  true; 
@@ -128,15 +151,18 @@ class CentralRepository extends BaseRepository
            foreach ($car->soat as $key => $value) {
                 if ($value->vigente) {
                     $resultado['soat'] = $value;
-                    break;
-                } 
+                }        
+            }
+            if (is_null($resultado['soat'])) {
                 $resultado['soat'] = 'notfound';
                 $resultado['soat-lasted'] = $car->soat;
                 $resultado['error'] =  true; 
                 $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b>Soat:</b> No se encuentra registrado o esta vencido, <a href='/soats/create' target='_blank'>Registrar aquí</a> </p>";
-                           
             }
         }
+        /** 
+         *  POLIZA RESPOSABILIDAD
+         */
         if ($car->polizaresponsabilidad->isEmpty()) {
             $resultado['polizaresponsabilidad'] = 'notfound'; 
             $resultado['error'] =  true;
@@ -145,12 +171,13 @@ class CentralRepository extends BaseRepository
             foreach ($car->polizaresponsabilidad as $key => $value) {
                 if ($value->vigente) {
                     $resultado['polizaresponsabilidad'] = $value;
-                    break;
-                } 
+                }                           
+            }
+            if (is_null($resultado['polizaresponsabilidad'])) {
                 $resultado['polizaresponsabilidad'] = 'notfound';
                 $resultado['polizaresponsabilidad-lasted'] = $car->polizaresponsabilidad;
                 $resultado['error'] =  true;
-                $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b> Poliza de responsabilidad (RCC RCE):</b> No se encuentra registrada o esta vencida, <a href='/polizaResponsabilidads/create' target='_blank'>Registrar aquí</a></p>";                            
+                $msg .= "<p><i class='fa fa fa-exclamation-circle fa-spin fa-fw'></i><b> Poliza de responsabilidad (RCC RCE):</b> No se encuentra registrada o esta vencida, <a href='/polizaResponsabilidads/create' target='_blank'>Registrar aquí</a></p>";
             }
         } 
         if ($resultado['error']) {

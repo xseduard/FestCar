@@ -23,7 +23,7 @@ class CreatePagoRelRutasTable extends Migration
             $table->foreign('ruta_id')->references('id')->on('rutas');
 
             $table->decimal('valor_final', 19, 2);
-            $table->integer('cantidad_viajes');
+            $table->decimal('cantidad_viajes', 3, 1);
             $table->integer('user_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
