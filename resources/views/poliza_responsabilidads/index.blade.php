@@ -14,6 +14,10 @@
             @include('flash::message')
         </div>
 
+        {!! Form::open(['route' => 'polizaResponsabilidads.index', 'method' => 'GET']) !!}  
+            @include('common.search_documentos_vehiculo', ['records' => $polizaResponsabilidads])
+         {!! Form::close() !!}
+
         <div class="clearfix"></div>
         <div class="animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
             <div class="box box-primary">
@@ -38,7 +42,15 @@
 
     <script>
         $(document).ready(function () { 
-            $("span.pie").peity("pie")
+            $("span.pie").peity("pie");
+            $(".select2_without_search").select2({
+              tags: false, // permite insertar texto
+              language: {noResults: function() {return "No se encontraron coincidencias";}, searching: function() {return "Buscando..";}
+                    },
+              placeholder: 'Seleccionar...',      
+              allowClear: true,
+               minimumResultsForSearch: -1
+            });
         }); 
     </script>
 @endsection

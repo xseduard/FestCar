@@ -15,7 +15,7 @@
     {!! Form::label('fecha_planilla', 'Fecha Planilla') !!}
     <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-    	{!! Form::text('fecha_planilla', null, ['class' => 'form-control datepicker', 'placeholder' => 'AAAA-MM-DD', 'required']) !!}
+    	{!! Form::text('fecha_planilla', $date_now->format('Y-m-d'), ['class' => 'form-control datepicker', 'placeholder' => 'AAAA-MM-DD', 'required']) !!}
     </div>
 </div>
 

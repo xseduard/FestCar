@@ -8,8 +8,7 @@
         <th width="100px">Fecha Inicio</th>
         <th width="10px"></th>
         <th width="100px">Fecha Final</th>
-        <th>Estado</th>
-                
+        <th>Estado</th>                
         <th  width="110px">Acciones</th>
     </thead>
     <tbody>
@@ -64,24 +63,24 @@
                     <!-- 
                         <a href="{!! route('contratoVinculacions.show', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
                     -->
-                @if(!$contratoVinculacion->aprobado)
-                    <a href="{!! route('contratoVinculacions.aprobar', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' title="Aprobar" onclick="return confirm('¿Confirma que desea Aprobar este contrato?')"><i class="fa fa-gavel" aria-hidden="true"></i></a>
-                @else
-                    <a href="#" disabled="disabled" class='btn btn-success btn-xs' title="Contrato aprobado por: {!! $contratoVinculacion->usuario_aprueba->fullname !!}" target=""><i class="fa fa-check" aria-hidden="true"></i></a>
-                @endif 
-                     
-                @if($contratoVinculacion->tipo_contrato != 'AF')
-                    <a href="{!! route('contratoVinculacions.print', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' title="Imprimir" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
-                @else
-                    <a href="#" disabled="disabled" class='btn btn-default btn-xs' title="Sin plantilla de Contrato" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
-                @endif
-                    <a href="{!! route('contratoVinculacions.edit', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
-                        'type' => 'submit',
-                        'class' => 'btn btn-danger btn-xs',
-                        'onclick' => "return confirm('¿Confirma que desea eliminar?')",
-                        'title' => 'Eliminar'
-                        ]) !!}
+                    @if(!$contratoVinculacion->aprobado)
+                        <a href="{!! route('contratoVinculacions.aprobar', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' title="Aprobar" onclick="return confirm('¿Confirma que desea Aprobar este contrato?')"><i class="fa fa-gavel" aria-hidden="true"></i></a>
+                    @else
+                        <a href="#" disabled="disabled" class='btn btn-success btn-xs' title="Contrato aprobado por: {!! $contratoVinculacion->usuario_aprueba->fullname !!}" target=""><i class="fa fa-check" aria-hidden="true"></i></a>
+                    @endif 
+                         
+                    @if($contratoVinculacion->tipo_contrato != 'AF')
+                        <a href="{!! route('contratoVinculacions.print', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' title="Imprimir" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
+                    @else
+                        <a href="#" disabled="disabled" class='btn btn-default btn-xs' title="Sin plantilla de Contrato" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
+                    @endif
+                        <a href="{!! route('contratoVinculacions.edit', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
+                        {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
+                            'type' => 'submit',
+                            'class' => 'btn btn-danger btn-xs',
+                            'onclick' => "return confirm('¿Confirma que desea eliminar?')",
+                            'title' => 'Eliminar'
+                            ]) !!}
                 </div>
                 {!! Form::close() !!}
             </td>

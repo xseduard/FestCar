@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 use App\Models\Empresa;
 use App\Models\ContratoVinculacion;
+use App\Models\Vehiculo;
 
  
 
@@ -43,15 +44,23 @@ class ContratoVinculacionController extends AppBaseController
     {
         $this->contratoVinculacionRepository->pushCriteria(new RequestCriteria($request));
 
-        $contratoVinculacions = ContratoVinculacion::Scodigo($request->codigo)
-        ->Stypecont($request->tipo_contrato)
-        ->Stypeprov($request->tipo_proveedor)
-        ->orderBy(request('order_item', 'updated_at'), request('order_type', 'desc'))
-        ->paginate(15);
+        $contratoVinculacions = ContratoVinculacion::
+            WhereHas('vehiculo', function($q) use ($request) { $q->Splaca($request->vehiculo_id); })
+            ->Where(function ($q) use ($request) {
+                    $q->orWhereHas('natural', function($q) use ($request) { $q->Sfullname($request->fullname); })
+                        ->orWhereHas('juridico', function($q) use ($request) { $q->Snombre($request->fullname); });
+                })
+            ->Where(function ($q) use ($request) {
+                    $q->orWhereHas('natural', function($q) use ($request) { $q->Scedula($request->cc_nit); })        
+                        ->orWhereHas('juridico', function($q) use ($request) { $q->Snit($request->cc_nit); });
+            })
+            ->Scodigo($request->codigo)
+            ->Stypecont($request->tipo_contrato)
+            ->Stypeprov($request->tipo_proveedor)
+            ->Sestado($request->estado)
+            ->orderBy(request('order_item', 'updated_at'), request('order_type', 'desc'))
+            ->paginate(request('per_page', '15'));
 
-        /**
-         * $contratoVinculacions = $this->contratoVinculacionRepository->all();
-         */
 
         return view('contrato_vinculacions.index')
             ->with('contratoVinculacions', $contratoVinculacions);

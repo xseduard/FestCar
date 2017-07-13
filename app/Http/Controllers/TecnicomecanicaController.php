@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Response;
 use Jenssegers\Date\Date;
 
+use App\Models\Tecnicomecanica;
+
 class TecnicomecanicaController extends AppBaseController
 {
     /** @var  TecnicomecanicaRepository */
@@ -35,8 +37,13 @@ class TecnicomecanicaController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->tecnicomecanicaRepository->pushCriteria(new RequestCriteria($request));
-        $tecnicomecanicas = $this->tecnicomecanicaRepository->orderBy('updated_at', 'desc')->paginate(15);        
+        //$this->tecnicomecanicaRepository->pushCriteria(new RequestCriteria($request));
+        
+        $tecnicomecanicas = Tecnicomecanica::Svehiculoplaca($request->vehiculo_id)
+        ->Sestado($request->estado)
+        ->orderBy(request('order_item', 'updated_at'), request('order_type', 'desc'))
+        ->paginate(request('per_page', '15'));
+
         $fecha_actual = \Carbon\Carbon::now();
 
         /**

@@ -39,5 +39,38 @@ trait DatesTranslatorContrato
     {       
         return $this->fecha_inicio->diffInDays($this->fecha_final);        
     }
+
+
+    /**
+     * Query Scope
+     */
+
+    public function scopeSestado($query, $estado)
+    {
+        if (!empty($estado)) {
+            switch ($estado) {
+                case 'vigente':
+                    return $query->where('fecha_inicio', '<=',  Carbon::now() )
+                                 ->where('fecha_final', '>=',  Carbon::now() )
+                                 ->where('aprobado', true);
+                    break;
+                case 'finalizado':
+                   return $query->where('fecha_inicio', '<',  Carbon::now() )
+                                 ->where('fecha_final', '<',  Carbon::now() );
+                    break;
+                case 'no_iniciado':
+                    return $query->where('fecha_inicio', '>',  Carbon::now() )
+                                 ->where('fecha_final', '>',  Carbon::now() );
+                    break;
+                case 'pendiente_aprobacion':
+                    return $query->where('aprobado', false);
+                    break;
+                default:
+                    return $query;
+                    break;
+            }
+        }  
+    }
+
 	
 }

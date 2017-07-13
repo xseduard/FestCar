@@ -47,4 +47,46 @@ trait DatesTranslatorDocumentosVehiculo
     {       
         return $this->fecha_vigencia_inicio->diffInDays($this->fecha_vigencia_final);        
     }
+
+    /**
+     * Query Scopes
+     */
+
+    public function scopeSvehiculoplaca($query, $placa)
+    {
+        $placa = trim($placa);
+        if (!empty($placa)) {
+        	return $query->WhereHas('vehiculo', function($q) use ($placa) { $q->Splaca($placa); });
+        }
+    }
+
+    public function scopeSestado($query, $estado)
+    {
+        if (!empty($estado)) {
+            switch ($estado) {
+                case 'vigente':
+                    return $query->where('fecha_vigencia_inicio', '<=',  Carbon::now() )
+                                 ->where('fecha_vigencia_final', '>=',  Carbon::now() );
+                    break;
+                case 'no_vigente':
+                	return $query->Where(function ($q) {
+				                $q->where('fecha_vigencia_inicio', '<',  Carbon::now() )
+                                  ->where('fecha_vigencia_final', '<',  Carbon::now() );
+				            })->orWhere(function ($q) {
+				                $q->where('fecha_vigencia_inicio', '>',  Carbon::now() )
+                                  ->where('fecha_vigencia_final', '>',  Carbon::now() );
+				            });
+                   
+                    break;
+
+                default:
+                    return $query;
+                    break;
+            }
+        }  
+    }
+
+
+
+
 }

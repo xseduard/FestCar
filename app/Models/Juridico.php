@@ -85,4 +85,24 @@ class Juridico extends Model
     /**
      * Funciones Especiales
      */
+
+    /**
+     * Query Scope
+     */
+
+    public function scopeSnit($query, $nit)
+    {
+        $nit = trim($nit);
+        if (!empty($nit)) {
+            return $query->Where('nit', 'LIKE', "%$nit%");
+        }
+    }
+
+    public function scopeSnombre($query, $nombre)
+    {
+        $nombre = trim($nombre);
+        if (!empty($nombre)) {
+            return $query->Where('nombre', 'LIKE', "%$nombre%");
+        }
+    }
 }

@@ -100,4 +100,27 @@ class Natural extends Model
     /**
      * Funciones Especiales
      */
+
+    /**
+     * Query Scope
+     */
+
+    public function scopeSfullname($query, $text)
+    {
+        $text = trim($text);
+        if (!empty($text)) {
+            return $query->Where(function ($q) use ($text) {
+                $q->where('nombres', 'LIKE', "%$text%")
+                    ->orWhere('apellidos', 'LIKE', "%$text%");
+            });
+        }
+    }
+
+    public function scopeScedula($query, $cedula)
+    {
+        $cedula = trim($cedula);
+        if (!empty($cedula)) {
+            return $query->Where('cedula', 'LIKE', "%$cedula%");
+        }
+    }
 }

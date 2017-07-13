@@ -13,6 +13,8 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Auth;
 use Response;
 
+use App\Models\TarjetaOperacion;
+
 class TarjetaOperacionController extends AppBaseController
 {
     /** @var  TarjetaOperacionRepository */
@@ -34,8 +36,13 @@ class TarjetaOperacionController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->tarjetaOperacionRepository->pushCriteria(new RequestCriteria($request));
-        $tarjetaOperacions = $this->tarjetaOperacionRepository->orderBy('updated_at', 'desc')->paginate(15);
+        //$this->tarjetaOperacionRepository->pushCriteria(new RequestCriteria($request));
+       
+        $tarjetaOperacions = TarjetaOperacion::Svehiculoplaca($request->vehiculo_id)
+        ->Sestado($request->estado)
+        ->orderBy(request('order_item', 'updated_at'), request('order_type', 'desc'))
+        ->paginate(request('per_page', '15'));
+
         $fecha_actual = \Carbon\Carbon::now();
 
         /**

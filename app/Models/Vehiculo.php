@@ -109,9 +109,14 @@ class Vehiculo extends Model
      * Query Scopes
      */
 
+  
+
     public function scopeSplaca($query, $placa)
     {
-        return $query->where('placa', 'LIKE', "%$placa%");
+        $placa = trim($placa);
+        if (!empty($placa)) {
+            return $query->where('placa', 'LIKE', "%$placa%");
+        }
     }
 
 }

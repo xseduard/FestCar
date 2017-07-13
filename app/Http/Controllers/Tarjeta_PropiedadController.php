@@ -13,6 +13,8 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Auth;
 use Response;
 
+use App\Models\Tarjeta_Propiedad;
+
 class Tarjeta_PropiedadController extends AppBaseController
 {
     /** @var  Tarjeta_PropiedadRepository */
@@ -35,7 +37,9 @@ class Tarjeta_PropiedadController extends AppBaseController
     public function index(Request $request)
     {
         $this->tarjetaPropiedadRepository->pushCriteria(new RequestCriteria($request));
-        $tarjetaPropiedads = $this->tarjetaPropiedadRepository->orderBy('updated_at', 'desc')->paginate(15);
+        $tarjetaPropiedads  = Tarjeta_Propiedad::Svehiculoplaca($request->vehiculo_id)
+        ->orderBy(request('order_item', 'updated_at'), request('order_type', 'desc'))
+        ->paginate(request('per_page', '15'));
 
         /**
          * $tarjetaPropiedads = $this->tarjetaPropiedadRepository->all();

@@ -8,6 +8,7 @@ use App\Traits\DatesTranslator;
 use App\Traits\DatesTranslatorContrato;
 
 
+
 /**
  * Class ContratoVinculacion
  * @package App\Models
@@ -177,6 +178,8 @@ class ContratoVinculacion extends Model
             return $query->where('id', $codigo);
         }
     }
+
+    
     
     
 }

@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Response;
 use Jenssegers\Date\Date;
 
+use App\Models\PolizaResponsabilidad;
+
 class PolizaResponsabilidadController extends AppBaseController
 {
     /** @var  PolizaResponsabilidadRepository */
@@ -35,8 +37,12 @@ class PolizaResponsabilidadController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->polizaResponsabilidadRepository->pushCriteria(new RequestCriteria($request));
-        $polizaResponsabilidads = $this->polizaResponsabilidadRepository->orderBy('updated_at', 'desc')->paginate(15);
+        //$this->polizaResponsabilidadRepository->pushCriteria(new RequestCriteria($request));        
+        $polizaResponsabilidads = PolizaResponsabilidad::Svehiculoplaca($request->vehiculo_id)
+        ->Sestado($request->estado)
+        ->orderBy(request('order_item', 'updated_at'), request('order_type', 'desc'))
+        ->paginate(request('per_page', '15'));
+
         $fecha_actual = \Carbon\Carbon::now();
 
         /**

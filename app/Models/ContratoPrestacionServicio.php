@@ -140,4 +140,16 @@ class ContratoPrestacionServicio extends Model
     {
        return $this->rl_name . ' ' . $this->rl_lastname;
     }
+
+    /**
+     * Query Scope
+     */
+
+    public function scopeScodigo($query, $codigo)
+    {
+        $codigo = trim($codigo);
+        if (!empty($codigo)) {
+            return $query->where('id', $codigo);
+        }
+    }
 }

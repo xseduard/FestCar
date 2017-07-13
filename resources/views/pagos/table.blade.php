@@ -1,20 +1,20 @@
 <table class="table table-responsive" id="pagos-table">
     <thead>
-        <th class="text-center">Pago No.</th>
-        <th class="text-center">Cps</th>
-        <th class="text-center">Vehículo</th>
-        <th class="text-center">Responsable</th>
-        <th class="text-center">Fecha Planilla</th>
+        <th class="">Pago No.</th>
+        <th class="">Cps</th>
+        <th class="">Vehículo</th>
+        <th class="">Responsable</th>
+        <th class="">Fecha Planilla</th>
         <th class="text-center">Semana(s)</th>  
         <!--      
         <th class="text-center">Desc. Finca</th>
         <th class="text-center">Desc. Admin</th>
         <th class="text-center">Desc. Transacción</th>
         -->
-        <th class="text-center">SubTotal</th>
-        <th class="text-center">Total</th>
+        <th class="text-right">SubTotal</th>
+        <th class="text-right">Total</th>
         <th class="text-center">Fecha Registro</th>
-        <th colspan="3">Acciones</th>
+        <th colspan="3" class="text-right">Acciones</th>
     </thead>
     <tbody>
     @foreach($pagos as $pago)

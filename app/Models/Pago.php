@@ -122,4 +122,16 @@ class Pago extends Model
     {
         return new Date($fecha_final);
     }
+
+    /**
+     * Query Scope
+     */
+
+     public function scopeScodigo($query, $codigo)
+    {
+        $codigo = trim($codigo);
+        if (!empty($codigo)) {
+            return $query->where('id', $codigo);
+        }
+    }
 }

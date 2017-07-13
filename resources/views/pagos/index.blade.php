@@ -13,6 +13,9 @@
         <div class="animsition" data-animsition-in-class="zoom-in-sm" data-animsition-in-duration="1500" data-animsition-out-class="zoom-out-sm" data-animsition-out-duration="800">
             @include('flash::message')
         </div>
+        {!! Form::open(['route' => 'pagos.index', 'method' => 'GET']) !!}  
+            @include('pagos.search')
+         {!! Form::close() !!}
 
         <div class="clearfix"></div>
         <div class="animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
@@ -33,4 +36,25 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+   
+    <script>
+        $(document).ready(function () {            
+            $(".select2_without_search").select2({
+              tags: false, // permite insertar texto
+              language: {noResults: function() {return "No se encontraron coincidencias";}, searching: function() {return "Buscando..";}
+                    },
+              placeholder: 'Seleccionar...',      
+              allowClear: true,
+               minimumResultsForSearch: -1
+            });
+            $('.datepicker').datepicker({             
+                format: 'yyyy-mm-dd',        
+                language: 'es',
+            });
+        }); 
+    </script>
+@endsection
+
 

@@ -117,4 +117,16 @@ class Tarjeta_Propiedad extends Model
     /**
      * Funciones Especiales
      */
+
+    /**
+     * Query Scope
+     */
+
+    public function scopeSvehiculoplaca($query, $placa)
+    {
+        $placa = trim($placa);
+        if (!empty($placa)) {
+            return $query->WhereHas('vehiculo', function($q) use ($placa) { $q->Splaca($placa); });
+        }
+    }
 }

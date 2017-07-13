@@ -273,3 +273,13 @@ $(".rutaname").on('change',function(){
               });  
 
 //// fin copia de seguridad
+
+
+        
+        $contratoVinculacions = ContratoVinculacion::
+        with('vehiculo')->whereHas('vehiculo', function($q) use ($request)
+        {
+            $q->Splaca($request->vehiculo_id);
+
+        })
+        ->Scodigo($request->codigo)

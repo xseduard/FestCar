@@ -75,7 +75,13 @@ class PagoController extends AppBaseController
     public function index(Request $request)
     {
         $this->pagoRepository->pushCriteria(new RequestCriteria($request));
-        $pagos = $this->pagoRepository->orderBy('updated_at', 'desc')->paginate(15);
+
+        $pagos = Pago::
+        WhereHas('contratovinculacion.vehiculo', function($q) use ($request) { $q->Splaca($request->vehiculo_id); })
+        ->WhereHas('cps', function($q) use ($request) { $q->Scodigo($request->cps); })
+        ->Scodigo($request->codigo)
+        ->orderBy(request('order_item', 'updated_at'), request('order_type', 'desc'))
+        ->paginate(request('per_page', '15'));
 
        /* dd($this->pagoRepository
             ->with('pagorelfactura.factura')
@@ -114,7 +120,7 @@ class PagoController extends AppBaseController
     {
         $selectores = $this->selectoresComunes();
 
-        return view('pagos.create')->with(['selectores' => $selectores]);
+        return view('pagos.create')->with(['selectores' => $selectores, 'date_now' => Carbon::now()]);
     }
 
     /**

@@ -13,6 +13,9 @@
         <div class="animsition" data-animsition-in-class="zoom-in-sm" data-animsition-in-duration="1500" data-animsition-out-class="zoom-out-sm" data-animsition-out-duration="800">
             @include('flash::message')
         </div>
+        {!! Form::open(['route' => 'revisionPreventivas.index', 'method' => 'GET']) !!}  
+            @include('common.search_documentos_vehiculo', ['records' => $revisionPreventivas])
+         {!! Form::close() !!}
 
         <div class="clearfix"></div>
         <div class="animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
@@ -38,7 +41,15 @@
 
     <script>
         $(document).ready(function () { 
-            $("span.pie").peity("pie")
+            $("span.pie").peity("pie");
+            $(".select2_without_search").select2({
+              tags: false, // permite insertar texto
+              language: {noResults: function() {return "No se encontraron coincidencias";}, searching: function() {return "Buscando..";}
+                    },
+              placeholder: 'Seleccionar...',      
+              allowClear: true,
+               minimumResultsForSearch: -1
+            });
         }); 
     </script>
 @endsection

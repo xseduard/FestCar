@@ -207,4 +207,10 @@ div > svg  > text{
   cursor:pointer;
 }
 
-
+.hovered-text:hover > span{
+  -webkit-transition: color .5s;
+  color: #0095d8    
+}
+.hovered-text > span{
+  -webkit-transition: color .5s;     
+}
