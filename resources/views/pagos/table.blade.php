@@ -5,10 +5,12 @@
         <th class="text-center">Vehículo</th>
         <th class="text-center">Responsable</th>
         <th class="text-center">Fecha Planilla</th>
-        <th class="text-center">Semana(s)</th>        
+        <th class="text-center">Semana(s)</th>  
+        <!--      
         <th class="text-center">Desc. Finca</th>
         <th class="text-center">Desc. Admin</th>
         <th class="text-center">Desc. Transacción</th>
+        -->
         <th class="text-center">SubTotal</th>
         <th class="text-center">Total</th>
         <th class="text-center">Fecha Registro</th>
@@ -43,10 +45,12 @@
                     {!! $pago->fecha_inicio->weekOfYear,"-",$pago->fecha_final->weekOfYear !!}
                 @endif
                 
-            </td>            
+            </td>       
+            <!--     
             <td class="text-right">{!! $pago->desc_finca !!}%</td>
             <td class="text-right">{!! $pago->desc_admin !!}%</td>
             <td class="text-right">$ {!! $pago->desc_transaccion !!}</td>
+            -->
             <td class="text-right">$ {!! number_format($pago->subtotal, 2, '.', ',' ) !!}</td>
             <td class="text-right">$ {!! number_format($pago->total, 2, '.', ',' ) !!}</td>
             <td class="text-center">{!! $pago->created_at->format('d-m-Y') !!}</td>

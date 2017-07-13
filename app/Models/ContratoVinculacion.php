@@ -118,6 +118,12 @@ class ContratoVinculacion extends Model
     public function responsable(){
         return $this->belongsTo('App\Models\Natural', 'responsable_id');
     }
+
+    public function pago(){
+        return $this->hasMany('App\Models\Pago', 'contrato_vinculacion_id', 'id');
+    }
+
+
     
 
     /**
@@ -142,4 +148,35 @@ class ContratoVinculacion extends Model
         }
        
     }
+
+    /**
+     * Query Scopes
+     */
+
+    public function scopeStypecont($query, $type_cont)
+    {
+        //$type_cont = trim($type_cont);
+        if (!empty($type_cont)) {
+            return $query->where('tipo_contrato', $type_cont);
+        }
+        
+    }
+    public function scopeStypeprov($query, $type_prov)
+    {
+        //$type_prov = trim($type_prov);
+        if (!empty($type_prov)) {
+            return $query->where('tipo_proveedor', $type_prov);
+        }
+        //return $query->where('tipo_proveedor', 'LIKE', "%$type_prov%");
+    }
+
+    public function scopeScodigo($query, $codigo)
+    {
+        $codigo = trim($codigo);
+        if (!empty($codigo)) {
+            return $query->where('id', $codigo);
+        }
+    }
+    
+    
 }

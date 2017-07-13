@@ -93,7 +93,12 @@ class VehiculoController extends AppBaseController
 
         $documentos = $this->centralRepository->validar_documentos_vehiculo($id);  
 
-        
+        /*$pla = null;
+
+        $pla = $vehiculo->with('contratovinculacion.pago')->where('id', $id);
+
+        dd($pla);
+*/
         $sim_gasto = SimuladorGasto::where('min', '<=', $vehiculo->capacidad)
         ->where('max', '>=', $vehiculo->capacidad)->first();
 

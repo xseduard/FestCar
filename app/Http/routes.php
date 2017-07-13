@@ -61,8 +61,13 @@ Route::group(['middleware' => 'web'], function() {
         Route::get('logout', 'Auth\AuthController@logout');
 
         // Registration Routes...
+
+        Route::get('register', function () { abort(403); });  //Desactivar Registro
+        Route::post('register', function () { abort(403); });  //Desactivar Registro
+        /*
         Route::get('register', 'Auth\AuthController@showRegistrationForm');
         Route::post('register', 'Auth\AuthController@register');
+        */
 
         // Password Reset Routes...
         Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');

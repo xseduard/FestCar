@@ -60,6 +60,7 @@ class HomeController extends Controller
         $cont['cv-cc-vigente'] = $cv->where('tipo_contrato','CC')->where('vigente',true)->count();
         $cont['cv-af-vigente'] = $cv->where('tipo_contrato','AF')->where('vigente',true)->count();
 
+
         //dd($cont);
         return view('home')->with(['cont' => $cont, 'datos' => $datos]);
     }

@@ -42,7 +42,12 @@ class ContratoVinculacionController extends AppBaseController
     public function index(Request $request)
     {
         $this->contratoVinculacionRepository->pushCriteria(new RequestCriteria($request));
-        $contratoVinculacions = $this->contratoVinculacionRepository->orderBy('updated_at', 'desc')->paginate(15);
+
+        $contratoVinculacions = ContratoVinculacion::Scodigo($request->codigo)
+        ->Stypecont($request->tipo_contrato)
+        ->Stypeprov($request->tipo_proveedor)
+        ->orderBy(request('order_item', 'updated_at'), request('order_type', 'desc'))
+        ->paginate(15);
 
         /**
          * $contratoVinculacions = $this->contratoVinculacionRepository->all();

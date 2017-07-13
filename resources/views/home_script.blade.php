@@ -11,17 +11,17 @@ $(function () {
 	    data: {
 	        labels: ["CV", "CP", "CC", "AF"],
 	        datasets: [{	            
-	            data: [7, 16, 5, 0],
-	            backgroundColor: [	                
-	                '#fc9107',	                
-	                '#1fc1d5',
-	                '#dc2265',
-	                '#f44336'
+	            data: [{!! $cont['cv-cv-vigente'] !!}, {!! $cont['cv-cp-vigente'] !!}, {!! $cont['cv-cc-vigente'] !!}, {!! $cont['cv-af-vigente'] !!}],
+	            backgroundColor: [     
+	                '#ff5722',
+	                '#00bcd4',
+	                '#8bc34a',
+	                '#9c27b0'
 	            ]
 	        }]
 	    },
 	    options: {
-	    	cutoutPercentage: '50',
+	    	cutoutPercentage: '65',
 	    }
 	});
 

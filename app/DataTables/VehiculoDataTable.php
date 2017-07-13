@@ -35,23 +35,22 @@ class VehiculoDataTable extends DataTable
                 })
             ->addColumn('contratovinculacion', function($vehiculos) {
                   //return ($vehiculos->contratovinculacion->isEmpty());
+                  $sw_exist = null;
                     if ($vehiculos->contratovinculacion->isEmpty()) {
                        return "Sin contrato";
                     } else { 
                      foreach ($vehiculos->contratovinculacion as $key => $value) {
                             if ($value->vigente) {
                                 return $value->tipo_contrato.str_pad($value->id, 4, "0", STR_PAD_LEFT);
-                                break;
-                            }  
-                            return "Contrato Vencido";                   
-                    }      
-                        
+                                $sw_exist = true;
+                                //break;
+                            }                                               
+                    }                     
+                    if (is_null($sw_exist)) {
+                            return "Contrato Vencido";
+                         } 
 
-                    }
-                    
-                    
-                    
-                                          
+                    }                  
                     
                 })
             ->editColumn('updated_at', function ($vehiculos) {

@@ -195,3 +195,16 @@ div > svg  > text{
     font-family : 'Rubik' !important;
     padding : "3%";
 }
+
+.fa_enlinea{
+  width: 40px !important;
+  height: 40px !important;
+  float: left !important;
+}
+
+
+.cursor-pointer{
+  cursor:pointer;
+}
+
+

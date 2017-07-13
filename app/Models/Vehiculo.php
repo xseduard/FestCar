@@ -103,13 +103,15 @@ class Vehiculo extends Model
         return $this->belongsTo('App\User');
     }
     
-    /**
-     * Ascensores
-     */
-
     
 
     /**
-     * Funciones Especiales
+     * Query Scopes
      */
+
+    public function scopeSplaca($query, $placa)
+    {
+        return $query->where('placa', 'LIKE', "%$placa%");
+    }
+
 }

@@ -6,7 +6,7 @@
         <th>Contratista</th>
         <th>Recorrido</th>
         <th>Conductor Ppal</th>
-        <th>Usuario Creador</th>
+        <th>Fecha de creación</th>
         
         <th width="100px">Acciones</th>
     </thead>
@@ -27,7 +27,7 @@
             </td>
             <td>{!! $extracto->recorrido !!}</td>
             <td>{!! $extracto->conductoruno->natural->fullname !!}</td>   
-            <td>{!! $extracto->user->fullname !!}</td>        
+            <td title="{!! $extracto->user->fullname !!}">{!! $extracto->created_at->format('d-M-Y') !!}</td>        
             <td>
                 {!! Form::open(['route' => ['extractos.destroy', $extracto->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>

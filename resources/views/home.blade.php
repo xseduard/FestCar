@@ -37,27 +37,7 @@
 		            </a>
 		          </div>
 		        </div>
-            <!-- ./col -->
-                <div class="col-lg-1 col-sm-1 col-md-1 col-xs-6">
-                    <!-- weather widget start --><a target="_blank" href="http://hotelmix.es/weather/apartado-w613092"><img src="https://w.bookcdn.com/weather/picture/25_w613092_1_4_17bc9c_250_13a085_ffffff_ffffff_1_2071c9_ffffff_0_6.png?scode=124&domid=&anc_id=16966"  alt="booked.net"/></a><!-- weather widget end -->
-                    
-                </div>
-		        <div class="col-lg-2 col-xs-6">
-		          <!-- small box -->
-		          <div class="small-box bg-green">
-		            <div class="inner">
-		              <h3>73.1<sup style="font-size: 20px">%</sup></h3>
-
-		              <p>Relación</p>
-		            </div>
-		            <div class="icon">
-		              <i class="ion ion-stats-bars"></i>
-		            </div>
-		            <!-- <a href="#" class="small-box-footer">
-		             Mas Información <i class="fa fa-arrow-circle-right"></i>
-		            </a> -->
-		          </div>
-		        </div>
+          
 		        <!-- ./col -->
 		        <div class="col-lg-3 col-xs-6">
 		          <!-- small box -->
@@ -98,7 +78,7 @@
       </div>
 
       <div class="row">
-          <div class="col-sm-3">
+          <div class="col-sm-6 col-xl-3">
               <div class="box box-info">
                   <div class="box-header with-border">
                       <h3 class="box-title">Contratos Vinculación</h3>
@@ -148,9 +128,11 @@
             </div>
             <div class="box-body">
               <!-- Content -->
+              <!--
               	<div><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
                                 <canvas id="lineChart" height="355" style="display: block; width: 762px; height: 355px;" width="762"></canvas>
                             </div>
+              -->
             </div>
             <!-- /.box-body -->
           </div>

@@ -19,7 +19,7 @@
             <td>{!! $emdiAutorizacion->lugar->nombre !!}</td>
             <td>{!! $emdiAutorizacion->conductor->fullname !!}</td>
 
-            <td>{!! $emdiAutorizacion->created_at->format('d-m-Y') !!}</td>
+            <td title="{!! $emdiAutorizacion->created_at->format('d-M-Y') !!}">{!! $emdiAutorizacion->created_at->diffForHumans() !!}</td>
             <td>
                 {!! Form::open(['route' => ['emdiAutorizacions.destroy', $emdiAutorizacion->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>

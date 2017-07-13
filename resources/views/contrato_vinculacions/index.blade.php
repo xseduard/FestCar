@@ -14,6 +14,10 @@
             @include('flash::message')
         </div>
 
+        {!! Form::open(['route' => 'contratoVinculacions.index', 'method' => 'GET']) !!}  
+        @include('contrato_vinculacions.search')
+        {!! Form::close() !!}
+
         <div class="clearfix"></div>
         <div class="animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
             <div class="box box-primary">
@@ -27,7 +31,7 @@
                     @else
                         @include('contrato_vinculacions.table')
                     @endif
-                    @include('common.paginate', ['records' => $contratoVinculacions])
+                    @include('common.paginate', ['records' => $contratoVinculacions])                    
                 </div>
             </div>
         </div>
@@ -39,6 +43,18 @@
     <script>
         $(document).ready(function () { 
             $("span.pie").peity("pie")
+            $(".select2_without_search").select2({
+              tags: false, // permite insertar texto
+              language: {noResults: function() {return "No se encontraron coincidencias";}, searching: function() {return "Buscando..";}
+                    },
+              placeholder: 'Seleccionar...',      
+              allowClear: true,
+               minimumResultsForSearch: -1
+            });
+            $('.datepicker').datepicker({             
+                format: 'yyyy-mm-dd',        
+                language: 'es',
+            });
         }); 
     </script>
 @endsection

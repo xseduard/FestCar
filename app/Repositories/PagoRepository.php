@@ -167,7 +167,7 @@ class PagoRepository extends BaseRepository
              'drawcolor' => '0,0,0',
              'linewidth' => '0.4',
              'linearea' => '0');
-            $col[] = array('text' => $value->cantidad_viajes,
+            $col[] = array('text' => floatval($value->cantidad_viajes),
              'width' => '12',
              'height' => '8',
              'align' => 'C',

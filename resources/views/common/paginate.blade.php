@@ -1,3 +1,3 @@
 <div class="pull-right">
-    {!! $records->render() !!}
+    {!! $records->appends(request()->query())->links() !!}
 </div>
