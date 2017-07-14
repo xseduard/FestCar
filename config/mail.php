@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'sistemas@transeba.com', 'name' => 'Transeba S.A.S'],
 
     /*
     |--------------------------------------------------------------------------
