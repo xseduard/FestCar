@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\VehiculoDataTable;
-use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\Http\Requests\CreateVehiculoRequest;
 use App\Http\Requests\UpdateVehiculoRequest;
 use App\Repositories\VehiculoRepository;
@@ -91,14 +91,7 @@ class VehiculoController extends AppBaseController
     {
         $vehiculo = $this->vehiculoRepository->findWithoutFail($id);
 
-        $documentos = $this->centralRepository->validar_documentos_vehiculo($id);  
-
-        /*$pla = null;
-
-        $pla = $vehiculo->with('contratovinculacion.pago')->where('id', $id);
-
-        dd($pla);
-*/
+        $documentos = $this->centralRepository->validar_documentos_vehiculo($id); 
         $sim_gasto = SimuladorGasto::where('min', '<=', $vehiculo->capacidad)
         ->where('max', '>=', $vehiculo->capacidad)->first();
 
@@ -219,5 +212,10 @@ class VehiculoController extends AppBaseController
         Flash::success('Vehículo eliminado correctamente.');
 
         return redirect(route('vehiculos.index'));
+    }
+
+    public function cont_show_profile(Request $request)
+    {        
+        return  response()->json($this->vehiculoRepository->consulta_vehiculo($request->placa, $request->type));
     }
 }

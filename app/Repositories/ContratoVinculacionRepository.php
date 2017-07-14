@@ -75,10 +75,10 @@ class ContratoVinculacionRepository extends BaseRepository
          //pdf
         $contrato = $this->findWithoutFail($id);
         $empresa = Empresa::first();
-        $contrato =  ContratoVinculacion::with('natural.municipio.departamento')
-        ->with('juridico.natural.municipio.departamento')
-        ->with('natural.residenciamunicipio.departamento')
-        ->with('vehiculo.tarjetapropiedad')
+        $contrato =  ContratoVinculacion::with(['natural.municipio.departamento',
+        'juridico.natural.municipio.departamento',
+        'natural.residenciamunicipio.departamento',
+        'vehiculo.tarjetapropiedad'])
         ->where('id',$id)
         ->first();
 

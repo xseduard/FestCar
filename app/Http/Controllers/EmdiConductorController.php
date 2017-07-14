@@ -35,7 +35,7 @@ class EmdiConductorController extends AppBaseController
     public function index(Request $request)
     {
         $this->emdiConductorRepository->pushCriteria(new RequestCriteria($request));
-        $emdiConductors = $this->emdiConductorRepository->paginate(15);
+        $emdiConductors = $this->emdiConductorRepository->with('user')->paginate(15);
 
         /**
          * $emdiConductors = $this->emdiConductorRepository->all();

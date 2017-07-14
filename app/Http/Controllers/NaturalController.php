@@ -13,6 +13,8 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use Illuminate\Support\Facades\Auth;
 
+//use App\Models\Natural;
+
 class NaturalController extends AppBaseController
 {
     /** @var  NaturalRepository */
@@ -35,7 +37,7 @@ class NaturalController extends AppBaseController
     public function index(Request $request)
     {
         $this->naturalRepository->pushCriteria(new RequestCriteria($request));
-        $naturals = $this->naturalRepository->orderBy('updated_at', 'desc')->paginate(15);
+        $naturals = $this->naturalRepository->with('residenciamunicipio.departamento')->orderBy('updated_at', 'desc')->paginate(15);
 
         /**
          * $naturals = $this->naturalRepository->all();

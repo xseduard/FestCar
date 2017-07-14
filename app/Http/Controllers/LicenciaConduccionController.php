@@ -13,6 +13,8 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Auth;
 use Response;
 
+use App\Models\LicenciaConduccion;
+
 class LicenciaConduccionController extends AppBaseController
 {
     /** @var  LicenciaConduccionRepository */
@@ -34,8 +36,8 @@ class LicenciaConduccionController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->licenciaConduccionRepository->pushCriteria(new RequestCriteria($request));
-        $licenciaConduccions = $this->licenciaConduccionRepository->orderBy('updated_at', 'desc')->paginate(15);
+        //$this->licenciaConduccionRepository->pushCriteria(new RequestCriteria($request));
+        $licenciaConduccions = LicenciaConduccion::with('natural')->orderBy('updated_at', 'desc')->paginate(15);
 
         /**
          * $licenciaConduccions = $this->licenciaConduccionRepository->all();

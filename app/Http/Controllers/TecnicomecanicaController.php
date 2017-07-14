@@ -39,7 +39,7 @@ class TecnicomecanicaController extends AppBaseController
     {
         //$this->tecnicomecanicaRepository->pushCriteria(new RequestCriteria($request));
         
-        $tecnicomecanicas = Tecnicomecanica::Svehiculoplaca($request->vehiculo_id)
+        $tecnicomecanicas = Tecnicomecanica::with('vehiculo')->Svehiculoplaca($request->vehiculo_id)
         ->Sestado($request->estado)
         ->orderBy(request('order_item', 'updated_at'), request('order_type', 'desc'))
         ->paginate(request('per_page', '15'));

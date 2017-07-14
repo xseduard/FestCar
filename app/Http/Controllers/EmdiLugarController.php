@@ -35,7 +35,7 @@ class EmdiLugarController extends AppBaseController
     public function index(Request $request)
     {
         $this->emdiLugarRepository->pushCriteria(new RequestCriteria($request));
-        $emdiLugars = $this->emdiLugarRepository->paginate(15);
+        $emdiLugars = $this->emdiLugarRepository->with('user')->paginate(15);
 
         /**
          * $emdiLugars = $this->emdiLugarRepository->all();

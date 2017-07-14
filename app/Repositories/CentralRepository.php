@@ -53,11 +53,11 @@ class CentralRepository extends BaseRepository
         }
     }
     public function validar_documentos_vehiculo($id){
-        $car =  Vehiculo::with('tarjetapropiedad')
-        ->with('tarjetaoperacion')
-        ->with('soat')
-        ->with('tecnicomecanica')
-        ->with('polizaresponsabilidad')       
+        $car =  Vehiculo::with(['tarjetapropiedad',
+        'tarjetaoperacion',
+        'soat',
+        'tecnicomecanica',
+        'polizaresponsabilidad'])       
         ->where('id',$id)
         ->first();
 
@@ -228,7 +228,7 @@ class CentralRepository extends BaseRepository
     }
      public function ContratoPrestacionServicio_id(){
         
-        $modelo = ContratoPrestacionServicio::with('natural')->with('juridico')->get()->toArray();
+        $modelo = ContratoPrestacionServicio::with(['natural', 'juridico'])->get()->toArray();
         $array = [];
 
         if (!empty($modelo)) {
@@ -252,7 +252,7 @@ class CentralRepository extends BaseRepository
 
     public function ContratoVinculacion_id(){
         
-        $modelo = ContratoVinculacion::with('vehiculo')->with('natural')->with('juridico.natural')->with('responsable')->get()->toArray();
+        $modelo = ContratoVinculacion::with(['vehiculo', 'natural', 'juridico.natural', 'responsable'])->get()->toArray();
         $array = [];
 
         if (!empty($modelo)) {
@@ -310,7 +310,7 @@ class CentralRepository extends BaseRepository
         return ($array);
     }
     public function vehiculo_id (){
-         $modelo = Vehiculo::with('natural')->with('juridico')->get()->toArray();
+         $modelo = Vehiculo::with(['natural', 'juridico'])->get()->toArray();
             foreach ($modelo as $key => $value) {               
                 //$array[$value['id']]=$value['placa']." - ".$value['natural']['cedula']." ".$value['natural']['nombres']." ".$value['natural']['apellidos'] ;
                  if ($value['tipo_propietario'] == 'Natural') {
@@ -322,7 +322,7 @@ class CentralRepository extends BaseRepository
         return ($array);
     }
     public function vehiculo_con_tarjeta_propiedad (){
-         $modelo = Tarjeta_Propiedad::with('vehiculo.natural')->with('vehiculo.juridico')->get()->toArray(); //demo doble relacion
+         $modelo = Tarjeta_Propiedad::with(['vehiculo.natural', 'vehiculo.juridico'])->get()->toArray(); //demo doble relacion
             foreach ($modelo as $key => $value) {              
                 if ($value['vehiculo']['tipo_propietario'] == 'Natural') {
                     $array[$value['vehiculo_id']]=$value['vehiculo']['placa']." - ".$value['vehiculo']['natural']['cedula']." ".$value['vehiculo']['natural']['nombres']." ".$value['vehiculo']['natural']['apellidos'] ;

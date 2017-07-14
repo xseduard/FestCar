@@ -21,7 +21,7 @@
            <!-- contenido -->
      
         <div class="row">
-		        <div class="col-lg-3 col-xs-6">
+		        <div class="col-xl-3 col-sm-4 col-xs-6">
 		          <!-- small box -->
 		          <div class="small-box bg-aqua">
 		            <div class="inner">
@@ -39,7 +39,7 @@
 		        </div>
           
 		        <!-- ./col -->
-		        <div class="col-lg-3 col-xs-6">
+		        <div class="col-xl-3 col-sm-4 col-xs-6">
 		          <!-- small box -->
 		          <div class="small-box bg-blue">
 		            <div class="inner">
@@ -57,7 +57,7 @@
 		        </div>
 		        <!-- ./col -->
 		        <!-- ./col -->
-		        <div class="col-lg-3 col-xs-6">
+		        <div class="col-xl-3 col-sm-4 col-xs-6">
 		          <!-- small box -->
 		          <div class="small-box bg-blue">
 		            <div class="inner">
@@ -78,7 +78,7 @@
       </div>
 
       <div class="row">
-          <div class="col-sm-6 col-xl-3">
+          <div class="col-sm-4 col-xl-2">
               <div class="box box-info">
                   <div class="box-header with-border">
                       <h3 class="box-title">Contratos Vinculación</h3>

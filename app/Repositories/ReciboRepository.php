@@ -31,9 +31,7 @@ class ReciboRepository extends BaseRepository
 
     function print_recibos($id){
         $empresa = Empresa::first();
-        $recibo  = Recibo::with('user')
-        ->with('natural.residenciamunicipio.departamento')
-        ->with('articulos.producto')
+        $recibo  = Recibo::with(['user', 'natural.residenciamunicipio.departamento', 'articulos.producto'])
         ->where('id',$id)
         ->first();
 

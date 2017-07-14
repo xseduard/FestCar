@@ -37,7 +37,7 @@ class Tarjeta_PropiedadController extends AppBaseController
     public function index(Request $request)
     {
         $this->tarjetaPropiedadRepository->pushCriteria(new RequestCriteria($request));
-        $tarjetaPropiedads  = Tarjeta_Propiedad::Svehiculoplaca($request->vehiculo_id)
+        $tarjetaPropiedads  = Tarjeta_Propiedad::with('vehiculo')->Svehiculoplaca($request->vehiculo_id)
         ->orderBy(request('order_item', 'updated_at'), request('order_type', 'desc'))
         ->paginate(request('per_page', '15'));
 

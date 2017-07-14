@@ -44,8 +44,8 @@ class ContratoVinculacionController extends AppBaseController
     {
         $this->contratoVinculacionRepository->pushCriteria(new RequestCriteria($request));
 
-        $contratoVinculacions = ContratoVinculacion::
-            WhereHas('vehiculo', function($q) use ($request) { $q->Splaca($request->vehiculo_id); })
+        $contratoVinculacions = ContratoVinculacion::with(['vehiculo', 'natural', 'juridico'])
+            ->WhereHas('vehiculo', function($q) use ($request) { $q->Splaca($request->vehiculo_id); })
             ->Where(function ($q) use ($request) {
                     $q->orWhereHas('natural', function($q) use ($request) { $q->Sfullname($request->fullname); })
                         ->orWhereHas('juridico', function($q) use ($request) { $q->Snombre($request->fullname); });

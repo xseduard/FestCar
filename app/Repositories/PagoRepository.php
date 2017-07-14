@@ -44,12 +44,12 @@ class PagoRepository extends BaseRepository
 
     function print_pagos($id){
         $empresa = Empresa::first();
-        $pago  = Pago::with('user')
-        ->with('pagorelfactura.factura')
-        ->with('pagorelruta.ruta')
-        ->with('pagoreldescuento.descuento')
-        ->with('cps')
-        ->with('contratovinculacion')
+        $pago  = Pago::with(['user',
+                'pagorelfactura.factura',
+                'pagorelruta.ruta',
+                'pagoreldescuento.descuento',
+                'cps',
+                'contratovinculacion'])
         ->where('id',$id)
         ->first();
 

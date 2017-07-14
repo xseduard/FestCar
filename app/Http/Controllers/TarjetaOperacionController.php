@@ -38,7 +38,7 @@ class TarjetaOperacionController extends AppBaseController
     {
         //$this->tarjetaOperacionRepository->pushCriteria(new RequestCriteria($request));
        
-        $tarjetaOperacions = TarjetaOperacion::Svehiculoplaca($request->vehiculo_id)
+        $tarjetaOperacions = TarjetaOperacion::with('vehiculo')->Svehiculoplaca($request->vehiculo_id)
         ->Sestado($request->estado)
         ->orderBy(request('order_item', 'updated_at'), request('order_type', 'desc'))
         ->paginate(request('per_page', '15'));

@@ -39,16 +39,16 @@ class ExtractoRepository extends BaseRepository
     
     function print_extractos($id){
         $empresa = Empresa::first();
-        $extracto =  Extracto::with('cps.natural')
-        ->with('cps.juridico.natural')
-        ->with('vehiculo.tarjetaoperacion')
-        ->with('cps.origen.departamento')
-        ->with('cps.destino.departamento')
-        ->with('contratovinculacion.juridico')
-        ->with('tarjetaoperacion')
-        ->with('conductoruno')
-        ->with('conductordos')
-        ->with('conductortres')
+        $extracto =  Extracto::with(['cps.natural',
+        'cps.juridico.natural',
+        'vehiculo.tarjetaoperacion',
+        'cps.origen.departamento',
+        'cps.destino.departamento',
+        'contratovinculacion.juridico',
+        'tarjetaoperacion',
+        'conductoruno',
+        'conductordos',
+        'conductortres'])
         ->where('id',$id)
         ->first();
 

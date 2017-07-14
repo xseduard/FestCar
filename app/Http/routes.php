@@ -10,7 +10,13 @@ use Illuminate\Support\Facades\Input;
 | and give it the controller to call when that URI is requested.
 |
 */
-
+// Ver SQL Optimizador
+/*
+DB::Listen(Function($query){
+    echo "<pre>{ $query->sql }</pre>";
+    //echo "<pre>{ $query->time }</pre>";
+});
+*/
 Route::get('/', function () {
     return redirect('/home');
 });
@@ -125,6 +131,10 @@ Route::group(['middleware' => 'web'], function() {
     Route::post('ruta/buscar_id', [
             'as' => 'ruta.buscarid',
             'uses' => 'RutaController@buscar_by_id',
+        ]);
+    Route::post('vehiculos/cont_show_profile', [
+            'as' => 'vehiculo.cont_show_profile',
+            'uses' => 'VehiculoController@cont_show_profile',
         ]);
 /*
     Route::get('contratoVinculacions/print/{id}', [

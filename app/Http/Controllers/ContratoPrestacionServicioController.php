@@ -13,6 +13,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Auth;
 use Response;
 use Carbon\Carbon;
+use App\Models\ContratoPrestacionServicio;
 use App\Models\Empresa;
 
 class ContratoPrestacionServicioController extends AppBaseController
@@ -36,8 +37,8 @@ class ContratoPrestacionServicioController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->contratoPrestacionServicioRepository->pushCriteria(new RequestCriteria($request));
-        $contratoPrestacionServicios = $this->contratoPrestacionServicioRepository->orderBy('updated_at', 'desc')->paginate(15);
+        //$this->contratoPrestacionServicioRepository->pushCriteria(new RequestCriteria($request));
+        $contratoPrestacionServicios = ContratoPrestacionServicio::with(['juridico', 'natural'])->orderBy('updated_at', 'desc')->paginate(15);
 
         /**
          * $contratoPrestacionServicios = $this->contratoPrestacionServicioRepository->all();

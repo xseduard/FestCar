@@ -35,7 +35,7 @@ class EmdiPacienteController extends AppBaseController
     public function index(Request $request)
     {
         $this->emdiPacienteRepository->pushCriteria(new RequestCriteria($request));
-        $emdiPacientes = $this->emdiPacienteRepository->orderBy('updated_at', 'desc')->paginate(15);
+        $emdiPacientes = $this->emdiPacienteRepository->with('user')->orderBy('updated_at', 'desc')->paginate(15);
 
         /**
          * $emdiPacientes = $this->emdiPacienteRepository->all();

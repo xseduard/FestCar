@@ -49,19 +49,24 @@
 
               <ul class="list-group list-group-unbordered">
               <li class="list-group-item">
-                  <i class="fa fa-bar-chart text-blue" aria-hidden="true"></i> <b>Rutas realizadas</b> <a class="pull-right">0</a>
+                  <i class="fa fa-bar-chart text-blue" aria-hidden="true"></i> <b>Rutas realizadas</b> 
+                  <a class="pull-right counter" id="trt">0</a>
                 </li>
                 <li class="list-group-item">
-                  <i class="fa fa-tachometer text-blue" aria-hidden="true"></i> <b>Kilometros recorridos</b> <a class="pull-right">0</a>
+                  <i class="fa fa-tachometer text-blue" aria-hidden="true"></i> <b>Kilometros recorridos</b> 
+                  <a class="pull-right counter" id="tkm">0</a>
                 </li>
                 <li class="list-group-item">
-                  <i class="fa fa-clock-o text-blue" aria-hidden="true"></i> <b>Tiempo de Uso</b> <a class="pull-right">0</a>
+                  <i class="fa fa-clock-o text-blue" aria-hidden="true"></i> <b>Tiempo de Uso (Horas)</b> 
+                  <a class="pull-right counter" id="tdu">0</a>
                 </li>
                 <li class="list-group-item">
-                  <i class="ion ion-clipboard text-blue"></i> <b>Extractos</b> <a class="pull-right">0</a>
+                  <i class="ion ion-clipboard text-blue"></i> <b>relación Costo/Km</b> 
+                  <a class="pull-right counter" id="rckm">0</a>
                 </li>
                 <li class="list-group-item">
-                 <i class="fa fa-money text-blue" aria-hidden="true"></i> <b>Planillas de pago</b> <a class="pull-right">0</a>
+                 <i class="fa fa-money text-blue" aria-hidden="true"></i> <b>Planillas de pago</b> 
+                 <a class="pull-right counter" id="tpg">0</a>
                 </li>
               </ul>
               <p class="text-muted text-center">

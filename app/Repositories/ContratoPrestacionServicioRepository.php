@@ -46,10 +46,10 @@ class ContratoPrestacionServicioRepository extends BaseRepository
         global $codigo_cont; 
         
         $empresa = Empresa::first();
-        $contrato =  ContratoPrestacionServicio::with('natural')
-        ->with('juridico.natural')
-        ->with('origen.departamento')
-        ->with('destino.departamento')
+        $contrato =  ContratoPrestacionServicio::with(['natural',
+        'juridico.natural',
+        'origen.departamento',
+        'destino.departamento'])
         ->where('id',$id)
         ->first(); 
 

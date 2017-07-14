@@ -38,7 +38,7 @@ class RevisionPreventivaController extends AppBaseController
     public function index(Request $request)
     {
         //$this->revisionPreventivaRepository->pushCriteria(new RequestCriteria($request));
-        $revisionPreventivas = RevisionPreventiva::Svehiculoplaca($request->vehiculo_id)
+        $revisionPreventivas = RevisionPreventiva::with(['vehiculo', 'user'])->Svehiculoplaca($request->vehiculo_id)
         ->Sestado($request->estado)
         ->orderBy(request('order_item', 'updated_at'), request('order_type', 'desc'))
         ->paginate(request('per_page', '15'));

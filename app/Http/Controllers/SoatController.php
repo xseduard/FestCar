@@ -38,7 +38,7 @@ class SoatController extends AppBaseController
     public function index(Request $request)
     {
         //$this->soatRepository->pushCriteria(new RequestCriteria($request));
-        $soats = Soat::Svehiculoplaca($request->vehiculo_id)
+        $soats = Soat::with('vehiculo')->Svehiculoplaca($request->vehiculo_id)
         ->Sestado($request->estado)
         ->orderBy(request('order_item', 'updated_at'), request('order_type', 'desc'))
         ->paginate(request('per_page', '15'));

@@ -38,7 +38,7 @@ class PolizaResponsabilidadController extends AppBaseController
     public function index(Request $request)
     {
         //$this->polizaResponsabilidadRepository->pushCriteria(new RequestCriteria($request));        
-        $polizaResponsabilidads = PolizaResponsabilidad::Svehiculoplaca($request->vehiculo_id)
+        $polizaResponsabilidads = PolizaResponsabilidad::with('vehiculo')->Svehiculoplaca($request->vehiculo_id)
         ->Sestado($request->estado)
         ->orderBy(request('order_item', 'updated_at'), request('order_type', 'desc'))
         ->paginate(request('per_page', '15'));

@@ -60,10 +60,7 @@ class EmdiAutorizacionRepository extends BaseRepository
 
     function print_autorizaciones($id){
         $empresa = Empresa::first();
-        $autorizacion  = EmdiAutorizacion::with('user')
-        ->with('paciente')
-        ->with('lugar')
-        ->with('conductor')
+        $autorizacion  = EmdiAutorizacion::with(['user', 'paciente', 'lugar', 'conductor'])
         ->where('id',$id)
         ->first();
 

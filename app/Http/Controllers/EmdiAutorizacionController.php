@@ -42,7 +42,7 @@ class EmdiAutorizacionController extends AppBaseController
     public function index(Request $request)
     {
         $this->emdiAutorizacionRepository->pushCriteria(new RequestCriteria($request));
-        $emdiAutorizacions = $this->emdiAutorizacionRepository->orderBy('updated_at', 'desc')->paginate(15);
+        $emdiAutorizacions = $this->emdiAutorizacionRepository->with(['user', 'paciente', 'lugar', 'conductor'])->orderBy('updated_at', 'desc')->paginate(15);
 
         /**
          * $emdiAutorizacions = $this->emdiAutorizacionRepository->all();

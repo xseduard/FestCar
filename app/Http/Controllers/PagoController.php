@@ -76,8 +76,10 @@ class PagoController extends AppBaseController
     {
         $this->pagoRepository->pushCriteria(new RequestCriteria($request));
 
-        $pagos = Pago::
-        WhereHas('contratovinculacion.vehiculo', function($q) use ($request) { $q->Splaca($request->vehiculo_id); })
+        $pagos = Pago::with(['contratovinculacion.vehiculo',
+          'contratovinculacion.responsable',
+          'contratovinculacion.natural'])
+        ->WhereHas('contratovinculacion.vehiculo', function($q) use ($request) { $q->Splaca($request->vehiculo_id); })
         ->WhereHas('cps', function($q) use ($request) { $q->Scodigo($request->cps); })
         ->Scodigo($request->codigo)
         ->orderBy(request('order_item', 'updated_at'), request('order_type', 'desc'))
