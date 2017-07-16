@@ -10,7 +10,7 @@
       <!-- /.box-tools -->
     </div>
     <!-- /.box-header -->
-    <div class="box-body" style="display: none;">
+    <div class="box-body" style="">
       <iframe style="width:900px; overflow:auto; height:750px;" src="https://www.runt.com.co/consultaCiudadana/#/consultaVehiculo" frameborder="0" scrolling="auto" id="external-frame"></iframe>
     </div>
     <!-- /.box-body -->
