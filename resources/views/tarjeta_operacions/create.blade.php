@@ -10,7 +10,7 @@
         <div class="animsition" data-animsition-in-class="zoom-in-sm" data-animsition-in-duration="1500" data-animsition-out-class="zoom-out-sm" data-animsition-out-duration="800">
             @include('common.errors')
         </div>
-         @include('common.verificar_runt')
+        <!--- @ include('common.verificar_runt')  -->
         <div class="animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
             <div class="box box-primary">
 
