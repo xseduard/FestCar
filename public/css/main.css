@@ -222,3 +222,22 @@ div > svg  > text{
     border-top-right-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
 }
+
+.daterangepicker > div > ul > li {
+  border-radius: 0px;
+}
+.daterangepicker_input > input {
+  border-radius: 0px !important;
+}
+
+.start-date, .end-date {
+  border-radius: 0px !important;
+}
+
+.xs-custom-box-title{
+  background-color:#f7f7f7; 
+  font-size: 18px; 
+  text-align: center; 
+  padding: 7px 10px; 
+  margin-top: 0;
+}

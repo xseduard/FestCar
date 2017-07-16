@@ -79,18 +79,68 @@ Route::group(['middleware' => 'web'], function() {
         Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
         Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
         Route::post('password/reset', 'Auth\PasswordController@reset');
-            
-            Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder');
-            Route::get('field_template', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@fieldTemplate');
 
-            Route::post('generator_builder/generate', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generate');
+        //Rutas del generador
+        /*    
+        Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder');
+        Route::get('field_template', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@fieldTemplate');
+        Route::post('generator_builder/generate', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generate');
+        */
+    Route::resource('triangulos', 'trianguloController');
+    Route::resource('cuadros', 'cuadroController');
+    Route::resource('departamentos', 'DepartamentoController');
+    Route::resource('municipios', 'MunicipioController');
+    Route::resource('naturals', 'NaturalController');
+    Route::resource('juridicos', 'JuridicoController');
+    Route::resource('vehiculos', 'VehiculoController');
+    Route::resource('tarjetaPropiedads', 'Tarjeta_PropiedadController');
+    Route::resource('soats', 'SoatController');
+    Route::resource('tecnicomecanicas', 'TecnicomecanicaController');
+    Route::resource('tarjetaOperacions', 'TarjetaOperacionController');
+    Route::resource('polizaResponsabilidads', 'PolizaResponsabilidadController');
+    Route::resource('revisionPreventivas', 'RevisionPreventivaController');
+    Route::resource('contratoVinculacions', 'ContratoVinculacionController');
+    Route::resource('contratoPrestacionServicios', 'ContratoPrestacionServicioController');
+    Route::resource('licenciaConduccions', 'LicenciaConduccionController');
+    Route::resource('extractos', 'ExtractoController');    
+    Route::resource('hojaVidas', 'HojaVidaController');
+    Route::resource('empresas', 'EmpresaController');
+    Route::resource('simuladorGastos', 'SimuladorGastoController');
 
-     // Central rutas       
+    // Recibos
+    Route::resource('reciboProductos', 'ReciboProductoController');
+    Route::resource('recibos', 'ReciboController');
+    Route::resource('reciboDetalles', 'ReciboDetalleController');
+
+    // Pagos
+    Route::resource('descuentos', 'DescuentoController');
+    Route::resource('facturas', 'FacturaController');
+    Route::resource('rutas', 'RutaController');
+    Route::resource('pagos', 'PagoController');
+    Route::resource('pagoRelFacturas', 'PagoRelFacturaController');
+    Route::resource('pagoRelDescuentos', 'PagoRelDescuentoController');
+    Route::resource('pagoRelRutas', 'PagoRelRutaController');
+
+    //Emdisalud
+    Route::resource('emdiPacientes', 'EmdiPacienteController');
+    Route::resource('emdiLugars', 'EmdiLugarController');
+    Route::resource('emdiConductors', 'EmdiConductorController');
+    Route::resource('emdiAutorizacions', 'EmdiAutorizacionController');
+    
+    /**
+    *  Central rutas       
+    */
     Route::get('central/departamentos', [
             'as' => 'central.sdepa',
             'uses' => 'CentralController@sdepa',
         ]);
 
+    /*
+    Route::get('contratoVinculacions/print/{id}', [
+            'as' => 'contratoVinculacions.print',
+            'uses' => 'PdfController@vinculacion_print',
+        ]);
+    */
     Route::get('contratoVinculacions/print/{id}', [
             'as' => 'contratoVinculacions.print',
             'uses' => 'ContratoVinculacionController@print_space',
@@ -136,13 +186,22 @@ Route::group(['middleware' => 'web'], function() {
             'as' => 'vehiculo.cont_show_profile',
             'uses' => 'VehiculoController@cont_show_profile',
         ]);
-/*
-    Route::get('contratoVinculacions/print/{id}', [
-            'as' => 'contratoVinculacions.print',
-            'uses' => 'PdfController@vinculacion_print',
-        ]);
-*/
 
+    /**
+     * Informes Excel
+    */
+    Route::get('informes', [
+            'as' => 'informes.index',
+            'uses' => 'ExcelController@index',
+        ]);
+    Route::post('informes/generate', [
+            'as' => 'informes.generate',
+            'uses' => 'ExcelController@generate',
+        ]);
+
+     /**
+     * Comands Laravel 
+     */
         //Clear Cache facade value:
         Route::get('/clear-cache', function() {
             $exitCode = Artisan::call('cache:clear');
@@ -172,49 +231,9 @@ Route::group(['middleware' => 'web'], function() {
             $exitCode = Artisan::call('config:cache');
             return '<h1>Clear Config cleared</h1>';
         });
+    // End Commands laravel
 
-    Route::resource('triangulos', 'trianguloController');
-    Route::resource('cuadros', 'cuadroController');
-    Route::resource('departamentos', 'DepartamentoController');
-    Route::resource('municipios', 'MunicipioController');
-    Route::resource('naturals', 'NaturalController');
-    Route::resource('juridicos', 'JuridicoController');
-    Route::resource('vehiculos', 'VehiculoController');
-    Route::resource('tarjetaPropiedads', 'Tarjeta_PropiedadController');
-    Route::resource('soats', 'SoatController');
-    Route::resource('tecnicomecanicas', 'TecnicomecanicaController');
-    Route::resource('tarjetaOperacions', 'TarjetaOperacionController');
-    Route::resource('polizaResponsabilidads', 'PolizaResponsabilidadController');
-    Route::resource('revisionPreventivas', 'RevisionPreventivaController');
-    Route::resource('contratoVinculacions', 'ContratoVinculacionController');
-    Route::resource('contratoPrestacionServicios', 'ContratoPrestacionServicioController');
-    Route::resource('licenciaConduccions', 'LicenciaConduccionController');
-    Route::resource('extractos', 'ExtractoController');    
-    Route::resource('hojaVidas', 'HojaVidaController');
-    Route::resource('empresas', 'EmpresaController');
-    Route::resource('simuladorGastos', 'SimuladorGastoController');
-
-    // Recibos
-    Route::resource('reciboProductos', 'ReciboProductoController');
-    Route::resource('recibos', 'ReciboController');
-    Route::resource('reciboDetalles', 'ReciboDetalleController');
-
-    // Pagos
-    Route::resource('descuentos', 'DescuentoController');
-    Route::resource('facturas', 'FacturaController');
-    Route::resource('rutas', 'RutaController');
-    Route::resource('pagos', 'PagoController');
-    Route::resource('pagoRelFacturas', 'PagoRelFacturaController');
-    Route::resource('pagoRelDescuentos', 'PagoRelDescuentoController');
-    Route::resource('pagoRelRutas', 'PagoRelRutaController');
-
-    //Emdisalud
-    Route::resource('emdiPacientes', 'EmdiPacienteController');
-    Route::resource('emdiLugars', 'EmdiLugarController');
-    Route::resource('emdiConductors', 'EmdiConductorController');
-    Route::resource('emdiAutorizacions', 'EmdiAutorizacionController');
-    
-});
+}); //End Route group
 
 
 

@@ -157,19 +157,25 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         /**
-         * personal composer
+         * Required composer
          */
         Collective\Html\HtmlServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
-        \InfyOm\Generator\InfyOmGeneratorServiceProvider::class,        
-        \Jlapp\Swaggervel\SwaggervelServiceProvider::class,
-        \InfyOm\GeneratorBuilder\GeneratorBuilderServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
-        InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Anouar\Fpdf\FpdfServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Unicodeveloper\Identify\IdentifyServiceProvider::class,
+
+        /**
+         * local-dev composer
+         */        
+        \InfyOm\Generator\InfyOmGeneratorServiceProvider::class,        
+        \Jlapp\Swaggervel\SwaggervelServiceProvider::class,
+        \InfyOm\GeneratorBuilder\GeneratorBuilderServiceProvider::class,
+        InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class,
         
     ],
 
@@ -223,6 +229,8 @@ return [
         'PDF'       => Barryvdh\DomPDF\Facade::class,
         'Fpdf'      => Anouar\Fpdf\Facades\Fpdf::class,
         'Date'      => Jenssegers\Date\Date::class,
+        'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
+        'Identify'  => Unicodeveloper\Identify\Facades\IdentifyFacade::class,
         
         
     ],

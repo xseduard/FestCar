@@ -62,7 +62,8 @@
                     -->
                     <a href="{!! route('pagos.print', [$pago->id]) !!}" class='btn btn-default btn-xs' title="Imprimir" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
 
-                    <a href="{!! route('pagos.edit', [$pago->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="#" class='btn btn-default btn-xs' title="Opción bloqueada por el administrador" disabled><i class="glyphicon glyphicon-edit"></i></a>
+                    <!--<a href="{!! route('pagos.edit', [$pago->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>-->
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                         'type' => 'submit',
                         'class' => 'btn btn-danger btn-xs',

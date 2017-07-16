@@ -178,6 +178,10 @@
     <a href="{!! route('pagos.index') !!}"><i class="fa fa-star"></i><span>Planillas de Pago</span></a>
 </li>
 
+<li class="{{ Request::is('informes*') ? 'active' : '' }}">
+    <a href="{!! route('informes.index') !!}"><i class="fa fa-circle"></i><span>Informes</span></a>
+</li>
+
 
 
 @endif
