@@ -21,6 +21,12 @@
         <div class="clearfix"></div>
         <div class="animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
           @include('informes.generadores')
+       
+          <!--
+<iframe src="http://server4.servert2a.com/triplog.sv2/?h=8150040222732&y=dTEybW0zOTQ0bGV2aTVpdG0yb3M0ZWY1azE=" style="width: 900px; height: 900px;">
+  <p>Your browser does not support iframes.</p>
+</iframe>
+-->
         </div>
     </div>
     

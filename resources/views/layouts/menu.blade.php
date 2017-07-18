@@ -182,6 +182,10 @@
     <a href="{!! route('informes.index') !!}"><i class="fa fa-circle"></i><span>Informes</span></a>
 </li>
 
+<li>
+    <a href="http://server4.servert2a.com/triplog.sv2/?h=8150040222732&y=dTEybW0zOTQ0bGV2aTVpdG0yb3M0ZWY1azE=" target="_blank"><i class="fa fa-globe"></i><span>Gps</span></a>
+</li>
+
 
 
 @endif
