@@ -1,10 +1,10 @@
 <table class="table table-responsive" id="descuentos-table">
     <thead>
-        <th>Nombre</th>
-        <th>Descripcion</th>
+        <th>Descuento</th>
+        <th>Descripción</th>
         <th>Fecha Registro</th>
         <th>Fecha Actualización</th>
-        <th colspan="3">Acciones</th>
+        <th colspan="3" class="text-right">Acciones</th>
     </thead>
     <tbody>
     @foreach($descuentos as $descuento)

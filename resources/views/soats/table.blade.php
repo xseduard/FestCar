@@ -21,7 +21,7 @@
             <td>{!! $soat->poliza !!}</td>
             <td>{!! $soat->fecha_expedicion->format('d-M-Y') !!}</td>
             <td>{!! $soat->fecha_vigencia_inicio->format('d-M-Y') !!}</td>
-            <td title="{!! $soat->dias_actual_diferencia !!}/{!! $soat->dias_diferencia !!}">
+            <td custom-title="{!! $soat->dias_actual_diferencia !!}/{!! $soat->dias_diferencia !!}">
                  <span class="pie" data-peity='{ "fill": ["#00b0a3", "#d2d6de"],  "innerRadius": 0, "radius": 9 }'>{!! $soat->dias_actual_diferencia !!}/{!! $soat->dias_diferencia !!}</span>            
             </td>
             <td>{!! $soat->fecha_vigencia_final->format('d-M-Y') !!}</td>
@@ -30,7 +30,7 @@
             </td>
             <td>
                 @if ($soat->fecha_vigencia_inicio != $soat->fecha_vigencia_final->subYear()->addDay())                   
-                        <span class="badge badge-danger" title="Verfiqué los datos ingresados, {!! $soat->user->fullname !!}"><i class='fa fa fa-exclamation fa-spin fa-fw'></i> Fechas Inconsistentes</span>
+                        <span class="badge badge-danger" custom-title="Verfiqué los datos ingresados, {!! $soat->user->fullname !!}"><i class='fa fa fa-exclamation fa-spin fa-fw'></i> Fechas Inconsistentes</span>
                 @else
                     @if ($soat->vigente)
                         <span class="badge badge-success">Vigente</span>
@@ -43,14 +43,14 @@
                 {!! Form::open(['route' => ['soats.destroy', $soat->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>
                     <!-- 
-                        <a href="{!! route('soats.show', [$soat->id]) !!}" class='btn btn-default btn-xs' title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a href="{!! route('soats.show', [$soat->id]) !!}" class='btn btn-default btn-xs' custom-title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
                     -->
-                    <a href="{!! route('soats.edit', [$soat->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="{!! route('soats.edit', [$soat->id]) !!}" class='btn btn-default btn-xs' custom-title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                         'type' => 'submit',
                         'class' => 'btn btn-danger btn-xs',
                         'onclick' => "return confirm('¿Confirma que desea eliminar?')",
-                        'title' => 'Eliminar'
+                        'custom-title' => 'Eliminar'
                         ]) !!}
                 </div>
                 {!! Form::close() !!}

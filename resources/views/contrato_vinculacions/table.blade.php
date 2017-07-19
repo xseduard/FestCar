@@ -14,7 +14,7 @@
     <tbody>
     @foreach($contratoVinculacions as $contratoVinculacion)
         <tr>
-            <td title="Tipo: @php 
+            <td custom-title="Tipo: @php 
                 switch ($contratoVinculacion->tipo_contrato) {
                     case 'AF':
                        echo "Administración Flota";
@@ -42,7 +42,7 @@
             @endif   
             <td><span class="label label-default">{!! $contratoVinculacion->vehiculo->placa !!}</span></td>
             <td>{!! $contratoVinculacion->fecha_inicio->format('d-m-Y') !!}</td>
-            <td title="{!! $contratoVinculacion->dias_actual_diferencia !!}/{!! $contratoVinculacion->dias_diferencia !!}">
+            <td custom-title="{!! $contratoVinculacion->dias_actual_diferencia !!}/{!! $contratoVinculacion->dias_diferencia !!}">
                 <span class="pie" data-peity='{ "fill": ["#00b0a3", "#d2d6de"],  "innerRadius": 0, "radius": 9 }'>{!! $contratoVinculacion->dias_actual_diferencia !!}/{!! $contratoVinculacion->dias_diferencia !!}</span>
             </td>
             <td>{!! $contratoVinculacion->fecha_final->format('d-m-Y') !!}</td>
@@ -61,25 +61,25 @@
                 {!! Form::open(['route' => ['contratoVinculacions.destroy', $contratoVinculacion->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>
                     <!-- 
-                        <a href="{!! route('contratoVinculacions.show', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a href="{!! route('contratoVinculacions.show', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' custom-title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
                     -->
                     @if(!$contratoVinculacion->aprobado)
-                        <a href="{!! route('contratoVinculacions.aprobar', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' title="Aprobar" onclick="return confirm('¿Confirma que desea Aprobar este contrato?')"><i class="fa fa-gavel" aria-hidden="true"></i></a>
+                        <a href="{!! route('contratoVinculacions.aprobar', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' custom-title="Aprobar" onclick="return confirm('¿Confirma que desea Aprobar este contrato?')"><i class="fa fa-gavel" aria-hidden="true"></i></a>
                     @else
-                        <a href="#" disabled="disabled" class='btn btn-success btn-xs' title="Contrato aprobado por: {!! $contratoVinculacion->usuario_aprueba->fullname !!}" target=""><i class="fa fa-check" aria-hidden="true"></i></a>
+                        <a href="#" disabled="disabled" class='btn btn-success btn-xs' custom-title="Contrato aprobado por: {!! $contratoVinculacion->usuario_aprueba->fullname !!}" target=""><i class="fa fa-check" aria-hidden="true"></i></a>
                     @endif 
                          
                     @if($contratoVinculacion->tipo_contrato != 'AF')
-                        <a href="{!! route('contratoVinculacions.print', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' title="Imprimir" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
+                        <a href="{!! route('contratoVinculacions.print', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' custom-title="Imprimir" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
                     @else
-                        <a href="#" disabled="disabled" class='btn btn-default btn-xs' title="Sin plantilla de Contrato" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
+                        <a href="#" disabled="disabled" class='btn btn-default btn-xs' custom-title="Sin plantilla de Contrato" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
                     @endif
-                        <a href="{!! route('contratoVinculacions.edit', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a href="{!! route('contratoVinculacions.edit', [$contratoVinculacion->id]) !!}" class='btn btn-default btn-xs' custom-title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
                         {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                             'type' => 'submit',
                             'class' => 'btn btn-danger btn-xs',
                             'onclick' => "return confirm('¿Confirma que desea eliminar?')",
-                            'title' => 'Eliminar'
+                            'custom-title' => 'Eliminar'
                             ]) !!}
                 </div>
                 {!! Form::close() !!}

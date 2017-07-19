@@ -11,6 +11,42 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: 'Rubik',sans-serif;
 }
 
+.skin-blue .main-header .navbar {
+    background: #0095d8 !important;
+    background: -moz-linear-gradient(left,  #0095d8 0%, #00b0a3 100%) !important;
+    background: -webkit-linear-gradient(left,  #0095d8 0%,#00b0a3 100%) !important;
+    background: linear-gradient(to right,  #0095d8 0%,#00b0a3 100%) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0095d8', endColorstr='#00b0a3',GradientType=1 ) !important;
+
+}
+.skin-blue .main-header .logo {
+    background: #0095D8;
+}
+.skin-blue .main-header li.user-header {
+    background: #00B0A3;
+}
+
+[custom-title]{
+  position:relative;
+}
+[custom-title]:after{
+  content:attr(custom-title);
+  color:#fff;
+  background:#333;
+  background:rgba(51,51,51,0.75);
+  padding:5px;
+  position:absolute;
+  left:-9999px;
+  opacity:0;
+  bottom:100%;
+  white-space:nowrap;
+  -webkit-transition:0.25s linear opacity;
+}
+[custom-title]:hover:after{
+  left:5px;
+  opacity:1;
+}
+
 .badge {
   padding: 1px 9px 2px;
   font-size: 12.025px;

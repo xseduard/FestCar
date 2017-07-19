@@ -16,7 +16,7 @@
             <td>{!! $tarjetaOperacion->codigo !!}</td>            
             <td>{!! $tarjetaOperacion->fecha_expedicion->format('d-M-Y') !!}</td>
             <td>{!! $tarjetaOperacion->fecha_vigencia_inicio->format('d-M-Y') !!}</td>
-            <td title="{!! $tarjetaOperacion->dias_actual_diferencia !!}/{!! $tarjetaOperacion->dias_diferencia !!}">
+            <td custom-title="{!! $tarjetaOperacion->dias_actual_diferencia !!}/{!! $tarjetaOperacion->dias_diferencia !!}">
                  <span class="pie" data-peity='{ "fill": ["#00b0a3", "#d2d6de"],  "innerRadius": 0, "radius": 9 }'>{!! $tarjetaOperacion->dias_actual_diferencia !!}/{!! $tarjetaOperacion->dias_diferencia !!}</span>            
             </td>
             <td>{!! $tarjetaOperacion->fecha_vigencia_final->format('d-M-Y') !!}</td>
@@ -31,14 +31,14 @@
                 {!! Form::open(['route' => ['tarjetaOperacions.destroy', $tarjetaOperacion->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>
                     <!-- 
-                        <a href="{!! route('tarjetaOperacions.show', [$tarjetaOperacion->id]) !!}" class='btn btn-default btn-xs' title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a href="{!! route('tarjetaOperacions.show', [$tarjetaOperacion->id]) !!}" class='btn btn-default btn-xs' custom-title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
                     -->
-                    <a href="{!! route('tarjetaOperacions.edit', [$tarjetaOperacion->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="{!! route('tarjetaOperacions.edit', [$tarjetaOperacion->id]) !!}" class='btn btn-default btn-xs' custom-title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                         'type' => 'submit',
                         'class' => 'btn btn-danger btn-xs',
                         'onclick' => "return confirm('¿Confirma que desea eliminar?')",
-                        'title' => 'Eliminar'
+                        'custom-title' => 'Eliminar'
                         ]) !!}
                 </div>
                 {!! Form::close() !!}

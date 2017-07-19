@@ -27,7 +27,7 @@
             @endif   
                         
            <td>{!! $contratoPrestacionServicio->fecha_inicio->format('d-m-Y') !!}</td>
-           <td title="{!! $contratoPrestacionServicio->dias_actual_diferencia !!}/{!! $contratoPrestacionServicio->dias_diferencia !!}">
+           <td custom-title="{!! $contratoPrestacionServicio->dias_actual_diferencia !!}/{!! $contratoPrestacionServicio->dias_diferencia !!}">
                 <span class="pie" data-peity='{ "fill": ["#00b0a3", "#d2d6de"],  "innerRadius": 0, "radius": 9 }'>{!! $contratoPrestacionServicio->dias_actual_diferencia !!}/{!! $contratoPrestacionServicio->dias_diferencia !!}</span>
             </td>
             <td>{!! $contratoPrestacionServicio->fecha_final->format('d-m-Y') !!}</td>
@@ -48,25 +48,25 @@
                 <div class='btn-group pull-right'>
 
                 @if(!$contratoPrestacionServicio->aprobado)
-                    <a href="{!! route('contratoPrestacionServicios.aprobar', [$contratoPrestacionServicio->id]) !!}" class='btn btn-default btn-xs' title="Aprobar" onclick="return confirm('¿Confirma que desea Aprobar este contrato?')"><i class="fa fa-gavel" aria-hidden="true"></i></a>
+                    <a href="{!! route('contratoPrestacionServicios.aprobar', [$contratoPrestacionServicio->id]) !!}" class='btn btn-default btn-xs' custom-title="Aprobar" onclick="return confirm('¿Confirma que desea Aprobar este contrato?')"><i class="fa fa-gavel" aria-hidden="true"></i></a>
                 @else
-                    <a href="#" disabled="disabled" class='btn btn-success btn-xs' title="Contrato aprobado por: {!! $contratoPrestacionServicio->usuario_aprueba->fullname !!}" target=""><i class="fa fa-check" aria-hidden="true"></i></a>
+                    <a href="#" disabled="disabled" class='btn btn-success btn-xs' custom-title="Contrato aprobado por: {!! $contratoPrestacionServicio->usuario_aprueba->fullname !!}" target=""><i class="fa fa-check" aria-hidden="true"></i></a>
                 @endif 
 
                 @if ($contratoPrestacionServicio->tipo_cliente=='Natural')
-                        <a href="{!! route('contratoPrestacionServicios.print', [$contratoPrestacionServicio->id]) !!}" class='btn btn-default btn-xs' title="Imprimir" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
+                        <a href="{!! route('contratoPrestacionServicios.print', [$contratoPrestacionServicio->id]) !!}" class='btn btn-default btn-xs' custom-title="Imprimir" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
                 @else
-                    <a href="#" disabled="disabled" class='btn btn-default btn-xs' title="Sin plantilla de Contrato" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
+                    <a href="#" disabled="disabled" class='btn btn-default btn-xs' custom-title="Sin plantilla de Contrato" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
                 @endif
                 <!--
-                        <a href="{!! route('contratoPrestacionServicios.show', [$contratoPrestacionServicio->id]) !!}" class='btn btn-default btn-xs' title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a href="{!! route('contratoPrestacionServicios.show', [$contratoPrestacionServicio->id]) !!}" class='btn btn-default btn-xs' custom-title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
                     -->
-                    <a href="{!! route('contratoPrestacionServicios.edit', [$contratoPrestacionServicio->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="{!! route('contratoPrestacionServicios.edit', [$contratoPrestacionServicio->id]) !!}" class='btn btn-default btn-xs' custom-title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                         'type' => 'submit',
                         'class' => 'btn btn-danger btn-xs',
                         'onclick' => "return confirm('¿Confirma que desea eliminar?')",
-                        'title' => 'Eliminar'
+                        'custom-title' => 'Eliminar'
                         ]) !!}
                 </div>
                 {!! Form::close() !!}

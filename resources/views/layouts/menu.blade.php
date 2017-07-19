@@ -88,7 +88,7 @@
     )
     active
 @endif">
-<a href="#"><i class="fa fa-id-card-o" aria-hidden="true"></i><span>Documentos vehículos</span><i class="fa fa-angle-left pull-right"></i></a>
+<a href="#"><i class="fa fa-id-card-o" aria-hidden="true"></i><span>Docs. vehículos</span><i class="fa fa-angle-left pull-right"></i></a>
     <ul class="treeview-menu">
 
         <li class="{{ Request::is('tarjetaPropiedads*') ? 'active' : '' }}">
@@ -112,7 +112,7 @@
         </li>
 
         <li class="{{ Request::is('revisionPreventivas*') ? 'active' : '' }}">
-            <a href="{!! route('revisionPreventivas.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Revisiones de Preventivas</span></a>
+            <a href="{!! route('revisionPreventivas.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Rev. Preventivas</span></a>
         </li>
 
    
@@ -125,11 +125,11 @@
     )
     active
 @endif">
-<a href="#"><i class="fa fa-bars" aria-hidden="true"></i></i><span>Documentos Conductores</span><i class="fa fa-angle-left pull-right"></i></a>
+<a href="#"><i class="fa fa-bars" aria-hidden="true"></i></i><span>Docs. Conductores</span><i class="fa fa-angle-left pull-right"></i></a>
     <ul class="treeview-menu">
 
         <li class="{{ Request::is('licenciaConduccions*') ? 'active' : '' }}">
-            <a href="{!! route('licenciaConduccions.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Licencias de Conducción</span></a>
+            <a href="{!! route('licenciaConduccions.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Licencias</span></a>
         </li>   
         <li class="{{ Request::is('hojaVidas*') ? 'active' : '' }}">
             <a href="{!! route('hojaVidas.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Hojas de Vida</span></a>
@@ -162,28 +162,51 @@
     <a href="{!! route('recibos.index') !!}"><i class="ion-ios-cart"></i> <span>Recibos</span></a>
 </li>
 
-<li class="{{ Request::is('descuentos*') ? 'active' : '' }}">
-    <a href="{!! route('descuentos.index') !!}"><i class="fa fa-circle"></i><span>Descuentos</span></a>
-</li>
+<!-- pagos -->
+<li class="treeview 
+@if (Request::is('pagos*') 
+    or Request::is('descuentos*')
+    or Request::is('facturas*')
+    )
+    active
+@endif">
+<a href="#"><i class="fa fa-id-card-o" aria-hidden="true"></i><span>Pagos</span><i class="fa fa-angle-left pull-right"></i></a>
+    <ul class="treeview-menu">
+        <li class="{{ Request::is('pagos*') ? 'active' : '' }}">
+            <a href="{!! route('pagos.index') !!}"><i class="fa fa-circle-o text-aqua"></i><span>Planillas</span></a>
+        </li>  
+        <li class="{{ Request::is('descuentos*') ? 'active' : '' }}">
+            <a href="{!! route('descuentos.index') !!}"><i class="fa fa-circle-o"></i><span>Descuentos</span></a>
+        </li>
 
-<li class="{{ Request::is('facturas*') ? 'active' : '' }}">
-    <a href="{!! route('facturas.index') !!}"><i class="fa fa-circle"></i><span>Facturas</span></a>
+        <li class="{{ Request::is('facturas*') ? 'active' : '' }}">
+            <a href="{!! route('facturas.index') !!}"><i class="fa fa-circle-o"></i><span>Facturas</span></a>
+        </li>
+
+
+    </ul>
 </li>
+<!-- pagos -->
 
 <li class="{{ Request::is('rutas*') ? 'active' : '' }}">
-    <a href="{!! route('rutas.index') !!}"><i class="fa fa-circle"></i><span>Rutas</span></a>
+    <a href="{!! route('rutas.index') !!}"><i class="fa fa-circle-o"></i><span>Rutas</span></a>
 </li>
 
-<li class="{{ Request::is('pagos*') ? 'active' : '' }}">
-    <a href="{!! route('pagos.index') !!}"><i class="fa fa-star"></i><span>Planillas de Pago</span></a>
-</li>
 
 <li class="{{ Request::is('informes*') ? 'active' : '' }}">
-    <a href="{!! route('informes.index') !!}"><i class="fa fa-circle"></i><span>Informes</span></a>
+    <a href="{!! route('informes.index') !!}"><i class="fa fa-circle-o"></i><span>Informes</span>
+    <span class="pull-right-container">
+      <small class="badge pull-right badge-success" custom-title="Nuevos Informes / Reportes">Nuevo</small>
+    </span>
+    </a>
 </li>
 
 <li>
-    <a href="http://server4.servert2a.com/triplog.sv2/?h=8150040222732&y=dTEybW0zOTQ0bGV2aTVpdG0yb3M0ZWY1azE=" target="_blank"><i class="fa fa-globe"></i><span>Gps</span></a>
+    <a href="http://server4.servert2a.com/triplog.sv2/?h=8150040222732&y=dTEybW0zOTQ0bGV2aTVpdG0yb3M0ZWY1azE=" target="_blank"><i class="fa fa-globe"></i><span>Gps</span>
+    <span class="pull-right-container">
+      <small class="badge pull-right badge-warning" custom-title="En construcción">4</small>
+    </span>
+    </a>
 </li>
 
 

@@ -16,13 +16,13 @@
         >
             <td><span class="label label-default">{!! $revisionPreventiva->vehiculo->placa !!}</span></td>
             <td>{!! $revisionPreventiva->fecha_vigencia_inicio->format('d-M-Y') !!}</td>
-            <td title="{!! $revisionPreventiva->dias_actual_diferencia !!}/{!! $revisionPreventiva->dias_diferencia !!}">
+            <td custom-title="{!! $revisionPreventiva->dias_actual_diferencia !!}/{!! $revisionPreventiva->dias_diferencia !!}">
                  <span class="pie" data-peity='{ "fill": ["#00b0a3", "#d2d6de"],  "innerRadius": 0, "radius": 9 }'>{!! $revisionPreventiva->dias_actual_diferencia !!}/{!! $revisionPreventiva->dias_diferencia !!}</span>            
             </td>
             <td>{!! $revisionPreventiva->fecha_vigencia_final->format('d-M-Y') !!}</td>
             <td>
                 @if ($revisionPreventiva->fecha_vigencia_inicio != $revisionPreventiva->fecha_vigencia_final->subMonth(2))                   
-                        <span class="badge badge-danger" title="Verfiqué los datos ingresados, {!! $revisionPreventiva->user->fullname !!}"><i class='fa fa fa-exclamation fa-spin fa-fw'></i> Fechas Inconsistentes</span>
+                        <span class="badge badge-danger" custom-title="Verfiqué los datos ingresados, {!! $revisionPreventiva->user->fullname !!}"><i class='fa fa fa-exclamation fa-spin fa-fw'></i> Fechas Inconsistentes</span>
                 @else
                     @if ($revisionPreventiva->vigente)
                         <span class="badge badge-success">Vigente</span>
@@ -35,14 +35,14 @@
                 {!! Form::open(['route' => ['revisionPreventivas.destroy', $revisionPreventiva->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>
                     <!-- 
-                        <a href="{!! route('revisionPreventivas.show', [$revisionPreventiva->id]) !!}" class='btn btn-default btn-xs' title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a href="{!! route('revisionPreventivas.show', [$revisionPreventiva->id]) !!}" class='btn btn-default btn-xs' custom-title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
                     -->
-                    <a href="{!! route('revisionPreventivas.edit', [$revisionPreventiva->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="{!! route('revisionPreventivas.edit', [$revisionPreventiva->id]) !!}" class='btn btn-default btn-xs' custom-title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                         'type' => 'submit',
                         'class' => 'btn btn-danger btn-xs',
                         'onclick' => "return confirm('¿Confirma que desea eliminar?')",
-                        'title' => 'Eliminar'
+                        'custom-title' => 'Eliminar'
                         ]) !!}
                 </div>
                 {!! Form::close() !!}

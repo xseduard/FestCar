@@ -17,9 +17,9 @@
                     </div>                                  
             </div>
             <div class="box-footer">
-               <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-plus-circle"></i> Generar </button>
+               {{-- <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-plus-circle"></i> Generar </button>
                <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-print"></i> Imprimir</button>
-               <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-download"></i> Descargar</button>
+               <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-download"></i> Descargar</button> --}}
                <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-file-excel-o"></i> Exportar</button>
             </div>
         </div>
@@ -43,9 +43,9 @@
                     </div>                                  
             </div>
             <div class="box-footer">
-               <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-plus-circle"></i> Generar </button>
+               {{-- <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-plus-circle"></i> Generar </button>
                <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-print"></i> Imprimir</button>
-               <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-download"></i> Descargar</button>
+               <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-download"></i> Descargar</button> --}}
                <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-file-excel-o"></i> Exportar</button>
             </div>
         </div>
@@ -53,13 +53,13 @@
     </div>
     <div class="col-xl-4 col-sm-6">
         {!! Form::open(['route' => 'informes.generate']) !!}                 
-        <div class="box box-warning">
+        <div class="box box-primary">
             <div class="box-header">
               <h4 class="xs-custom-box-title">Tiempos de recorrido y kilometros</h4>
             </div>
             <div class="box-body">
                    <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor  desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.</p> 
-                    {!! Form::hidden('type', 'vehiculos_servicios') !!}
+                    {!! Form::hidden('type', 'contador_recorrido') !!}
                    <div class="form-group">
                         {!! Form::label('fecha', 'Filtrar por Fecha') !!}
                         <div class="input-group">
@@ -69,9 +69,9 @@
                     </div>                                  
             </div>
             <div class="box-footer">
-               <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-plus-circle"></i> Generar </button>
+               {{-- <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-plus-circle"></i> Generar </button>
                <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-print"></i> Imprimir</button>
-               <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-download"></i> Descargar</button>
+               <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-download"></i> Descargar</button> --}}
                <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-file-excel-o"></i> Exportar</button>
             </div>
         </div>
@@ -101,9 +101,9 @@
                                                    
             </div>
             <div class="box-footer">
-               <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-plus-circle"></i> Generar </button>
+               {{-- <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-plus-circle"></i> Generar </button>
                <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-print"></i> Imprimir</button>
-               <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-download"></i> Descargar</button>
+               <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-download"></i> Descargar</button> --}}
                <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-file-excel-o"></i> Exportar</button>
             </div>
         </div>

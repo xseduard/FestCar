@@ -4,17 +4,17 @@
         <th>Fecha Inicio</th>
         <th>Fecha Final</th>
         <th>Total</th>
-        <th>Observacion</th>
+        <th>Observación</th>
         <th>Fecha Registro</th>
         <th>Fecha Actualización</th>
-        <th colspan="3">Acciones</th>
+        <th colspan="3" class="text-right">Acciones</th>
     </thead>
     <tbody>
     @foreach($facturas as $factura)
         <tr>
             <td>{!! $factura->codigo !!}</td>
-            <td>{!! $factura->fecha_inicio !!}</td>
-            <td>{!! $factura->fecha_final !!}</td>
+            <td>{!! $factura->fecha_inicio == '-0001-11-30 00:00:00' ? 'Sin asignar' : $factura->fecha_inicio !!}</td>
+            <td>{!! $factura->fecha_final == '-0001-11-30 00:00:00' ? 'Sin asignar' : $factura->fecha_final !!}</td>
             <td>{!! $factura->total !!}</td>
             <td>{!! $factura->observacion !!}</td>
             <td>{!! $factura->created_at !!}</td>

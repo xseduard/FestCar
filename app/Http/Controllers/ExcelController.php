@@ -61,10 +61,13 @@ class ExcelController extends Controller
     	//return $request->all();
     	switch ($request->type) {
     		case 'vehiculos_servicios':
-    			return $this->vehiculos_servicios($request)->export('xlsx');
+    			return $this->vehiculos_servicios($request);
     			break;
     		case 'rutas':
-    			return $this->rutas($request)->export('xlsx');
+    			return $this->rutas($request);
+    			break;
+    		case 'contador_recorrido':
+    			return $this->contador_recorrido($request);
     			break;
     		
     		default:
@@ -178,7 +181,7 @@ class ExcelController extends Controller
 
 		});
 
-		return $doc;
+		return $doc->export('xlsx');
     }
 
     public function rutas($request)
@@ -246,7 +249,7 @@ class ExcelController extends Controller
                 $query_rel->whereNotNull('pg.id')
                     ->groupBy('prr.id');
 
-                $query_rel->get(); 
+                $query_rel->get(); //inutil 
 
 
 
@@ -426,6 +429,84 @@ class ExcelController extends Controller
 		
     	});  // end excel
 		
-		return $doc;
+		return $doc->export('xlsx');
     }
-}
+
+    public function contador_recorrido($request)
+    {
+		$q = DB::table('vehiculos as vh')
+	        ->select("vh.placa")    	    
+	        ->addSelect(DB::raw("cast(SUM(prr.cantidad_viajes*rt.distancia) as  decimal(16,1)) AS suma_km"))
+	        ->addSelect(DB::raw("cast(SUM(prr.cantidad_viajes*rt.duracion/60) as  decimal(16,2)) AS total_duracion_horas"));
+	        
+
+		$q->leftJoin('contrato_vinculaciones as cv', 'cv.vehiculo_id', '=', 'vh.id')
+	        ->leftJoin('pagos as pg', 'pg.contrato_vinculacion_id', '=', 'cv.id')
+	        ->leftJoin('contrato_prestacion_servicios as cps', 'cps.id', '=', 'pg.cps_id')
+	        ->leftJoin('pago_rel_rutas as prr', 'prr.pago_id', '=', 'pg.id')
+	        ->leftJoin('rutas as rt', 'rt.id', '=', 'prr.ruta_id');
+
+		$q->whereNull('vh.deleted_at')
+	        ->whereNull('cv.deleted_at')
+	        ->whereNull('pg.deleted_at')
+	        ->whereNull('prr.deleted_at');
+
+		$q->whereNotNull('pg.id');
+
+        $q->groupBy('vh.placa');  
+
+        $doc = Excel::create('Tiempos de recorrido y kilometros | InformesTranseba', function($excel) use($request, $q) {
+    		 $excel->sheet('Contadores', function($sheet) use($q) {
+    		 	
+    		 	$sheet->row(1, ['Placa', 'Kilometros', 'Tiempo Estimado']); 
+
+    		 	$sheet->setColumnFormat(array(				   
+				    'B' => '0" Km"',
+				    'C' => '0" Horas"',	
+				));	 
+
+				$ckm   = 0;
+				$ctime = 0;
+
+				$data = $q->get();
+    		 	foreach ($data as $key => $value) {
+	    			$sheet->row($key+2, [
+				    			$value->placa,
+				    			$value->suma_km,
+				    			$value->total_duracion_horas,
+				    			]); 
+
+					$ckm   = $ckm + $value->suma_km;
+					$ctime = $ctime + $value->total_duracion_horas;
+	    		 }
+
+	    		 $sheet->row(count($data)+2, [
+			    			'Totales',
+			    			$ckm,
+			    			$ctime,
+			    			]); 
+
+
+	    		 	//style
+	    		 	$sheet->cells('A1:C1', function($cells) {
+							$cells->setBackground('#00b0a3');
+							$cells->setFontColor('#ffffff');
+							$cells->setFont(array(
+							    'family'     => 'Calibri',
+							    'size'       => '16',
+							    'bold'       =>  true
+							));	
+
+						});
+					$sheet->cells('A1:C1', function($cells) {
+							$cells->setAlignment('center');
+					});
+	    		 	$sheet->freezeFirstRowAndColumn();
+
+	    		}); // end sheet contadores
+
+	    	});  // end excel
+
+		return $doc->export('xlsx');
+    }
+} //Class
