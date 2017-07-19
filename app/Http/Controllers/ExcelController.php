@@ -298,7 +298,7 @@ class ExcelController extends Controller
     	 */
 
 	    
-	    	$excel->sheet('vehiculos', function($sheet) use($vehiculos) {
+	    	$excel->sheet('Vehiculos', function($sheet) use($vehiculos) {
 
 	    		$sheet->row(1, ['Placa', 'Tipo Prop.', 'CC / Nit', 'Nombre / Razón social', 'Vehiculo', 'ID',  'Capacidad', 'Modelo', 'Marca', 'Clase', 'Propiedad Empresarial', 'Contrato', 'CC/Nit Contratista', 'Nombre Contratista', 'Responsable Contrato', 'Fecha de creación', 'Última actualización', 'Observaciones' ]);
 

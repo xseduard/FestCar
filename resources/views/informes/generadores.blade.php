@@ -27,7 +27,7 @@
     </div>
     <div class="col-xl-4 col-sm-6">
         {!! Form::open(['route' => 'informes.generate']) !!}                 
-        <div class="box box-primary">
+        <div class="box box-warning">
             <div class="box-header">
               <h4 class="xs-custom-box-title">Conductor por Servicio</h4>
             </div>
@@ -53,7 +53,7 @@
     </div>
     <div class="col-xl-4 col-sm-6">
         {!! Form::open(['route' => 'informes.generate']) !!}                 
-        <div class="box box-primary">
+        <div class="box box-warning">
             <div class="box-header">
               <h4 class="xs-custom-box-title">Tiempos de recorrido y kilometros</h4>
             </div>
