@@ -32,7 +32,7 @@ class VehiculoRepository extends BaseRepository
         return Vehiculo::class;
     }
 
-    public function consulta_vehiculo($placa = null, $type = null)
+    public function consulta_vehiculo($type = null, $placa = null)
     {
         $query = DB::table('vehiculos as vh')
         //->select('vh.placa')
@@ -92,14 +92,26 @@ class VehiculoRepository extends BaseRepository
                         ->addSelect(DB::raw("round(SUM(cps.s4*prr.cantidad_viajes)) as salud"))
                         ->addSelect(DB::raw("round(SUM(cps.s5*prr.cantidad_viajes)) as turismo"));
                         
-                        $query->where('vh.placa', $placa);
-                        $query->groupBy('vh.placa');
+                        $query->where('vh.placa', $placa)
+                                ->groupBy('vh.placa');
 
                         return $query->first(); 
 
                 } else {
                     return 'Seleccione placa'; 
                 }
+                break;
+            case 'vehiculos_servicios':
+                $query->addSelect(DB::raw("round(SUM(cps.s1*prr.cantidad_viajes)) as empresarial"))
+                        ->addSelect(DB::raw("round(SUM(cps.s2*prr.cantidad_viajes)) as escolar"))
+                        ->addSelect(DB::raw("round(SUM(cps.s3*prr.cantidad_viajes)) as grupo_usuarios"))
+                        ->addSelect(DB::raw("round(SUM(cps.s4*prr.cantidad_viajes)) as salud"))
+                        ->addSelect(DB::raw("round(SUM(cps.s5*prr.cantidad_viajes)) as turismo"));                        
+
+                $query ->whereNotNull('pg.id')
+                        ->groupBy('vh.placa');
+
+                return $query->get();
                 break;
             default:
                 return 'Mensaje por defecto';

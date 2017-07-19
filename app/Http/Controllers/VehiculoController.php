@@ -216,6 +216,6 @@ class VehiculoController extends AppBaseController
 
     public function cont_show_profile(Request $request)
     {        
-        return  response()->json($this->vehiculoRepository->consulta_vehiculo($request->placa, $request->type));
+        return  response()->json($this->vehiculoRepository->consulta_vehiculo($request->type, $request->placa));
     }
 }

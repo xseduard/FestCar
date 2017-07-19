@@ -119,4 +119,26 @@ class Vehiculo extends Model
         }
     }
 
-}
+    /**
+     * mutators
+     */
+
+    public function getNameOwnerAttribute()
+    {       
+        if ($this->tipo_propietario == 'Natural') {
+            return $this->natural->fullname;
+        } else if ($this->tipo_propietario == 'Juridico') {
+             return $this->juridico->nombre;
+        }
+    }
+    
+    public function getIdOwnerAttribute()
+    {       
+        if ($this->tipo_propietario == 'Natural') {
+            return $this->natural->cedula;
+        } else if ($this->tipo_propietario == 'Juridico') {
+             return $this->juridico->nit;
+        }
+    }
+
+} //end model

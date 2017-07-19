@@ -150,6 +150,43 @@ class ContratoVinculacion extends Model
        
     }
 
+    public function getNameContratistaAttribute()
+    {       
+        if ($this->tipo_proveedor == 'Natural') {
+            return $this->natural->fullname;
+        } else if ($this->tipo_proveedor == 'Juridico') {
+             return $this->juridico->nombre;
+        }
+    }
+    
+    public function getIdContratistaAttribute()
+    {       
+        if ($this->tipo_proveedor == 'Natural') {
+            return $this->natural->cedula;
+        } else if ($this->tipo_proveedor == 'Juridico') {
+             return $this->juridico->nit;
+        }
+    }
+
+    public function getNameResponsableAttribute()
+    {
+        if (empty($this->responsable)) {
+                return "";
+        } else {
+            return $this->responsable->fullname;
+        }
+    }
+
+    public function getIdResponsableAttribute()
+    {
+        if (empty($this->responsable)) {
+                return "";
+        } else {
+            return $this->responsable->cedula;
+        }
+    }
+
+
     /**
      * Query Scopes
      */

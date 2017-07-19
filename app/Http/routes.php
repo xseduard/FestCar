@@ -194,12 +194,13 @@ Route::group(['middleware' => 'web'], function() {
             'as' => 'informes.index',
             'uses' => 'ExcelController@index',
         ]);
+
     Route::post('informes/generate', [
             'as' => 'informes.generate',
             'uses' => 'ExcelController@generate',
         ]);
 
-     
+
 
 }); //End Route group
 
