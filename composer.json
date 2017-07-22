@@ -15,7 +15,7 @@
         "unicodeveloper/laravel-identify": "1.1.*",
         "greggilbert/recaptcha": "dev-master",
         "laracasts/flash": "~2.0",
-        "prettus/laravel-repository": "2.6.*"
+        "prettus/laravel-repository": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
