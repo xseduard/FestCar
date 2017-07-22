@@ -21,7 +21,7 @@
         "jlapp/swaggervel": "dev-master",
         "doctrine/dbal": "~2.3",
         "arielcr/numero-a-letras": "dev-master",
-        "barryvdh/laravel-dompdf": "0.6.*",
+        "barryvdh/laravel-dompdf": "0.6.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -31,7 +31,7 @@
         "symfony/dom-crawler": "2.8.*|3.0.*",
         "infyomlabs/laravel-generator": "5.2.x-dev",        
         "infyomlabs/generator-builder": "dev-master",
-        "infyomlabs/adminlte-templates": "5.2.x-dev",
+        "infyomlabs/adminlte-templates": "5.2.x-dev"
 
     },
     "autoload": {
