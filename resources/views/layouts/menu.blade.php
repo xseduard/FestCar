@@ -200,7 +200,28 @@
     </span>
     </a>
 </li>
+<!-- pqrs -->
+<li class="treeview 
+@if (Request::is('pqrsWebs*') 
+    or Request::is('pqrsSeguimientos*')
+    )
+    active
+@endif">
+<a href="#"><i class="fa fa-compass" aria-hidden="true"></i><span>Pqrs</span><i class="fa fa-angle-left pull-right"></i></a>
+    <ul class="treeview-menu">
+        <li class="{{ Request::is('pqrsWebs*') ? 'active' : '' }}">
+            <a href="{!! route('pqrsWebs.index') !!}"><i class="fa fa-circle-o"></i><span>Buzon de entrada</span></a>
+        </li>
 
+
+        <li class="{{ Request::is('pqrsSeguimientos*') ? 'active' : '' }}">
+            <a href="{!! route('pqrsSeguimientos.index') !!}"><i class="fa fa-circle-o"></i><span>Seguimientos</span></a>
+        </li>
+
+
+    </ul>
+</li>
+<!-- pqrs -->
 <li>
     <a href="http://server4.servert2a.com/triplog.sv2/?h=8150040222732&y=dTEybW0zOTQ0bGV2aTVpdG0yb3M0ZWY1azE=" target="_blank"><i class="fa fa-globe"></i><span>Gps</span>
     <span class="pull-right-container">
@@ -254,7 +275,8 @@
     @endif
 
 @endif
-<li class="{{ Request::is('pqrsWebs*') ? 'active' : '' }}">
-    <a href="{!! route('pqrsWebs.index') !!}"><i class="fa fa-edit"></i><span>Pqrs</span></a>
-</li>
+
+
+
+
 

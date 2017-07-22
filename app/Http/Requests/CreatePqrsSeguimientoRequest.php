@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use App\Models\PqrsWeb;
+use App\Models\PqrsSeguimiento;
 
-class CreatePqrsPublicRequest extends Request
+class CreatePqrsSeguimientoRequest extends Request
 {
 
     /**
@@ -24,13 +24,8 @@ class CreatePqrsPublicRequest extends Request
      * @return array
      */
     public function rules()
-    { 
-        $array = PqrsWeb::$rules;
-        if (config('app.env') == 'production') 
-        {
-            $array['g-recaptcha-response'] = "required|recaptcha";   
-        }
-        return $array;
+    {
+        return PqrsSeguimiento::$rules;
     }
 
     /**
@@ -38,10 +33,8 @@ class CreatePqrsPublicRequest extends Request
      */
     public function attributes() {
         return [
-        'tipo_documento' => 'tipo de documento',
-        'cedula' => 'cédula',        
-        'observacion' => 'observaciones / comentarios',
-        'g-recaptcha-response' => 'Captcha',
+        "" => "",
+        "" => "",    
         ];
     }
     /*

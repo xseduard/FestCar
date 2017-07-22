@@ -107,6 +107,7 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('empresas', 'EmpresaController');
     Route::resource('simuladorGastos', 'SimuladorGastoController');
     Route::resource('pqrsWebs', 'PqrsWebController');
+    Route::resource('pqrsSeguimientos', 'PqrsSeguimientoController');
 
     // Recibos
     Route::resource('reciboProductos', 'ReciboProductoController');
@@ -210,20 +211,19 @@ Route::group(['middleware' => 'web'], function() {
             'as' => 'pqrsPublic.create',
             'uses' => 'PqrsPublicController@create',
         ]);
+    Route::get('pqrsPublic/create', [
+            'as' => 'pqrsPublic.create',
+            'uses' => 'PqrsPublicController@create',
+        ]);
     Route::get('pqrsPublic/store', [
             'as' => 'pqrsPublic.store',
             'uses' => 'PqrsPublicController@store',
         ]);
-    Route::get('pqrsPublic/consulta', [
-            'as' => 'pqrsPublic.consulta',
-            'uses' => 'PqrsPublicController@consulta',
+    Route::get('pqrsSeguimientos/create_with/{id}', [
+            'as' => 'pqrsSeguimientos.create_with',
+            'uses' => 'PqrsSeguimientoController@create_with',
         ]);
 
 
 }); //End Route group
-
-
-
-
-
 

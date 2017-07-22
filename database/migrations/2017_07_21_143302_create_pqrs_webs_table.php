@@ -24,6 +24,7 @@ class CreatePqrsWebsTable extends Migration
             $table->string('correo', 50);
             $table->string('motivo', 30);
             $table->string('servicio', 30);
+            $table->string('estado', 50)->default('pendiente');            
             $table->text('observacion');
             $table->integer('easy_token')->unsigned();
             $table->integer('user_id')->unsigned();

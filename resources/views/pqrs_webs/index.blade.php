@@ -4,7 +4,8 @@
     <section class="content-header">
         <h1 class="pull-left">Pqrs Webs</h1>
         <h1 class="pull-right">
-           <a class="btn btn-primary btn-flat pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('pqrsWebs.create') !!}"><i class="fa fa-plus"></i> &nbsp; Aregar</a>
+           <a class="btn btn-primary btn-flat pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('pqrsWebs.create') !!}"><i class="fa fa-plus"></i> &nbsp; Interno</a>
+           <a class="btn btn-primary btn-flat pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('pqrsPublic.create') !!}"><i class="fa fa-plus"></i> &nbsp; Público</a>
         </h1>
     </section>
     <div class="content">
@@ -16,20 +17,20 @@
 
         <div class="clearfix"></div>
         <div class="animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
-            <div class="box box-primary">
-                <div class="box-body">
-                    @if($pqrsWebs->isEmpty())
-                        <div class="alert alert-info alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <h4><i class="icon fa fa-info"></i>Sistema de Información</h4>
-                           No se encontraron registros de PqrsWebs en esta consulta.
-                      </div>                    
-                    @else
-                        @include('pqrs_webs.table')
-                    @endif
-                    @include('common.paginate', ['records' => $pqrsWebs])
+            @if($pqrsWebs->isEmpty())
+                <div class="box box-primary">
+                    <div class="box-body">
+                            <div class="alert alert-info alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-info"></i>Sistema de Información</h4>
+                               No se encontraron registros de PqrsWebs en esta consulta.
+                          </div>                    
+                    </div>
                 </div>
-            </div>
+            @else
+                @include('pqrs_webs.table')
+            @endif
+            @include('common.paginate', ['records' => $pqrsWebs])
         </div>
     </div>
 @endsection

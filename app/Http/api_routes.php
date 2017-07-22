@@ -83,3 +83,7 @@ Route::resource('emdi_conductors', 'EmdiConductorAPIController');
 Route::resource('emdi_autorizacions', 'EmdiAutorizacionAPIController');
 
 Route::resource('pqrs_webs', 'PqrsWebAPIController');
+
+
+
+Route::resource('pqrs_seguimientos', 'PqrsSeguimientoAPIController');

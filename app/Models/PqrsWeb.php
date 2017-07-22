@@ -30,8 +30,9 @@ class PqrsWeb extends Model
         'correo',
         'motivo',
         'servicio',
+        'estado',
         'observacion',
-        'short_token',
+        'easy_token',
         'user_id'
     ];
     /**
@@ -46,9 +47,10 @@ class PqrsWeb extends Model
         'ciudad' => 'string',
         'correo' => 'string',
         'motivo' => 'string',
+        'estado' => 'string',
         'servicio' => 'string',
         'observacion' => 'string',
-        'short_token' => 'integer',
+        'easy_token' => 'integer',
         'user_id' => 'integer'
     ];
     /**
@@ -78,4 +80,63 @@ class PqrsWeb extends Model
     /**
      * Ascensores & Mutadores
      */
+
+    public function getTypeMotivoAttribute()
+    {     
+        switch ($this->motivo) {
+            case 'p':
+                return 'Petición';
+                break;
+            case 'Q':
+                return 'Queja';
+                break;
+            case 'R':
+                return 'Reclamo';
+                break;
+            case 'S':
+                return 'Solicitud';
+                break;
+            case 'C':
+                return 'Consulta';
+                break;
+            case 'F':
+                return 'Felicitación';
+                break;
+            default:
+                return 'No Disponible';
+                break;
+        }
+        
+    }
+
+    public function getTypeServicioAttribute()
+    {     
+        switch ($this->servicio) {
+            case 's1':
+                return 'Empresarial';
+                break;
+            case 's2':
+                return 'Escolar';
+                break;
+            case 's3':
+                return 'Grupo de usuarios';
+                break;
+            case 's4':
+                return 'Salud';
+                break;
+            case 's5':
+                return 'Turismo';
+                break;
+           
+            default:
+                return 'No Disponible';
+                break;
+        }
+        
+    }     
+
+    public function getFullNameAttribute()
+    {
+       return $this->nombres . ' ' . $this->apellidos;
+    }
 }

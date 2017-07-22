@@ -28,6 +28,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 [custom-title]{
   position:relative;
+  cursor:help;
 }
 [custom-title]:after{
   content:attr(custom-title);
@@ -241,6 +242,9 @@ div > svg  > text{
 
 .cursor-pointer{
   cursor:pointer;
+}
+.cursor-help{
+  cursor: help;
 }
 
 .hovered-text:hover > span{
