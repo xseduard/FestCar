@@ -103,7 +103,7 @@ $text = "
 <p>4. Que el CONTRATANTE están plenamente autorizado y tiene la capacidad necesaria para obligarse de acuerdo a lo establecido en el artículo 2.2.1.6.3.2 numeral cuarto del Decreto 431 de marzo de 2017 (suscribe el contrato de transporte y se obliga al pago de la totalidad del valor del servicio).
 </p>
 <p>Este contrato se regirá por las siguientes clausulas.</p>
-<p>OBJETO DEL CONTRATO: La realización de un servicio de transporte expreso por parte del CONTRATISTA para trasladar a las personas que hacen parte del grupo de usuarios del CONTRATANTE.  desde ".$data['origen'].", hasta ".$data['destino'].", Servicio que se prestará con un vehículo Clase Microbús
+<p>OBJETO DEL CONTRATO: La realización de un servicio de transporte expreso por parte del CONTRATISTA para trasladar a las personas que hacen parte del grupo de usuarios del CONTRATANTE.  desde ".$data['origen'].", hasta ".$data['destino'].".
 </p> 
 <p>DURACIÓN DEL CONTRATO: La prestación de este servicio tiene como fecha de inicio, ".$data['fecha_inicio']." y fecha de terminación, ".$data['fecha_final'].". La hora de salida y de regreso será fijada por EL CONTRATANTE.
 </p>

@@ -254,3 +254,7 @@
     @endif
 
 @endif
+<li class="{{ Request::is('pqrsWebs*') ? 'active' : '' }}">
+    <a href="{!! route('pqrsWebs.index') !!}"><i class="fa fa-edit"></i><span>Pqrs</span></a>
+</li>
+

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Transeba | FestCar</title>
+    <title>{{ $empresa_only_name or "Transporte Digital" }} | FestCar</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
     {!! Html::style('/bower_components/admin-lte/bootstrap/css/bootstrap.min.css') !!}
@@ -161,21 +161,22 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{!! url('/') !!}">
-                    Invitado: {!! Auth::guest() !!}
+                    {{ $empresa_only_name or "Transporte Digital" }} 
+                    {{-- {!! Auth::guest() !!} --}} <!-- logged? -->
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{!! url('/home') !!}">Home</a></li>
+                    <li><a href="{!! url('/home') !!}">Inicio</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    <li><a href="{!! url('/login') !!}">Login</a></li>
-                    <li><a href="{!! url('/register') !!}">Register</a></li>
+                    <li><a href="{!! url('/login') !!}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Iniciar sesión </a></li>
+                    {{-- <li><a href="{!! url('/register') !!}">Registrarse</a></li> --}}
                 </ul>
             </div>
         </div>

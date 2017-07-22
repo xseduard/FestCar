@@ -76,6 +76,12 @@ return [
     'unique'               => 'El elemento :attribute ya está en uso.',
     'url'                  => 'El formato de :attribute no corresponde con el de una URL válida.',
 
+
+    /**
+     * Custom Recaptcha
+     */
+    'recaptcha'            => 'Verifique que no es un robot mediante la :attribute .',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

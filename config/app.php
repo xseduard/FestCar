@@ -168,6 +168,7 @@ return [
         Jenssegers\Date\DateServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Unicodeveloper\Identify\IdentifyServiceProvider::class,
+        Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
 
         /**
          * local-dev composer
@@ -231,6 +232,7 @@ return [
         'Date'      => Jenssegers\Date\Date::class,
         'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
         'Identify'  => Unicodeveloper\Identify\Facades\IdentifyFacade::class,
+        'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
         
         
     ],

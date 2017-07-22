@@ -3,7 +3,7 @@
         <th class="">Pago No.</th>
         <th class="">Cps</th>
         <th class="">Vehículo</th>
-        <th class="">Responsable</th>
+        <th class="" custom-title="Persona que recibe el pago (Responsable del contrato)">Beneficiario</th>
         <th class="">Fecha Planilla</th>
         <th class="text-center">Semana(s)</th>  
         <!--      
@@ -21,7 +21,7 @@
         <tr>
             <td>{!! str_pad($pago->id, 4, "0", STR_PAD_LEFT) !!}</td>
             <td>{!! "CPS",str_pad($pago->cps_id, 4, "0", STR_PAD_LEFT) !!}</td>
-            <td title="{!! $pago->contratovinculacion->tipo_contrato,str_pad($pago->contrato_vinculacion_id, 4, "0", STR_PAD_LEFT) !!}">
+            <td custom-title="{!! $pago->contratovinculacion->tipo_contrato,str_pad($pago->contrato_vinculacion_id, 4, "0", STR_PAD_LEFT) !!}">
                 <span class="label label-default">{!! $pago->contratovinculacion->vehiculo->placa !!}</span>
             </td>
             <td>
@@ -38,7 +38,7 @@
                 @endif
             </td>
             <td>{!! $pago->fecha_planilla->format('d-m-Y') !!}</td>
-            <td class="text-center" title="{!! $pago->fecha_inicio->format('d-m-Y'),"-",$pago->fecha_final->format('d-m-Y') !!}">
+            <td class="text-center" custom-title="{!! $pago->fecha_inicio->format('d-m-Y'),"-",$pago->fecha_final->format('d-m-Y') !!}">
                 @if($pago->fecha_inicio->weekOfYear == $pago->fecha_final->weekOfYear)
                     {!! $pago->fecha_inicio->weekOfYear !!}
                 @else
@@ -58,17 +58,17 @@
                 {!! Form::open(['route' => ['pagos.destroy', $pago->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>
                     <!-- 
-                        <a href="{!! route('pagos.show', [$pago->id]) !!}" class='btn btn-default btn-xs' title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a href="{!! route('pagos.show', [$pago->id]) !!}" class='btn btn-default btn-xs' custom-title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
                     -->
-                    <a href="{!! route('pagos.print', [$pago->id]) !!}" class='btn btn-default btn-xs' title="Imprimir" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
+                    <a href="{!! route('pagos.print', [$pago->id]) !!}" class='btn btn-default btn-xs' custom-title="Imprimir" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
 
-                    <a href="#" class='btn btn-default btn-xs' title="Opción bloqueada por el administrador" disabled><i class="glyphicon glyphicon-edit"></i></a>
-                    <!--<a href="{!! route('pagos.edit', [$pago->id]) !!}" class='btn btn-default btn-xs' title="Editar"><i class="glyphicon glyphicon-edit"></i></a>-->
+                    <a href="#" class='btn btn-default btn-xs' custom-title="Opción bloqueada por el administrador" disabled><i class="glyphicon glyphicon-edit"></i></a>
+                    <!--<a href="{!! route('pagos.edit', [$pago->id]) !!}" class='btn btn-default btn-xs' custom-title="Editar"><i class="glyphicon glyphicon-edit"></i></a>-->
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                         'type' => 'submit',
                         'class' => 'btn btn-danger btn-xs',
                         'onclick' => "return confirm('¿Confirma que desea eliminar?')",
-                        'title' => 'Eliminar'
+                        'custom-title' => 'Eliminar'
                         ]) !!}
                 </div>
                 {!! Form::close() !!}
