@@ -14,7 +14,8 @@
         "maatwebsite/excel": "^2.1",
         "unicodeveloper/laravel-identify": "1.1.*",
         "greggilbert/recaptcha": "dev-master",
-        "laracasts/flash": "~2.0"
+        "laracasts/flash": "~2.0",
+        "prettus/laravel-repository": "2.6.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
