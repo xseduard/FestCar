@@ -18,7 +18,7 @@
                 <div class="box-body">
                     <div class="row">
                         {!! Form::open(['route' => 'pqrsPublic.store', 'method' => 'GET']) !!}
-
+                            {!! csrf_field() !!}
                             @include('pqrs_webs.public_fields')                            
 
                         {!! Form::close() !!}

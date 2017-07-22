@@ -13,6 +13,7 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Auth;
 use Response;
+use App\Models\PqrsWeb;
 
 class PqrsPublicController extends AppBaseController
 {
@@ -181,16 +182,33 @@ class PqrsPublicController extends AppBaseController
         return redirect(route('pqrsWebs.index'));
     }
     public function consulta() //public function consulta($id) 
+    {       
+       $empresa_only_name = $this->centralRepository->empresa_only_name();
+
+        return view('pqrs_webs.public_consulta')->with(['empresa_only_name' => $empresa_only_name]);
+    }
+    public function seguimiento(Request $request) //public function consulta($id) 
     {
-        return 'ok';
-        $pqrsWeb = $this->pqrsWebRepository->findWithoutFail($id);
 
-        if (empty($pqrsWeb)) {
-            Flash::error('Pqrs No se encuentra registrado.');
+        $rules = [];
+        $rules['radicado'] = 'required';
 
-            return redirect(route('pqrsWebs.index'));
+        if (config('app.env') == 'production') 
+        {
+            $rules['g-recaptcha-response'] = "required|recaptcha";   
         }
 
+        $this->validate($request, $rules);
+
+        $pqrsWeb = PqrsWeb::where('easy_token', $request->radicado)->first();
+
+        // $pqrsWeb = $this->pqrsWebRepository->findWithoutFail($request->radicado);
+
+        if (empty($pqrsWeb)) {
+            Flash::error('Pqrs número '.$request->radicado.' No se encuentra radicada.');
+
+            return redirect(route('pqrsPublic.consulta'));
+        }
         return view('pqrs_webs.show')->with('pqrsWeb', $pqrsWeb);
     }
 }

@@ -3,16 +3,20 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Pqrs Web
+            Pqrs Consulta
         </h1>
     </section>
     <div class="content">
         <div class="animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
-            <div class="box box-primary">
-                <div class="box-body">
-                    <div class="row" style="padding-left: 20px">
-                        @include('pqrs_webs.show_fields')
-                        <a href="{!! route('pqrsWebs.index') !!}" class="btn btn-default">Atrás</a>
+            <div class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2 col-xl-6 col-xl-offset-3">
+                <div class="box box-primary">
+                    <div class="box-body">
+                        <div class="row" style="padding-left: 20px">
+                            @include('pqrs_webs.show_fields')
+                            <div class="col-sm-12">
+                                <a href="{!! route('pqrsPublic.consulta') !!}" class="btn btn-default">Atrás</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
