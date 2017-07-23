@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{{ $empresa_only_name or "Transporte Digital" }} | FestCar</title>
+    <title>{{ $enterprise_public->short_name or "Transporte Digital" }} | FestCar</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
     {!! Html::style('/bower_components/admin-lte/bootstrap/css/bootstrap.min.css') !!}
@@ -32,12 +32,15 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     -->
     <!-- FLATICONS Custom -->
-
     {!! Html::style('/css/flaticon_bus/flaticon.css') !!}
 
     <!-- CSS PRINCIPAL WEB PAGE CUSTOM-->
     {!! Html::style('/css/main.css') !!}
     <!-- FavICONS ================================================== -->
+
+    @if (Auth::guest())
+          {!! Html::style('/css/guest.css') !!}
+    @endif
 
         <link rel="apple-touch-icon" sizes="57x57" href="{!! url('/favicon/apple-icon-57x57.png') !!}">
         <link rel="apple-touch-icon" sizes="60x60" href="{!! url('/favicon/apple-icon-60x60.png') !!}">
@@ -161,7 +164,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{!! url('/') !!}">
-                    {{ $empresa_only_name or "Transporte Digital" }} 
+                    {{ $enterprise_public->short_name or "Transporte Digital" }} 
                     {{-- {!! Auth::guest() !!} --}} <!-- logged? -->
                 </a>
             </div>
@@ -170,6 +173,13 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{!! url('/home') !!}">Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">PQRS <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{!! url('/pqrsPublic/create') !!}">Radicar</a></li>
+                            <li><a href="{!! url('/pqrsPublic/consulta') !!}">Consultar</a></li>                        
+                        </ul>
+                      </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -242,8 +252,7 @@
             overlayParentElement : 'body',
             transition: function(url){ window.location.href = url; }
           });
-
-          console.log('Welcome To FestCar - PowerBy XS EDUARD');          
+          console.log('%cReady To FestCar - PowerBy XSEDUARD', 'color:green;');          
         });
     </script>
      <!-- Animsition end ini -->

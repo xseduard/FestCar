@@ -323,3 +323,8 @@ $(".rutaname").on('change',function(){
         });
         
     // End Commands laravel
+
+
+// Validaciones
+     $this->validate($request, ['g-recaptcha-response' => 'required|recaptcha']);
+

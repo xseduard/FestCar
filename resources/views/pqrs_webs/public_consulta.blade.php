@@ -13,19 +13,20 @@
             @include('common.errors')
             @include('flash::message')
         </div>
-                <div class="box box-primary">
+                <div class="box box-info">
 
                 <div class="box-body">
                     <div class="row">
                         {!! Form::open(['route' => 'pqrsPublic.seguimiento', 'method' => 'GET']) !!}
                              <div class="form-group col-sm-12 col-lg-12">
                                <p>
-                                    Recuerde que puede solicitar asistencia de soporte si lo requiere, o o bien contactarnos mediante los telefonos presentes en la pagina de principal de {{ $empresa_only_name or "Transporte Digital" }}.
+                                    Recuerde que puede solicitar asistencia / soporte si lo requiere, o o bien contactarnos mediante los telefonos presentes en la pagina de principal de {{ $enterprise_public->short_name or "Transporte Digital" }}.
                                </p> 
                              </div>
                             <div class="form-group col-sm-12 col-lg-12">
+                                {!! Form::label('radicado', 'Radicado') !!}
                                 <div class="input-group">                                 
-                                  {!! Form::text('radicado', null, ['class' => 'form-control', 'placeholder' => 'Ingrese Radicado...']) !!}
+                                  {!! Form::text('radicado', null, ['class' => 'form-control', 'required' => true, 'placeholder' => 'Ingrese Radicado...']) !!}
                                   <span class="input-group-btn">
                                     <button class="btn btn-primary btn-flat" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Consultar</button>
                                   </span>

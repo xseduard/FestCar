@@ -19,7 +19,7 @@
 <!-- Cedula Campo de texto -->
 <div class="form-group col-sm-8">
     {!! Form::label('cedula', 'Cédula') !!}
-    {!! Form::text('cedula', null, ['required', 'class' => 'form-control', 'placeholder'=>'']) !!}
+    {!! Form::number('cedula', null, ['required', 'class' => 'form-control', 'placeholder'=>'']) !!}
 </div>
 <div class="clearfix"></div>
 <!-- Nombres Campo de texto -->
@@ -72,7 +72,7 @@
     {!! Recaptcha::render() !!}
 </div>
 <div class="form-group col-sm-12 col-lg-12">
-    <p align="justify">Antes de enviar su solicitud de contacto, sírvase leer con detenimiento la siguiente <b>NOTA SOBRE PROTECCION DE DATOS PERSONALES</b>: Conforme a <a href="https://www.mintic.gov.co/portal/604/articles-4274_documento.pdf">la Ley 1581 de 2012 de Protección de datos Personales</a>, en el momento en que usted envíe esta solicitud junto con sus datos personales en él incorporado, se entiende que, de manera previa, expresa e inequívoca, nos autoriza para tratar dichos datos con la finalidad de dar respuesta a su solicitud y seguimiento de la misma. De igual manera, se entiende que ha consultado y aceptado en todos sus términos la Política de Tratamiento de la Información que hemos adoptado en {{ $empresa_only_name or "Transporte Digital" }}; Recuerde que puede consultar el estado de su PQRS haciendo <a href="{{ route('pqrsPublic.consulta') }}">click aquí</a>.</p>
+    <p align="justify">Antes de enviar su solicitud de contacto, sírvase leer con detenimiento la siguiente <b>NOTA SOBRE PROTECCIÓN DE DATOS PERSONALES</b>: Conforme a <a href="https://www.mintic.gov.co/portal/604/articles-4274_documento.pdf">la Ley 1581 de 2012 de Protección de datos Personales</a>, en el momento en que usted envíe esta solicitud junto con sus datos personales en él incorporado, se entiende que, de manera previa, expresa e inequívoca, nos autoriza para tratar dichos datos con la finalidad de dar respuesta a su solicitud y seguimiento de la misma. De igual manera, se entiende que ha consultado y aceptado en todos sus términos la Política de Tratamiento de la Información que hemos adoptado en {{ $enterprise_public->short_name or "Transporte Digital" }}; Recuerde que puede consultar el estado de su PQRS haciendo <a href="{{ route('pqrsPublic.consulta') }}">click aquí</a>.</p>
 </div>
 <!-- Submit Field -->
 <div class="form-group col-sm-12">

@@ -29,7 +29,8 @@
     		</li>
             <li class="{{ Request::is('reciboProductos*') ? 'active' : '' }}">
                 <a href="{!! route('reciboProductos.index') !!}"><i class="fa fa-circle-o" aria-hidden="true"></i><span>Recibo (Productos)</span></a>
-            </li>           
+            </li>     
+            <li class="divider"></li>      
             <li class="header" style="color: #f5f5f5">Opciones Avanzadas</li>
              <li class="{{ Request::is('reciboDetalles*') ? 'active' : '' }}">
                 <a href="{!! route('reciboDetalles.index') !!}"><i class="fa fa-cog" aria-hidden="true"></i><span>Recibo-Detalles</span></a>

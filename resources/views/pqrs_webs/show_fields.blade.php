@@ -54,7 +54,7 @@
 <div class="col-sm-12">
     <!-- Observacion Field -->
     <div class="form-group">
-        {!! Form::label('observacion', 'Observacion:') !!}
+        {!! Form::label('observacion', 'Observaciones / Comentarios:') !!}
         <p>{!! $pqrsWeb->observacion !!}</p>
     </div>
 </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Restablecer Contraseña</title>
+    <title>Nueva Contraseña</title>
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -23,6 +23,11 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/css/skins/_all-skins.min.css">
 
+
+    <!-- CSS PRINCIPAL WEB PAGE CUSTOM-->
+    {!! Html::style('/css/lte_custom.css') !!}
+
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -31,10 +36,10 @@
     <![endif]-->
 
 </head>
-<body class="hold-transition login-page">
+<body class="cbody">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>Nueva </b>Contraseña</a>
+        <a href="{{ url('/home') }}"><b class="text-white">Nueva </b>Contraseña</a>
     </div>
 
     <!-- /.login-logo -->
@@ -80,8 +85,8 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary pull-right">
-                        <i class="fa fa-btn fa-refresh"></i>Restaurar
+                    <button type="submit" class="btn btn-primary btn-flat pull-right">
+                        <i class="fa fa-btn fa-refresh"></i> Restaurar
                     </button>
                 </div>
             </div>
@@ -97,6 +102,10 @@
 <!-- AdminLTE App -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/js/app.min.js"></script>
 <script>
+    $(document).ready(function() {
+        console.log('%cWelcome To FestCar %c| OWASP 2017 RC1 Security ', 'color:green;', 'color:black;'); 
+    });
+
     $(function () {
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
@@ -104,6 +113,7 @@
             increaseArea: '20%' // optional
         });
     });
+
 </script>
 </body>
 </html>

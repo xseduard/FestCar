@@ -28,9 +28,16 @@ class CentralRepository extends BaseRepository
     {
         return Empresa::first();
     }
-    public function empresa_only_name()
-    {        
-        return Empresa::select('nombre_corto')->first()->nombre_corto;
+    public function enterprise_public()
+    {                
+        $enterprise = Empresa::first();
+        $collection = collect([]);
+        $collection->short_name = $enterprise->nombre_corto;
+        $collection->nit = $enterprise->nit;
+        $collection->direccion = $enterprise->direccion;
+        $collection->correo = $enterprise->correo;
+        $collection->ciudad = $enterprise->ciudad;
+        return $collection;
     }
     /**
      * Validador de vehículos

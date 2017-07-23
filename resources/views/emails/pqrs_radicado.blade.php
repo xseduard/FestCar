@@ -1,10 +1,9 @@
-<!-- Click here to reset your password: <a href="{{ $link = url('password/reset', $token).'?email='.urlencode($user->getEmailForPasswordReset()) }}"> {{ $link }} </a> -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Configurar una nueva contraseña para FestCar Transeba S.A.S</title>
+    <title>Notificación de radicado PQRS. FestCar - {!! $enterprise_public->short_name !!}</title>
     <!-- 
     The style block is collapsed on page load to save you some scrolling.
     Postmark automatically inlines all CSS properties for maximum email client 
@@ -16,14 +15,14 @@
     </style>
   </head>
   <body>
-    <span class="preheader">Utilice este enlace para restablecer su contraseña. El enlace sólo será válido durante las siguientes 24 horas.</span>
+    <span class="preheader">Notificación de radicado PQRS.</span>
     <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0">
       <tr>
         <td align="center">
           <table class="email-content" width="100%" cellpadding="0" cellspacing="0">
             <tr>
               <td class="email-masthead">
-                <a href="http://transeba.com/" class="email-masthead_name">Transeba S.A.S</a>
+                <a href="http://transeba.com/" class="email-masthead_name">{!! $enterprise_public->short_name !!}</a>
               </td>
             </tr>
             <!-- Email Body -->
@@ -33,21 +32,36 @@
                   <!-- Body content -->
                   <tr>
                     <td class="content-cell">
-                      <h1>Hola {{$user->nombres}},</h1>
-                      <p>¿Olvidaste tu contraseña? No hay problema, sólo presiona el enlace de abajo para restablecerla. <strong>Válido sólo durante las siguientes 24 horas.</strong></p>
+                      <h1>Hola {{$pqrsWeb->nombres}},</h1>
+                      <p>Gracias por utilizar nuestro sistema de PQRS. Nuestros asesores se pondran en contacto contigo en un plazo maximo de <b>15</b> dias habiles a partir de la fecha de radicado.</p>
                       <!-- Action -->
                       <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                         <tr>
                           <td align="center">
-                             {{-- Border based button
+                            {{--  Border based button
                        https://litmus.com/blog/a-guide-to-bulletproof-buttons-in-email-design  --}}
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                               <tr>
                                 <td align="center">
                                   <table border="0" cellspacing="0" cellpadding="0">
                                     <tr>
+                                      <td class="attributes_content">
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                          <tbody><tr>
+                                            <td class="attributes_item"><strong>No. radicado:</strong>{!! $pqrsWeb->easy_token !!}</td>
+                                          </tr>
+                                          <tr>
+                                            <td class="attributes_item"><strong>Fecha Radicado:</strong> {!! $pqrsWeb->created_at !!}</td>
+                                          </tr>
+                                        </tbody></table>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                  <br>
+                                  <table border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
                                       <td>
-                                        <a href="{{ $link = url('password/reset', $token).'?email='.urlencode($user->getEmailForPasswordReset()) }}" class="button button--green" target="_blank">Restablecer su contraseña</a>
+                                        <a href="{{ url('pqrsPublic/consulta') }}" class="button button--green" target="_blank">Consultar estado actual</a>
                                       </td>
                                     </tr>
                                   </table>
@@ -57,16 +71,16 @@
                           </td>
                         </tr>
                       </table>
-                      <p>Por razones de seguridad, Nuestro sistema se reserva el derecho a suministrar información de terceros, por lo tanto Si no solicitó un restablecimiento de contraseña, ignore este correo electrónico o <a href="{{ url('/home') }}">Contacte a nuestro soporte al cliente</a> para mas información.</p>
-                      {{-- <p>Por razones de seguridad, esta solicitud fue recibida desde {!! 'operating_system' !!} usando el dispositivo {!!'browser_name'!!}. Si no solicitó un restablecimiento de contraseña, ignore este correo electrónico o <a href="http://transeba.com/">Contacte a nuestro soporte al cliente</a> para mas información.</p> --}}
+                      <p>Por razones de seguridad, Nuestro sistema se reserva el derecho a suministrar información de terceros, por lo tanto Si desconoce la procedencia de este mensaje, ignore este correo electrónico o <a href="{{ url('/home') }}">Contacte a nuestro soporte al cliente</a> para mas información.</p>
                       <p>Saludos,
-                        <br>Equipo de Transeba S.A.S</p>
+                        <br>Equipo de {!! $enterprise_public->short_name !!}</p>
                       <!-- Sub copy -->
                       <table class="body-sub">
                         <tr>
                           <td>
-                            <p class="sub">Si tienes problemas con el botón de arriba, copia y pega la URL a continuación en tu navegador web.</p>
-                            <p class="sub"><a href="{{ $link }}">{{ $link }}</a></p>
+                            <p class="sub">
+                              {{-- msg sub --}}
+                            </p>
                           </td>
                         </tr>
                       </table>
@@ -81,11 +95,12 @@
                   <tr>
                     <td class="content-cell" align="center">                      
                       <p class="sub align-center">
-                        Transeba S.A.S 
-                        <br>Carrera 107 - 95A-12 oficina 201 <a href="mailito:transsebax@gmail.com">Transsebax@gmail.com</a>
-                        <br>Apartadó, Colombia
+                        {!! $enterprise_public->short_name !!}
+                        <br>{!! $enterprise_public->direccion !!} <a href="mailito:{!! $enterprise_public->correo !!}">
+                        {!! $enterprise_public->correo !!}</a>
+                        <br>{!! $enterprise_public->ciudad !!}, Colombia
                       </p>
-                      <p class="sub align-center">&copy; 2017 Transeba S.A.S. All rights reserved.</p>
+                      <p class="sub align-center">&copy; {!! $enterprise_public->short_name !!} - FestCar All rights reserved.</p>
                     </td>
                   </tr>
                 </table>

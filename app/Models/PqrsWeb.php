@@ -75,6 +75,10 @@ class PqrsWeb extends Model
         return $this->belongsTo('App\Models\Modelo');
     }
     */
+
+    public function seguimiento(){
+        return $this->hasMany('App\Models\PqrsSeguimiento', 'pqrs_id');
+    }
     
 
     /**

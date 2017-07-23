@@ -68,11 +68,11 @@ class Pago extends Model
      * Relaciones entre Modelos
      */
     // return $this->belongsToMany('App\Models\Factura', 'pago_rel_facturas')->withPivot('pago_id', 'factura_id');
-     public function pagorelfactura(){
+    public function pagorelfactura(){
         return $this->hasMany('App\Models\PagoRelFactura');
     }
 
-     public function pagorelruta(){
+    public function pagorelruta(){
         return $this->hasMany('App\Models\PagoRelRuta');
     }
 

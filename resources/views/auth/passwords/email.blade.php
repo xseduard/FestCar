@@ -23,6 +23,9 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/css/skins/_all-skins.min.css">
 
+    <!-- CSS PRINCIPAL WEB PAGE CUSTOM-->
+    {!! Html::style('/css/lte_custom.css') !!}
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -31,10 +34,10 @@
     <![endif]-->
 
 </head>
-<body class="hold-transition login-page">
+<body class="cbody">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>Restablecer </b>Contraseña</a>
+        <a href="{{ url('/home') }}"><b class="text-white">Restablecer </b>Contraseña</a>
     </div>
 
     <!-- /.login-logo -->
@@ -62,7 +65,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary pull-right">
+                    <button type="submit" class="btn btn-primary btn-flat pull-right">
                         <i class="fa fa-btn fa-envelope"></i> Enviarme un e-mail
                     </button>
                 </div>
@@ -80,5 +83,11 @@
 
 <!-- AdminLTE App -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/js/app.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        console.log('%cWelcome To FestCar %c| OWASP 2017 RC1 Security ', 'color:green;', 'color:black;'); 
+    });
+</script>
 </body>
 </html>

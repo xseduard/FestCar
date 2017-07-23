@@ -25,7 +25,16 @@
                         <b>Correo</b>
                         <p>{!! $pqrsWeb->correo !!}</p>
                         <b>Estado</b>
-                        <p class="text-warning"><i class="fa fa-bell-o"></i> {!! $pqrsWeb->estado !!}</p>
+                        @if($pqrsWeb->motivo != 'F')
+                            @if($pqrsWeb->seguimiento->isEmpty())
+                                <p class="text-warning"><i class="fa fa-bell-o"></i> {!! $pqrsWeb->estado !!}</p>
+                            @else
+                                <p class="text-green"><i class="fa fa-check"></i> Revisada</p>
+                            @endif
+                        @else
+                            <p class="text-green"><i class="fa fa-check"></i> No requiere respuesta</p>
+                        @endif
+                        
                     </div>
                     <div class="col-sm-12">
                         <p>{!! $pqrsWeb->observacion !!}</p>

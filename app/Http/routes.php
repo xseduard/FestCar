@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\Input;
 |
 */
 // Ver SQL Optimizador
-/*
-DB::Listen(Function($query){
-    echo "<pre>{ $query->sql }</pre>";
-    //echo "<pre>{ $query->time }</pre>";
-});
-*/
+
+// DB::Listen(Function($query){
+//     echo "<pre>{ $query->sql }</pre>";
+//     //echo "<pre>{ $query->time }</pre>";
+// });
+
 Route::get('/', function () {
     return redirect('/home');
 });
@@ -70,10 +70,10 @@ Route::group(['middleware' => 'web'], function() {
 
         Route::get('register', function () { abort(403); });  //Desactivar Registro
         Route::post('register', function () { abort(403); });  //Desactivar Registro
-        /*
-        Route::get('register', 'Auth\AuthController@showRegistrationForm');
-        Route::post('register', 'Auth\AuthController@register');
-        */
+        
+        // Route::get('register', 'Auth\AuthController@showRegistrationForm');
+        // Route::post('register', 'Auth\AuthController@register');
+        
 
         // Password Reset Routes...
         Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');

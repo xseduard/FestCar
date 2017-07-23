@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 // use App\Http\Requests\CreatePqrsWebRequest;
 use App\Http\Requests\CreatePqrsPublicRequest;
 use App\Http\Requests\UpdatePqrsWebRequest;
+use App\Http\Requests\SeguimientoPqrsPublicRequest;
 use App\Repositories\PqrsWebRepository;
 use App\Repositories\CentralRepository;
 use App\Http\Controllers\AppBaseController;
@@ -14,6 +15,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Auth;
 use Response;
 use App\Models\PqrsWeb;
+use Mail;
 
 class PqrsPublicController extends AppBaseController
 {
@@ -62,11 +64,11 @@ class PqrsPublicController extends AppBaseController
     {        
         $selectores = $this->selectoresComunes();
 
-        $empresa_only_name = $this->centralRepository->empresa_only_name();
+        $enterprise_public = $this->centralRepository->enterprise_public();
 
        
 
-        return view('pqrs_webs.public_create')->with(['selectores' => $selectores, 'empresa_only_name' => $empresa_only_name]);
+        return view('pqrs_webs.public_create')->with(['selectores' => $selectores, 'enterprise_public' => $enterprise_public]);
     }
 
     /**
@@ -82,9 +84,22 @@ class PqrsPublicController extends AppBaseController
         $input = $request->all();
         $input['easy_token'] = str_pad(mt_rand(100,999999), 6, "0", STR_PAD_LEFT); 
 
-        $pqrsWeb = $this->pqrsWebRepository->create($input);
+        $pqrsWeb = $this->pqrsWebRepository->create($input);   
+        $enterprise_public = $this->centralRepository->enterprise_public();     
+ 
+        try{
+            Mail::send('emails.pqrs_radicado', ['pqrsWeb' => $pqrsWeb, 'enterprise_public' => $enterprise_public], function ($message) use($pqrsWeb, $enterprise_public){
+     
+                $message->from('sistema@transeba.com', $enterprise_public->short_name);
+         
+                $message->to($pqrsWeb->correo)->subject('Notificación Radicado PQRS');
+         
+            });
+        } catch(\Exception $e) {
+            // errors
+        }
 
-        Flash::success('Pqrs radicado correctamente.');
+        Flash::success('Pqrs radicado correctamente con el número/codigo <b>'.$pqrsWeb->easy_token.'</b> <p>Se ha enviado un mensaje al correo <b>'.$pqrsWeb->correo.'</b> </p> <p>Para mas información puede consultar su petición haciendo <a href="/pqrsPublic/consulta">click aquí</a> .</p> ');
 
         return redirect(route('pqrsPublic.create'));
     }
@@ -183,23 +198,13 @@ class PqrsPublicController extends AppBaseController
     }
     public function consulta() //public function consulta($id) 
     {       
-       $empresa_only_name = $this->centralRepository->empresa_only_name();
+       $enterprise_public = $this->centralRepository->enterprise_public();
 
-        return view('pqrs_webs.public_consulta')->with(['empresa_only_name' => $empresa_only_name]);
+        return view('pqrs_webs.public_consulta')->with(['enterprise_public' => $enterprise_public]);
     }
-    public function seguimiento(Request $request) //public function consulta($id) 
+    public function seguimiento(SeguimientoPqrsPublicRequest $request) //public function consulta($id) 
     {
-
-        $rules = [];
-        $rules['radicado'] = 'required';
-
-        if (config('app.env') == 'production') 
-        {
-            $rules['g-recaptcha-response'] = "required|recaptcha";   
-        }
-
-        $this->validate($request, $rules);
-
+        $enterprise_public = $this->centralRepository->enterprise_public();
         $pqrsWeb = PqrsWeb::where('easy_token', $request->radicado)->first();
 
         // $pqrsWeb = $this->pqrsWebRepository->findWithoutFail($request->radicado);
@@ -209,6 +214,6 @@ class PqrsPublicController extends AppBaseController
 
             return redirect(route('pqrsPublic.consulta'));
         }
-        return view('pqrs_webs.show')->with('pqrsWeb', $pqrsWeb);
+        return view('pqrs_webs.show')->with(['pqrsWeb' => $pqrsWeb, 'enterprise_public' => $enterprise_public]);
     }
 }

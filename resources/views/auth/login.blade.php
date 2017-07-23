@@ -128,7 +128,7 @@
 
     <!-- Animsition ini -->
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function() {     
           $(".animsition").animsition({
             inClass: 'fade-in',
             outClass: 'fade-out',
@@ -157,7 +157,7 @@
               radioClass: 'iradio_minimal-blue',
               increaseArea: '20%' // optional
             });
-
+          console.log('%cWelcome To FestCar %c| OWASP 2017 RC1 Security ', 'color:green;', 'color:black;'); 
         });
 
 

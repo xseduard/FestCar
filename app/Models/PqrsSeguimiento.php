@@ -48,11 +48,15 @@ class PqrsSeguimiento extends Model
     /**
      * Relaciones entre Modelos
      */
-    /*
-    public function modelo(){
-        return $this->belongsTo('App\Models\Modelo');
+    
+    public function pqrs(){
+        return $this->belongsTo('App\Models\PqrsWeb', 'pqrs_id', 'id');
     }
-    */
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
+    
     
 
     /**
