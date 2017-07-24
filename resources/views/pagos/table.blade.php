@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="pagos-table">
+<table class="table table-responsive table-hover" id="pagos-table">
     <thead>
         <th class="">Pago No.</th>
         <th class="">Cps</th>

@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="emdiAutorizacions-table">
+<table class="table table-responsive table-hover" id="emdiAutorizacions-table">
     <thead>
         <th>Codigo</th>
         <th>Afiliado/Paciente</th>

@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="emdiLugars-table">
+<table class="table table-responsive table-hover" id="emdiLugars-table">
     <thead>
         <th>Nombre</th>
         <th>Teléfono</th>

@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="emdiPacientes-table">
+<table class="table table-responsive table-hover" id="emdiPacientes-table">
     <thead>
         <th>Cédula</th>
         <th>Nombres</th>

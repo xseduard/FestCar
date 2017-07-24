@@ -62,6 +62,7 @@
         <!-- favicons -->
 
     @yield('css')
+    @stack('css')
 </head>
 
 <body class="skin-blue sidebar-mini">
@@ -257,5 +258,6 @@
     </script>
      <!-- Animsition end ini -->
     @yield('scripts')
+    @stack('scripts')
 </body>
 </html>
