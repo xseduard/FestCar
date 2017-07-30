@@ -87,7 +87,11 @@ class PagoRepository extends BaseRepository
         $pdf->SetFont('helvetica','',8);
         $pdf->SetTextColor(100);
 
-        $pdf->Cell(0,4,"Propietario","0",1,"L");
+        if (!is_null($pago->contratovinculacion->responsable)) {           
+            $pdf->Cell(0,4,"Propietario (Responsable)","0",1,"L");
+        } else {
+            $pdf->Cell(0,4,"Propietario (Contratista)","0",1,"L");
+        }
 
         $pdf->SetFont('helvetica','',10);
         $pdf->SetTextColor(50);
