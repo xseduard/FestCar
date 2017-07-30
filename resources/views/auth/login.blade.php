@@ -55,7 +55,7 @@
 
             <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
                 <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Usuario">
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <span class="ion-person form-control-feedback"></span>
                 @if ($errors->has('email'))
                     <span class="help-block">
                     <strong>{{ $errors->first('email') }}</strong>
@@ -65,7 +65,7 @@
 
             <div class="form-group has-feedback {{ $errors->has('password') ? ' has-error' : '' }}">
                 <input type="password" class="form-control" placeholder="Contraseña" name="password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <span class="ion-ios-keypad form-control-feedback"></span>
                 @if ($errors->has('password'))
                     <span class="help-block">
                         <strong>{{ $errors->first('password') }}</strong>
@@ -83,11 +83,13 @@
             </div>
        <div class="row">
                 <div class="col-xs-12">                
-                   <div class="checkbox icheck">
+                   <div class="checkbox icheck pull-left">
                      <input type="checkbox" name="remember">
                      <label for="inputCheckbox">Recuerdame</label>
                     </div>
-                    <a class="" href="{{ url('/password/reset') }}">¿Olvidó su contraseña? </a>
+                   <div class="resetpass-custom pull-right">
+                      <a class="" href="{{ url('/password/reset') }}">¿Olvidó su contraseña? </a>
+                   </div>
                 </div>
                 
             </div>
@@ -95,8 +97,8 @@
         <p>No tienes cuenta? <a href="{{ url('/register') }}" class="text-center">Registrate</a> </p>
             
 
-    <footer class="page-copyright">
-        <p>FestCar <a href="#" class="text-color-5"   > Design By xsEduard </a> </p>
+    <footer class="">
+        <p>FestCar Design By <a href="https://transportedigital.com" class="text-color-5">  xsEd </a> </p>
         <p>Copyright © 2017. Todos los derechos reservados.</p>
         
       </footer>

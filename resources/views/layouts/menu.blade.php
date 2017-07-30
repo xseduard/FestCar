@@ -51,16 +51,16 @@
     </li>
     
 
-    <!--
-        <li class="{{ Request::is('generator_builder*') ? 'active' : '' }}">
-            <a href="{!! url('/generator_builder') !!}"><i class="fa fa-tasks"></i><span>GUI Generador</span></a>
-        </li>
-    -->
-    <!-- route('rosas.index') -->
+    
+{{-- <li class="{{ Request::is('generator_builder*') ? 'active' : '' }}">
+    <a href="{!! url('/generator_builder') !!}"><i class="fa fa-tasks"></i><span>GUI Generador</span></a>
+</li> --}}
+
 @endif
 
 @if(Auth::user()->role == 'secretaria' or Auth::user()->role == 'administrador')
-<!--
+
+{{-- 
 <li class="{{ Request::is('triangulos*') ? 'active' : '' }}">
     <a href="{!! route('triangulos.index') !!}"><i class="fa fa-indent"></i><span>triangulos</span></a>
 </li>
@@ -68,7 +68,7 @@
 <li class="{{ Request::is('cuadros*') ? 'active' : '' }}">
     <a href="{!! route('cuadros.index') !!}"><i class="fa fa-indent"></i><span>cuadros</span></a>
 </li>
--->
+ --}}
 <li class="{{ Request::is('naturals*') ? 'active' : '' }}">
     <a href="{!! route('naturals.index') !!}"><i class="fa fa-users" aria-hidden="true"></i></i><span>Tercero Natural</span></a>
 </li><li class="{{ Request::is('juridicos*') ? 'active' : '' }}">
@@ -78,7 +78,7 @@
 <li class="{{ Request::is('vehiculos*') ? 'active' : '' }}">
     <a href="{!! route('vehiculos.index') !!}"><i class="flaticon-transport-2"></i> <span>Vehículos</span></a>
 </li>
-<!-- documentos vehiculos -->
+{{-- DOCUMENTOS VEHÍCULOS --}}
 <li class="treeview 
 @if (Request::is('tarjetaPropiedads*') 
     or Request::is('soats*')
@@ -119,7 +119,7 @@
    
     </ul>
 </li>
-<!-- documentos conductores -->
+{{-- DOCUMENTOS CONDUCTORE --}}
 <li class="treeview 
 @if (Request::is('licenciaConduccions*') 
     or Request::is('hojaVidas*')    
@@ -163,7 +163,7 @@
     <a href="{!! route('recibos.index') !!}"><i class="ion-ios-cart"></i> <span>Recibos</span></a>
 </li>
 
-<!-- pagos -->
+{{-- PAGOS --}}
 <li class="treeview 
 @if (Request::is('pagos*') 
     or Request::is('descuentos*')
@@ -187,7 +187,7 @@
 
     </ul>
 </li>
-<!-- pagos -->
+{{-- END PAGOS --}}
 
 <li class="{{ Request::is('rutas*') ? 'active' : '' }}">
     <a href="{!! route('rutas.index') !!}"><i class="fa fa-circle-o"></i><span>Rutas</span></a>
@@ -222,9 +222,9 @@
 
     </ul>
 </li>
-<!-- pqrs -->
+{{-- PQRS --}}
 <li>
-    <a href="http://server4.servert2a.com/triplog.sv2/?h=8150040222732&y=dTEybW0zOTQ0bGV2aTVpdG0yb3M0ZWY1azE=" target="_blank"><i class="fa fa-globe"></i><span>Gps</span>
+    <a href="http://seguitel.servertrack.co/seguitel/" target="_blank"><i class="fa fa-globe"></i><span>Gps</span>
     <span class="pull-right-container">
       <small class="badge pull-right badge-warning" custom-title="En construcción">4</small>
     </span>
@@ -232,9 +232,9 @@
 </li>
 
 
-
 @endif
 
+{{-- Autorizaciones Emdi --}}
 @if(Auth::user()->role == 'autorizador_emdisalud' or Auth::user()->role == 'administrador')    
    <li class="{{ Request::is('emdiPacientes*') ? 'active' : '' }}">
     <a href="{!! route('emdiPacientes.index') !!}"><i class="fa fa-user" aria-hidden="true"></i><span>Afiliados/Pacientes</span></a>

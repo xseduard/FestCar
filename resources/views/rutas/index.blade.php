@@ -18,9 +18,9 @@
         <div class="animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
             <div class="box box-primary">
                 <div class="box-body">
-                {!!  Form::open(['route' => 'rutas.index', 'method' => 'GET']) !!}
-                @include('common.buscar_form')
-                {!! Form::close() !!}
+                    {!!  Form::open(['route' => 'rutas.index', 'method' => 'GET']) !!}
+                        @include('common.buscar_form')
+                    {!! Form::close() !!}
                     <div class="clearfix"></div>
                     <hr>
                     @if($rutas->isEmpty())

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- DEV:EDUARD DATE:19-05-17-->
     <meta charset="UTF-8">
     <title>{{ $enterprise_public->short_name or "Transporte Digital" }} | FestCar</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -11,6 +12,7 @@
     {!! Html::style('/bower_components/select2/dist/css/select2.min.css') !!}
     {!! Html::style('/bower_components/admin-lte/dist/css/AdminLTE.min.css') !!}
     {!! Html::style('/bower_components/admin-lte/dist/css/skins/_all-skins.min.css') !!}
+    
     <!-- Linear Icons -->
     {!! Html::style('/dependencia_local/icon-font.min.css') !!}
     <!-- Simple Line icons -->
@@ -24,19 +26,14 @@
     <!-- skin icheck -->
     {!! Html::style('/bower_components/admin-lte/plugins/iCheck/square/blue.css') !!}
 
-
-    <!-- /dependencia_local/ -->
-
-    <!-- select2 -->
-    <!--
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-    -->
+    <!-- select2 -->   
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" /> --}}
+    
     <!-- FLATICONS Custom -->
     {!! Html::style('/css/flaticon_bus/flaticon.css') !!}
 
-    <!-- CSS PRINCIPAL WEB PAGE CUSTOM-->
+    <!-- Css Page Custom -->
     {!! Html::style('/css/main.css') !!}
-    <!-- FavICONS ================================================== -->
 
     @if (Auth::guest())
           {!! Html::style('/css/guest.css') !!}
@@ -149,7 +146,7 @@
     </div> <!-- End wrapper -->
     
 @else
-<!-- USUARIO O INVITADO -->
+{{--  USUARIO O INVITADO --}}
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -212,9 +209,9 @@
     <!-- AdminLTE App -->
     {!! HTML::script('/bower_components/admin-lte/dist/js/app.min.js') !!}
     <!-- Vue.js -->
-    <!-- 
-    {!! HTML::script('/dependencia_local/vue.js"') !!} // COMENTADO
-    --> 
+
+    {{-- {!! HTML::script('/dependencia_local/vue.js"') !!} --}}
+
     <!-- select2 español -->
     {!! HTML::script('/bower_components/select2/dist/js/i18n/es.js') !!}
     <!-- datepicker  -->
