@@ -28,7 +28,7 @@ class SeguimientoPqrsPublicRequest extends Request
         $array['radicado'] = 'required';
         if (config('app.env') == 'production') 
         {
-            $array['g-recaptcha-response'] = "required|recaptcha";   
+            $array['g-recaptcha-response'] = "required";   
         }
         return $array;
     }
