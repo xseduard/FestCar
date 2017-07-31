@@ -65,3 +65,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# sublime config
+festc.sublime-project
+festc.sublime-workspace
+
