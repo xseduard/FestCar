@@ -36,8 +36,5 @@ class Update$MODEL_NAME$Request extends Request
         "" => "",
         "" => "",    
         ];
-    }
-    /*
-    $FIELDS$
-    */
+    }    
 }

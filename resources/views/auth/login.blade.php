@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"> --}}
 
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
@@ -22,14 +22,16 @@
 
      <!-- Animsitun -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.min.css">
-     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/blue.css">
 
     {!! Html::style('/css/login.css') !!}
-    {!! Html::style('/css/login_v2.css') !!}    
+    <link rel="stylesheet" type="text/css" href="/css/login_v2.css" media="none" onload="if(media!='all')media='all'">
+    {{-- {!! Html::style('/css/login_v2.css') !!}     --}}
 
 </head>
 <body class="animsition page-login-v2 layout-full page-dark" >
-<div class="page" data-animsition-in="fade-in" data-animsition-out="fade-out"   >
+<div class="page" data-animsition-in="fade-in" data-animsition-out="fade-out">
+
    <div class="page-content">
      <div class="page-brand-info">
        <div class="brand">
@@ -41,73 +43,72 @@
        <p class="font-size-20"></p>
      </div>
      <div class="page-login-main">
-       <div class="brand hidden-md-up">
-        <!--<img class="brand-img" src="" alt="...">-->
-        <div class="login-logo">
-        <a href="{{ url('/home') }}" ><b style="color: #00B0A3 !important">Fest</b>Transeba</a>
-    </div>
-        <h3 class="brand-text font-size-40"></h3>
-      </div>
-      <h3 class="font-size-24">Acceder</h3>
-      <p>Ingrese sus credenciales.</p>
-      <form method="post" action="{{ url('/login') }}">
-            {!! csrf_field() !!}
-
-            <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
-                <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Usuario">
-                <span class="ion-person form-control-feedback"></span>
-                @if ($errors->has('email'))
-                    <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </span>
-                @endif
+         <div class="brand hidden-md-up">
+          <!--<img class="brand-img" src="" alt="...">-->
+            <div class="login-logo">
+                <a href="{{ url('/home') }}" ><b style="color: #00B0A3 !important">Fest</b>Transeba</a>
             </div>
+            <h3 class="brand-text font-size-40"></h3>
+        </div>
+        <h3 class="font-size-24">Acceder</h3>
+        <p>Ingrese sus credenciales.</p>
+        <form method="post" action="{{ url('/login') }}">
+              {!! csrf_field() !!}
 
-            <div class="form-group has-feedback {{ $errors->has('password') ? ' has-error' : '' }}">
-                <input type="password" class="form-control" placeholder="Contraseña" name="password">
-                <span class="ion-ios-keypad form-control-feedback"></span>
-                @if ($errors->has('password'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                @endif
+              <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
+                  <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Usuario">
+                  <span class="ion-person form-control-feedback"></span>
+                  @if ($errors->has('email'))
+                      <span class="help-block">
+                      <strong>{{ $errors->first('email') }}</strong>
+                  </span>
+                  @endif
+              </div>
 
-            </div>
-            
-            <div class="row">
-                <!-- /.col -->
-                <div class="col-xs-12">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat ">Iniciar</button>
-                </div>
-                <!-- /.col -->
-            </div>
-       <div class="row">
-                <div class="col-xs-12">                
-                   <div class="checkbox icheck pull-left">
-                     <input type="checkbox" name="remember">
-                     <label for="inputCheckbox">Recuerdame</label>
-                    </div>
-                   <div class="resetpass-custom pull-right">
-                      <a class="" href="{{ url('/password/reset') }}">¿Olvidó su contraseña? </a>
-                   </div>
-                </div>
-                
-            </div>
-        </form>
-        <p>No tienes cuenta? <a href="{{ url('/register') }}" class="text-center">Registrate</a> </p>
-            
+              <div class="form-group has-feedback {{ $errors->has('password') ? ' has-error' : '' }}">
+                  <input type="password" class="form-control" placeholder="Contraseña" name="password">
+                  <span class="ion-ios-keypad form-control-feedback"></span>
+                  @if ($errors->has('password'))
+                      <span class="help-block">
+                          <strong>{{ $errors->first('password') }}</strong>
+                      </span>
+                  @endif
 
-    <footer class="">
-        <p>FestCar Design By <a href="https://transportedigital.com" class="text-color-5">  xsEd </a> </p>
-        <p>Copyright © 2017. Todos los derechos reservados.</p>
-        
-      </footer>
+              </div>
+              
+              <div class="row">
+                  <!-- /.col -->
+                  <div class="col-xs-12">
+                      <button type="submit" class="btn btn-primary btn-block btn-flat ">Iniciar</button>
+                  </div>
+                  <!-- /.col -->
+              </div>
+              <div class="row">
+                  <div class="col-xs-12">                
+                     <div class="checkbox icheck pull-left">
+                       <input type="checkbox" name="remember">
+                       <label for="inputCheckbox">Recuerdame</label>
+                      </div>
+                     <div class="resetpass-custom pull-right">
+                        <a class="" href="{{ url('/password/reset') }}">¿Olvidó su contraseña? </a>
+                     </div>
+                  </div>                
+              </div>
+          </form>
+          <p>No tienes cuenta? <a href="{{ url('/register') }}" class="text-center">Registrate</a> </p>
+              
 
-    </div>
+        <footer class="">
+          <p>FestCar Design By <a href="https://transportedigital.com" class="text-color-5">  xsEd </a> </p>
+          <p>Copyright © 2017. Todos los derechos reservados.</p>
+          
+        </footer>
+
+    </div> {{-- page-login-main --}}
 
 
-     </div>
-  </div>
+  </div> {{-- page-content --}}
+
 </div>
 <!-- /.login-box -->
 
@@ -123,12 +124,13 @@
   <!-- Animsition -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.min.js"></script>
 
-<!--recopy -->
+<!--recopy -->{{-- 
 <script src="https://www.marcoguglie.it/Codepen/AnimatedHeaderBg/demo-1/js/EasePack.min.js"></script>
 <script src="https://www.marcoguglie.it/Codepen/AnimatedHeaderBg/demo-1/js/rAF.js"></script>
-<script src="https://www.marcoguglie.it/Codepen/AnimatedHeaderBg/demo-1/js/TweenLite.min.js"></script>
+<script src="https://www.marcoguglie.it/Codepen/AnimatedHeaderBg/demo-1/js/TweenLite.min.js"></script> --}}
 
     <!-- Animsition ini -->
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {     
           $(".animsition").animsition({
@@ -155,8 +157,8 @@
           });
 
           $('input').iCheck({
-              checkboxClass: 'icheckbox_minimal-blue',
-              radioClass: 'iradio_minimal-blue',
+              checkboxClass: 'icheckbox_square-blue',
+              radioClass: 'iradio_square-blue',
               increaseArea: '20%' // optional
             });
           console.log('%cWelcome To FestCar %c| OWASP 2017 RC1 Security ', 'color:green;', 'color:black;'); 
@@ -164,7 +166,6 @@
 
 
     </script>
- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
 
 </body>
 </html>

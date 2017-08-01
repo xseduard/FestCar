@@ -1,5 +1,0 @@
-Pasos
-
-crear columnas timetamps y softdeletes
-agregar al filllable del modelo la llave primaria para que guarde
-colocar la llave primaria en los botones dela tabla y la vista edit
