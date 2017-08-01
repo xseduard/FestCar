@@ -27,6 +27,7 @@ class UpdateNaturalRequest extends Request
     {
         $array = Natural::$rules;
         $array['cedula'] = "";
+        // $array['cedula'] = "required|unique:naturales,cedula,".$this->route('naturals');
          return $array;
         
     }

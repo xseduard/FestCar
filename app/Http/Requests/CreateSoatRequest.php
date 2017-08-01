@@ -33,11 +33,12 @@ class CreateSoatRequest extends Request
      */
     public function attributes() {
         return [
-        "vehiculo_id" => "Vehículo",        
-       'fecha_expedicion' => 'fecha de expedición',
+        'vehiculo_id' => 'Vehículo',
+        'poliza' => 'numero de poliza',
+        'fecha_expedicion' => 'fecha de expedición',
         'fecha_vigencia_inicio' => 'fecha inicio de vigencia',
         'fecha_vigencia_final' => 'fecha final de vigencia',
-        "" => "",    
+        "" => "",        
         ];
     }
     /*

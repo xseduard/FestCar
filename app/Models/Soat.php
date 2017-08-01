@@ -51,7 +51,7 @@ class Soat extends Model
      */
     public static $rules = [
         'vehiculo_id' => 'required',
-        'poliza' => 'required',
+        'poliza' => 'required|numeric|unique:soats,poliza',
         'fecha_expedicion' => 'date|required',
         'fecha_vigencia_inicio' => '',
         'fecha_vigencia_final' => 'date|required',

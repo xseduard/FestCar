@@ -26,7 +26,7 @@ class UpdateJuridicoRequest extends Request
     public function rules()
     {        
         $array = Juridico::$rules;
-        $array['nit'] = "";
+        $array['nit'] = "required|unique:juridicos,nit,".$this->route('juridicos');
          return $array;
     }
 

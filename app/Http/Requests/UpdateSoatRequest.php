@@ -25,7 +25,9 @@ class UpdateSoatRequest extends Request
      */
     public function rules()
     {
-        return Soat::$rules;
+        $array = Soat::$rules;
+        $array['poliza'] = "required|numeric|unique:soats,poliza,".$this->route('soats');
+        return $array;
     }
 
     /**
@@ -33,14 +35,12 @@ class UpdateSoatRequest extends Request
      */
     public function attributes() {
         return [
-       "vehiculo_id" => "Vehículo",
-       'fecha_expedicion' => 'fecha de expedición',
+        'vehiculo_id' => 'Vehículo',
+        'poliza' => 'numero de poliza',
+        'fecha_expedicion' => 'fecha de expedición',
         'fecha_vigencia_inicio' => 'fecha inicio de vigencia',
         'fecha_vigencia_final' => 'fecha final de vigencia',
         "" => "",    
         ];
     }
-    /*
-    $FIELDS$
-    */
 }
