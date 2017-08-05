@@ -235,47 +235,39 @@
 @endif
 
 {{-- Autorizaciones Emdi --}}
-@if(Auth::user()->role == 'autorizador_emdisalud' or Auth::user()->role == 'administrador')    
-   <li class="{{ Request::is('emdiPacientes*') ? 'active' : '' }}">
-    <a href="{!! route('emdiPacientes.index') !!}"><i class="fa fa-user" aria-hidden="true"></i><span>Afiliados/Pacientes</span></a>
-    </li>
-
-    <li class="{{ Request::is('emdiLugars*') ? 'active' : '' }}">
-        <a href="{!! route('emdiLugars.index') !!}"><i class="fa fa-hospital-o" aria-hidden="true"></i><span>Clinicas/Hospitales</span></a>
-    </li>
-
-    <li class="{{ Request::is('emdiConductors*') ? 'active' : '' }}">
-        <a href="{!! route('emdiConductors.index') !!}"><i class="fa fa-taxi" aria-hidden="true"></i><span>Conductores</span></a>
-    </li>
-
-    <li class="{{ Request::is('emdiAutorizacions*') ? 'active' : '' }}">
-        <a href="{!! route('emdiAutorizacions.index') !!}"><i class="fa fa-wpforms" aria-hidden="true"></i><span>Autorizaciones</span></a>
-    </li>     
-@endif 
-
-@if(Auth::user()->role == 'autorizador_emdisalud')
-    
-    @if(Request::is('home*') 
-        or Request::is('emdiPacientes*')
+@if(Auth::user()->role == 'autorizador_emdisalud' or Auth::user()->role == 'administrador') 
+{{-- MENU EMDI    --}}
+    <li class="treeview 
+        @if ( Request::is('emdiPacientes*')
         or Request::is('emdiLugars*')
         or Request::is('emdiConductors*')
-        or Request::is('emdiAutorizacions*') )
-@else
+        or Request::is('emdiAutorizacions*')
+            )
+            active  
+        @endif">
+        <a href="#"><i class="fa fa-bars" aria-hidden="true"></i><span>Autorizaciones</span><i class="fa fa-angle-left pull-right"></i></a>
+            <ul class="treeview-menu">
 
-<script type="text/javascript">
-    alert('Su cuenta No cuenta con los permisos suficientes para acceder a esta ruta, FestCar te ha Desconectado por seguridad');     
-</script>
-    {!! Auth::logout(); !!}
-    {!! \Redirect::intended('/');  !!}
-    {!! header('Location: url("/logout")') !!}
-<script type="text/javascript">
-    window.locationf="{!! url('/logout') !!}";
-</script>
-       
+               <li class="{{ Request::is('emdiPacientes*') ? 'active' : '' }}">
+                <a href="{!! route('emdiPacientes.index') !!}"><i class="fa fa-user" aria-hidden="true"></i><span>Afiliados/Pacientes</span></a>
+                </li>
 
-    @endif
+                <li class="{{ Request::is('emdiLugars*') ? 'active' : '' }}">
+                    <a href="{!! route('emdiLugars.index') !!}"><i class="fa fa-hospital-o" aria-hidden="true"></i><span>Clinicas/Hospitales</span></a>
+                </li>
 
-@endif
+                <li class="{{ Request::is('emdiConductors*') ? 'active' : '' }}">
+                    <a href="{!! route('emdiConductors.index') !!}"><i class="fa fa-taxi" aria-hidden="true"></i><span>Conductores</span></a>
+                </li>
+
+                <li class="{{ Request::is('emdiAutorizacions*') ? 'active' : '' }}">
+                    <a href="{!! route('emdiAutorizacions.index') !!}"><i class="fa fa-wpforms" aria-hidden="true"></i><span>Autorizaciones</span></a>
+                </li>  
+             </ul>
+    </li> 
+    {{-- MENU EMDIL    --}}  
+@endif 
+
 
 
 

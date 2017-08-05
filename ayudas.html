@@ -197,9 +197,35 @@ ORDER BY
         return ($array);
     }
 
-<iframe style="width:900px; overflow:auto; height:750px;" src="https://www.runt.com.co/consultaCiudadana/#consultaPersona" frameborder="0" scrolling="auto" id="external-frame"></iframe>
+// <iframe style="width:900px; overflow:auto; height:750px;" src="https://www.runt.com.co/consultaCiudadana/#consultaPersona" frameborder="0" scrolling="auto" id="external-frame"></iframe>
 
-<iframe src="https://consulta.simit.org.co/Simit/verificar/contenido_verificar_pago_linea.jsp" width="100%" height="500" frameborder="0"></iframe>
+// <iframe src="https://consulta.simit.org.co/Simit/verificar/contenido_verificar_pago_linea.jsp" width="100%" height="500" frameborder="0"></iframe>
+
+
+//obsoleto redireccionador
+
+{{-- @if(Auth::user()->role == 'autorizador_emdisalud')    
+    @if( Request::is('home*') 
+        or Request::is('emdiPacientes*')
+        or Request::is('emdiLugars*')
+        or Request::is('emdiConductors*')
+        or Request::is('emdiAutorizacions*') )        
+    @else
+        @push('scripts')
+            <script type="text/javascript">
+                alert('Su cuenta No cuenta con los permisos suficientes para acceder a esta ruta, FestCar te ha Desconectado por seguridad');     
+                window.locationf="{!! url('/logout') !!}";
+            </script>
+                {!! Auth::logout(); !!}
+                {!! \Redirect::intended('/');  !!}
+                {!! header('Location: url("/logout")') !!}
+            <script type="text/javascript">
+            </script>
+        @endpush
+    @endif
+@endif  --}}
+
+
 
 como parar java script
 debugger;
@@ -327,4 +353,41 @@ $(".rutaname").on('change',function(){
 
 // Validaciones
      $this->validate($request, ['g-recaptcha-response' => 'required|recaptcha']);
+
+
+
+//Forma larga de hacer la  validacion hasrole
+
+    public function hasRoles(array $roles)
+    {
+        foreach ($roles as $role) 
+        {
+            foreach ($this->roles as $userRole)
+            {
+                if ($userRole->name === $role) 
+                {
+                    return true;                   
+                }
+            }
+        }
+        return false;
+    }
+
+
+route actual
+    Route::getCurrentRoute()->uri
+    Route::getCurrentRoute()->getAction()["as"]
+
+
+
+//redireccionadores
+<script>
+    window.locationf="{!! url('/logout') !!}";
+</script>
+
+  {!! Auth::logout(); !!}
+  {!! \Redirect::intended('/');  !!}
+  {!! header('Location: url("/logout")') !!}
+
+
 

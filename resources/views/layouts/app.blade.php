@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -256,5 +257,6 @@
      <!-- Animsition end ini -->
     @yield('scripts')
     @stack('scripts')
+    @include('common.partial_chat')
 </body>
 </html>
