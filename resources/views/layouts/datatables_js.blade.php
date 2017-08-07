@@ -10,3 +10,9 @@
 <!-- custom -->
 <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.flash.min.js" ></script>
+
+
+<script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js" ></script>
+<script src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js" ></script>
+
+
