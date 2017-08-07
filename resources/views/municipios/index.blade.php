@@ -14,7 +14,7 @@
 
         <div class="clearfix"></div>
         <div class="box box-primary">
-            <div class="box-body">
+            <div class="box-body table-responsive">
                 @if($municipios->isEmpty())
                     <div class="well text-center">No se encontraron registros de Municipios en esta consulta.</div>
                 @else

@@ -15,7 +15,7 @@
         <div class="clearfix"></div>
         <div class="animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
             <div class="box box-primary">
-                <div class="box-body">               
+                <div class="box-body table-responsive">               
                     {!!  Form::open(['route' => 'naturals.index', 'method' => 'GET']) !!}
                         @include('common.buscar_form')
                     {!! Form::close() !!}

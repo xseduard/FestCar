@@ -86,9 +86,15 @@ class VehiculoDataTable extends DataTable
             //->addAction(['width' => '140px'])
             ->ajax('')
             ->parameters([
-                'dom' => '<"col-sm-6"B> <"col-sm-2 pull-left"l> <"col-sm-3 pull-right"f> <"col-sm-12"t> <"col-sm-4"i> <"col-sm-8"p>',
+                'dom' => '<"col-sm-12 col-lg-6"B> <"col-sm-12 col-lg-2"l> <"col-sm-12 col-lg-3 pull-right"f> <"col-sm-12"t> <"col-sm-12 col-lg-4"i> <"col-sm-12 col-lg-8"p>',
                 'scrollX' => false,
                 'language' => ['url' => '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json'],
+                'responsive' => true,
+                'columnDefs' => [
+                     ['responsivePriority' => 1, 'targets' => 0 ],
+                     ['responsivePriority' => 2, 'targets' => -1], 
+                     ['responsivePriority' => 3, 'targets' => 2] 
+                ],
                 'order'   => [[0, 'asc']],
                 'buttons' => [
                     [
