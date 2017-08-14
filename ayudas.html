@@ -8,24 +8,26 @@ storage/framework/views
 <script>
 
 //0009
-str_pad($var, 4, "0", STR_PAD_LEFT);
+str_pad(var, 4, "0", STR_PAD_LEFT);
 
 //  9.090 = 9.09
-floatval($var)
+floatval(var)
 
 //mayucula
-mb_strtoupper($var,'utf-8');
+mb_strtoupper(var,'utf-8');
 
 //recortar
-substr($var, 0, 40)
+substr(var, 0, 40)
 
 // puntos comas
-number_format($var, 0, '.', ',' )
+number_format(var, 0, '.', ',' )
 //for money
-"$ ".number_format($var, 2, '.', ',' )
+"$ ".number_format(var, 2, '.', ',' )
+
+"$".number_format(var, 2, '.', ',' )
 
 //letras
-\NumeroALetras::convertir($var)."PESOS ***"
+\NumeroALetras::convertir(var)."PESOS ***"
 
 //tipo variable 
 gettype() — Obtener el tipo de una variable

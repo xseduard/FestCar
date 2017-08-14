@@ -130,15 +130,15 @@ class HojaVida extends Model
         'ii_establecimiento_primaria' => 'string',
         'ii_primaria_ciudad' => 'integer',
         'ii_primaria_ultimo_grado' => 'string',
-        'ii_primaria_fecha' => 'integer',
+        'ii_primaria_fecha' => 'date',
         'ii_establecimiento_bachillerato' => 'string',
         'ii_bachillerato_ciudad' => 'integer',
         'ii_bachillerato_ultimo_grado' => 'string',
-        'ii_bachillerato_fecha' => 'integer',
+        'ii_bachillerato_fecha' => 'date',
         'ii_establecimiento_superior' => 'string',
         'ii_superior_ciudad' => 'integer',
         'ii_superior_anos_cursados' => 'string',
-        'ii_superior_fecha' => 'integer',
+        'ii_superior_fecha' => 'date',
         'ii_superior_titulo_obtenido' => 'string',
         'ii_superior_tipo_formacion' => 'string',
         'ii_estudios_realiza_actualmente' => 'string',
@@ -188,7 +188,13 @@ class HojaVida extends Model
         'natural_id' => 'required',
         'i_barrio' => '',
         'v_nombre_padres' => '',
-        'talla_camisa' => ''
+        'talla_camisa' => '',
+        'fecha' => 'date',
+        'i_fecha_nacimiento' => 'date',
+        'ii_bachillerato_fecha' => 'date',
+        'ii_superior_fecha' => 'date',
+        'iii_fecha_ingreso' => 'date',
+        'iii_fecha_retiro' => 'date',
     ];
     /**
      * Relaciones entre Modelos
