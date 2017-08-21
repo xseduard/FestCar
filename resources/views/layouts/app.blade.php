@@ -21,7 +21,7 @@
     <!-- Ionicons -->
     {!! Html::style('/bower_components/Ionicons/css/ionicons.min.css') !!}
     <!-- Animsitun -->
-    {!! Html::style('/dependencia_local/animsition.min.css') !!}
+    {!! Html::style('/dependencia_local/animsition.css') !!}
     <!-- datepicker -->
     {!! Html::style('/dependencia_local/bootstrap-datepicker.min.css') !!}
     <!-- skin icheck -->
@@ -230,10 +230,10 @@
     <script type="text/javascript">
         $(document).ready(function() {
           $(".animsition").animsition({
-            inClass: 'fade-in-left-sm',
-            outClass: 'fade-out-left-sm',
+            inClass: 'fade-in-right-sm',
+            outClass: 'fade-out-right-sm',
             inDuration: 500,
-            outDuration: 350,
+            outDuration: 300,
             linkElement: 'a:not([target="_blank"]):not([href^="#"])',
             loading: true,
             loadingParentElement: '.content', //animsition wrapper element
