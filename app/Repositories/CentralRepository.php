@@ -3,20 +3,21 @@
 namespace App\Repositories;
 
 
-use App\Models\Empresa;
-use App\Models\Departamento;
-use App\Models\Municipio;
-use App\Models\Natural;
-use App\Models\Juridico;
-use App\Models\Vehiculo;
 use App\Models\ContratoPrestacionServicio;
 use App\Models\ContratoVinculacion;
+use App\Models\Departamento;
+use App\Models\Empresa;
+use App\Models\Juridico;
 use App\Models\LicenciaConduccion;
+use App\Models\Municipio;
+use App\Models\Natural;
 use App\Models\Tarjeta_Propiedad;
+use App\Models\Vehiculo;
 use App\models\Ruta;
-use InfyOm\Generator\Common\BaseRepository;
 use Carbon\Carbon;
 use Flash;
+use InfyOm\Generator\Common\BaseRepository;
+use Jenssegers\Date\Date;
 
 class CentralRepository extends BaseRepository
 {
@@ -456,6 +457,16 @@ class CentralRepository extends BaseRepository
     {
         // Minuscula key 's' de aceurdo a la DB
         return ['s1' => 'Empresarial', 's2' => 'Escolar',  's3' => 'Grupo de usuarios', 's4' => 'Salud', 's5' => 'Turismo' ];
+    }
+
+
+    public function separarFechas($fechas)
+    {
+        $array_aux = explode(" - ", $fechas);
+        for ($i=0; $i < 2 ; $i++) { 
+            $array[$i] = new Date($array_aux[$i]);
+        }
+        return $array;
     }
 
 

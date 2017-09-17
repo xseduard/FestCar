@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\ExcelRepository;
+use App\Repositories\CentralRepository;
 use Illuminate\Support\Facades\Auth;
 use Response;
 use Jenssegers\Date\Date;
 use Carbon\Carbon;
 use Excel;
 use DB;
-
 use App\Models\Ruta;
 use App\Models\Vehiculo;
 
@@ -21,11 +21,13 @@ use App\Models\Vehiculo;
 class ExcelController extends Controller
 {
 	 private $excelRepository;
+	 private $centralRepository;
 
-	 public function __construct(ExcelRepository $excelRepo)
+	 public function __construct(ExcelRepository $excelRepo, CentralRepository $centralRepo)
     {
         $this->middleware('auth');
         $this->excelRepository = $excelRepo;
+        $this->centralRepository = $centralRepo;
     }
 
     public function index(Request $request)
@@ -80,6 +82,10 @@ class ExcelController extends Controller
 
     public function vehiculos_servicios($request)
     {
+    	//Separar fechas
+    	$fechas  = $this->centralRepository->separarFechas($request->fecha);
+    	
+    	
     	$doc = Excel::create('Vehiculos por servicio | InformesTranseba', function($excel) use($request) {
 
 				$vehiculos = $this->excelRepository->getData($request->type);
