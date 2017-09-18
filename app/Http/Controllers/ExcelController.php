@@ -85,10 +85,9 @@ class ExcelController extends Controller
     	//Separar fechas
     	$fechas  = $this->centralRepository->separarFechas($request->fecha);
     	
-    	
-    	$doc = Excel::create('Vehiculos por servicio | InformesTranseba', function($excel) use($request) {
+    	$doc = Excel::create('Vehiculos por servicio | InformesTranseba', function($excel) use($request, $fechas) {
 
-				$vehiculos = $this->excelRepository->getData($request->type);
+				$vehiculos = $this->excelRepository->getData($request->type, $fechas);
 
 		 		$excel->sheet('vehiculos', function($sheet) use($vehiculos, $request) { 
 		 			$sheet->row(1, ['Informe Vehiculos por Servicio Transeba S.A.S '.$request->fecha]);
@@ -440,6 +439,8 @@ class ExcelController extends Controller
 
     public function contador_recorrido($request)
     {
+    	$fechas  = $this->centralRepository->separarFechas($request->fecha);
+    	
 		$q = DB::table('vehiculos as vh')
 	        ->select("vh.placa")    	    
 	        ->addSelect(DB::raw("cast(SUM(prr.cantidad_viajes*rt.distancia) as  decimal(16,1)) AS suma_km"))
@@ -455,7 +456,9 @@ class ExcelController extends Controller
 		$q->whereNull('vh.deleted_at')
 	        ->whereNull('cv.deleted_at')
 	        ->whereNull('pg.deleted_at')
-	        ->whereNull('prr.deleted_at');
+	        ->whereNull('prr.deleted_at')
+	        ->where('pg.created_at', '>=', $fechas[0])
+			->where('pg.created_at', '<=', $fechas[1]);
 
 		$q->whereNotNull('pg.id');
 

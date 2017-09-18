@@ -1,12 +1,13 @@
 <div class="row">
     <div class="col-xl-4 col-sm-6">
+
         {!! Form::open(['route' => 'informes.generate']) !!}                 
         <div class="box box-primary">
             <div class="box-header">
-              <h4 class="xs-custom-box-title">Vehículos por Servicio</h4>
+              <h4 class="xs-custom-box-title">Vehiculos por Servicio</h4>
             </div>
             <div class="box-body">
-                   <p>Este informe muestra los vehiculos y sus respectivos contadores de servicios (Empresarial, Escolar Salud...) segun la cantidad de viajes en base a las rutas pre-establecidas y/o eventuales.</p> 
+                   <p>Muestra los vehículos y sus respectivos contadores de servicios (Empresarial, Escolar Salud...) segun la cantidad de viajes, basado a las rutas pre-establecidas y/o eventuales.</p> 
                     {!! Form::hidden('type', 'vehiculos_servicios') !!}
                    <div class="form-group">
                         {!! Form::label('fecha', 'Filtrar por Fecha') !!}
@@ -24,15 +25,14 @@
             </div>
         </div>
         {!! Form::close() !!} 
-    </div>
-    <div class="col-xl-4 col-sm-6">
+
         {!! Form::open(['route' => 'informes.generate']) !!}                 
         <div class="box box-warning">
             <div class="box-header">
               <h4 class="xs-custom-box-title">Conductor por Servicio</h4>
             </div>
             <div class="box-body">
-                   <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor  desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.</p> 
+                   <p>Muestra la cantidad de servicios relizados por vehículo y conductor asignado</p> 
                     {!! Form::hidden('type', 'vehiculos_servicios') !!}
                    <div class="form-group">
                         {!! Form::label('fecha', 'Filtrar por Fecha') !!}
@@ -51,14 +51,19 @@
         </div>
         {!! Form::close() !!} 
     </div>
+
+
+
+    {{-- SECOND COLUM --}}
     <div class="col-xl-4 col-sm-6">
+
         {!! Form::open(['route' => 'informes.generate']) !!}                 
         <div class="box box-primary">
             <div class="box-header">
               <h4 class="xs-custom-box-title">Tiempos de recorrido y kilometros</h4>
             </div>
             <div class="box-body">
-                   <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor  desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.</p> 
+                   <p>Muestra la duración y algunos datos relevantes del recorrido y/o trayecto.</p> 
                     {!! Form::hidden('type', 'contador_recorrido') !!}
                    <div class="form-group">
                         {!! Form::label('fecha', 'Filtrar por Fecha') !!}
@@ -76,8 +81,8 @@
             </div>
         </div>
         {!! Form::close() !!} 
-    </div>
-    <div class="col-xl-4 col-sm-6">
+
+
         {!! Form::open(['route' => 'informes.generate']) !!}                 
         <div class="box box-primary">
             <div class="box-header">

@@ -55,8 +55,8 @@ class PagoRepository extends BaseRepository
 
         $pdf = new PDF_PAGOS('P','mm',array(139, 216));
         $pdf->AddPage();
-        $pdf->SetTitle(str_pad($pago->id, 4, "0", STR_PAD_LEFT)." | AUTORIZACIÓN EMDISALUD",true);
-        $pdf->SetSubject('Copia Autorización');
+        $pdf->SetTitle(str_pad($pago->id, 4, "0", STR_PAD_LEFT)." | PLANILLA DE PAGO",true);
+        $pdf->SetSubject('Planilla de pago');
         $pdf->SetCreator('FestCar Project');
         $pdf->SetAuthor('@xsED');
 
@@ -70,8 +70,8 @@ class PagoRepository extends BaseRepository
 
         $pdf->SetFont('helvetica','b',16);
         $pdf->SetTextColor(255);
-        $pdf->Cell(95,8,"","0",0,"C");
-        $pdf->Cell(35,8,str_pad($pago->id, 4, "0", STR_PAD_LEFT),"0",1,"C");
+        $pdf->Cell(100,8,"","0",0,"C");
+        $pdf->Cell(30,8,str_pad($pago->id, 4, "0", STR_PAD_LEFT),"0",1,"C");
 
         $pdf->SetFont('helvetica','',10);
         $pdf->SetTextColor(50);
@@ -82,7 +82,7 @@ class PagoRepository extends BaseRepository
         } else{
             $pdf->Cell(43,6,utf8_decode("Semanas: ".$pago->fecha_inicio->weekOfYear." a ".$pago->fecha_final->weekOfYear),"0",0,"L");
         }
-        $pdf->Cell(37,6,utf8_decode($pago->fecha_planilla->format('d / M / Y')),"0",1,"C");
+        $pdf->Cell(35,6,utf8_decode(mb_strtoupper($pago->fecha_planilla->format('d / M / Y'),'utf-8')),"0",1,"R");
 
         $pdf->SetFont('helvetica','',8);
         $pdf->SetTextColor(100);
@@ -382,7 +382,8 @@ class PDF_PAGOS extends baseFpdf
        function Header()
     {
         // Logo
-        $this->Image('pdf-templates/pagos_membrete.jpg',0,0,0);
+        // $this->Image('pdf-templates/pagos_membrete.jpg',0,0,0);
+        $this->Image('pdf-templates/pagos_membrete_2.jpg',0,0,-198);
         $this->ln(5);
         // helvetica bold 15
 

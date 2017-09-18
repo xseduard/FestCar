@@ -1,11 +1,8 @@
 <script>
-$(document).ready(function () {  
-  // Area ready      
-});
 
 $(function () {
 
-	var ctx = document.getElementById("chart_contratos");
+	var ctx = $("#chart_contratos");
 	var chart_contratos = new Chart(ctx, {
 	    type: 'doughnut',
 	    data: {
@@ -26,5 +23,7 @@ $(function () {
 	});
 
 });
+
+
 
 </script>

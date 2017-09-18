@@ -7,14 +7,12 @@
         </h1>
     </section>
     <div class="content">
-    <div class="clearfix"></div>
 
         <div class="animsition" data-animsition-in-class="zoom-in-sm" data-animsition-in-duration="1500" data-animsition-out-class="zoom-out-sm" data-animsition-out-duration="800">
-            @include('flash::message')
-        </div>
+            @include('flash::message')      
 
-        <div class="clearfix"></div>
-        <div class="animsition" data-animsition-in-class="zoom-in-sm" data-animsition-in-duration="1500" data-animsition-out-class="zoom-out-sm" data-animsition-out-duration="800">
+          <div class="clearfix"></div>
+
             @include('common.errors')
         </div>
         <div class="animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
@@ -93,7 +91,7 @@
 
                     <!-- chart -->
                    <div style="height: 30%; margin: auto;">
-                        <canvas id="chart_contratos" width="200" height="200"></canvas>
+                        <canvas id="chart_contratos" ></canvas>
                    </div>
 
                        <div class="row text-center m-t-30">
@@ -116,26 +114,7 @@
   
            <div class="col-md-6">
           <!-- LINE CHART -->
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Sección uno</h3>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <div class="box-body">
-              <!-- Content -->
-              <!--
-              	<div><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
-                                <canvas id="lineChart" height="355" style="display: block; width: 762px; height: 355px;" width="762"></canvas>
-                            </div>
-              -->
-            </div>
-            <!-- /.box-body -->
-          </div>
           <!-- /.box -->
           </div>
           

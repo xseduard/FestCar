@@ -5,7 +5,6 @@
         <th>Duración</th>
         <th>Valor</th>
         <th>Predefinido</th>
-        <th>Fecha Registro</th>
         <th>Fecha Actualización</th>
         <th colspan="3">Acciones</th>
     </thead>
@@ -13,9 +12,9 @@
     @foreach($rutas as $ruta)
         <tr>
             <td>{!! $ruta->nombre !!}</td>
-            <td>{!! $ruta->distancia !!}</td>
-            <td>{!! $ruta->duracion !!}</td>
-            <td>{!! $ruta->valor_sugerido !!}</td>
+            <td>{!! $ruta->distancia !!} Km</td>
+            <td>{!! $ruta->duracion !!} Mins</td>
+            <td>{!! "$".number_format($ruta->valor_sugerido, 2, '.', ',' ) !!}</td>
             <td>
                 @if($ruta->predefinido)
                   Si
@@ -23,8 +22,7 @@
                   No
                 @endif
             </td>
-            <td>{!! $ruta->created_at !!}</td>
-            <td>{!! $ruta->updated_at !!}</td>
+            <td>{!! $ruta->updated_at->format('d-m-Y h:m:s A') !!}</td>
             <td>
                 {!! Form::open(['route' => ['rutas.destroy', $ruta->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>

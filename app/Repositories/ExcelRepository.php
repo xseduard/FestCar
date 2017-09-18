@@ -16,7 +16,7 @@ class ExcelRepository extends Model implements Transformable
     protected $fillable = [];
 
 
-     public function getData($type = null, $filter = null)
+     public function getData($type = null, array $filter = null)
     {        
 
         switch ($type) {                       
@@ -37,8 +37,10 @@ class ExcelRepository extends Model implements Transformable
 
 		        $q->whereNull('vh.deleted_at')
 			        ->whereNull('cv.deleted_at')
-			        ->whereNull('pg.deleted_at')
-			        ->whereNull('prr.deleted_at');                        
+                    ->whereNull('pg.deleted_at')
+                    ->whereNull('prr.deleted_at')                        
+                    ->where('pg.created_at', '>=', $filter[0])
+			        ->where('pg.created_at', '<=', $filter[1]);
 
                 $q->whereNotNull('pg.id')
                     ->groupBy('vh.placa');
