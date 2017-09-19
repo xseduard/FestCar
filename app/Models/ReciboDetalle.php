@@ -58,4 +58,9 @@ class ReciboDetalle extends Model
     /**
      * Funciones Especiales
      */
+
+    public function getTotalAttribute()
+    {
+       return $this->cantidad * $this->precio_final;
+    }
 }

@@ -463,9 +463,10 @@ class CentralRepository extends BaseRepository
     public function separarFechas($fechas)
     {
         $array_aux = explode(" - ", $fechas);
-        for ($i=0; $i < 2 ; $i++) { 
-            $array[$i] = new Date($array_aux[$i]);
-        }
+
+        $array['inicial'] = new Date($array_aux[0]);
+        $array['final'] = ( new Date($array_aux[1]) )->addSeconds(86399);  //equivalente a 23:59:59
+                
         return $array;
     }
 

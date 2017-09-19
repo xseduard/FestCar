@@ -26,6 +26,33 @@
         </div>
         {!! Form::close() !!} 
 
+
+        {!! Form::open(['route' => 'informes.generate']) !!}                 
+        <div class="box box-primary">
+            <div class="box-header">
+              <h4 class="xs-custom-box-title">Recibos caja menor</h4>
+            </div>
+            <div class="box-body">
+                   <p>Muestra los recibos generados entre las fechas designadas.</p> 
+                    {!! Form::hidden('type', 'recibos_caja') !!}
+                   <div class="form-group">
+                        {!! Form::label('fecha', 'Filtrar por Fecha') !!}
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                            {!! Form::text('fecha', null, ['class' => 'form-control daterange_picker', 'placeholder'=>'Click']) !!}
+                        </div>
+                    </div>                                  
+            </div>
+            <div class="box-footer">
+               {{-- <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-plus-circle"></i> Generar </button>
+               <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-print"></i> Imprimir</button>
+               <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-download"></i> Descargar</button> --}}
+               <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-file-excel-o"></i> Exportar</button>
+            </div>
+        </div>
+        {!! Form::close() !!} 
+
+
         {!! Form::open(['route' => 'informes.generate']) !!}                 
         <div class="box box-warning">
             <div class="box-header">
@@ -50,7 +77,9 @@
             </div>
         </div>
         {!! Form::close() !!} 
-    </div>
+
+
+    </div> {{-- final firts colum --}}
 
 
 

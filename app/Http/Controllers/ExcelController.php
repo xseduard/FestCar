@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Flash;
-use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\ExcelRepository;
-use App\Repositories\CentralRepository;
-use Illuminate\Support\Facades\Auth;
-use Response;
-use Jenssegers\Date\Date;
-use Carbon\Carbon;
-use Excel;
-use DB;
+use App\Models\Recibo;
 use App\Models\Ruta;
 use App\Models\Vehiculo;
+use App\Repositories\CentralRepository;
+use App\Repositories\ExcelRepository;
+use Carbon\Carbon;
+use DB;
+use Excel;
+use Flash;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Jenssegers\Date\Date;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Response;
 
 //use App\Http\Requests;
 
@@ -71,6 +72,9 @@ class ExcelController extends Controller
     		case 'contador_recorrido':
     			return $this->contador_recorrido($request);
     			break;
+    		case 'recibos_caja':
+    			return $this->recibos_caja($request);
+    			break;
     		
     		default:
     			# code...
@@ -85,7 +89,7 @@ class ExcelController extends Controller
     	//Separar fechas
     	$fechas  = $this->centralRepository->separarFechas($request->fecha);
     	
-    	$doc = Excel::create('Vehiculos por servicio | InformesTranseba', function($excel) use($request, $fechas) {
+    	$doc = Excel::create('Vehiculos por servicio '.$request->fecha.' | InformesTranseba', function($excel) use($request, $fechas) {
 
 				$vehiculos = $this->excelRepository->getData($request->type, $fechas);
 
@@ -457,14 +461,14 @@ class ExcelController extends Controller
 	        ->whereNull('cv.deleted_at')
 	        ->whereNull('pg.deleted_at')
 	        ->whereNull('prr.deleted_at')
-	        ->where('pg.created_at', '>=', $fechas[0])
-			->where('pg.created_at', '<=', $fechas[1]);
+	        ->where('pg.created_at', '>=', $fechas['inicial'])
+			->where('pg.created_at', '<=', $fechas['final']);
 
 		$q->whereNotNull('pg.id');
 
         $q->groupBy('vh.placa');  
 
-        $doc = Excel::create('Tiempos de recorrido y kilometros | InformesTranseba', function($excel) use($request, $q) {
+        $doc = Excel::create('Tiempos de recorrido y kilometros '.$request->fecha.' | InformesTranseba', function($excel) use($request, $q) {
     		 $excel->sheet('Contadores', function($sheet) use($q) {
     		 	
     		 	$sheet->row(1, ['Placa', 'Kilometros', 'Tiempo Estimado']); 
@@ -518,4 +522,116 @@ class ExcelController extends Controller
 
 		return $doc->export('xlsx');
     }
+
+    public function recibos_caja($request)
+    {
+
+    	$fechas  = $this->centralRepository->separarFechas($request->fecha);			
+
+
+    	$recibos = Recibo::with(['user', 'natural', 'articulos.producto'])
+	    	->where('created_at', '>=', $fechas['inicial'])
+			->where('created_at', '<=', $fechas['final'])
+	    	->orderBy('created_at')->get();
+
+    	$doc = Excel::create('Recibos caja '.$request->fecha.' | InformesTranseba', function($excel) use($fechas, $recibos) {
+    		 $excel->sheet('Recibos', function($sheet) use($recibos) {
+    		 	
+    		 	$sheet->row(1, [
+    		 	  'Fecha',
+    		 	  'Codigo',
+    		 	  'Cédula cliente',
+    		 	  'Nombre cliente',
+    		 	  'Metodo de Pago',
+    		 	  'Descuento',
+    		 	  'Incremento',
+    		 	  'Total',
+    		 	  'Observaciones',
+
+    		 	]);
+    		 	$sheet->setColumnFormat(array(				    
+				    'C' => '#,##_-',
+				    'F' => '"$"#,##0.00_-',
+				    'G' => '"$"#,##0.00_-',
+				    'H' => '"$"#,##0.00_-',
+
+				));	
+				$sum_descuento = 0;	
+				$sum_incremento = 0;	
+				$sum_total = 0;	
+
+    		 	foreach ($recibos as $key => $value) {
+    		 		$sheet->row($key+2, [
+			    			$value->created_at->format('d-m-Y'),						    				
+			    			$value->id,
+			    			$value->natural->cedula,
+			    			$value->natural->fullname,
+			    			$value->modo_pago,
+			    			$value->descuento,
+			    			$value->incremento,
+			    			$value->articulos->sum('total'),
+			    			$value->observaciones,
+			    			]);
+			    	
+			    	$sum_descuento = $sum_descuento +  $value->descuento;
+			    	$sum_incremento = $sum_incremento +  $value->incremento;
+			    	$sum_total = $sum_total + $value->articulos->sum('total');
+
+			    	if ($key%2==1) {				    			
+				    		$sheet->cells('A'.($key+2).':I'.($key+2), function($cells) {
+								$cells->setBackground('#d0e4ed');
+							});
+			    		}
+    		 	}
+
+    		 	$cont_rows = count($recibos)+2;
+
+    		 	$sheet->row($cont_rows, [
+			    			'Totales',
+			    			'',
+			    			'',
+			    			'',
+			    			'',
+			    			$sum_descuento,
+			    			$sum_incremento,
+			    			$sum_total,
+			    			]);
+
+    		 	//style
+    		 	$sheet->cells('A1:I1', function($cells) {
+						$cells->setBackground('#00b0a3');
+						$cells->setFontColor('#ffffff');
+						$cells->setFont(array(
+						    'family'     => 'Calibri',
+						    'size'       => '16',
+						    'bold'       =>  true
+						));	
+
+					});
+
+    		 	$sheet->cells('A'.$cont_rows.':I'.$cont_rows, function($cells) {
+						$cells->setBackground('#00b0a3');
+						$cells->setFontColor('#ffffff');
+						$cells->setFont(array(
+						    'family'     => 'Calibri',
+						    'size'       => '16',
+						    'bold'       =>  true
+						));	
+
+					});
+
+				$sheet->cells('A1:I1', function($cells) {
+						$cells->setAlignment('center');
+				});
+    		 	$sheet->freezeFirstRowAndColumn();
+        		
+    		});// end sheet recibos
+
+
+	    	});  // end excel
+
+		return $doc->export('xlsx');
+    }
+
+
 } //Class

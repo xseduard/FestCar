@@ -17,14 +17,10 @@
             <td>{!! 'RC'.str_pad($recibo->id, 4, "0", STR_PAD_LEFT) !!}</td>
             <td>{!! $recibo->natural->fullname !!}</td>
             <td>{!! $recibo->modo_pago !!}</td>
-            <td>$ {!! $recibo->descuento !!}</td>
-            <td>$ {!! $recibo->incremento !!}</td>
-            <td>
-                @php ($total_view = 0) 
-                 @foreach($recibo->articulos as $articulo)
-                        @php ($total_view = $total_view+$articulo->precio_final)                         
-                 @endforeach
-                 $ {!! $total_view !!}
+            <td>${!! $recibo->descuento !!}</td>
+            <td>${!! $recibo->incremento !!}</td>
+            <td>               
+                 ${!! $recibo->articulos->sum('total') !!}
              </td>
             <td>{!! $recibo->observaciones !!}</td>
             <td>{!! $recibo->created_at->format('d-m-Y') !!}</td>

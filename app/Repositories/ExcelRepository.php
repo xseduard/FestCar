@@ -39,8 +39,8 @@ class ExcelRepository extends Model implements Transformable
 			        ->whereNull('cv.deleted_at')
                     ->whereNull('pg.deleted_at')
                     ->whereNull('prr.deleted_at')                        
-                    ->where('pg.created_at', '>=', $filter[0])
-			        ->where('pg.created_at', '<=', $filter[1]);
+                    ->where('pg.created_at', '>=', $filter['inicial'])
+			        ->where('pg.created_at', '<=', $filter['final']);
 
                 $q->whereNotNull('pg.id')
                     ->groupBy('vh.placa');
