@@ -11,10 +11,10 @@
         <th class="text-center">Desc. Admin</th>
         <th class="text-center">Desc. Transacción</th>
         -->
-        <th class="text-right">SubTotal</th>
+        <th class="text-right">Valor facturado</th>
+        <th class="text-right">Descuentos</th>
         <th class="text-right">Total</th>
-        <th class="text-center">Fecha Registro</th>
-        <th colspan="3" class="text-right">Acciones</th>
+        <th colspan="3" class="text-right" width="110px">Acciones</th>
     </thead>
     <tbody>
     @foreach($pagos as $pago)
@@ -37,8 +37,8 @@
                     @endif
                 @endif
             </td>
-            <td>{!! $pago->fecha_planilla->format('d-m-Y') !!}</td>
-            <td class="text-center" custom-title="{!! $pago->fecha_inicio->format('d-m-Y'),"-",$pago->fecha_final->format('d-m-Y') !!}">
+            <td title='Fecha de registro: {!! $pago->created_at->format('d F Y h:m:s A') !!}'>{!! $pago->fecha_planilla->format('d-m-Y') !!}</td>
+            <td class="text-center" data-toggle='tooltip' title='' data-original-title='Intervalo: {!! $pago->fecha_inicio->format('d/m/Y')," - ",$pago->fecha_final->format('d/m/Y') !!}'>
                 @if($pago->fecha_inicio->weekOfYear == $pago->fecha_final->weekOfYear)
                     {!! $pago->fecha_inicio->weekOfYear !!}
                 @else
@@ -49,26 +49,32 @@
             <!--     
             <td class="text-right">{!! $pago->desc_finca !!}%</td>
             <td class="text-right">{!! $pago->desc_admin !!}%</td>
-            <td class="text-right">$ {!! $pago->desc_transaccion !!}</td>
+            <td class="text-right">${!! $pago->desc_transaccion !!}</td>
             -->
-            <td class="text-right">$ {!! number_format($pago->subtotal, 2, '.', ',' ) !!}</td>
-            <td class="text-right">$ {!! number_format($pago->total, 2, '.', ',' ) !!}</td>
-            <td class="text-center">{!! $pago->created_at->format('d-m-Y') !!}</td>
+
+            <td class="text-right">${{ number_format($pago->CalcFacturado, 2, '.', ',' ) }}</td>
+            <td class="text-right">${{ number_format($pago->CalcDescuento, 2, '.', ',' ) }}</td>
+            <td class="text-right">${!! number_format($pago->CalcTotal, 2, '.', ',' ) !!}</td>
+
             <td>
                 {!! Form::open(['route' => ['pagos.destroy', $pago->id], 'method' => 'delete']) !!}
                 <div class='btn-group pull-right'>
                     <!-- 
                         <a href="{!! route('pagos.show', [$pago->id]) !!}" class='btn btn-default btn-xs' custom-title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
                     -->
-                    <a href="{!! route('pagos.print', [$pago->id]) !!}" class='btn btn-default btn-xs' custom-title="Imprimir" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
+                    <a href="{!! route('pagos.print', [$pago->id]) !!}" class='btn btn-default btn-xs' data-toggle='tooltip' title='' data-original-title='Imprimir' target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
 
-                    <a href="#" class='btn btn-default btn-xs' custom-title="Opción bloqueada por el administrador" disabled><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="{!! route('pagoRelDescuentos.index', ['search='.$pago->id]) !!}" class='btn btn-default btn-xs' data-toggle='tooltip' title='' data-original-title='Agregar/Editar descuentos asignados'><i class="fa fa-caret-square-o-down" style="color: #00b0a4"></i></a>
+                    <a href="#" class='btn btn-default btn-xs' data-toggle='tooltip' title='' data-original-title='Opción bloqueada por el administrador' disabled><i class="glyphicon glyphicon-edit"></i></a>
                     <!--<a href="{!! route('pagos.edit', [$pago->id]) !!}" class='btn btn-default btn-xs' custom-title="Editar"><i class="glyphicon glyphicon-edit"></i></a>-->
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                         'type' => 'submit',
                         'class' => 'btn btn-danger btn-xs',
                         'onclick' => "return confirm('¿Confirma que desea eliminar?')",
-                        'custom-title' => 'Eliminar'
+                        'data-toggle' => 'tooltip',
+                        'title' => '',
+                        'data-original-title' => 'Eliminar'
+
                         ]) !!}
                 </div>
                 {!! Form::close() !!}

@@ -223,9 +223,9 @@ class PagoRepository extends BaseRepository
 
         $pdf->SetFont('helvetica','',10);
         $pdf->Cell(90,6,"Valor Facturado","B",0,"L");
-        $pdf->Cell(35,6,"$".number_format($pago->subtotal, 2, '.', ',' ),"B",1,"R");
-         $descuento_finca = $pago->subtotal*$pago->desc_finca/100;
-         $total_facturado = $pago->subtotal-$descuento_finca;
+        $pdf->Cell(35,6,"$".number_format($pago->CalcFacturado, 2, '.', ',' ),"B",1,"R");
+         $descuento_finca = $pago->CalcFacturado * $pago->desc_finca/100;
+         $total_facturado = $pago->CalcFacturado - $descuento_finca;
         $pdf->Cell(90,6,"Descuento Finca","B",0,"L");    
         $pdf->Cell(35,6,"$ -".number_format($descuento_finca, 2, '.', ',' ),"B",1,"R");        
         $pdf->Cell(90,8,"Total Facturado","B",0,"L");
@@ -237,9 +237,9 @@ class PagoRepository extends BaseRepository
         $pdf->Cell(90,6,utf8_decode("Transacción"),"B",0,"L");
         $pdf->Cell(35,6,"$ -".number_format($pago->desc_transaccion, 2, '.', ',' ),"B",1,"R");
         $pdf->Cell(90,6,"4x1000","B",0,"L");
-        $pdf->Cell(35,6,"$ -".number_format($pago->subtotal*4/1000, 2, '.', ',' ),"B",1,"R");
+        $pdf->Cell(35,6,"$ -".number_format($pago->CalcCuatroPorMil, 2, '.', ',' ),"B",1,"R");
         $pdf->Cell(90,6,utf8_decode("Administración"),"B",0,"L");
-        $pdf->Cell(35,6,"$ -".number_format($pago->subtotal*$pago->desc_admin/100, 2, '.', ',' ),"B",1,"R");
+        $pdf->Cell(35,6,"$ -".number_format($pago->CalcFacturado * $pago->desc_admin/100, 2, '.', ',' ),"B",1,"R");
 
         if ($pago->desc_sobrecosto > 0) {
             $pdf->Cell(90,6,utf8_decode("Sobrecosto"),"B",0,"L");
@@ -258,7 +258,7 @@ class PagoRepository extends BaseRepository
             }
         }
 
-        $descuentos = $pago->desc_transaccion + $pago->desc_sobrecosto + ($pago->subtotal*4/1000) + ($pago->subtotal*$pago->desc_admin/100) + $desc_each;
+        $descuentos = $pago->desc_transaccion + $pago->desc_sobrecosto + $pago->CalcCuatroPorMil + ($pago->CalcFacturado * $pago->desc_admin/100) + $desc_each;
         
 
         $total = $total_facturado - $descuentos;

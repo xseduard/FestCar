@@ -144,3 +144,16 @@
         {!! Form::close() !!} 
     </div>
 </div>
+
+
+
+{{-- 
+posible solucion 
+
+<input type="submit" name="grabar" value ="Grabar">
+
+<input type="submit" name="borrar" value ="Borrar">
+
+<input type="submit" name="editar" value ="Editar">
+
+<input type="submit" name="salir" value ="Salir"> --}}

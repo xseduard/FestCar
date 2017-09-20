@@ -51,6 +51,7 @@ class PagoRelDescuentoController extends AppBaseController
     {
         $selectores = [];
         // $selectores['atributo_id'] = $this->centralRepository->atributo_id();
+        $selectores['descuento_id'] = $this->centralRepository->descuento_id();
         return $selectores;
     }
     /**
@@ -79,9 +80,9 @@ class PagoRelDescuentoController extends AppBaseController
 
         $pagoRelDescuento = $this->pagoRelDescuentoRepository->create($input);
 
-        Flash::success('Pago Rel Descuento registrado correctamente.');
+        Flash::success('Descuento asignado a pago registrado correctamente.');
 
-        return redirect(route('pagoRelDescuentos.index'));
+        return redirect(route('pagos.index'));
     }
 
     /**
@@ -96,7 +97,7 @@ class PagoRelDescuentoController extends AppBaseController
         $pagoRelDescuento = $this->pagoRelDescuentoRepository->findWithoutFail($id);
 
         if (empty($pagoRelDescuento)) {
-            Flash::error('Pago Rel Descuento No se encuentra registrado.');
+            Flash::error('Descuento asignado a pago No se encuentra registrado.');
 
             return redirect(route('pagoRelDescuentos.index'));
         }
@@ -116,7 +117,7 @@ class PagoRelDescuentoController extends AppBaseController
         $pagoRelDescuento = $this->pagoRelDescuentoRepository->findWithoutFail($id);
 
         if (empty($pagoRelDescuento)) {
-            Flash::error('Pago Rel Descuento No se encuentra registrado.');
+            Flash::error('Descuento asignado a pago No se encuentra registrado.');
 
             return redirect(route('pagoRelDescuentos.index'));
         }
@@ -139,7 +140,7 @@ class PagoRelDescuentoController extends AppBaseController
         $pagoRelDescuento = $this->pagoRelDescuentoRepository->findWithoutFail($id);
 
         if (empty($pagoRelDescuento)) {
-            Flash::error('Pago Rel Descuento No se encuentra registrado.');
+            Flash::error('Descuento asignado a pago No se encuentra registrado.');
 
             return redirect(route('pagoRelDescuentos.index'));
         }
@@ -148,9 +149,9 @@ class PagoRelDescuentoController extends AppBaseController
 
         $pagoRelDescuento = $this->pagoRelDescuentoRepository->update($input, $id);
 
-        Flash::success('Pago Rel Descuento actualizado correctamente.');
+        Flash::success('Descuento asignado a pago actualizado correctamente.');
 
-        return redirect(route('pagoRelDescuentos.index'));
+        return redirect(route('pagoRelDescuentos.index', ['search='.$pagoRelDescuento->pago_id]));
     }
 
     /**
@@ -165,15 +166,15 @@ class PagoRelDescuentoController extends AppBaseController
         $pagoRelDescuento = $this->pagoRelDescuentoRepository->findWithoutFail($id);
 
         if (empty($pagoRelDescuento)) {
-            Flash::error('Pago Rel Descuento No se encuentra registrado.');
+            Flash::error('Descuento asignado a pago No se encuentra registrado.');
 
             return redirect(route('pagoRelDescuentos.index'));
         }
 
         $this->pagoRelDescuentoRepository->delete($id);
 
-        Flash::success('Pago Rel Descuento eliminado correctamente.');
+        Flash::success('Descuento asignado a pago eliminado correctamente.');
 
-        return redirect(route('pagoRelDescuentos.index'));
+        return redirect(route('pagoRelDescuentos.index', ['search='.$pagoRelDescuento->pago_id]));
     }
 }

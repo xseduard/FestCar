@@ -195,9 +195,9 @@
     {!! Form::label('text_cuatro_por_mil', '4x1000') !!}
     <div class="input-group">
       <span class="input-group-addon addon-custom" title="Habilitar / Desabilitar">
-      {!! Form::checkbox('cuatro_por_mil', '1', true) !!}
-        {!! Form::hidden('cuatro_por_mil', false) !!}
-        
+        {{-- {!! Form::checkbox('cuatro_por_mil', true) !!} --}}
+        <input type="hidden" name="cuatro_por_mil" value="0" />
+        <input type="checkbox" name="cuatro_por_mil" value="1" checked="true" />
       </span>
       <span class="input-group-addon"><i class="fa fa-usd"></i></span>
       {!! Form::text('text_cuatro_por_mil', 0, ['class' => 'form-control texto-right', 'placeholder'=>'', 'readonly']) !!}

@@ -37,11 +37,7 @@
             </li>
             <li class="{{ Request::is('pagoRelFacturas*') ? 'active' : '' }}">
                 <a href="{!! route('pagoRelFacturas.index') !!}"><i class="fa fa-cog" aria-hidden="true"></i><span>Pago-Facturas</span></a>
-            </li>
-
-            <li class="{{ Request::is('pagoRelDescuentos*') ? 'active' : '' }}">
-                <a href="{!! route('pagoRelDescuentos.index') !!}"><i class="fa fa-cog" aria-hidden="true"></i><span>Pago-Descuentos</span></a>
-            </li>
+            </li>            
 
             <li class="{{ Request::is('pagoRelRutas*') ? 'active' : '' }}">
                 <a href="{!! route('pagoRelRutas.index') !!}"><i class="fa fa-cog" aria-hidden="true"></i><span>Pago-Rutas</span></a>
@@ -168,22 +164,37 @@
 @if (Request::is('pagos*') 
     or Request::is('descuentos*')
     or Request::is('facturas*')
+    or Request::is('pagoRelDescuentos*')
     )
     active
 @endif">
-<a href="#"><i class="fa fa-id-card-o" aria-hidden="true"></i><span>Pagos</span><i class="fa fa-angle-left pull-right"></i></a>
+<a href="#"><i class="fa fa-id-card-o" aria-hidden="true"></i><span>Pagos</span>
+    
+    {{-- <i class="fa fa-angle-left pull-right badge badge-warning"></i> --}}
+
+    <small class="badge pull-right badge-success">
+      <i class="fa fa-chevron-down"></i>
+    </small>
+</a>
     <ul class="treeview-menu">
         <li class="{{ Request::is('pagos*') ? 'active' : '' }}">
-            <a href="{!! route('pagos.index') !!}"><i class="fa fa-circle-o text-aqua"></i><span>Planillas</span></a>
+            <a href="{!! route('pagos.index') !!}"><i class="fa fa-circle-o text-aqua"></i><span>Planillas</span>
+              <small class="badge pull-right badge-success" data-toggle='tooltip' title='' data-original-title='Opción temporal para asignar descuentos a los pagos'>
+                  Actualizado
+              </small>
+            </a>
         </li>  
         <li class="{{ Request::is('descuentos*') ? 'active' : '' }}">
-            <a href="{!! route('descuentos.index') !!}"><i class="fa fa-circle-o"></i><span>Descuentos</span></a>
+            <a href="{!! route('descuentos.index') !!}"><i class="fa fa-circle-o"></i><span>Tipos Descuento</span></a>
         </li>
 
         <li class="{{ Request::is('facturas*') ? 'active' : '' }}">
             <a href="{!! route('facturas.index') !!}"><i class="fa fa-circle-o"></i><span>Facturas</span></a>
         </li>
 
+        <li class="{{ Request::is('pagoRelDescuentos*') ? 'active' : '' }}">
+            <a href="{!! route('pagoRelDescuentos.index') !!}"><i class="fa fa-cog" aria-hidden="true"></i><span>Descuentos Asignados</span></a>
+        </li>
 
     </ul>
 </li>
@@ -197,9 +208,9 @@
 <li class="{{ Request::is('informes*') ? 'active' : '' }}">
     <a href="{!! route('informes.index') !!}"><i class="fa fa-circle-o"></i><span>Informes</span>
     <span class="pull-right-container">
-      <small class="badge pull-right badge-success" custom-title="Nuevos Informes / Reportes">Nuevo</small>
+      <small class="badge pull-right badge-success" data-toggle='tooltip' title='' data-original-title='Nuevo informe de recibos'>Nuevo</small>
     </span>
-    </a>
+</a>
 </li>
 <!-- pqrs -->
 <li class="treeview 

@@ -11,9 +11,7 @@ class PagoRelDescuentoRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'pago_id',
-        'descuento_id',
-        'user_id'
+        'pago_id' => 'LIKE',
     ];
 
     /**

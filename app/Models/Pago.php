@@ -134,4 +134,39 @@ class Pago extends Model
             return $query->where('id', $codigo);
         }
     }
+
+    /**
+    * Funciones de calculo
+    */
+
+
+    public function getCalcFacturadoAttribute()
+    {
+       return $this->pagorelruta->sum('total');
+    }
+
+    public function getCalcCuatroPorMilAttribute()
+    {
+        if ($this->cuatro_por_mil) {            
+            return $this->CalcFacturado * 4 / 1000;
+        } else {
+            return 0;
+        }
+    }
+
+    public function getCalcDescuentoAttribute()
+    {
+        return $this->desc_transaccion 
+            + $this->desc_sobrecosto 
+            + $this->CalcCuatroPorMil
+            + ( $this->CalcFacturado * $this->desc_finca/100 ) 
+            + ( $this->CalcFacturado * $this->desc_admin/100 )
+            + $this->PagoRelDescuento->sum('valor');
+       
+    }
+
+    public function getCalcTotalAttribute()
+    {
+        return $this->CalcFacturado - $this->CalcDescuento;
+    }
 }

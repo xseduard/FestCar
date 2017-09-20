@@ -135,6 +135,7 @@ class PagoController extends AppBaseController
     public function store(CreatePagoRequest $request)
     {
         $input = $request->all();
+
         $input['user_id'] = Auth::id();
         
         $contratoVinculacion = ContratoVinculacion::where('id',  $input['contrato_vinculacion_id'])->first();
@@ -149,7 +150,6 @@ class PagoController extends AppBaseController
                
             }
         }
-
         
         $input['fecha_inicio'] = Carbon::createFromFormat('Y-m-d',$request->fecha_inicio)->startOfWeek();
         $input['fecha_final'] = Carbon::createFromFormat('Y-m-d', $request->fecha_final)->endOfWeek();

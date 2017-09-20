@@ -59,4 +59,10 @@ class PagoRelRuta extends Model
     /**
      * Funciones Especiales
      */
+
+
+    public function getTotalAttribute()
+    {
+       return $this->cantidad_viajes * $this->valor_final;
+    }
 }

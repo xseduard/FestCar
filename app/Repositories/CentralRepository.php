@@ -6,6 +6,7 @@ namespace App\Repositories;
 use App\Models\ContratoPrestacionServicio;
 use App\Models\ContratoVinculacion;
 use App\Models\Departamento;
+use App\Models\Descuento;
 use App\Models\Empresa;
 use App\Models\Juridico;
 use App\Models\LicenciaConduccion;
@@ -468,6 +469,10 @@ class CentralRepository extends BaseRepository
         $array['final'] = ( new Date($array_aux[1]) )->addSeconds(86399);  //equivalente a 23:59:59
                 
         return $array;
+    }
+
+    public function descuento_id(){                        
+           return Descuento::lists('nombre', 'id');
     }
 
 
